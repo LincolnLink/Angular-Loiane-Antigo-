@@ -1,22 +1,69 @@
-<section class="property-binding">
 
-    <article>
-        <h3>Interpolation / Interpolação</h3>
-        <p>{{ teste }}</p>
-        <p>Valor de uam soma: {{getCalculo()}}</p>
-    </article>
+<div class="container">
 
-    <article>
-        <h3>Property Binding</h3>
-        <!--<img src="{{ urlImagem }}">-->
-        <br>
-        <!--<img [src]="urlImagem ">-->
-    </article>
+    <div class="row">
+        <div class="col-md-12">
 
-    <article>
-        <h3>Event Binding</h3>
-        <div>
-            <button class="btn btn-primary">Click</button>
+            <section class="property-binding">
+
+                <article>
+                    <h3>Interpolation / Interpolação  (<small> Do Componente para o Template!</small>)</h3>
+                    
+                    <p>{{ teste }}</p>
+                    <p>Valor de uam soma: {{getCalculo()}}</p>
+                    <p>Resultado de 1 + 1 é: {{ 1 + 1 }}</p>
+                    <p>O curso é bom: {{ cursoAngular && getCurtirCurso()}}</p>
+
+                </article>
+
+                <article>
+                    <h3>Property Binding  (<small> Do Componente para o Template!</small>)</h3>
+
+                    <!--Interpolação também faz  property binding!-->
+                    <!--<img src="{{ urlImagem }}">-->
+                    <br>
+                    <!--Exemplo claro de property binding-->
+                    <img [src]="urlImagem ">
+                    <br>
+                    <!--Formato padrão é através de bind-nomePropriedade-->
+                    <!--<img bind-src="urlImagem" />-->
+                    <br>
+                    <!--Pesquisar depois-->     
+                    <!--Quando não existe uma propriedade no elemento, usa-se [attr.colspan]-->
+
+                </article>
+
+                <article>
+                    <h3>Property Binding com CSS/Class-Binding (<small>Do Componente para o Template!</small>)</h3>
+                    
+                    <select #varSelect (change)="0">
+                        <option value="alert-success">Sucesso</option>
+                        <option value="alert-info">Info</option>
+                        <option value="alert-warning">Alerta</option>
+                        <option value="alert-danger">Erro</option>
+                    </select>
+                    <br><br>
+                    <div class="alert {{ varSelect.value}}" role="alert">Otexto é colorido de acordo com oque foi escolhido</div>
+                    <br><br>
+
+                    <div class="alert" role="alert" [class.alert-success]="varSelect.value == 'alert-success'">Sucesso</div>
+                    <div class="alert" role="alert" [class.alert-info]="varSelect.value == 'alert-info'">Info</div>
+                    <div class="alert" role="alert" [class.alert-warning]="varSelect.value == 'alert-warning'">Alerta</div>
+                    <div class="alert" role="alert" [class.alert-danger]="varSelect.value == 'alert-danger'">Erro</div>
+
+                    <br><br>
+                    <div class="alert alert-danger" role="alert" [style.display]="varSelect.value == 'alert-danger' ? 'block': 'none'">Só exibe caso tenha erro</div>
+
+                </article>
+
+                <article>
+                    <h3>Event Binding</h3>
+                    <div>
+                        <button class="btn btn-primary">Click</button>
+                    </div>
+                </article>
+            </section>
+
         </div>
-    </article>
-</section>
+    </div>
+</div>

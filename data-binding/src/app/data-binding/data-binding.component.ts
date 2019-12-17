@@ -11,6 +11,8 @@ export class DataBindingComponent implements OnInit {
 
   urlImagem = 'http://lorempixel.com/400/200/';
 
+  cursoAngular: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
@@ -18,6 +20,10 @@ export class DataBindingComponent implements OnInit {
 
   getCalculo() {
     return 25 + 25;
+  }
+
+  getCurtirCurso(){
+    return true;
   }
 
 }
