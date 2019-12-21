@@ -1,2 +1,15 @@
 
 
+.highlight{
+
+    background-color: yellow;
+    font-weight: bold;
+
+}
+
+
+#article.blockStyle{
+    
+    display: block;
+    border: solid 1px black;
+}

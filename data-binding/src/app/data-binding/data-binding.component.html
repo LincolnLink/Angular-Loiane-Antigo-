@@ -6,7 +6,7 @@
 
             <section class="property-binding">
 
-                <article>
+                <article class="blockStyle">
                     <h3>Interpolation / Interpolação  (<small> Do Componente para o Template!</small>)</h3>
                     
                     <p>{{ teste }}</p>
@@ -34,7 +34,7 @@
                 </article>
 
                 <article>
-                    <h3>Property Binding com CSS/Class-Binding (<small>Do Componente para o Template!</small>)</h3>
+                    <h3>Property Binding com CSS/Class-Binding</h3>
                     
                     <select #varSelect (change)="0">
                         <option value="alert-success">Sucesso</option>
@@ -58,12 +58,79 @@
 
                 <article>
                     <h3>Event Binding</h3>
+
+                    <!--Evento de clique-->
                     <div>
-                        <button class="btn btn-primary">Click</button>
+                        <button class="btn btn-primary"
+                            (click)="botaoClicado()">
+                            Me clique!
+                        </button>
                     </div>
+                    <br><br>
+
+                    <!--keyup: evento quando termina de digitar -->
+                    <!--keyup.enter: evento quando aperta o enter!-->
+                    <!--blur: evento quando perde o foco -->
+                    <!--#campoInput: Variavel/propriedade criada que faz referencia ao controlador input-->
+                    <input type="text"
+                        (keyup)="onKeyUp($event)"
+                        (keyup.enter)="salvarValor($event.target.value)"
+                        (blur)="salvarValor(campoInput.value)"
+                        #campoInput />
+
+                    <br><br>
+                    
+                    <p>Valor atual: {{ valorAtual }}</p>
+                    <p>Valor atual: {{ valorSalvo }}</p>
+                    
+                    <br><br>                       
+
+                    <!--mouseover: evento ocorre quando coloca o mouse em cima do controlador span-->
+                    <!--mouseover: evento ocorre quando tira o mouse de cima do controlador span-->                    
+                    <span
+                    (mouseover)="onMouseOverOut()"
+                    (mouseout)="onMouseOverOut()"
+                    [class.highlight]="isMouseOver">
+                    Passe o mouse sobre mim</span
+                        >
+
+                    <br><br>  
+                </article>
+
+                <article>
+                    <h3>Two-way data binding</h3>
+
+                    <!--o controlador input tem um evento chamado input, ativa quando atualiza o campo-->
+                    <!--<input type="text"
+                        [value]="nome"
+                        (input)="nome = $event.target.value"
+                    />-->
+
+                    <!--ngModel: é a representação de uma entidade-->
+                    <!--ngModel tem um evento chamado ngModelChange, ativa quando o campo é atualizado-->  
+
+                    <!--<input type="text"
+                        [ngModel]="nome"
+                        (ngModelChange)="nome = $event"
+                    />-->
+
+                    <input type="text" [(ngModel)]="nome">                   
+
+                    <p>Você digitou: {{ nome }}</p>
+                    <br><br>
+                    <input type="text" [(ngModel)]="pessoa.nome" />
+                    <input type="text" [(ngModel)]="pessoa.idade" />
+
+                <p>Meu nome é : {{ pessoa.nome }}, e a minha idade é: {{ pessoa.idade }}</p>
+
+
+                    <br><br>
+                    <br><br>
                 </article>
             </section>
 
+
         </div>
+        
     </div>
 </div>
