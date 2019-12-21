@@ -8,19 +8,44 @@ import { FormsModule } from '@angular/forms';
 })
 export class DataBindingComponent implements OnInit {
 
-  teste: string = 'Valor do componente';
-  urlImagem = 'http://lorempixel.com/400/200/';
+
+  /*----------------------------Interpolation / Interpolação--------*/
   cursoAngular: boolean = true;
+  teste: string = 'Valor do componente';  
+
+  /*----------------------------Property Binding--------------------*/  
+  urlImagem = 'http://lorempixel.com/400/200/';
+
+  /*----------------------------Event Binding-----------------------*/  
   valorAtual: string = ''; 
   valorSalvo: string = '';
   isMouseOver: boolean = false;
 
+  /*----------------------------Two-way data binding---------------*/  
+  nome: string = 'abc';  
+  
+  //objeto sem tipo
+  pessoa: any = {
+    nome: 'def',
+    idade: 17
+  }
+
+  /*------------------------------Input Properties-----------------*/
+  nomeDoCurso: string = 'Angular';
+
+  /*------------------------------Output Properties----------------*/
+  valorInicial = 15;
+
+
+
+
   constructor() { }
 
-  /*----------Interpolation / Interpolação--------*/
-
   ngOnInit() {
+
   }
+
+  /*----------------------------Interpolation / Interpolação--------*/  
 
   getCalculo() {
     return 25 + 25;
@@ -30,8 +55,7 @@ export class DataBindingComponent implements OnInit {
     return true;
   }
 
-  /*-------Event Binding--------*/
-
+  /*----------------------------Event Binding-------------------*/    
   botaoClicado(){
 
     //função do JS!
@@ -59,20 +83,12 @@ export class DataBindingComponent implements OnInit {
 
   }
 
-  /*----------------Two-way data binding-----------------*/
-  
-  nome: string = 'abc';
 
-  //objeto sem tipo
-  pessoa: any = {
-    nome: 'def',
-    idade: 17
+  /*------------------------------Output Properties-----------*/
+  onMudouValor(evento){
+    //console.log(evento);
+    console.log(evento.novoValor);
   }
-
-
-  /*------------Input/Output Properties-------*/
-
-  nomeDoCurso: string = 'Angular';
 
 
 

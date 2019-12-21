@@ -133,7 +133,14 @@
             
                     <!--Jogando informação de um componente para o outro, usando as input-property-->
                     <!--Só foi possivel criar a propriedade "nome", porque foi declarado um @input-->
+                    <!--O componente pai está enviando informação para o componente filho!!-->>
                     <app-curso [nome]="nomeDoCurso"></app-curso>
+
+
+                    <!--Um segundo componente filho!-->
+                    <!--Com o evento personalizado, o filho consegue enviar o valor da propriedade para o componente pai-->
+                    <contador [valor]="valorInicial" 
+                    (mudouValor)="onMudouValor($event)"></contador>
             
                     
                     <br><br>
