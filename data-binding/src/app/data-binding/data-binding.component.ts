@@ -14,13 +14,6 @@ export class DataBindingComponent implements OnInit {
   valorAtual: string = ''; 
   valorSalvo: string = '';
   isMouseOver: boolean = false;
-  nome: string = 'abc';
-
-  //objeto sem tipo
-  pessoa: any = {
-    nome: 'def',
-    idade: 17
-  }
 
   constructor() { }
 
@@ -67,6 +60,25 @@ export class DataBindingComponent implements OnInit {
   }
 
   /*----------------Two-way data binding-----------------*/
+  
+  nome: string = 'abc';
+
+  //objeto sem tipo
+  pessoa: any = {
+    nome: 'def',
+    idade: 17
+  }
+
+
+  /*------------Input/Output Properties-------*/
+
+  nomeDoCurso: string = 'Angular';
+
+
+
+
+
+
 
 
 
