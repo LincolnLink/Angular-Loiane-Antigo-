@@ -1,5 +1,16 @@
 <span>{{ title }}</span>
 
+
+<app-ciclo [valorInicial]="valorI" *ngIf="!deletarCiclo"></app-ciclo>
+
+<button class="btn btn-primary" (click)="mudarValor()" >Mudar Valor</button>
+
+<button class="btn btn-primary" (click)="destruirCiclo()">Destruir Ciclo</button>
+
+
+<!--
 <app-data-binding></app-data-binding>
 
 <router-outlet></router-outlet>
+
+-->
