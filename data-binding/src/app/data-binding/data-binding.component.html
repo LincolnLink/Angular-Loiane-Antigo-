@@ -133,7 +133,7 @@
             
                     <!--Jogando informação de um componente para o outro, usando as input-property-->
                     <!--Só foi possivel criar a propriedade "nome", porque foi declarado um @input-->
-                    <!--O componente pai está enviando informação para o componente filho!!-->>
+                    <!--O componente pai está enviando informação para o componente filho!!-->
                     <app-curso [nome]="nomeDoCurso"></app-curso>
 
 
@@ -148,6 +148,19 @@
                     
                 </article>
               
+
+                <article>
+                    <h3>DOM Properties</h3>        
+                   
+
+                    <dom [valorDOM]="valorInicialDOM"
+                    (eventoPersonalizado)="pegandoValorQueFoiPassadoPorDom($event)"></dom>                   
+            
+                    
+                    <br><br>
+            
+                    
+                </article>
             </section>
 
 

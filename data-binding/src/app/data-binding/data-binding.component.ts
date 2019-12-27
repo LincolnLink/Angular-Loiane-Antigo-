@@ -36,6 +36,11 @@ export class DataBindingComponent implements OnInit {
   /*------------------------------Output Properties----------------*/
   valorInicial = 15;
 
+  
+  /*------------------------------Output Properties----------------*/
+  valorInicialDOM = 15;
+
+
 
 
 
@@ -90,6 +95,12 @@ export class DataBindingComponent implements OnInit {
     console.log(evento.novoValor);
   }
 
+
+  /*----------------DOM---------------------*/
+
+  pegandoValorQueFoiPassadoPorDom(evento){
+    console.log(evento.novoValor);
+  }
 
 
 

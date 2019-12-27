@@ -8,6 +8,7 @@ import { DataBindingComponent } from './data-binding/data-binding.component';
 import { InputPropertyComponent } from './input-property/input-property.component';
 import { OutputPropertyComponent } from './output-property/output-property.component';
 import { CicloComponent } from './ciclo/ciclo.component';
+import { DomViewChildComponent } from './dom-view-child/dom-view-child.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CicloComponent } from './ciclo/ciclo.component';
     DataBindingComponent,
     InputPropertyComponent,
     OutputPropertyComponent,
-    CicloComponent
+    CicloComponent,
+    DomViewChildComponent
   ],
   imports: [
     BrowserModule,
