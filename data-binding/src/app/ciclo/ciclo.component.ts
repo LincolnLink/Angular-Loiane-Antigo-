@@ -1,9 +1,9 @@
-import { 
-  Component, 
+import {
+  Component,
   OnInit,
   OnChanges,
   DoCheck,
-  AfterContentInit, 
+  AfterContentInit,
   AfterContentChecked,
   AfterViewChecked,
   OnDestroy,

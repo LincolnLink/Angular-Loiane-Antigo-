@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { OutputPropertyComponent } from './output-property.component';
 
@@ -8,7 +9,8 @@ describe('OutputPropertyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OutputPropertyComponent ]
+      declarations: [ OutputPropertyComponent ],
+      imports:[ FormsModule ],
     })
     .compileComponents();
   }));

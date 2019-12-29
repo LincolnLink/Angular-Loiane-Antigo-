@@ -12,12 +12,12 @@ export class AppComponent {
 
   deletarCiclo: boolean = false;
 
-  mudarValor(){
-    this.valorI++;
-  }
+mudarValor() {
+   this.valorI++;
+}
 
-  destruirCiclo(){
-    this.deletarCiclo = true;
-  }
+destruirCiclo() {
+  this.deletarCiclo = true;
+}
 
 }
