@@ -26,3 +26,29 @@
 <br><br>
 
 <button (click)="onMostrarCrusos()">Mostrar ou Esconder cursos</button>
+
+
+<br><br>
+<h5>Hidden como alternativa</h5>
+<p>Alternativa para trocar o ngIf, seria o hidden,
+     ele esconde ao inves de destruir o DOM!</p>
+
+     <br>   
+<div [hidden]="!mostrarCursos">
+    Lista de cursos aqui.
+</div>
+
+<!--Não existe ELSE, tem que negar para mostrar o oposto do IF-->
+<div [hidden]="mostrarCursos">
+    Não existe cursos para serem listados.
+</div>
+
+
+
+
+
+
+
+
+
+
