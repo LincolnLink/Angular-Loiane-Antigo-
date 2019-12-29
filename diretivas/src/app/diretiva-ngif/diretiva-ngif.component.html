@@ -1,0 +1,28 @@
+<h5> *ngIf</h5>
+
+<div *ngIf="cursos.length > 0">
+    Lista de cursos aqui.
+</div>
+
+<!--Não existe ELSE, tem que negar para mostrar o oposto do IF-->
+<div *ngIf="cursos.length == 0">
+    Não existe cursos para serem listados.
+</div>
+
+<p>----------Usando boolean--------------</p>
+<br><br>
+
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui.
+</div>
+
+<!--Não existe ELSE, tem que negar para mostrar o oposto do IF-->
+<div *ngIf="!mostrarCursos">
+    Não existe cursos para serem listados.
+</div>
+
+<p>----------Com Botão--------------</p>
+<br><br>
+
+<button (click)="onMostrarCrusos()">Mostrar ou Esconder cursos</button>
