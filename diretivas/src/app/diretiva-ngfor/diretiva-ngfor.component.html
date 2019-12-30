@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <h5>*ngFor</h5>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li *ngFor="let curso of cursos, let i = index">
+                    {{ i + 1}} - {{ curso }}
+                </li>
+            </ul>
+            <!-- não funciona mais!
+            <ul>
+                <li template="ngFor let curso of cursos, let i = index">
+                    {{ i + 1}} - {{ curso }}
+                </li>
+            </ul>-->
+            <br>
+            <h5>Forma para remover o *</h5>
+            <ul>
+                <ng-template ngFor [ngForOf]="cursos" let-curso let-i="index">
+                    <li >
+                        {{ i + 1}} - {{ curso }}
+                    </li>
+                </ng-template>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="container">
+    <div class="row">
+        <h5>*ngFor</h5>
+    </div>
+    <div class="row">
+        <div class="col">
+            
+        </div>
+    </div>
+</div>-->

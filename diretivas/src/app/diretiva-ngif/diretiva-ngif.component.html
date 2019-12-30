@@ -29,8 +29,8 @@
 
 
 <br><br>
-<h5>Hidden como alternativa</h5>
-<p>Alternativa para trocar o ngIf, seria o hidden,
+<h5>-Hidden como alternativa</h5>
+<p>--Alternativa para trocar o ngIf, seria o hidden,
      ele esconde ao inves de destruir o DOM!</p>
 
      <br>   
@@ -42,6 +42,29 @@
 <div [hidden]="mostrarCursos">
     Não existe cursos para serem listados.
 </div>
+
+
+<br>
+<br>
+<h5>
+    <p>-Removendo o * e usnado template</p>
+</h5>
+<p>--Usando template</p>
+<br>
+<br>
+
+<ng-template [ngIf]="!mostrarCursos">
+    <div> Lista de cursos aqui.</div>
+</ng-template>
+
+ <br>
+<!-- não funciona mais!!!
+ <div template="ngIf !mostrarCursos">
+    Lista de cursos aqui teste
+</div>-->
+    
+
+
 
 
 

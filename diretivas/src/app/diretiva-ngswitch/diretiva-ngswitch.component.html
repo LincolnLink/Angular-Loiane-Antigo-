@@ -36,11 +36,12 @@
 
         </div>        
     </div>
+
+   
 </div>
 
 
 <div class="container" [ngSwitch]="aba">
-
 <p *ngSwitchCase="'mapa'">
     Modo mapa ativado
 </p>
@@ -51,6 +52,20 @@
 <p *ngSwitchDefault>
     Home
 </p>
-
-
 </div>
+
+<h5>Removendo o *</h5>
+<div class="container" [ngSwitch]="aba">
+
+    <ng-template [ngSwitchCase]="'mapa'">
+       <p>Modo mapa ativado</p> 
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'lista'">
+       <p>Modo lista ativado</p> 
+    </ng-template>
+
+    <ng-template [ngSwitchCase]="'home'" ngSwitchDefault>
+       <p>Home</p> 
+    </ng-template>
+    </div>
