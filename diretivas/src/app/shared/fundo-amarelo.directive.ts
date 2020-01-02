@@ -13,11 +13,12 @@ export class FundoAmareloDirective {
     private _renderer: Renderer
     ) { 
 
-    /* URGENTE ---- Evitar usando ElementRef!!! */
+    /* URGENTE ---- Evitar usando ElementRef sozinho!!! */
     //console.log(_elementRef);
     //this._elementRef.nativeElement.style.backgroundColor = 'yellow';
 
-
+    //Manipula o elemento DOM de quem recebe a diretiva!
+    //Troca a cor de fundo!
     this._renderer.setElementStyle(
       this._elementRef.nativeElement,
       'background-color',
