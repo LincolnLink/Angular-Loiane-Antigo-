@@ -23,7 +23,7 @@ export class HighlightMouseDirective {
   // Faz uma associação de atributo ou classe do elemento HTML para uma variavel!
   // style.backgroundColor: atributo do HTML!
   // this.backgroundColor: variavel!
-  // get : escuta assim que a variavel for modificada!
+  // get : escuta assim que a variavel for modificada(retornada)!
   // Manipular os dados antes de criar um vinculo(associação) entre o atributo HTML e variavel! 
   @HostBinding('style.backgroundColor') get setColor(){
     // codigo  extra;

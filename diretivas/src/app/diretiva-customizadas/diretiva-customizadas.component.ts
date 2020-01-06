@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DiretivaCustomizadasComponent implements OnInit {
 
+  diretivaExibe: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  btnDiretiva(){
+    this.diretivaExibe = !this.diretivaExibe;
+  }
+  
 }
