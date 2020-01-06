@@ -1,4 +1,4 @@
-# Diretivas
+# Servicos
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
 
@@ -25,23 +25,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-
-## Criando Diretiva personalizada de atributos
-
---shared : é odiretorio que fica os arquivos aonde toda aplicação tem acesso!
-
-exemplo: 
-
--- ng g d 'shared/' 'nome da diretiva'
-
-
-## classe de serviço
-
--- É ultilizada para fazer chamadas no banco, enviar e receber dados 
-da base de dados para o componente!
-
--- Também é ultilizada para criar métodos e distributir para outros componentes, evitando
-repetição de métodos em cada componente!
-
--- Alem da logica podemos por classe ultilitarias dentro dos serviços

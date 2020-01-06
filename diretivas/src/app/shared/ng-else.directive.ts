@@ -15,6 +15,7 @@ export class NgElseDirective {
   // set: se usa ele para identificar toda vez que o input for modificado!
   // @Input:  exportar a propriedade para o componente pai!
   // 'ngElse': da propriedade da classe NgElseDirective
+  // ngElse()
   @Input('ngElse') set ngElse(condition: boolean){
     if (!condition){
       //rederiza a view embutida no template!
