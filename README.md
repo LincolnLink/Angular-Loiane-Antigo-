@@ -109,3 +109,25 @@ exemplo: ng-class, ng-style
 
 
 -- ngIf
+
+
+
+------Service---------
+
+
+-- bota a classe de serviço no providers para ela ser
+ instanciada uma vez para toda aplicação
+
+
+---------criando module de funcionalidade
+
+Module de funcionalidade vs module root/ modulo raiz
+
+Module de funcionalidade se importa o CommonModule!
+
+Modulo raiz se importa o BrowserModule!
+
+
+
+padrão singoto: não importa quantas vezes declara o servico, 
+sempre vai ter uma unica instancia!
