@@ -16,8 +16,9 @@ export class ReceberCursoCriadoComponent implements OnInit {
 
   ngOnInit() {
 
-    //Comunicação de componente pai para filho!
-    // O componente se inscreve no método para pegar a informação do componente pai!    
+    // Comunicação de componente pai para filho!
+    // O componente se inscreve no método para pegar a informação do componente pai! 
+    // Informa o curso que foi cadastrado   
     this.cursoService.emitirCursoCriado.subscribe(
       cursoCriado => this.curso = cursoCriado
     );

@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
+import { LogService } from '../shared/log.service';
 
 @Injectable(/*{
   //providedIn: 'root'
@@ -18,15 +19,25 @@ export class CursosService {
   // atributo ou método statico, não precisa acessar a instancia do mesmo!
   static criouNovoCurso = new EventEmitter<string>();
 
-  constructor() { 
+  constructor(private logService: LogService) { 
     console.log('!-->instancia da classe de serviço');
   }
 
+  // Requisição do tipo: GET
   getCursos(){
+    
+    this.logService.consoleLog('Obtendo lista de cursos');
+
     return this.cursos;
   }
 
+  // Requisição do tipo: POST
   addCurso(curso: string){
+
+    // Usando o serviço de log
+    // templat do ecmaScript2015 usando CRASE, e ${} para ler uma variavel,
+    // ...aonde não precisa concatenar
+    this.logService.consoleLog(`Criando um novo curso: ${curso}`);
 
     // Adicionando o novo curso na lista!
     this.cursos.push(curso);
@@ -37,6 +48,7 @@ export class CursosService {
     this.emitirCursoCriado.emit(curso);
 
     // Emite informação para outro componente poder escutar!
+    // Como se usa uma classe statica!
     CursosService.criouNovoCurso.emit(curso);
 
   }

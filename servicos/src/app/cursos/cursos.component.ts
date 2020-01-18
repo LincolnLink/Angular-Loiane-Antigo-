@@ -18,6 +18,7 @@ export class CursosComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Carrega os cursos existente para o componente
     this.cursos = this.serviceCurso.getCursos();
 
     // Para receber a informação que o outro componente gerou!
@@ -30,8 +31,8 @@ export class CursosComponent implements OnInit {
       }*/
 
       // AeroFunction - ecmaScript 2015
-      //curso => console.log(curso)
-
+      // curso => console.log(curso)
+      // Informa o curso que foi cadastrado   
       curso => this.cursos.push(curso + " <-new")
     ); 
 
