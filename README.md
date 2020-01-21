@@ -131,3 +131,22 @@ Modulo raiz se importa o BrowserModule!
 
 padrão singoto: não importa quantas vezes declara o servico, 
 sempre vai ter uma unica instancia!
+
+
+--------------Pipes--------------------
+
+
+# criando um Pipe personalizado
+
+
+ `ng g p 'nome do pipe'`
+
+
+
+
+
+
+
+
+
+

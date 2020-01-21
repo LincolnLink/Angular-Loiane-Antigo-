@@ -1,0 +1,12 @@
+<h5>Exemplos de Pipes</h5>
+
+<!--Os pipes filtrando cada valor, camelCase é um pipe personalizado!-->
+<p>Título: {{ livro.titulo | uppercase | lowercase | camelCase }} </p>
+<p>Estrelas: {{ livro.ranting | number:'1.1-1' }}</p>
+<p>Páginas: {{ livro.numeroPaginas | number }}</p>
+<p>Preço: {{ livro.preco | currency:'BRL':true }}</p>
+<!--<p>Data Lançamento: {{ livro.dataLancamento | date:'dd-MM-yyyy' }}</p>-->
+<p>Data Lançamento: {{ livro.dataLancamento | date }}</p>
+<p>Url: {{ livro.url }}</p>
+<br>
+<p>Livro: {{ livro | json }}</p>
