@@ -10,3 +10,48 @@
 <p>Url: {{ livro.url }}</p>
 <br>
 <p>Livro: {{ livro | json }}</p>
+
+<input type="text" [(ngModel)]="filtro">
+
+<br>
+<input type="text" #novoValor>
+<button (click)="addCurso(novoValor.value)">
+    Add Curso
+</button>
+
+<h5>Pipe Puro</h5>
+
+<ul>
+    <li *ngFor="let liv of livros | filtroArray:filtro">
+        {{ liv }}
+    </li>
+</ul>
+<br><br>
+
+<h5>Pipe Impuro</h5>
+
+<ul>
+    <li *ngFor="let liv of livros | filtroArrayImpuro:filtro">
+        {{ liv }}
+    </li>
+</ul>
+
+
+<h5>Maneira correta de usar filtro nos projetos</h5>
+
+<ul>
+    <li *ngFor="let liv of obterCursos()">
+        {{ liv }}
+    </li>
+</ul>
+
+<br><br>
+<h5>Exemplo de Pipes: Async</h5>
+
+<p>{{ valorAsync | async }}</p>
+
+
+<br>
+<h5>Exemplo de Pipes: Observable</h5>
+
+<p>{{ valorAsync2 | async }}</p>

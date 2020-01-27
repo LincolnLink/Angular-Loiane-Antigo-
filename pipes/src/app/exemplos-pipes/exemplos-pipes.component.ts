@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { resolve } from 'url';
+import { Observable, interval } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-exemplos-pipes',
@@ -17,9 +20,51 @@ export class ExemplosPipesComponent implements OnInit {
     url: 'http://a.co/glgjpRP'
   }
 
+  // Pipes puros
+  livros:string[] = ['Angular2', 'PHP', 'Java'];
+
+  filtro:string = '';
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
+
+  addCurso(valor: string){
+    this.livros.push(valor);
+
+    console.log(valor);
+  }
+
+  obterCursos(){
+
+    // Codigo que faz o filtro!
+    if (this.livros.length === 0 || this.filtro === undefined 
+      || this.filtro.trim() === ''){
+      return this.livros;
+    }
+
+    return this.livros.filter( (v) =>{
+        if (v.toLocaleLowerCase().indexOf(this.filtro.toLowerCase()) >= 0){
+          return true;
+        }
+        return false;
+      });
+  }
+
+
+
+  // Simulando uma chamada Ajax no servidor
+  valorAsync = new Promise((resolve, reject) =>{
+
+    // Atribui o valor da string para o atributo(valorAsync) em 2 segundos
+    // setTimeout serve para demorar um pouco
+    setTimeout( ()=> resolve('Valor assíncrono'), 2000);
+  });
+
+  // Programação por fluxo, Observable!
+  //valorAsync2 = Observable.interval(2000)
+
+  valorAsync2 = interval(2000).pipe(map(valor => 'Valor assíncrono 2'));
 
 }

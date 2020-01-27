@@ -1,6 +1,33 @@
 # Angular-Loiane
 Praticando Angular com Loiane Groner
 
+# Principais  comando JS/TS
+
+.filter() : Filtra uma lista, deacordo com uma condição!
+pode passar uma Arrow functions!
+
+return value.filter(
+      v => v.toLocaleLowerCase().indexOf(filter) != -1
+    );
+
+________________________________________________________
+
+.indexOf(): O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
+
+return value.filter(
+      v => v.toLocaleLowerCase().indexOf(filter) != -1
+    );
+
+________________________________________________________
+
+
+.map
+
+
+________________________________________________________
+
+
+
 
 # Comando principais
 
