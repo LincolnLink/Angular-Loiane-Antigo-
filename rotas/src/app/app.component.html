@@ -1,3 +1,37 @@
+
+<nav ngxNavbarDynamicExpand class="navbar navbar-dark bg-dark">
+
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
+    <span class="navbar-toggler-icon d-flex align-items-center justify-content-center"></span>
+  </button>
+
+  <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Cursos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </ngx-navbar-collapse>
+</nav>
+
+<div class="container">
+  
+  <router-outlet></router-outlet>
+
+</div>
+
+<!--
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">{{ title }}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,11 +53,5 @@
       </li>
     </ul>
   </div>
-</nav>
-
-<div class="container">
-  
-  <router-outlet></router-outlet>
-
-</div>
+</nav>-->
 
