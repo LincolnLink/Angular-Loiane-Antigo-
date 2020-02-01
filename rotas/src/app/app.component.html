@@ -1,26 +1,23 @@
 
 <nav ngxNavbarDynamicExpand class="navbar navbar-dark bg-dark">
 
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a routerLink="" class="navbar-brand" href="#">Navbar</a>
 
   <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
     <span class="navbar-toggler-icon d-flex align-items-center justify-content-center"></span>
   </button>
-
+  
   <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li routeLinkActive="active" class="nav-item">
+        <a routerLink="" class="nav-link" >Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+      <li routeLinkActive="active" class="nav-item">
+        <a routerLink="/login" class="nav-link" >Login</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Cursos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      <li routeLinkActive="active" class="nav-item">
+        <a routerLink="/cursos" class="nav-link" >Cursos</a>
+      </li>      
     </ul>
   </ngx-navbar-collapse>
 </nav>
