@@ -37,7 +37,7 @@ export class DataBindingComponent implements OnInit {
   valorInicial = 15;
 
   
-  /*------------------------------Output Properties----------------*/
+  /*------------------------------DOM----------------*/
   valorInicialDOM = 15;
 
 

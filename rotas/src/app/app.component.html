@@ -1,7 +1,7 @@
 
 <nav ngxNavbarDynamicExpand class="navbar navbar-dark bg-dark">
 
-  <a routerLink="" class="navbar-brand" href="#">Navbar</a>
+  <a routerLink="" class="navbar-brand" href="#">Logo</a>
 
   <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
     <span class="navbar-toggler-icon d-flex align-items-center justify-content-center"></span>
@@ -16,13 +16,22 @@
         <a routerLink="/login" class="nav-link" >Login</a>
       </li>
       <li routeLinkActive="active" class="nav-item">
-        <a routerLink="/cursos" class="nav-link" >Cursos</a>
+        <a routerLink="/cursos" [queryParams]="{pagina:1}" class="nav-link" >Cursos</a>
+      </li> 
+      <li routeLinkActive="active" class="nav-item">
+        <a [routerLink]="['curso', idCurso.value]" class="nav-link" >Cursos com Id</a>
       </li>      
     </ul>
   </ngx-navbar-collapse>
 </nav>
 
 <div class="container">
+  <p>Entre com o Id do curso</p>
+  <br>
+  <input #idCurso (input)="0">
+  <br>
+  <br>
+  
   
   <router-outlet></router-outlet>
 
