@@ -18,19 +18,22 @@
       <li routeLinkActive="active" class="nav-item">
         <a routerLink="/cursos" [queryParams]="{pagina:1}" class="nav-link" >Cursos</a>
       </li> 
-      <li routeLinkActive="active" class="nav-item">
+      <!--<li routeLinkActive="active" class="nav-item">
         <a [routerLink]="['curso', idCurso.value]" class="nav-link" >Cursos com Id</a>
-      </li>      
+      </li>-->
+      <li routeLinkActive="active" class="nav-item">
+        <a [routerLink]="['alunos']" class="nav-link" >Alunos</a>
+      </li>
     </ul>
   </ngx-navbar-collapse>
 </nav>
 
 <div class="container">
-  <p>Entre com o Id do curso</p>
+  <!--<p>Entre com o Id do curso</p>
   <br>
   <input #idCurso (input)="0">
   <br>
-  <br>
+  <br>-->
   
   
   <router-outlet></router-outlet>

@@ -1,0 +1,21 @@
+<p>Lista de Alunos</p>
+<br>
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <a [routerLink]="['/alunos',a.id]"  *ngFor="let a of alunos" class="list-group-item list-group-item-action list-group-item-secondary">
+             id: {{ a.id }} - Nome: {{ a.nome }}
+            </a>    
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <!--É preciso por o "router-outlet" quando o componente tem rotas filhas!-->
+        <router-outlet></router-outlet>
+
+    </div>
+</div>
