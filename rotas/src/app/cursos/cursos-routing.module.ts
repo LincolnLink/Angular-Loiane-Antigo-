@@ -7,9 +7,10 @@ import { CursoNaoEncontradoComponent } from './curso-nao-encontrado/curso-nao-en
 
 
 /* Define o nome da rota e vincula um componente */
+/* Path Está vazio porque está configurado na rota  */
 const cursosRoutes: Routes = [
-  { path: 'cursos', component:CursosComponent },
-  { path: 'curso/:id', component:CursoDetalheComponent },
+  { path: '', component:CursosComponent },
+  { path: ':id', component:CursoDetalheComponent },
   { path: 'naoEncontrado', component: CursoNaoEncontradoComponent},
 ];
 

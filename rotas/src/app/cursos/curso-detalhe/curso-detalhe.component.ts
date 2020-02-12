@@ -47,7 +47,7 @@ export class CursoDetalheComponent implements OnInit, OnDestroy {
 
           // Vai passar o objeto da rota!
           // Transfere a pagina para o componente informado!
-          this.router.navigate(['naoEncontrado']);
+          this.router.navigate(['cursos/naoEncontrado']);
         }
 
       }

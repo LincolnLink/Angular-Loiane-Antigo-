@@ -27,8 +27,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
       (params: any) => {
         let idAluno = params['id'];
 
-        this.alunoTeste = this.alunoService.getAluno(idAluno)
-        console.log(this.alunoTeste)
+        this.alunoTeste = this.alunoService.getAluno(idAluno)        
 
         // Tratamento
         if( this.alunoTeste === null)

@@ -6,7 +6,11 @@ import { LoginComponent } from './login/login.component';
 
 
 /* Define o nome da rota e vincula um componente */
+/* Configurando Modulos sobre demanda*/
+/* Informa o path principal, mais o caminho do Module! */
 const appRoutes: Routes = [
+  { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'},
+  { path: 'alunos', loadChildren: './alunos/alunos.module#AlunosModule'},  
   { path: 'login', component: LoginComponent},
   { path: '', component: HomeComponent}
 ];

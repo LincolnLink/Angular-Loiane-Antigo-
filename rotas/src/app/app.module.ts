@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar'; 
 
-import { CursosModule } from './cursos/cursos.module';
+/* For comentado para poder configurar o Module por demanda */
+
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AlunosModule } from './alunos/alunos.module';
+//import { CursosModule } from './cursos/cursos.module';
+//import { AlunosModule } from './alunos/alunos.module';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,8 @@ import { AlunosModule } from './alunos/alunos.module';
     BrowserAnimationsModule,
     AppRoutingModule, 
     NgxNavbarModule,
-    CursosModule,
-    AlunosModule,
+    //CursosModule,
+    //AlunosModule,
     
   ],
   providers: [],
