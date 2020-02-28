@@ -1,5 +1,6 @@
 import { AuthService } from './login/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,8 @@ export class AppComponent implements OnInit {
 
   mostrarMenu: boolean = false;
 
-  constructor( private authService: AuthService){
-
-  }
+  constructor( private authService: AuthService,
+    private router: Router){}
 
   ngOnInit(){
 
@@ -23,6 +23,11 @@ export class AppComponent implements OnInit {
       mostrar => this.mostrarMenu = mostrar
     );
 
+
+    if(this.mostrarMenu == false)
+    {
+      this.router.navigate(['/login']);
+    }
     
   }
 }
