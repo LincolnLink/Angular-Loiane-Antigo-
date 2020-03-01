@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 /* Define o nome da rota e vincula um componente */
@@ -10,11 +11,26 @@ import { LoginComponent } from './login/login.component';
 /* Informa o path principal, mais o caminho do Module! */
 /* Lazy Loading */
 const appRoutes: Routes = [
-  { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'},
-  { path: 'alunos', loadChildren: './alunos/alunos.module#AlunosModule'},  
-  { path: 'login', component: LoginComponent},
-  { path: '', component: LoginComponent},
-  { path: 'home', component: HomeComponent}
+  { 
+    path: 'cursos', 
+    loadChildren: './cursos/cursos.module#CursosModule',
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'alunos',
+    loadChildren: './alunos/alunos.module#AlunosModule',
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent    
+  },
+  { 
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  }
+
 ];
 
 /*Configura a lista de rotas que foi definidas! */

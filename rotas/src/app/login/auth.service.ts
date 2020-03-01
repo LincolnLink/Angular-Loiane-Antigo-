@@ -10,30 +10,35 @@ import { Usuario } from './usuario';
 export class AuthService {
 
     private usuarioAutenticado: boolean = false;
-
     mostrarMenuEmitter = new EventEmitter<boolean>();
 
     constructor(private router: Router) { }
   
     //TODO 
+    // Validar Login - retornaria um token!
     fazerLogin(usuario: Usuario){
-
-      // Validar o usuario e senha pelo servidor, com um token!
-      console.log(usuario);
-
-      //Logica temporaria
+      
+      //Logica temporaria para validação!
       if(usuario.nome === "Link")
       {        
         this.usuarioAutenticado = true;
-        console.log(this.usuarioAutenticado);
+        
+        // Decide se mostra o menu ou não
         this.mostrarMenuEmitter.emit(true);
-        this.router.navigate(['/home']);
+
+        this.router.navigate(['/']);
       }
       else
-      {        
+      {
         this.usuarioAutenticado = false;
-        this.mostrarMenuEmitter.emit(false);
-        console.log(this.usuarioAutenticado);
+
+        // Decide se mostra o menu ou não
+        this.mostrarMenuEmitter.emit(false);       
       }
+    }
+    
+
+    usuarioEstaAutenticado(){
+      return this.usuarioAutenticado;
     }
 }

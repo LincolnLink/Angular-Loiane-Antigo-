@@ -23,11 +23,5 @@ export class AppComponent implements OnInit {
       mostrar => this.mostrarMenu = mostrar
     );
 
-
-    if(this.mostrarMenu == false)
-    {
-      this.router.navigate(['/login']);
-    }
-    
   }
 }

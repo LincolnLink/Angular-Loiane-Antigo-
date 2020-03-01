@@ -169,11 +169,82 @@ sempre vai ter uma unica instancia!
  `ng g p 'nome do pipe'`
 
 
+# Criando um sistema de rotas 
+
+
+Se cria primeiro um modulo da rota principal, esse modulo na versão 8 já vem implementado
+quando cria o projeto angular(ng new 'nomeDoProjeto')!
+
+configuração:
+
+``
+
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+
+
+/* Define o nome da rota e vincula um componente */
+/* Configurando Modulos sobre demanda*/
+/* Informa o path principal, mais o caminho do Module! */
+/* Lazy Loading */
+const appRoutes: Routes = [
+  { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'},
+  { path: 'alunos', loadChildren: './alunos/alunos.module#AlunosModule'},  
+  { path: 'login', component: LoginComponent},
+  { path: '', component: LoginComponent},
+  { path: 'home', component: HomeComponent}
+];
+
+/*Configura a lista de rotas que foi definidas! */
+/*RouterModule é exportado e importado, para poder usar a diretiva routerLink */
+@NgModule({
+  imports: [RouterModule.forRoot(appRoutes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
 
 
 
 
+``
 
+
+
+# Lazy Loading
+
+O conseito de Lazy loading seria você deixar a sua aplicação/ site mas rapido, carregando ele em partes, o Angular divide essas partes atraves dos Modulos(pode organizar com pastas), cada Modulo agrupa componentes, você carregando os modulos sobe demanda, faz com que os componentes carrega apenas quando são chamados! 
+
+Essa configuração de Lazy Loading se configura usando o sistema de rotas!
+
+A organização de pastas fica assim:
+
+-pasta-alunos
+--pasta/do-componente-aluno-detalhes
+--pasta/do-componente-aluno-forms
+alunos-routing.module.ts
+alunos-componente-principal.component.ts
+alunos.module.ts
+
+
+# Guarda de rota
+
+É um tipo de serviço especial, que implementa um método, que o Angular reconhece a implementação dele, e pode ser usado como Guarda de rota!
+
+``
+
+
+ng g s guards/'nome do serviço'
+
+``
+
+
+Remove a parte de "sirviço" e quarda na pasta "guards"
+
+implementa a interface 'CanActivate', isso define que esse serviço é uma Guarda de rota!
 
 
 
