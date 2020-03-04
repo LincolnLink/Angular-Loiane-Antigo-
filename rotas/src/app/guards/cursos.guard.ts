@@ -14,6 +14,8 @@ export class CursosGuard implements CanActivateChild {
         ): boolean | Observable<boolean> | Promise<boolean>
     {
             return true;
+            //TODO -  iniciando quarda de rotas filhas, criei outro branch para poder 
+            // atualizar o Angular8 para o Angular9
     }
 
     
