@@ -3,7 +3,7 @@ Praticando Angular com Loiane Groner
 
 # Atualizando o Angular CLI
 
-- atualizando de forma global: Global package
+- passo1: atualizando de forma global: Global package
 
 ``
 
@@ -15,7 +15,7 @@ npm install -g @angular/cli@latest
 ``
 
 
-# local project package
+- passo2: Local do projeto: local project package
 
 ``
 
