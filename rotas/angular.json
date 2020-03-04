@@ -23,13 +23,10 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [              
-              "src/styles.css"             
-              
+            "styles": [
+              "src/styles.css"
             ],
-            "scripts": [
-                                          
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -123,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rotas"
+    }
+  },
+  "defaultProject": "rotas",
+  "cli": {
+    "analytics": "50a6bd22-ab05-4440-af88-be73b65b7e72"
+  }
 }
