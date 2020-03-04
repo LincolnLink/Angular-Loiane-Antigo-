@@ -1,6 +1,32 @@
 # Angular-Loiane
 Praticando Angular com Loiane Groner
 
+# Atualizando o Angular CLI
+
+- atualizando de forma global: Global package
+
+``
+
+
+npm uninstall -g angular-cli @angular/cli
+npm cache clean
+npm install -g @angular/cli@latest
+
+``
+
+
+# local project package
+
+``
+
+
+rm -rf nome_modules dist
+npm install --save-dev @angular/cli@latest
+npm install
+
+``
+
+
 # Principais  comando JS/TS
 
 .filter() : Filtra uma lista, deacordo com uma condição!

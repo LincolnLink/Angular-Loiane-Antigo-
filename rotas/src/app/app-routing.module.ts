@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CursosGuard } from './guards/cursos.guard';
 
 
 /* Define o nome da rota e vincula um componente */
@@ -14,7 +15,8 @@ const appRoutes: Routes = [
   { 
     path: 'cursos', 
     loadChildren: './cursos/cursos.module#CursosModule',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    canActivateChild: [CursosGuard]
   },
   { 
     path: 'alunos',
