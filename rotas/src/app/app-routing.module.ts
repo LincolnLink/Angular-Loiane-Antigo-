@@ -14,13 +14,13 @@ import { CursosGuard } from './guards/cursos.guard';
 const appRoutes: Routes = [
   { 
     path: 'cursos', 
-    loadChildren: './cursos/cursos.module#CursosModule',
+    loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule),
     canActivate: [AuthGuard],
     canActivateChild: [CursosGuard]
   },
   { 
     path: 'alunos',
-    loadChildren: './alunos/alunos.module#AlunosModule',
+    loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
     canActivate: [AuthGuard]
   },
   { 
