@@ -39,6 +39,10 @@ export class AuthService {
     
 
     usuarioEstaAutenticado(){
+
+      console.log("Usuario logado: " + this.usuarioAutenticado);
+
       return this.usuarioAutenticado;
+      
     }
 }

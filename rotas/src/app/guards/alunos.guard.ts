@@ -6,14 +6,14 @@ import { promise } from 'protractor';
 
 
 @Injectable()
-export class CursosGuard implements CanActivateChild {
+export class AlunosGuard implements CanActivateChild {
 
     canActivateChild(
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
         ): boolean | Observable<boolean> | Promise<boolean>
     {
-        console.log("Chamando guarda de rotas filhas!");
+        console.log("Chamando guarda de rotas filhas - ALUNOS!");
             return true;
     }
 

@@ -5,6 +5,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CursosGuard } from './guards/cursos.guard';
+import { AlunosGuard } from './guards/alunos.guard';
+import { CursosModule } from './cursos/cursos.module';
+import { AlunosModule } from './alunos/alunos.module';
+
 
 
 /* Define o nome da rota e vincula um componente */
@@ -21,7 +25,8 @@ const appRoutes: Routes = [
   { 
     path: 'alunos',
     loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    canActivateChild: [AlunosGuard]
   },
   { 
     path: 'login', 
