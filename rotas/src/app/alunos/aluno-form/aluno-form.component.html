@@ -12,7 +12,11 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
         </div>
-        <input [(ngModel)]="alunoTeste.nome" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        <input [(ngModel)]="alunoTeste.nome" type="text"
+               class="form-control" aria-label="Default"
+               aria-describedby="inputGroup-sizing-default"
+               (input)="onInput()"
+        >
     </div>
     <div class="input-group mb-12">
         <div class="input-group-prepend">

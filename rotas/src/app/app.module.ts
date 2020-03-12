@@ -37,7 +37,7 @@ import { CursosGuard } from './guards/cursos.guard';
   ],
   providers: [
     AuthService,
-    AuthGuard,
+    AuthGuard, // Configuração para guarda de rotas global!
     CursosGuard
     
   ],

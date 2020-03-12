@@ -15,13 +15,14 @@ export class AlunosGuard implements CanActivateChild {
     {
         console.log("Chamando guarda de rotas filhas - ALUNOS!");
         // Usa esses dois objetos para criar logica
-        console.log(childRoute);
-        console.log(state);
+        //console.log(childRoute);
+        //console.log(state);
 
-        // Pode se criar uma validação para verificar se o usuario pode editar ou não!
+        // Pode se criar uma validação para verificar se o usuario pode editar ou não
+        // se base ando na informação do objeto state!
         if(state.url.includes('editar')){
-            alert('Usuario de acesso');
-            return false;
+            //alert('Usuario de acesso');
+            //return false;
         }
 
         return true;
