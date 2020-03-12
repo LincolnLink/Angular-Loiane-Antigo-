@@ -7,6 +7,7 @@ import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunosRoutingModule } from './alunos-routing.module';
 import { AlunosService } from './alunos.service';
+import { AlunosGuard } from './guard/alunos.guard';
 
 
 @NgModule({
@@ -20,6 +21,6 @@ import { AlunosService } from './alunos.service';
     AlunosRoutingModule,
     FormsModule
   ],
-  providers:[AlunosService]
+  providers:[AlunosService, AlunosGuard]
 })
 export class AlunosModule { }
