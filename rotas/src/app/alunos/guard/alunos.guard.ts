@@ -8,12 +8,13 @@ import { promise } from 'protractor';
 @Injectable()
 export class AlunosGuard implements CanActivateChild {
 
+    // Guarda de rota, para rotas filhas
     canActivateChild(
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
         ): boolean | Observable<boolean> | Promise<boolean>
     {
-        console.log("Chamando guarda de rotas filhas - ALUNOS!");
+        console.log("Verifica permissão para Editar - Guarda de rotas filha!");
         // Usa esses dois objetos para criar logica
         //console.log(childRoute);
         //console.log(state);

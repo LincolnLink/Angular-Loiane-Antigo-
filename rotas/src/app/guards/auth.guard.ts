@@ -27,6 +27,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
     ) : Observable<boolean> | boolean
   {
+    console.log("Verifica se esta logado - Guarda de rota Global!");    
+
     //throw new Error("Method not implemented.");
     if(this.authService.usuarioEstaAutenticado())
     {

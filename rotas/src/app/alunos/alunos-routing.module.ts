@@ -7,6 +7,7 @@ import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunosGuard } from '../alunos/guard/alunos.guard';
 import { AlunosDeactivateGuard } from './guard/alunos-deactivate.guard';
+import { AlunoDetalheResolver } from './guard/alunos-detalhes.resolver';
 
 /* Exemplo de rotas filhas */
 // Incluindo a Guarda de rotas filhas, para componentes especificos e não global!
@@ -17,7 +18,9 @@ const alunosRoutes: Routes = [
     canActivateChild : [AlunosGuard],
     children: [
         {path: 'novo', component: AlunoFormComponent},
-        {path: ':id', component: AlunoDetalheComponent},
+        {path: ':id', component: AlunoDetalheComponent,
+          resolve: { aluno: AlunoDetalheResolver }
+        },
         {path: ':id/editar',
          component: AlunoFormComponent,
          canDeactivate: [AlunosDeactivateGuard]

@@ -17,6 +17,9 @@ import { IformCanDeactivade } from 'src/app/guards/iform-candeactivate';
 // canDeactivate: () => any;
 // }
 
+// Cria uma interface para poder tipar o CanDeactivate, e tornar ele generico!
+// Assim todos os componentes pode ter a opção de cancelar a rota, implementa o método da interface
+// com a logica que decide, se vai ser desativado ou não a rota!
 @Injectable({providedIn: 'root'})
 export class AlunosDeactivateGuard implements CanDeactivate<IformCanDeactivade> {
     canDeactivate(
