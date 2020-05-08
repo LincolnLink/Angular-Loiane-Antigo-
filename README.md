@@ -5,126 +5,137 @@ Praticando Angular com Loiane Groner
 
 - passo1: atualizando de forma global: Global package
 
-``
-
-
-npm uninstall -g angular-cli @angular/cli
-npm cache clean
-npm install -g @angular/cli@latest
-
-``
-
+  <blockquote>npm uninstall -g angular-cli @angular/cli</blockquote>
+  <blockquote>npm cache clean</blockquote>
+  <blockquote>npm install -g @angular/cli@latest</blockquote>
 
 - passo2: Local do projeto: local project package
 
-``
+  <blockquote>rm -rf nome_modules dist</blockquote>
+  <blockquote>npm install --save-dev @angular/cli@latest</blockquote>
+  <blockquote>npm install</blockquote>
 
+- passo3: executar o comando
 
-rm -rf nome_modules dist
-npm install --save-dev @angular/cli@latest
-npm install
-
-``
-
+  <blockquote> ng update</blockquote>
 
 # Principais  comando JS/TS
 
-.filter() : Filtra uma lista, deacordo com uma condição!
-pode passar uma Arrow functions!
+-.filter(): Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
 
-return value.filter(
-      v => v.toLocaleLowerCase().indexOf(filter) != -1
+  <blockquote>
+
+    return value.filter(
+
+          v => v.toLocaleLowerCase().indexOf(filter) != -1
+
     );
 
-________________________________________________________
+  </blockquote> 
 
-.indexOf(): O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
+- .indexOf(): O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
 
-return value.filter(
-      v => v.toLocaleLowerCase().indexOf(filter) != -1
+  <blockquote> 
+
+    return value.filter(
+
+        v => v.toLocaleLowerCase().indexOf(filter) != -1
+
     );
 
-________________________________________________________
+  </blockquote> 
 
-
-.map
-
-
-________________________________________________________
+- .map()
 
 
 
+# Principais comandos do Angular CLI
 
-# Comando principais
+- Criando um componente pelo CLI
 
--- componente pelo CLI
+  <blockquote> ng g c nomeDoComponente </blockquote> 
 
-`ng g c nomeDoComponente`
+- Criando um module pelo CLI
 
--- module pelo cli
+  <blockquote> ng g m nomeDoModulo</blockquote> 
 
-`ng  g m nomeDoModulo`
+- Criando um serviço 
 
--- service 
+  <blockquote> ng g s nomeDoServico</blockquote> 
 
-`ng g s nomeServico`
+- Instalando o bootstrap no angular
+
+  <blockquote> npm install ngx - inicialização - salvar </blockquote> 
+
+  <blockquote> https://valor-software.com/ngx-bootstrap/#/documentation </blockquote> 
+
+  <blockquote> http://themicon.co/theme/angle/v4.6/frontend/site/</blockquote> 
 
 
--- bootstrap no angular
 
-npm install ngx - inicialização - salvar
+# Comandos de teste
 
-https://valor-software.com/ngx-bootstrap/#/documentation
+- Comando que varifica o seu codigo!
 
-outros 
+  <blockquote> ng lint </blockquote>
 
-http://themicon.co/theme/angle/v4.6/frontend/site/
+- Roda os arquivos de teste, e informa o tipo de erro no teste!
+
+  <blockquote> ng test: </blockquote>
+
+- Teste de integração
+
+  <blockquote> ng e2e</blockquote>
 
 
 
 # Ciclo de vida do Angular ! 
 
-Evento (Hooks) -  Quando?
+  Quando? - Evento (Hooks) -
 
--- ngOnChanges: Antes #2 e quando valor property-binding é atualizado (importante)
+- Antes #2 e quando valor property-binding é atualizado (importante):
 
--- ngOnInit: Quando component é inicializado
+    <blockquote> ngOnChanges() </blockquote> 
 
--- ngDoCheck: A cada ciclo de verificação de mudanças
+- Quando component é inicializado:
 
--- ngAfterContentInit: Depois de inserir conteúdo externo na view
+    <blockquote> ngOnInit()</blockquote>
 
--- ngAfterContentChecked: A cada verificação de conteúdo inserido
+- A cada ciclo de verificação de mudanças:
 
--- ngAfterViewChecked: A cada verificação de conteúdo / conteúdo filho
+    <blockquote> ngDoCheck()</blockquote>
 
--- ngOnDestroy: Antes da diretiva / component ser destruído (importante
+- Depois de inserir conteúdo externo na view:
+
+  <blockquote> ngAfterContentInit()</blockquote>
+
+- A cada verificação de conteúdo inserido:
+
+  <blockquote> ngAfterContentChecked()</blockquote>
+
+- A cada verificação de conteúdo / conteúdo filho: 
+
+  <blockquote> ngAfterViewChecked()</blockquote> 
+
+- Antes da diretiva / component ser destruído (importante):
+
+  <blockquote> ngOnDestroy()</blockquote>
+
+
 
 # Mudando o pré processador de css de um projeto que ja existe!
- 
-`
-ng set defaults.styleExt scss
 
-ng set dedaults.styleExt less
+- style guid: Padrões do angular
 
-ng set dedaults.styleExt styl
+  https://angular.io/guide/styleguide
+  
+  <blockquote>ng set defaults.styleExt scss</blockquote>
 
-`
--- style guid: Padrões do angular
+  <blockquote>ng set dedaults.styleExt less</blockquote>
 
-https://angular.io/guide/styleguide
+  <blockquote>ng set dedaults.styleExt style</blockquote>
 
 
-# nglint: 
-comando que varifica o seu codigo!
-
-
-# ng test: 
-roda os arquivos de teste, e informa o tipo de erro no teste!
-
-
-# nge2e:
- teste de integração!
 
 # Diretivas do Angular:
 
@@ -195,48 +206,12 @@ sempre vai ter uma unica instancia!
  `ng g p 'nome do pipe'`
 
 
+# Projeto de estudo sobre ROTAS
+
+- https://github.com/LincolnLink/Angular-Loiane/tree/master/rotas
+
 # Criando um sistema de rotas 
 
-
-Se cria primeiro um modulo da rota principal, esse modulo na versão 8 já vem implementado
-quando cria o projeto angular(ng new 'nomeDoProjeto')!
-
-configuração:
-
-``
-
-
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-
-
-/* Define o nome da rota e vincula um componente */
-/* Configurando Modulos sobre demanda*/
-/* Informa o path principal, mais o caminho do Module! */
-/* Lazy Loading */
-const appRoutes: Routes = [
-  { path: 'cursos', loadChildren: './cursos/cursos.module#CursosModule'},
-  { path: 'alunos', loadChildren: './alunos/alunos.module#AlunosModule'},  
-  { path: 'login', component: LoginComponent},
-  { path: '', component: LoginComponent},
-  { path: 'home', component: HomeComponent}
-];
-
-/*Configura a lista de rotas que foi definidas! */
-/*RouterModule é exportado e importado, para poder usar a diretiva routerLink */
-@NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-
-
-
-
-``
 
 
 
@@ -258,6 +233,9 @@ alunos.module.ts
 
 # Guarda de rota
 
+A principal função é de não deixar o usuario acessar outras paginas de forma errada, um bom exemplo seria acessar uma pagina sem fazer login e digitando diretamente
+na URL!
+
 É um tipo de serviço especial, que implementa um método, que o Angular reconhece a implementação dele, e pode ser usado como Guarda de rota!
 
 ``
@@ -268,7 +246,7 @@ ng g s guards/'nome do serviço'
 ``
 
 
-Remove a parte de "sirviço" e quarda na pasta "guards"
+Remove a parte de "serviço" e quarda na pasta "guards"
 
 implementa a interface 'CanActivate', isso define que esse serviço é uma Guarda de rota!
 

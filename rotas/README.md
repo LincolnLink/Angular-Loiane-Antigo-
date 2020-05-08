@@ -1,27 +1,100 @@
-# Rotas
+# Configurando o Module de Rotas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.22.
+- Se cria primeiro um modulo da rota do componente principal, esse modulo na versão 8 já vem implementado
+    quando cria o projeto angular(ng new 'nomeDoProjeto')!
+    A classe "AppRoutingModule" recebe a configuração principal das rotas, primeiro cria uma constante do tipo "Rotes" que recebe um array de objetos, cada objetos desse tem uma configração de rotas diferente!
 
-## Development server
+    - Path/component: As principais propriedade de cada objeto é, a definição do "Path" que é o caminho da rota, e a definição do "component" que é o nome do componente que vai ser carregado!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    - loadChildren: Caso tenha configurado um "Lazy Loading", você deve trocar o "component" pela propriedade "loadChildren", ele recebe uma "Arrow functions" que define qual modulo será carregado quando o usuario entrar naquela rota, sendo assim aquele modulo carregara outros componentes que foi configurado na quele modulo, com isso você carrega componentes sobre demanda, deixando o sistema mais leve e rapido!
 
-## Code scaffolding
+    - canActivate:  Outra propriedade que pode ter nesse objeto é o "canActivate", aonde ela recebe um array de "Guardas de rotas", essa "guarda de rotas" é um tipo de service especial do Angular, aonde você precisa implementar uma interface para o Angular reconhecer ele como guarda de rota, ele é executado quando o usuario entra na rota especifica, você pode configurar na rota pai ou na rota filha!
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    - Com o Array configurado você deve importar o "RouterModule" chamando o método "forRoot()" passando para ele o array de rotas que você configurou!
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+    <blockquote>
 
-## Running unit tests
+    const appRoutes: Routes = [
+    { 
+        path: 'cursos', 
+        loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule),
+        canActivate: [AuthGuard],
+        canActivateChild: [CursosGuard]
+    },
+    { 
+        path: 'alunos',
+        loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
+        canActivate: [AuthGuard],
+        //canActivateChild: [AlunosGuard]
+    },
+    { 
+        path: 'login', 
+        component: LoginComponent    
+    },
+    { 
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    }
+    ];
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    @NgModule({
+        imports: [RouterModule.forRoot(appRoutes)],
+        exports: [RouterModule]
+    })
+    export class AppRoutingModule { }
+    </blockquote>
 
-## Running end-to-end tests
+# Configurando o Module de Rotas filhas
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- Motivo de usar
 
-## Further help
+    - Evitar repetição no nome do "path" na configuração de rotas !
+    - Renderizar componente pai e componente filho ao mesmo tempo na tela, ou rederizar 2 componentes filho ao mesmo tempo um dolado do outro! 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Configuração
+
+    Como o componente Alunos tem muitas paginas, cada pagina foi criada em forma de componente, para gerenciar cada componente de Alunos, foi criado um Module(AlunosModule) apenas para os componentes Alunos, e para gerencia as rotas foi criado um Module de rotas(AlunosRoutingModule) para so componentes Alunos!
+    
+    - No "AlunosRoutingModule" foi configurar uma constante do tipo "Routes" que recebe um array com apenas um objeto, que seria a configuração da rota pai do componente!
+
+    - "children" é a propriedade da rota pai, que define as rotas filhas, ela recebe um array de objeto, cada objeto representa uma rota filha!
+
+    O método "forRoot()" é apenas para o "AppRoutingModule" que é o Module de rotas principal do componente principal do projeto, outros Module de outros componentes deve ser usar o método "forChild()"
+
+    <blockquote>
+
+        const alunosRoutes: Routes = [
+        {
+            path: '', component:AlunosComponent,
+            canActivateChild : [AlunosGuard],
+            children: [
+                {path: 'novo', component: AlunoFormComponent},
+                {path: ':id', component: AlunoDetalheComponent,
+                resolve: { aluno: AlunoDetalheResolver }
+                },
+                {path: ':id/editar',
+                component: AlunoFormComponent,
+                canDeactivate: [AlunosDeactivateGuard]
+                },
+            ]
+        },
+        ];
+
+        @NgModule({
+        declarations: [],
+        imports: [RouterModule.forChild(alunosRoutes)],
+        exports: [RouterModule]
+
+        })
+        export class AlunosRoutingModule { }
+
+    </blockquote>
+
+
+
+
+
+
+

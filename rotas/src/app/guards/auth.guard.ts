@@ -19,9 +19,10 @@ export class AuthGuard implements CanActivate {
     private router: Router
     ){}
 
-  // Implementando a Interface que reconhece o serviço como uma Guarda de rotas!
-  // passando os parametros!
-  // Os resultados de pois do ':' são os retornos!
+  // No JS não tem o conceito Interface, mas se deve implementar o método obrigatorio! 
+  // Implementando o método que reconhece o serviço como uma Guarda de rotas!
+  // Parametros pode ter qualquer nome, mas o tipo é obrigatorio  
+  // Os resultados de pois do ':' são os tipos de retornos!
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
