@@ -137,118 +137,89 @@ Praticando Angular com Loiane Groner
 
 
 
-# Diretivas do Angular:
+# Projeto de estudo sobre Diretivas
 
-Uma forma de passar instruções para o template(codigo HTML)
+- Uma forma de passar instruções para o template(codigo HTML)
 
+  Exemplo: *ngFor
 
-EXEMPLO: *ngFor
+  <blockquote>
 
-<ul>
-    <li *ngFor="let curso of cursos">
-    {{ curso }}
-    </li>
-</ul>
+    <ul>
+      <li *ngFor="let curso of cursos">
+      {{ curso }}
+      </li>
+    </ul>
 
-Os componentes ~soa diretivas com template
+  </blockquote> 
 
-exemplos:
-<cursos-lista></cursos-lista>
+  Os componentes são diretivas com template
 
+  Exemplos:
+  <blockquote>
+    < cursos-lista></ cursos-lista>
+  </blockquote>
 
-existe 2 tipos de diretivas 
+- Existe 2 tipos de diretivas 
 
--- Diretivas Estruturais:
-Interagem com a view e
-modifica a estrutura do DOM o/ou codigo html! 
+  - Diretivas Estruturais
 
-exemplo: ngFor, ngIf
+    Interagem com a view e modifica a estrutura do DOM o/ou codigo html! 
 
+    <blockquote>
+      ngFor, ngIf
+    </blockquote>
 
--- Diretivas de atributos
+  - Diretivas de atributos
 
-Interagem com o elemento em que foram aplicadas
+    Interagem com o elemento em que foram aplicadas
 
-exemplo: ng-class, ng-style
-
-
--- ngIf
-
-
-
-------Service---------
-
-
--- bota a classe de serviço no providers para ela ser
- instanciada uma vez para toda aplicação
+    <blockquote>
+      ng-class, ng-style
+    </blockquote>
 
 
----------criando module de funcionalidade
-
-Module de funcionalidade vs module root/ modulo raiz
-
-Module de funcionalidade se importa o CommonModule!
-
-Modulo raiz se importa o BrowserModule!
+- ngIf
 
 
 
-padrão singoto: não importa quantas vezes declara o servico, 
-sempre vai ter uma unica instancia!
+# Projeto de estudo sobre Service
+
+- Bota a classe de serviço no providers para ela ser instanciada uma vez para toda aplicação
+
+  Padrão singoto: não importa quantas vezes declara o servico, sempre vai ter uma unica instancia!
 
 
---------------Pipes--------------------
+# Module
+
+- Module de funcionalidade vs module root/ modulo raiz
+
+  - Module de funcionalidade se importa o CommonModule!
+
+  - Modulo raiz se importa o BrowserModule!
 
 
-# criando um Pipe personalizado
+# Projeto de estudo sobre Pipes
+
+- Criando um Pipe personalizado
+
+  <blockquote>
+
+    ng g p 'nome do pipe'
+
+  </blockquote>
 
 
- `ng g p 'nome do pipe'`
-
-
-# Projeto de estudo sobre ROTAS
+# Projeto de estudo sobre Rotas
 
 - https://github.com/LincolnLink/Angular-Loiane/tree/master/rotas
 
-# Criando um sistema de rotas 
 
 
 
 
-# Lazy Loading
-
-O conseito de Lazy loading seria você deixar a sua aplicação/ site mas rapido, carregando ele em partes, o Angular divide essas partes atraves dos Modulos(pode organizar com pastas), cada Modulo agrupa componentes, você carregando os modulos sobe demanda, faz com que os componentes carrega apenas quando são chamados! 
-
-Essa configuração de Lazy Loading se configura usando o sistema de rotas!
-
-A organização de pastas fica assim:
-
--pasta-alunos
---pasta/do-componente-aluno-detalhes
---pasta/do-componente-aluno-forms
-alunos-routing.module.ts
-alunos-componente-principal.component.ts
-alunos.module.ts
 
 
-# Guarda de rota
-
-A principal função é de não deixar o usuario acessar outras paginas de forma errada, um bom exemplo seria acessar uma pagina sem fazer login e digitando diretamente
-na URL!
-
-É um tipo de serviço especial, que implementa um método, que o Angular reconhece a implementação dele, e pode ser usado como Guarda de rota!
-
-``
-
-
-ng g s guards/'nome do serviço'
-
-``
-
-
-Remove a parte de "serviço" e quarda na pasta "guards"
-
-implementa a interface 'CanActivate', isso define que esse serviço é uma Guarda de rota!
 
 
 

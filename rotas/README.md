@@ -10,6 +10,8 @@
 
     - canActivate:  Outra propriedade que pode ter nesse objeto é o "canActivate", aonde ela recebe um array de "Guardas de rotas", essa "guarda de rotas" é um tipo de service especial do Angular, aonde você precisa implementar uma interface para o Angular reconhecer ele como guarda de rota, ele é executado quando o usuario entra na rota especifica, você pode configurar na rota pai ou na rota filha!
 
+    - canActivateChild: faz o mesmo que "canActivate" só que para as rotas filhas!
+
     - Com o Array configurado você deve importar o "RouterModule" chamando o método "forRoot()" passando para ele o array de rotas que você configurou!
 
 
@@ -44,7 +46,7 @@
             exports: [RouterModule]
         })
         export class AppRoutingModule { }
-        
+
     </blockquote>
 
 # Configurando o Module de Rotas filhas
@@ -61,6 +63,10 @@
     - No "AlunosRoutingModule" foi configurar uma constante do tipo "Routes" que recebe um array com apenas um objeto, que seria a configuração da rota pai do componente!
 
     - "children" é a propriedade da rota pai, que define as rotas filhas, ela recebe um array de objeto, cada objeto representa uma rota filha!
+
+    - resolve:
+
+    - canDeactivate:  
 
     O método "forRoot()" é apenas para o "AppRoutingModule" que é o Module de rotas principal do componente principal do projeto, outros Module de outros componentes deve ser usar o método "forChild()"
 
@@ -92,6 +98,24 @@
         export class AlunosRoutingModule { }
 
     </blockquote>
+
+
+
+# Configurando a guarda de rotas
+
+- Motivo para usar
+
+    A principal função é de não deixar o usuario acessar outras paginas de forma errada, um bom exemplo seria acessar uma pagina digitando diretamente na URL sem fazer login, uma guarda de rota com um script que verifica se o usuario está logado ou não, bloquearia a URL, forçando o usuario a fazer login!
+
+- Criando uma guarda de rota
+
+    <blockquote>
+        ng g s guards/'nome do serviço'
+    </blockquote>
+
+    - Remove a parte de "serviço" e quarda na pasta "guards"
+
+    - Implementa a interface 'CanActivate', isso define que esse serviço é uma Guarda de rota!
 
 
 
