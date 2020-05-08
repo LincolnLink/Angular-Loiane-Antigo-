@@ -15,35 +15,36 @@
 
     <blockquote>
 
-    const appRoutes: Routes = [
-    { 
-        path: 'cursos', 
-        loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule),
-        canActivate: [AuthGuard],
-        canActivateChild: [CursosGuard]
-    },
-    { 
-        path: 'alunos',
-        loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
-        canActivate: [AuthGuard],
-        //canActivateChild: [AlunosGuard]
-    },
-    { 
-        path: 'login', 
-        component: LoginComponent    
-    },
-    { 
-        path: '',
-        component: HomeComponent,
-        canActivate: [AuthGuard]
-    }
-    ];
+        const appRoutes: Routes = [
+        { 
+            path: 'cursos', 
+            loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule),
+            canActivate: [AuthGuard],
+            canActivateChild: [CursosGuard]
+        },
+        { 
+            path: 'alunos',
+            loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
+            canActivate: [AuthGuard],
+            //canActivateChild: [AlunosGuard]
+        },
+        { 
+            path: 'login', 
+            component: LoginComponent    
+        },
+        { 
+            path: '',
+            component: HomeComponent,
+            canActivate: [AuthGuard]
+        }
+        ];
 
-    @NgModule({
-        imports: [RouterModule.forRoot(appRoutes)],
-        exports: [RouterModule]
-    })
-    export class AppRoutingModule { }
+        @NgModule({
+            imports: [RouterModule.forRoot(appRoutes)],
+            exports: [RouterModule]
+        })
+        export class AppRoutingModule { }
+        
     </blockquote>
 
 # Configurando o Module de Rotas filhas
