@@ -21,7 +21,7 @@ Praticando Angular com Loiane Groner
 
 # Principais  comando JS/TS
 
--.filter(): Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
+- .filter(): Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
 
   <blockquote>
 
