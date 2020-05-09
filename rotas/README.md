@@ -1,7 +1,142 @@
+# RouterLink e RouteLinkActive
+
+- RouterLink: Essa diretiva define rotas para o template HTML, que recebe o caminho da rota, ao clicar você é direcionado para rota, que ativa o componente que foi configurado!
+
+- RouteLinkActive: É uma diretiva do angular que foi configurada no "< li>" que quando o link é clicado, a diretiva bota uma classe que foi configurada!
+
+    <blockquote>
+
+        <nav *ngIf="mostrarMenu" ngxNavbarDynamicExpand class="navbar navbar-dark bg-dark">
+
+            <a routerLink="" class="navbar-brand" href="#">Logo</a>
+
+            <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
+                <span class="navbar-toggler-icon d-flex align-items-center justify-content-center"></span>
+            </button>
+            
+            <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li routeLinkActive="active" class="nav-item">
+                        <a routerLink="/" class="nav-link" >Home</a>
+                    </li>
+                    <li routeLinkActive="active" class="nav-item">
+                        <a routerLink="/login" class="nav-link" >Login</a>
+                    </li>
+                    <li routeLinkActive="active" class="nav-item">
+                        <a routerLink="/cursos" [queryParams]="{pagina:1}" class="nav-link" >Cursos</a>
+                    </li>                    
+                    <li routeLinkActive="active" class="nav-item">
+                        <a [routerLink]="['alunos']" class="nav-link" >Alunos</a>
+                    </li>
+                </ul>
+            </ngx-navbar-collapse>
+        </nav>
+
+        <div class="container">
+
+            <router-outlet></router-outlet>
+
+        </div>
+
+
+    </blockquote>
+
+# Definindo e extraindo parâmetros de roteamento
+
+- Parametros na rota: a direteiva "[ routerLink]= ''" alem da rota receber o caminho ela também pode receber    um paremetro, no exemplo abaixo ela está recebendo um "idCurso.value" que seria o id de algum objeto que está sendo renderizado no 
+ 
+    <blockquote>
+        <li routeLinkActive="active" class="nav-item">
+            <a [routerLink]="['curso', idCurso.value]" class="nav-link" >Cursos com Id</a>
+        </li>
+        <br>
+        <p>Entre com o ID do curso</p>
+        <input #idCurso>
+
+    </blockquote>
+
+
+- Extraindo parâmetros: 
+
+    - Primeira forma[de forma ruim]: faz uma injeção de dependencia da classe "ActivatedRoute", com isso você tem acesso ao snapshot da roda, ele é uma copia da rota atual, com isso você consegue obter o parametro que foi passado para a rota!
+
+    <blockquote>
+
+        id: number;
+
+        constructor(private route: ActivatedRoute) {
+
+        //Obtendo o parametro da rota de forma ruim!
+        this.id = this.route.snapshot.params['id'];
+    }
+        
+    </blockquote>
+
+    - Segunda forma[Solução mais elegante!] faz uma injeção de dependencia da classe "ActivatedRoute" com isso você acessa o "params" e faz uma inscrição "subscribe()" passa uma arrow function, esperando um parametro chamado "params" de qualquer tipo(any) com isso você pega o indice "id" igual da primeira forma!
+
+    Essa inscrição deve ser colocada em uma variavel, para poder desiscrever "unsubscribe()" quando o componente é destruido "ngOnDestroy()"!
+
+    Com essa inscrição você sempre vai obter o snapshot da rota atual!
+
+    - Router: Essa classe foi usada para poder trocar de pagina, ultilizando o método(navigate())
+
+    <blockquote>
+
+        inscricao: Subscription;        
+
+        constructor(
+            private route: ActivatedRoute, 
+            private cursosService: CursosService,
+            private router: Router) {            
+        }
+
+        ngOnInit() {
+
+        // Se inscreve para poder receber ID do curso! 
+        // Com o ID carrega o curso selecionado!
+
+        this.inscricao = this.route.params.subscribe( 
+            (params: any) => {
+
+            this.id = params['id'];
+
+            // Busca o curso com o id especificado!
+
+            this.curso = this.cursosService.getCurso(this.id);
+
+            if(this.curso == null)
+            {
+
+            // Verificar se a rota está ativa
+            //this.router.isActive
+
+            // Vai passar o objeto da rota!
+            // Transfere a pagina para o componente informado!
+
+            this.router.navigate(['cursos/naoEncontrado']);
+
+            }
+
+        }
+        ); 
+    }
+
+    // Quando o objeto é descruido ele se desinscreve![Boas praticas]
+    
+    ngOnDestroy(){
+
+        //this.inscricao.unsubscribe();
+
+    }
+
+    </blockquote>
+
+    
+
 # Configurando o Module de Rotas
 
 - Se cria primeiro um modulo da rota do componente principal, esse modulo na versão 8 já vem implementado
-    quando cria o projeto angular(ng new 'nomeDoProjeto')!
+    quando cria o projeto angular(ng new 'nomeDoProjeto'), no index deve se por a tag "< base href="/">".
     A classe "AppRoutingModule" recebe a configuração principal das rotas, primeiro cria uma constante do tipo "Rotes" que recebe um array de objetos, cada objetos desse tem uma configração de rotas diferente!
 
     - Path/component: As principais propriedade de cada objeto é, a definição do "Path" que é o caminho da rota, e a definição do "component" que é o nome do componente que vai ser carregado!
@@ -100,6 +235,42 @@
     </blockquote>
 
 
+- Configurando o arquivo HTML
+
+    Para que as rotas filhas apareça no componente pai é preciso por o "< router-outlet></ router-outlet>" no codigo HTML do componente pai!
+
+    <blockquote>
+
+        <p>Lista de Alunos</p>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="list-group">
+
+                    <a [routerLink]="['/alunos',a.id]"  *ngFor="let a of alunos" class="list-group-item list-group-item-action list-group-item-secondary">
+
+                        id: {{ a.id }} - Nome: {{ a.nome }}
+
+                    </a>    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <!--É preciso por o "router-outlet" quando o componente tem rotas filhas!-->
+
+                <router-outlet></router-outlet>
+
+            </div>
+        </div>
+
+    </blockquote>
+
+
 
 # Configurando a guarda de rotas
 
@@ -116,10 +287,4 @@
     - Remove a parte de "serviço" e quarda na pasta "guards"
 
     - Implementa a interface 'CanActivate', isso define que esse serviço é uma Guarda de rota!
-
-
-
-
-
-
 

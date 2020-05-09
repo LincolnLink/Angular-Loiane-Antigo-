@@ -25,9 +25,9 @@ Praticando Angular com Loiane Groner
 
   <blockquote>
 
-    return value.filter(
-
-          v => v.toLocaleLowerCase().indexOf(filter) != -1
+    value.filter(
+      
+      v => v.toLocaleLowerCase().indexOf(filter) != -1
 
     );
 
@@ -141,16 +141,16 @@ Praticando Angular com Loiane Groner
 
 - Uma forma de passar instruções para o template(codigo HTML)
 
-  Exemplo: *ngFor
+  *ngFor
 
   <blockquote>
 
-    <ul>
-      <li *ngFor="let curso of cursos">
+    < ul>
+      < li *ngFor="let curso of cursos">
       {{ curso }}
-      </li>
-    </ul>
-
+      < /li>
+    < /ul>
+    
   </blockquote> 
 
   Os componentes são diretivas com template
