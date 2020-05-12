@@ -74,11 +74,13 @@
 
     - Segunda forma[Solução mais elegante!] faz uma injeção de dependencia da classe "ActivatedRoute" com isso você acessa o "params" e faz uma inscrição "subscribe()" passa uma arrow function, esperando um parametro chamado "params" de qualquer tipo(any) com isso você pega o indice "id" igual da primeira forma!
 
+    Só é possivel se inscrever porque o "params" é do tipo BehaviorSubject
+
     Essa inscrição deve ser colocada em uma variavel, para poder desiscrever "unsubscribe()" quando o componente é destruido "ngOnDestroy()"!
 
     Com essa inscrição você sempre vai obter o snapshot da rota atual!
 
-    - Router: Essa classe foi usada para poder trocar de pagina, ultilizando o método(navigate())
+    - Router (Rotas Imperativas, Redirecionamento via código): Essa classe foi usada para poder trocar de pagina, ultilizando o método(navigate())
 
     <blockquote>
 
@@ -87,7 +89,9 @@
         constructor(
             private route: ActivatedRoute, 
             private cursosService: CursosService,
-            private router: Router) {            
+            private router: Router) { 
+
+            //console.log(route)               
         }
 
         ngOnInit() {
@@ -132,6 +136,66 @@
     </blockquote>
 
     
+
+# Definindo e extraindo parâmetros de url (query)
+
+- queryParams: É uma diretiva do angular que permite passar um objeto(queryParams) na URL, é um parametro de pagina!
+
+    <blockquote>
+
+        <li routeLinkActive="active" class="nav-item">
+            <a routerLink="/cursos" [queryParams]="{pagina:1}" class="nav-link" >Cursos</a>
+        </li> 
+
+    </blockquote>
+
+- A forma de extrair esse "queryParams", seria usando novamente o "ActivatedRoute"
+
+    <blockquote>
+
+        pagina: number;
+        inscricao: Subscription;
+
+        constructor(
+
+            private CursosService: CursosService,
+            private route: ActivatedRoute,
+            private router: Router
+
+        ) { }
+
+        ngOnInit() {
+
+            this.cursos = this.CursosService.getCursos();
+
+            // Obtendo o queryParams!
+            this.inscricao = this.route.queryParams.subscribe(
+            (queryParams: any) => {
+
+                this.pagina = queryParams['pagina'];
+
+            }
+        );
+        }
+
+        // Boa pratica para quando for usar o método "subscribe"
+
+        ngOnDestroy(){
+
+            this.inscricao.unsubscribe();
+
+        }
+
+        // Botão da paginação
+        proximaPagina(){    
+
+        this.router.navigate(['/cursos'],{queryParams: {'pagina': ++this.pagina}});
+
+        }
+
+    <blockquote>
+    
+
 
 # Configurando o Module de Rotas
 
@@ -272,7 +336,7 @@
 
 
 
-# Configurando a guarda de rotas
+# Configurando a guarda de rotas (CanActivate)
 
 - Motivo para usar
 
@@ -287,4 +351,353 @@
     - Remove a parte de "serviço" e quarda na pasta "guards"
 
     - Implementa a interface 'CanActivate', isso define que esse serviço é uma Guarda de rota!
+
+# Configurando Guarda de Rotas filhas (CanActivateChild)
+
+- Motivo para usar
+
+    - Verificar se o usuario pode editar ou deletar, quando entra na pagina de visualização do curso ou produto!
+
+- Cria um arquivo chamada "CursosGuard" na pasta "guards", depois implementa a interface "CanActivateChild"
+
+    - childRoute: ActivatedRouteSnapshot -> Esse parametro é uma foto da rota ativada!
+
+    - state: RouterStateSnapshot -> Esse parametro é o estado dessa rota! 
+
+        <blockquote>
+
+            @Injectable()
+            export class CursosGuard implements CanActivateChild {
+
+                canActivateChild(
+                    childRoute: ActivatedRouteSnapshot,
+                    state: RouterStateSnapshot
+                    ): boolean | Observable<boolean> | Promise<boolean>
+                {
+                    console.log("Chamando guarda de rotas filhas! - cursos");
+
+                    // Usa esses dois objetos para criar logica
+                    console.log(childRoute);
+
+                    console.log(state);
+
+                    return true;
+                }
+
+                constructor() {}
+
+            }
+
+        </blockquote>
+
+        Pode definir as guardas de rotas de forma global no modulo de rotas principal, ou no modulo especifico do componente que deseja!
+
+
+# Configurando as Guarda de Rotas (CanDeactivate)
+
+- Motivo para usar
+
+    - Verificar se o usuario pode desativar uma rota ou não!
+
+    - Verificar se o usuario realmente quer sair do formulario que já foi preenchido, informando para ele que pode perder os dados que já foram digitados!
+
+    - Caso de erro na pagina!
+
+- Crie uma interface com nome de "IformCanDeactivade", caso queira tipar de forma generica a classe!
+
+    <blockquote>
+
+    // interface é coisa do Type Script
+    export interface IformCanDeactivade{
+
+        podeDesativar(): any;
+
+    }
+
+    </blockquote>
+
+
+- Crie um servico chamado "AlunosDeactivateGuard", você pode definor qual componente vai receber essa guarda de rotas, <T>, ou então passar uma interface para tipar de forma generica!
+
+    <blockquote>
+
+    @Injectable({providedIn: 'root'})
+    export class AlunosDeactivateGuard implements CanDeactivate< IformCanDeactivade> {
+        canDeactivate(
+        component: IformCanDeactivade,
+        currentRoute: ActivatedRouteSnapshot, 
+        currentState: RouterStateSnapshot
+        ): Observable< boolean>|Promise< boolean>|boolean {
+
+        console.log("Entrou na configuração de desativar a rota [x]");
+
+        // Logica para definir se vai mudar ou não de rota!
+        //return component.podeMudarDeRota();
+
+        return component.podeDesativar();
+
+        }
+    }
+
+    </blockquote>
+
+- Uma classe precisa dar um corpo de logica para o método da interface, nesse caso o componente "AlunoFormComponent" implementou o método da interface!
+
+    <blockquote>
+
+        private formMudou: boolean = false;
+
+        // Logica que verifica se o campo "nome" está preenchido!
+        onInput(){
+            this.formMudou = true;
+            console.log("O campo está preenchido!");
+        }
+
+        // Logica informa para o usuario que o campo está preenchido e não foi salvo!
+        // Pergunta se ele deseja sair ou não!
+
+        podeMudarDeRota(){
+
+            if(this.formMudou) {
+
+            return confirm("Tem certeza que deseja mudar de pagina, exite dados modificados que não foram salvos!");
+
+            }
+
+        }
+        
+        podeDesativar() {
+
+            return this.podeMudarDeRota();
+
+        }
+
+    </blockquote>
+
+- Por final declara o "AlunosDeactivateGuard" em algum provider de algum module, no module principal fica global, no module especifico ele só ativa no componente especifico! 
+
+    <blockquote>
+
+    canDeactivate: [AlunosDeactivateGuard]
+
+    </blockquote>
+
+
+# Guarda de Rotas (Resolve) 
+
+- Motivo de usar
+
+    - Carregando dados antes da rota ser ativada(antes que o componente seja criado)
+
+    - Serve também para obter informações de um usuario ou produto, com o id que está sendo passado pela pagina, para poder obter os dados e depois quando carregar o outro componente carregar !
+
+- Cria um servico chamado "AlunoDetalheResolver", herda a classe Resolve< T> com um tipo de objeto que sera resolvido, no construtor já tem uma injeção de dependencia do servico Crud, obtenha o parametro da rota que é um id de usuario, usando o "route.params[' id']"
+
+    <blockquete>
+            
+        @Injectable(/*{ providedIn: 'root' }*/)
+        export class AlunoDetalheResolver implements Resolve<Aluno> {
+        
+            alunoTeste: any;
+
+            constructor(private alunoService: AlunosService){}
+            
+            resolve(
+                route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot
+                ): Observable<any>|Promise<any>|any {
+
+                let id = route.params['id']; 
+
+                console.log("Obtem informação antes de entrar na rota - Resolve");
+
+                return this.alunoTeste = this.alunoService.getAluno(id);
+            }
+        }
+
+    </blockquete>
+
+
+- Define o Resolve em um componente filho! 
+
+    <blockquete>
+        resolve: { aluno: AlunoDetalheResolver }
+    </blockquete>
+
+- Configurando o componente que usa o resolve!
+
+    Com o resolve configurado, e definido em qual componente vai usar, no componente você deve fazer uma injeção de dependencia do "private route: ActivatedRoute", para poder pegar os dados do "resolve", você deve fazer uma inscrição no na propriedade "data", com isso você consegue extrair o objeto "aluno" do tipo aluno que foi declarado na rota filha, com os dados que veio do servico!
+
+    Como uma boa pratica é sempre bom se desinscrever depois que o objeto é destruido!
+
+    <blockquote>
+        inscricao: Subscription;  
+        alunoView: Aluno;  
+
+        constructor(
+            private route: ActivatedRoute,    
+            private router: Router,
+            //private alunoService: AlunosService,
+        ) { }
+
+        this.inscricao = this.route.data.subscribe(
+            (info: {aluno: Aluno}) => {
+
+            //console.log("objeto que é recebido");
+            //console.log(info);
+
+            this.alunoView = info.aluno
+            } 
+        );
+
+        ngOnDestroy(){
+            this.inscricao.unsubscribe();
+        }
+    </blockquote>
+
+    Por final declara no provider do module de rotas do projeto Alunos, para a injeção de dependencia funcionar!
+
+
+# Usando Guarda de Rotas (CanLoad) Como não carregar o módulo sem permissão
+
+- Motivo de usar
+
+    - É uma permissão para segurar que seu script não fica exposto em inspeções de navegadores, quando o usuario não está logado!
+
+- Configuração: a interface canLoad foi implementada na classe "authGuard"
+
+    O método que verifica login foi refatorado e isolado em um método novo, foi feito isso para reutilizar ele no na implementação do "canActivate" e "canLoad"
+
+    <blockquote>
+
+        private verificarAcesso(){
+
+            if(this.authService.usuarioEstaAutenticado())
+            {
+            return true;
+            }
+            
+            this.router.navigate(['/login']);
+            return false;
+        }
+    </blockquote>
+
+    Implementa o método "CanLoad"
+
+    <blockquote>
+    
+        canLoad(
+            route: Route, 
+            segments: UrlSegment[]
+            ): boolean | Observable<boolean> | Promise<boolean> {           
+            
+            console.log("canLoad: Verificando se o usuario pode carregar o cod. do mudule")
+
+            return this.verificarAcesso();
+
+        }
+
+    </blockquote>
+
+    Depois disso faz a chamada do canLoad no module de rotas principal, aonde está configurado o lazyLoad
+
+    <blockquote>
+
+        canLoad: [AuthGuard]
+
+    </blockqoute>
+
+# Definindo rota padrão e wildcard (rota não encontrada)
+
+
+- Motivo para usar 
+
+    - Configurar uma pagina para o erro 404
+
+    - Quando o usuario digita um valor na URL!
+
+- Configuração
+
+    Cria um componente com o nome de "paginaNaoEncontrada"
+
+    <blockquote>
+
+        ng g c paginaNaoEncontrada
+
+    </blockquote>
+
+    Adiciona uma nova rota, todo caminho estranho é considerado um "**", que direciona para uma pagina mais amigavel para o usuario !
+
+    <blockquote>
+
+        {
+            path: '**', component: PaginaNaoEncontradaComponent //, canActivate: [AuthGuard]
+        }
+
+    </blockquote>
+
+    Pode por o "canActivate: [ AuthGuard]" para redirecionar o usuario para pagina de login!
+
+- Rota padrão (redirectTo), segunda dica!
+
+    Fazendo um redirecionamento diretamente pelo module padrão de rotas, usando a propriedade "redirectTo"
+
+    <blockquote>
+
+        { 
+            path: '/Home',
+            component: HomeComponent,
+            canActivate: [AuthGuard]
+        },
+
+        { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+        {
+            path: '**', component: PaginaNaoEncontradaComponent //, canActivate: [AuthGuard]
+        }
+    
+    </blockquote>
+
+    O a propriedade "pathMatch" tem dois valores, full e prefix
+
+    - full: verifica e avalia a rota toda, ignorando as rotas filhas!
+
+    - prefix: verifica e avalia as rotas filhas!
+
+# Estilo de url: HTML5 ou usando #
+
+- o HTML5 deixa as rotas sem o "#", porem pode dar erro na hora de fazer requisição e uma API!
+
+-Configuração: deve configurar no module de rota principal, passa um segundo parametro, que é um objeto com a propriedade "useHash" recebendo valor de "true"
+
+    <blockquote>
+
+        @NgModule({
+        imports: [RouterModule.forRoot(appRoutes, {useHash: true})],
+        exports: [RouterModule]
+        })
+        export class AppRoutingModule { }
+
+    </blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

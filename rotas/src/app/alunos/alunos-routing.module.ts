@@ -19,7 +19,7 @@ const alunosRoutes: Routes = [
     children: [
         {path: 'novo', component: AlunoFormComponent},
         {path: ':id', component: AlunoDetalheComponent,
-          resolve: { aluno: AlunoDetalheResolver }
+          resolve: { alunoResolvido: AlunoDetalheResolver }
         },
         {path: ':id/editar',
          component: AlunoFormComponent,

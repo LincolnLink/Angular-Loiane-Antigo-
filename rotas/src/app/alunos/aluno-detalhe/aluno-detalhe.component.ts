@@ -38,17 +38,17 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
       }
     );*/
 
-    console.log("ngOnInit do componente");
+    //console.log("ngOnInit do componente");
 
     // Essa forma de pegar a informação é quando usa a guarda de rota "resolve"
     // Só está pegando o objeto que já foi tratado, antes mesmo de entrar na rota!
     this.inscricao = this.route.data.subscribe(
-      (info: {aluno: Aluno}) => {
+      (info: {alunoResolvido: Aluno}) => {
 
-        console.log("objeto que é recebido");
-        console.log(info);
+        //console.log("objeto que é recebido");
+        //console.log(info);
 
-        this.alunoView = info.aluno
+        this.alunoView = info.alunoResolvido
       } 
     );
 

@@ -5,19 +5,24 @@ import {
   CanActivate, 
   ActivatedRouteSnapshot, 
   RouterStateSnapshot,   
-  Router
+  Router,
+  CanLoad,
+  Route,
+  UrlSegment
 } from '@angular/router';
 
 
 @Injectable(/*{
   providedIn: 'root'
 }*/)
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
 
   constructor(
     private authService: AuthService,
     private router: Router
     ){}
+    
+  
 
   // No JS não tem o conceito Interface, mas se deve implementar o método obrigatorio! 
   // Implementando o método que reconhece o serviço como uma Guarda de rotas!
@@ -28,9 +33,14 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
     ) : Observable<boolean> | boolean
   {
-    console.log("Verifica se esta logado - Guarda de rota Global!");    
+    console.log("canActivate: Verifica se esta logado - Guarda de rota Global!");    
 
-    //throw new Error("Method not implemented.");
+    return this.verificarAcesso();   
+    
+  }
+
+  private verificarAcesso(){
+
     if(this.authService.usuarioEstaAutenticado())
     {
       return true;
@@ -38,7 +48,19 @@ export class AuthGuard implements CanActivate {
     
     this.router.navigate(['/login']);
     return false;
+
+  }
+
+
+  canLoad(
+    route: Route, 
+    segments: UrlSegment[]
+    ): boolean | Observable<boolean> | Promise<boolean> {
     
+    console.log("canLoad: Verificando se o usuario pode carregar o cod. do mudule")
+
+    return this.verificarAcesso();
+
   }
 
 

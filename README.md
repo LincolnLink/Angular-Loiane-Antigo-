@@ -48,6 +48,18 @@ Praticando Angular com Loiane Groner
 - .map()
 
 
+- .includes()
+
+  Verifica se existe em um array a string passado como parametro!
+
+
+    <blockquote>
+
+      includes('editar')
+
+    </blockquote>
+
+
 
 # Principais comandos do Angular CLI
 

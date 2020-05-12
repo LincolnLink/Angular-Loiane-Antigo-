@@ -25,6 +25,7 @@ export class CursoDetalheComponent implements OnInit, OnDestroy {
 
     // Obtendo o parametro da rota, [ Forma ruim ]
     //this.id = this.route.snapshot.params['id'];
+    //console.log(route)
   }
 
   // Executa quando a classe é inicializada!
