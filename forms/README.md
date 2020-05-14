@@ -1,27 +1,127 @@
 # Forms
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
+- Existe 2 tipos de formulario no angular 2+ o Template Driven e o Data Driven
 
-## Development server
+- Template Driven: 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+  - O formulario é criado e configurado no HTML.
 
-## Code scaffolding
+  - Validações são feitas no proprio template do HTML.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  - Angular cria/deduz um FormGroup do cod HTML, é colocado diretivas nos campos para o angular saber para o Angular gerencia.
 
-## Build
+  - Valores do form são submetidos com ngSubmit, é usada uma variasvel local para o método que faz o submite pegar os valores.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Data Driven(Reativo)
 
-## Running unit tests
+  - O formulario é criado e configurado no Component, o HTML só recebe o basico, o componente cria o objeto forms, e o proprio componente gerencia os dados.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  - Validações são feitas no component, no HTML é feita apenas uma ferencia para poder casar as informações!
 
-## Running end-to-end tests
+  - Angular usa o FormGroup criado no Component!
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  - Form já está no Component e não precisa de ngSubmit
 
-## Further help
+# Iniciando um projeto para estudo de formularios no Angular 2+
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Cria um projeto chamado "forms"
+
+  <blockquote>ng new forms</blockquote>
+
+- Instala o ngx-bootstrap no projeto
+
+  https://github.com/valor-software/ngx-bootstrap/blob/development/docs/getting-started/ng-cli.md
+  
+  <blockquote>
+    npm install ngx-bootstrap bootstrap --save
+  </blockquote>
+
+
+- Link com os exemplos de forms: 
+  
+  https://getbootstrap.com/docs/3.3/css/#forms
+
+  Bota o caminho do css no arquivo angular.json
+
+  <blockquote>
+
+    "styles": [
+            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "styles.css",
+          
+    ],
+
+  </blockquote>
+
+- Estrutura HTML do NavBar com as duas rotas
+
+  <blockquote>
+
+      < nav ngxNavbarDynamicExpand class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" routerLink="">Angular Forms</a>
+
+        <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+          <ul class="navbar-nav">
+            <li class="nav-item active" routerLinkActive="active">
+              <a class="nav-link" routerLink="/templateForm">Form - Template Driven</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" routerLink="/dataForm">Form - Data Driven</a>
+            </li>
+            
+          </ul>
+        </ngx-navbar-collapse>
+      < /nav>
+
+      < div class="container">        
+          
+            <router-outlet></router-outlet>          
+        
+      < /div>
+
+  </blockquote>
+
+  Crie dois componentes, para cada formulario diferente, depois configura no module de rotas
+
+
+  </blockquote>ng g c TemplateFormComponent</blockquote>
+
+
+  </blockquote>ng g c DataFormComponent</blockquote>
+
+
+# Estrutura em HTML do Template-formulario
+
+- Exemplo
+  
+    </blockquote>
+    
+        <form class="form-horizontal">
+        <div class="form-group">
+
+            <label for="nome" class="control-label">Nome</label>
+            <input type="text" class="form-control" id="nome" placeholder="Nome">
+            
+
+            <label for="email" class="control-label">Email</label>        
+            <input type="email" class="form-control" id="email" placeholder="nome@Email.com">
+            
+            <button type="submit" class="btn btn-primary">Enviar</button>
+
+
+
+            </div>
+        </form>    
+    
+    </blockquote>
+
+  
+
+
+
+
