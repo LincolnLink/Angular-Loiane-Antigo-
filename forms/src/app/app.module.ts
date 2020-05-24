@@ -7,22 +7,24 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
-import { TemplateFormComponent } from './template-form/template-form.component';
 import { DataFormComponent } from './data-form/data-form.component';
-
+import { TemplateFormModule } from './template-form/template-form.module';
+import { AppBootstrapModule } from './AppBootstrap/app-bootstrap/app-bootstrap.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TemplateFormComponent,
     DataFormComponent
+    
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    NgxNavbarModule
+    NgxNavbarModule,
+    TemplateFormModule,
+    AppBootstrapModule
   ],
   providers: [],
   bootstrap: [AppComponent]

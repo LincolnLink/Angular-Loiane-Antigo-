@@ -1,17 +1,37 @@
-<form class="form-horizontal">
-    <div class="form-group">
+<form class="form-horizontal" #f=ngForm (ngSubmit)="onSubmit(f)" >
+
+    <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
 
         <label for="nome" class="control-label">Nome</label>
-        <input type="text" class="form-control" id="nome" placeholder="Nome">
-        
 
-        <label for="email" class="control-label">Email</label>        
-        <input type="email" class="form-control" id="email" placeholder="nome@Email.com">
-        
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <input type="text" class="form-control" name="nome" 
+        id="nome" placeholder="Nome" [(ngModel)]="userExemplo.nome"
+        required #nome="ngModel">        
 
-
-
+        <alert type="danger" [dismissible]="dismissible" *ngIf="!nome.valid && nome.touched">
+            <strong>Nome</strong>  é obrigatorio!
+        </alert>
     </div>
+
+    <div class="form-group"
+        [class.has-error]="!email.valid && email.touched"
+        [ngClass]="{'has-feedback': !email.valid && email.touched}">
+
+        <label class="control-label" for="emailLb">Email</label> 
+
+        <input type="email" class="form-control" name="email"
+         id="email" placeholder="nome@Email.com" 
+         [(ngModel)]="userExemplo.email" required email #email="ngModel" >       
+       
+        <alert type="danger" [dismissible]="dismissible" *ngIf="!email.valid && email.touched">
+            <strong>E-mail</strong> é obrigatorio!
+        </alert>
+     
+    </div>
+
+    <button disabled="!f.valid" type="submit" class="btn btn-primary">Enviar</button>
+
+    <app-form-debug [form]="f"></app-form-debug>
+
 </form>
 
