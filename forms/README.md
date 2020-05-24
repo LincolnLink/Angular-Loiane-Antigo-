@@ -280,9 +280,35 @@
 
 - Forms (Dica): Verificando dados do Form no template com JSON
 
+
+  Crie um component com o nome de "FormDebugComponent", esse componente serve para ver informações do formulario!
   <blockquote>
+
+    < div style="margin-top: 20px;" *ngIf="form">
+        < div>
+            Detalhes do form
+        < /div>
+        < pre>
+            Form válido: {{ form.valid  }}
+        < /pre>
+        < pre>
+            Form submetido: {{ form.submitted  }}
+        < /pre>
+        < pre>
+            Valores: < br> {{ form.value | json  }}
+        < /pre>
+    < /div>
   
   </blockquote>
+
+  Ele recebe do component pai um objeto de formulario!
+
+  <blockquote>
+
+    < app-form-debug [ form]="f"></ app-form-debug>
+  
+  </blockquote>
+
 
 
 
