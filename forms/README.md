@@ -318,7 +318,42 @@
   
   </blockquote>
 
+- Forms (template driven) Adicionando campos de endereço (form layout Bootstrap 3)
 
+  Estrutura do HTML do formulario, exemplo curto: 
+
+  <blockquote>
+
+    < form class="mt-5" #f=ngForm (ngSubmit)="onSubmit(f)" >
+
+        <div class="form-group row" [class.has-error]="!nome.valid && nome.touched">
+            
+            <div class="col-sm-12">
+
+                <label for="nome" class="label font-weight-bold">Nome</label>
+
+                <input type="text" name="nome" class="form-control"  
+                id="nome" placeholder="Nome" [(ngModel)]="userExemplo.nome"
+                required #nome="ngModel">
+            
+                <alert type="danger" [dismissible]="dismissible" *ngIf="!nome.valid && nome.touched">
+                    <strong>Nome</strong>  é obrigatorio!
+                </alert>
+
+            </div>
+
+        </div>
+
+    </form>
+
+  <blockquote>
+
+- Forms (template driven) Refatorando (simplificando) CSS e mensagens de erro
+
+
+Refatorando a forma que o ngClasse recebe a condição, criando um método que recebe o campo como parametro, a condição que é usada pode se transformar em outro método reutilizavel!
+
+A forma de mostrar o erro foi alterada, isolando todo o HTML em um componente, passando as condições e mensagem pelo input do componente!
 
 
 

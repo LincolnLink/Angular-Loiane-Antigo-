@@ -26,6 +26,25 @@ export class TemplateFormComponent implements OnInit {
     //console.log(this.userExemplo);
   }
 
+
+  // Verifica se o campo foi tocado e se é valido!
+  isValidTouched(campo: any){
+    return campo.valid && campo.touched;
+  }
+
+  // Verifica se o campo foi tocado e se é valido!
+  isInValidTouched(campo){
+    return !campo.valid && campo.touched;
+  }
+
+  // Retorna um conjuto de classes CSS, de acordo com a condição baseada no parametro!
+  aplicaCssErro(campo){ 
+      return {
+        'is-valid': this.isValidTouched(campo),
+        'is-invalid': this.isInValidTouched (campo)        
+    }  
+  }
+
   
 
 }

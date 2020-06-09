@@ -1,37 +1,133 @@
-<form class="form-horizontal" #f=ngForm (ngSubmit)="onSubmit(f)" >
+<form class="mt-5" #f=ngForm (ngSubmit)="onSubmit(f)" >
 
-    <div class="form-group" [class.has-error]="!nome.valid && nome.touched">
+    <div class="form-group row" [class.has-error]="!nome.valid && nome.touched">
+        
+        <div class="col-sm-12">
 
-        <label for="nome" class="control-label">Nome</label>
+            <label for="nome" class="label font-weight-bold">Nome</label>
 
-        <input type="text" class="form-control" name="nome" 
-        id="nome" placeholder="Nome" [(ngModel)]="userExemplo.nome"
-        required #nome="ngModel">        
+            <input type="text" name="nome" class="form-control"
+            id="nome" placeholder="Nome"
+            [ngClass]="aplicaCssErro(nome)"
+            [(ngModel)]="userExemplo.nome" required #nome="ngModel">
+        
+            <alert type="danger" [dismissible]="dismissible" *ngIf="!nome.valid && nome.touched">
+                <strong>Nome</strong>  é obrigatorio!
+            </alert>
+        </div>
+    </div>
+    
 
-        <alert type="danger" [dismissible]="dismissible" *ngIf="!nome.valid && nome.touched">
-            <strong>Nome</strong>  é obrigatorio!
-        </alert>
+    <div class="form-group row">
+        
+        <div class="col-sm-12">
+
+            <label for="emailLb" class="label font-weight-bold">Email</label> 
+
+            <input type="email"  name="email" class="form-control"
+            id="email" placeholder="nome@Email.com" 
+            [ngClass]="{'is-invalid': !email.valid && email.touched,
+            'is-valid': email.valid && email.touched}"            
+            [(ngModel)]="userExemplo.email" required email #email="ngModel" >
+        
+            <alert type="danger" [dismissible]="dismissible" *ngIf="!email.valid && email.touched">
+                <strong>E-mail</strong> é obrigatorio!
+            </alert>
+        </div>
     </div>
 
-    <div class="form-group"
-        [class.has-error]="!email.valid && email.touched"
-        [ngClass]="{'has-feedback': !email.valid && email.touched}">
+    <div class="form-group row">
 
-        <label class="control-label" for="emailLb">Email</label> 
+        <div class="col-sm-3">
 
-        <input type="email" class="form-control" name="email"
-         id="email" placeholder="nome@Email.com" 
-         [(ngModel)]="userExemplo.email" required email #email="ngModel" >       
-       
-        <alert type="danger" [dismissible]="dismissible" *ngIf="!email.valid && email.touched">
-            <strong>E-mail</strong> é obrigatorio!
-        </alert>
-     
+            <label for="" class="label font-weight-bold">CEP</label>
+
+            <input type="number" name="cep" class="form-control" id="cep"
+            [class.is-invalid]="!cep.valid && cep.touched"
+            [class.is-valid]="cep.valid && cep.touched"
+            placeholder="23045100" required maxlength="8" ngModel #cep="ngModel">
+
+            <alert type="danger" [dismissible]="dismissible" *ngIf="!cep.valid && cep.touched">
+                <strong>CEP</strong> é obrigatorio!
+            </alert>
+
+        </div>
+        <div class="col-sm-3">
+
+            <label for="" class="label font-weight-bold">Número</label>
+
+            <input type="number" name="numero" class="form-control"
+            [class.is-invalid]="!numero.valid && numero.touched"
+            [class.is-valid]="numero.valid && numero.touched"
+            placeholder="100" required ngModel #numero="ngModel">
+
+            <alert type="danger" [dismissible]="dismissible" *ngIf="!numero.valid && numero.touched">
+                <strong>Número</strong> é obrigatorio!
+            </alert>
+
+        </div>
+        <div class="col-sm-6">
+
+            <label for="" class="label font-weight-bold">Complemento</label>
+
+            <input type="text" name="complemento" class="form-control" ngModel #complemento="ngModel">
+
+        </div>
+
     </div>
 
-    <button disabled="!f.valid" type="submit" class="btn btn-primary">Enviar</button>
+    <div class="form-group row">
 
-    <app-form-debug [form]="f"></app-form-debug>
+        <div class="col-sm-12">
+
+            <label for="" class="label font-weight-bold">Rua</label>
+
+            <input type="text" name="rua" class="form-control"
+            [ngClass]="aplicaCssErro(rua)"
+            placeholder="Avenida Paulista" required ngModel #rua="ngModel">
+            <alert type="danger" [dismissible]="dismissible" *ngIf="!rua.valid && rua.touched">
+                <strong>Rua</strong> é obrigatorio!
+            </alert>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-5">
+            <label for="" class="label font-weight-bold">Bairro</label>
+            
+            <input type="text" name="bairro" class="form-control"
+            [ngClass]="aplicaCssErro(bairro)"
+            placeholder="Bela Vista" required ngModel #bairro="ngModel">
+
+            <app-campo-control-erro [condicao]="isInValidTouched(bairro)" msnErro="Bairro" ></app-campo-control-erro>
+        
+        </div>
+        <div class="col-sm-4">
+            <label for="" class="label font-weight-bold">Cidade</label>
+
+            <input type="text" name="cidade" class="form-control"
+            [ngClass]="aplicaCssErro(cidade)"
+            placeholder="São Paulo" required ngModel #cidade="ngModel">           
+
+            <app-campo-control-erro [condicao]="isInValidTouched(cidade)" msnErro="Cidade" ></app-campo-control-erro>
+        
+        </div>
+        <div class="col-sm-3">
+            <label for="" class="label font-weight-bold">Estado</label>
+
+            <input type="text" name="estado" class="form-control"
+            [ngClass]="aplicaCssErro(estado)" maxlength="2" placeholder="SP" 
+            required ngModel #estado="ngModel">            
+
+            <app-campo-control-erro [condicao]="isInValidTouched(estado)" msnErro="Estado" ></app-campo-control-erro>
+        
+        </div>
+    </div>
+
+    <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Enviar</button>  
 
 </form>
+
+<app-form-debug [form]="f"></app-form-debug>
 
