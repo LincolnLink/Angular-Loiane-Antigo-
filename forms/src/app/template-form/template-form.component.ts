@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ConsultaCepService } from './consulta-cep.service';
+
+import { cep } from './Entidades/cep';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-template-form',
@@ -14,7 +18,7 @@ export class TemplateFormComponent implements OnInit {
     email: null
   };
 
-  constructor() { }
+  constructor(private httpService: ConsultaCepService) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +49,83 @@ export class TemplateFormComponent implements OnInit {
     }  
   }
 
+  // Consulta uma API que busca dados de cep  
+  consultaCEP(valueCep, form){
+
+    //Filtro: somente digitos
+    var cep = valueCep.replace(/\D/g, ''); 
+
+    //Verfirificar se não está vazio!
+    if(cep != ''){
+
+      //Expressão regular para validar o CEP
+      var validacep = /^[0-9]{8}$/;
+
+      if(validacep.test(cep)){
+
+        this.resetDados(form);
+
+        //TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+        this.httpService.getCep(cep)
+          .pipe(map(dados => dados))   
+          .subscribe((dados :cep) => this.feedsData(dados, form))
+
+        
+
+      }
+    }    
+  }
+
+  //"setValue" e "patchValue" são Método do FormGroup!
+  feedsData(dados :cep, formulario){
+
+    /*formulario.setValue({
+      nome: formulario.value.nome,
+      email: formulario.value.email,
+      endereco: {
+        cep: dados.cep.replace(/\D/g, ''),
+        numero: '',
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    });*/
+
+    //console.log(formulario);
+
+    formulario.form.patchValue({
+
+      endereco: {                
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+
+    });
+
+  }
+
+  // Reseta os dados do campo!
+  resetDados(formulario){
+
+    formulario.form.patchValue({
+
+      endereco: {                
+        complemento: '',
+        rua: '',
+        bairro: '',
+        cidade: '',
+        estado: ''
+      }
+
+    });
+
+  }
+  
   
 
 }

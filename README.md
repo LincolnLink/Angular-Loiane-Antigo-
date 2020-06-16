@@ -19,6 +19,15 @@ Praticando Angular com Loiane Groner
 
   <blockquote> ng update</blockquote>
 
+# Reparando erro de vulnerabilidade 
+
+- Comando
+
+  <blockquote> $ npm audit fix</blockquote>
+
+  depois executa um ng build e executa com ng serve!
+
+
 # Principais  comando JS/TS
 
 - .filter(): Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!

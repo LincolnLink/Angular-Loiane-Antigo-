@@ -350,11 +350,94 @@
 
 - Forms (template driven) Refatorando (simplificando) CSS e mensagens de erro
 
+  Refatorando a forma que o ngClasse recebe a condição, criando um método que recebe o campo como parametro, a condição que é usada pode se transformar em outro método reutilizavel!
 
-Refatorando a forma que o ngClasse recebe a condição, criando um método que recebe o campo como parametro, a condição que é usada pode se transformar em outro método reutilizavel!
+  A forma de mostrar o erro foi alterada, isolando todo o HTML em um componente, passando as condições e mensagem pelo input do componente!
 
-A forma de mostrar o erro foi alterada, isolando todo o HTML em um componente, passando as condições e mensagem pelo input do componente!
+- Forms (template driven) Form groups (agrupando dados)
 
+  ngModelGroup: agrupa cada elemento do ngModel, criando um objeto com varios objetos dentro!
+
+  <blockquote>
+    < div ngModelGroup="endereco">
+      .....
+    < /div>
+  </blockquote>
+
+- Forms (template driven) Pesquisando endereço automaticamente com CEP
+
+  Importa o "HttpClientModule" no module, e "HttpClient" no seu service!
+
+  fonte: https://angular.io/guide/http
+
+  Na parte do servico
+
+  <blockquote>
+
+    //Se coloca privada para ela se tornar local!
+    constructor(private http: HttpClient) { }
+
+    getCep(cep){
+
+      const configUrl =  //viacep.com.br/ws/${cep}/json`;
+
+      return this.http.get<cep>(configUrl);    
+      
+    }
+
+  </blockquote>
+
+  Na parte do component
+
+  <blockquote>
+
+    consultaCEP(valueCep){
+
+      //Filtro: somente digitos
+      var cep = valueCep.replace(/\D/g, ''); 
+
+      //Verfirificar se não está vazio!
+      if(cep != ''){
+
+        //Expressão regular para validar o CEP
+        var validacep = /^[0-9]{8}$/;
+
+        if(validacep.test(cep)){
+
+          this.httpService.getCep(cep)
+            .pipe(map(dados => dados))   
+            .subscribe((dados: cep) => console.log(dados))          
+
+        }      
+      }  
+    }
+
+  </blockquote>
+
+- Forms (template driven) Populando campos com setValue e patchValue (CEP)
+
+
+  - setValue: Tem que popular todos os campos existentes!
+
+  - patchValue: Pode popular apenas alguns campos
+
+    <blockquote>
+
+      formulario.form.patchValue({
+
+          endereco: {
+            cep: dados.cep.replace(/\D/g, ''),        
+            complemento: dados.complemento,
+            rua: dados.logradouro,
+            bairro: dados.bairro,
+            cidade: dados.localidade,
+            estado: dados.uf
+          }
+
+
+        });
+
+    </blockquote>
 
 
 
