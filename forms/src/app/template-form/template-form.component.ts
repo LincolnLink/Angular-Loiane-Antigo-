@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultaCepService } from './consulta-cep.service';
 
-import { cep } from './Entidades/cep';
+import { cepData } from './Entidades/cepData';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -66,9 +66,12 @@ export class TemplateFormComponent implements OnInit {
         this.resetDados(form);
 
         //TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+
+        //Mapeia os valores e transformar em um json
+        //Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
         this.httpService.getCep(cep)
           .pipe(map(dados => dados))   
-          .subscribe((dados :cep) => this.feedsData(dados, form))
+          .subscribe((dados :cepData) => this.feedsData(dados, form))
 
         
 
@@ -76,8 +79,9 @@ export class TemplateFormComponent implements OnInit {
     }    
   }
 
-  //"setValue" e "patchValue" são Método do FormGroup!
-  feedsData(dados :cep, formulario){
+  // "setValue" e "patchValue" são Método do FormGroup!
+  // Método que popula os campos
+  feedsData(dados :cepData, formulario){
 
     /*formulario.setValue({
       nome: formulario.value.nome,

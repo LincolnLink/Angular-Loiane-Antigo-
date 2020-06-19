@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import {cep } from './Entidades/cep';
+import { cepData } from './Entidades/cepData';
 
 
 @Injectable({
@@ -16,13 +16,12 @@ export class ConsultaCepService {
   //Se coloca privada para ela se tornar local!
   constructor(private http: HttpClient) { }
 
-  //Mapeia os valores e transformar em um json
-  //Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+  //GET - endpoint que pega dados de um cep!
   getCep(cep: any){
 
     const configUrl = `//viacep.com.br/ws/${cep}/json`;
 
-    return this.http.get<cep>(configUrl);
+    return this.http.get<cepData>(configUrl);
     
   }
 
