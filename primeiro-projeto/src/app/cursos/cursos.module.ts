@@ -8,7 +8,10 @@ import { CursosService } from './cursos.Service';
 
 //exportando o componente para outro modulo reconhecer
 @NgModule({
-  declarations: [PrimeiroCursoComponent, CursoDetalheComponent],
+  declarations: [
+    PrimeiroCursoComponent,
+    CursoDetalheComponent
+  ],
   imports: [
     CommonModule
   ],
