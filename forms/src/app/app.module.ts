@@ -7,15 +7,18 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
-import { DataFormComponent } from './data-form/data-form.component';
 import { TemplateFormModule } from './template-form/template-form.module';
-import { AppBootstrapModule } from './AppBootstrap/app-bootstrap/app-bootstrap.module';
+import { DataFormModule } from './data-form/data-form.module';
+
+
+//declarations: component, diretivas e pipes.
+//imports: modulos que vem de fora.
+//export: compartilha acesso de componentes e modulos. 
+//providers: serviços.
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DataFormComponent
-    
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +26,9 @@ import { AppBootstrapModule } from './AppBootstrap/app-bootstrap/app-bootstrap.m
     AppRoutingModule,
     FormsModule,
     NgxNavbarModule,
-    TemplateFormModule,
-    AppBootstrapModule
+    TemplateFormModule,    
+    DataFormModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

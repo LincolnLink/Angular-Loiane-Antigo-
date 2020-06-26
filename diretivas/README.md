@@ -1,20 +1,63 @@
+
 # Diretivas
 
-## Criando Diretiva personalizada de atributos
+- Existe 2 tipos de diretivas 
 
---shared : é odiretorio que fica os arquivos aonde toda aplicação tem acesso!
+  - Diretivas Estruturais
 
-exemplo: 
+        Interagem com a view e modifica a estrutura do DOM o/ou codigo html! 
 
--- ng g d 'shared/' 'nome da diretiva'
+        <blockquote>
+        ngFor, ngIf
+        </blockquote>
+
+  - Diretivas de atributos
+
+        Interagem com o elemento em que foram aplicadas
+
+        <blockquote>
+        ng-class, ng-style
+        </blockquote>
+
+# Criando Diretiva personalizada de atributos
+
+-   exemplo: 
+
+    <blockquote>
+    ng g d 'shared/' 'nome da diretiva'
+    </blockquote>
+
+# Diretivas do Angular
+
+-   Os componentes são diretivas com template
+
+    Exemplos:
+    <blockquote>
+    < cursos-lista></ cursos-lista>
+    </blockquote>
+
+    shared : é o diretorio que fica os arquivos aonde toda aplicação tem acesso!
+
+-   *ngFor
+
+    <blockquote>
+
+        < ul>
+
+            < li *ngFor="let curso of cursos">
+
+            {{ curso }}
+
+            < /li>
+
+        < /ul>
+    
+    </blockquote> 
 
 
-## classe de serviço
 
--- É ultilizada para fazer chamadas no banco, enviar e receber dados 
-da base de dados para o componente!
 
--- Também é ultilizada para criar métodos e distributir para outros componentes, evitando
-repetição de métodos em cada componente!
 
--- Alem da logica podemos por classe ultilitarias dentro dos serviços
+- ngIf
+
+    <!--TODO-->

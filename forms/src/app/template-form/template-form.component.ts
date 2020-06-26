@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultaCepService } from './consulta-cep.service';
-
-import { cepData } from './Entidades/cepData';
 import { map } from 'rxjs/operators';
+
+import { cepData } from '../Entidades/cepData';
 
 @Component({
   selector: 'app-template-form',
@@ -25,9 +25,13 @@ export class TemplateFormComponent implements OnInit {
 
 
   onSubmit(form: any){
-    console.log(form);
+    //console.log(form);
     //console.log(form.value);
     //console.log(this.userExemplo);
+
+    this.httpService.postFormData(form)
+    .pipe(map(data => data))
+    .subscribe(data => console.log("informações enviadas: "+ data));
   }
 
 
@@ -70,8 +74,8 @@ export class TemplateFormComponent implements OnInit {
         //Mapeia os valores e transformar em um json
         //Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
         this.httpService.getCep(cep)
-          .pipe(map(dados => dados))   
-          .subscribe((dados :cepData) => this.feedsData(dados, form))
+          .pipe(map(data => data))   
+          .subscribe((data :cepData) => this.feedsData(data, form))
 
         
 

@@ -441,6 +441,149 @@
 
 - Forms (template driven) Submetendo valores com HTTP POST
 
+  Exemplo de post no servico
+
+  <blockquote>
+
+    export class ConsultaCepService {
+
+      //Se coloca privada para ela se tornar local!
+      constructor(private http: HttpClient) { }
+
+      postFormData(form: FormGroup){
+
+        const configUrl = `https://httpbin.org/post`;
+
+        //Converte um objeto JS em JSON!
+        return this.http.post(configUrl, JSON.stringify(form.value));
+      }
+
+    }
+
+  </blockquote>
+
+  Chamando o servico no componente!
+
+  <blockquote>
+
+    onSubmit(form: any){
+      //console.log(form);
+      //console.log(form.value);
+      //console.log(this.userExemplo);
+
+      this.httpService.postFormData(form)
+      .pipe(map(data => data))
+      .subscribe(data => console.log("informações enviadas: "+ data));
+    }
+
+  </blockquote>
+
+
+
+# Formulários reativos ( Data Driven )
+
+- Formulários reativos (data driven) Introdução
+
+  Formulário é criado programaticamente e é sincronizando com o DOM/HTML
+
+  <blockquote>
+
+  </blockquote>
+
+- Formulários reativos: Configuração (Módulo e Componente)
+
+  Cria uma variavel do tipo "FormGroup", essa classe representa o formulario, ela recebe os campos, validações, agrupamento de dados etc!
+
+
+  <blockquote>
+
+    formulario: FormGroup;
+
+  </blockquote>
+
+  Cria um modulo para o componente data-form, remove a declaração do appmodule, importa o "ReactiveFormsModule"
+
+  <blockquote>
+
+    bg g m data-form
+
+  </blockquote>
+
+  - (FormGroup) Primeira forma de iniciar um formulario reativo, seria no ngOnInit() e  atribuindo a variavel que tem como tipo FormGroup, uma instancia de FormGroup!
+
+  Essa instancia recebe um objeto que tem as propriedades que representa um campo, elas recebem uma instancia de "FormControl", pode passar um valor unicial ou passar null caso não queira valor inicial
+
+  <blockquote>
+
+    formulario: FormGroup;
+
+    ngOnInit(): void {
+
+      this.formulario = new FormGroup({
+        nome: new FormControl(null),
+        email: new FormControl(null)
+
+      });
+    }
+
+  </blockquote>
+
+
+  - (FormBuilder) A segunda forma seria com o "FormBuild", injeta no contrutor, pode criar no construtor ou no ngOnInit
+
+  <blockquote>
+
+    formulario: FormGroup;
+
+    constructor(private formBuilder: FormBuilder) { }
+
+    ngOnInit(): void {
+    
+
+      this.formulario = this.formBuilder.group({
+
+        // 1° parametro: valor inicial
+        nome: [ null],
+        email: [ null]
+
+      });
+
+    }
+
+  </blockquote>
+
+- Formulários reativos: Sincronizando HTML com FormGroup
+
+
+  Deve ser usada uma diretiva do "ReactiveFormsModule" chamada: "formGroup" na tag < form> para sincronizar o template com o componet!
+
+  Bota essa diretiva como propert-baind para vincular a variavel do tipo "FormGroup"!
+
+  <blockquote>
+    < form class="mt-5" [formGroup]="formulario">
+  </blockquote>
+
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 

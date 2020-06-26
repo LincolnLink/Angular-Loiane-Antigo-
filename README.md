@@ -68,6 +68,17 @@ Praticando Angular com Loiane Groner
 
     </blockquote>
 
+- JSON.stringify()
+
+  Transforma qualquer objeto JS em JSON
+
+  <blockquote>
+
+    JSON.stringify(objetoExemplo)
+
+  </blockquote>
+
+
 
 
 # Principais comandos do Angular CLI
@@ -161,7 +172,6 @@ Praticando Angular com Loiane Groner
   <blockquote> ngOnDestroy()</blockquote>
 
 
-
 # Mudando o pré processador de css de um projeto que ja existe!
 
 - style guid: Padrões do angular
@@ -175,60 +185,6 @@ Praticando Angular com Loiane Groner
   <blockquote>ng set dedaults.styleExt style</blockquote>
 
 
-
-# Projeto de estudo sobre Diretivas
-
-- Uma forma de passar instruções para o template(codigo HTML)
-
-  *ngFor
-
-  <blockquote>
-
-    < ul>
-      < li *ngFor="let curso of cursos">
-      {{ curso }}
-      < /li>
-    < /ul>
-    
-  </blockquote> 
-
-  Os componentes são diretivas com template
-
-  Exemplos:
-  <blockquote>
-    < cursos-lista></ cursos-lista>
-  </blockquote>
-
-- Existe 2 tipos de diretivas 
-
-  - Diretivas Estruturais
-
-    Interagem com a view e modifica a estrutura do DOM o/ou codigo html! 
-
-    <blockquote>
-      ngFor, ngIf
-    </blockquote>
-
-  - Diretivas de atributos
-
-    Interagem com o elemento em que foram aplicadas
-
-    <blockquote>
-      ng-class, ng-style
-    </blockquote>
-
-
-- ngIf
-
-
-
-# Projeto de estudo sobre Service
-
-- Bota a classe de serviço no providers para ela ser instanciada uma vez para toda aplicação (Usando a injeção de dependencia)
-
-  Padrão singoto: não importa quantas vezes declara o servico, sempre vai ter uma unica instancia!
-
-
 # Module
 
 - Module de funcionalidade vs module root/ modulo raiz
@@ -237,16 +193,38 @@ Praticando Angular com Loiane Groner
 
   - Modulo raiz se importa o BrowserModule!
 
+- Decoreitor do ngModule 
+
+  - declarations: Cadastra os component, diretivas e pipes, vinculando ao modulo.
+
+  - imports: Pega os modulos que vem de fora.
+
+  - export: compartilha o acesso de componentes e modulos. 
+
+  - providers: cadastra os serviços que vão ser usado pelos componentes, pipes e diretivas vinculados.
+
+- Modulo de compartilhamento
+
+  Para compartilhar um componet que é reutilizado em varias paginas, por exemplo um "componente de mensagem de erro" devese declarar ele em um modulo, com isso você precisa apenas importar esse modulo!
+
+# Data-binding
+
+- https://github.com/LincolnLink/Angular-Loiane/tree/master/data-binding
+
+
+# Projeto de estudo sobre Diretivas
+
+- https://github.com/LincolnLink/Angular-Loiane/tree/master/diretivas 
+
+
+# Projeto de estudo sobre Service
+
+- https://github.com/LincolnLink/Angular-Loiane/tree/master/servicos
+
 
 # Projeto de estudo sobre Pipes
 
-- Criando um Pipe personalizado
-
-  <blockquote>
-
-    ng g p 'nome do pipe'
-
-  </blockquote>
+- https://github.com/LincolnLink/Angular-Loiane/tree/master/pipes
 
 
 # Projeto de estudo sobre Rotas
@@ -256,7 +234,7 @@ Praticando Angular com Loiane Groner
 
 # Formulários (template vs data / reativo) Introdução
 
--  https://github.com/LincolnLink/Angular-Loiane/tree/master/forms
+- https://github.com/LincolnLink/Angular-Loiane/tree/master/forms
 
 
 

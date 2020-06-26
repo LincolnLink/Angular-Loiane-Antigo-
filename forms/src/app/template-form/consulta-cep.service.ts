@@ -5,7 +5,9 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { cepData } from './Entidades/cepData';
+
+import { FormGroup } from '@angular/forms';
+import { cepData } from '../Entidades/cepData';
 
 
 @Injectable({
@@ -23,6 +25,14 @@ export class ConsultaCepService {
 
     return this.http.get<cepData>(configUrl);
     
+  }
+
+  postFormData(form: FormGroup){
+
+    const configUrl = `https://httpbin.org/post`;
+
+    //Converte um objeto JS em JSON!
+    return this.http.post(configUrl, JSON.stringify(form.value));
   }
 
 }
