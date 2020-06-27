@@ -185,7 +185,7 @@ Praticando Angular com Loiane Groner
   <blockquote>ng set dedaults.styleExt style</blockquote>
 
 
-# Module
+# Projeto de Module
 
 - Module de funcionalidade vs module root/ modulo raiz
 
@@ -207,7 +207,12 @@ Praticando Angular com Loiane Groner
 
   Para compartilhar um componet que é reutilizado em varias paginas, por exemplo um "componente de mensagem de erro" devese declarar ele em um modulo, com isso você precisa apenas importar esse modulo!
 
-# Data-binding
+- Exemplo:
+
+  https://github.com/LincolnLink/Angular-Loiane/tree/master/primeiro-projeto
+  
+
+# Projeto de Data-binding
 
 - https://github.com/LincolnLink/Angular-Loiane/tree/master/data-binding
 
@@ -232,7 +237,7 @@ Praticando Angular com Loiane Groner
 - https://github.com/LincolnLink/Angular-Loiane/tree/master/rotas
 
 
-# Formulários (template vs data / reativo) Introdução
+# Projeto de Formulários (template vs data / reativo) Introdução
 
 - https://github.com/LincolnLink/Angular-Loiane/tree/master/forms
 

@@ -196,6 +196,27 @@
     <blockquote>
     
 
+# Guia rapido de Lazy Loading
+
+- Motivação:
+
+    - Carrega com component sob demanda, deixando as paginas mais rapida de carregar!
+
+    - Segurança: caso tenha uma pagina de login, vai carregar primeiro apenas a pagina de login!
+
+- Configuração: 
+
+    - Configure a aplicação em modulos, usando modulos de funcionabilidade, examplo: um module apenas para paginas de "Alunos" ou um module apenas para paginas de "Cursos", o module ele agrupa os componentes quando você declara os componentes uma unica vez em um module especifico!
+
+    - Pare e execução do ng serve!
+
+    - Veja em todos os lugares e Remove a importação e declaração dos module que você for usar nas rotas.
+
+    - No arquivo "app-routing.module.ts" configure uma rota, passa o valor do "path" e na propriedade "loadChildren", passa um caminho de um module, e depois o nome do module.
+
+    - Cria um module de "RoutingModule" para o componente que estásendo roteado, ele deve ter uma rota padrão com o valor do "path" vazio, e com o "component" informado.
+
+    - Mantenha um padrão de nome de rotas.
 
 # Configurando o Module de Rotas
 

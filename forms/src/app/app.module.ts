@@ -11,10 +11,10 @@ import { TemplateFormModule } from './template-form/template-form.module';
 import { DataFormModule } from './data-form/data-form.module';
 
 
-//declarations: component, diretivas e pipes.
-//imports: modulos que vem de fora.
-//export: compartilha acesso de componentes e modulos. 
-//providers: serviços.
+//declarations: cadastra os component, diretivas e pipes, criando um vinculo unico com eles!
+//imports: inclui modulos que vem de fora.
+//export: compartilha o acesso de componentes e modulos. 
+//providers: lista de serviços que os component, diretiva, e pipes vão usar.
 
 @NgModule({
   declarations: [
