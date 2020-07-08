@@ -5,7 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TemplateFormComponent } from './template-form.component';
 import { ConsultaCepService } from './consulta-cep.service';
-import { AuxiliaresModule } from '../componentes-auxiliares/auxiliares.module';
+import { SharedModule } from '../shared/shared.module';
+
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { AuxiliaresModule } from '../componentes-auxiliares/auxiliares.module';
     CommonModule,
     FormsModule,
     HttpClientModule,    
-    AuxiliaresModule         
+    SharedModule         
   ],  
   providers: [ConsultaCepService]
 })

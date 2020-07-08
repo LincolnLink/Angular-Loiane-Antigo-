@@ -6,7 +6,7 @@
 
             <label for="nome" class="label font-weight-bold">Nome</label>
 
-            <input type="text" name="nome" class="form-control"
+            <input type="text" formControlName="nome" class="form-control"
             id="nome" placeholder="Nome">
                     
             <alert type="danger" [dismissible]="dismissible" >
@@ -23,7 +23,7 @@
 
             <label for="emailLb" class="label font-weight-bold">Email</label> 
 
-            <input type="email"  name="email" class="form-control"
+            <input type="email"  formControlName="email" class="form-control"
             id="email" placeholder="nome@Email.com"required email >
         
             <alert type="danger" [dismissible]="dismissible">
@@ -38,6 +38,6 @@
 </form>
 
 
-<!--app-form-debug [form]="f"></app-form-debug-->
+<app-form-debug [form]="formulario"></app-form-debug>
 
 

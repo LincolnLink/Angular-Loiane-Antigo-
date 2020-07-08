@@ -4,7 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DataFormComponent } from './data-form.component';
-import { AuxiliaresModule } from '../componentes-auxiliares/auxiliares.module';
+import { SharedModule } from '../shared/shared.module';
+
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { AuxiliaresModule } from '../componentes-auxiliares/auxiliares.module';
     CommonModule,
     ReactiveFormsModule,    
     HttpClientModule,    
-    AuxiliaresModule
+    SharedModule
   ]
 })
 export class DataFormModule { }

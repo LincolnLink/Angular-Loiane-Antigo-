@@ -557,11 +557,24 @@
 
   Deve ser usada uma diretiva do "ReactiveFormsModule" chamada: "formGroup" na tag < form> para sincronizar o template com o componet!
 
-  Bota essa diretiva como propert-baind para vincular a variavel do tipo "FormGroup"!
+  Bota essa diretiva como propert-baind para vincular a variavel do tipo "FormGroup", com isso o TS vai reconhecer todo o formulario!
 
   <blockquote>
-    < form class="mt-5" [formGroup]="formulario">
+
+    < form class="mt-5" [ formGroup]="formulario">
+
   </blockquote>
+
+  Para vincular o campo do html para o TS, deve ser usar a diretiva "formControlName" 
+
+  <blockquote>
+
+    < input type="text" formControlName="nome" class="form-control"
+            id="nome" placeholder="Nome">
+
+  </blockquote>
+
+  Para compartilhar varios componente se cria uma modulo de compartilhamento chamado "shared", declara os componente que vai ser compartilhado nele, e depois importa o modulo nos mudulos que vai receber os componentes reutilizaveis !
 
 - 
 

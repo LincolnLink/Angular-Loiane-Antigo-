@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CampoControlErroComponent } from './campo-control-erro/campo-control-erro.component';
 import { FormDebugComponent } from './form-debug/form-debug.component';
 import { AppBootstrapModule } from '../AppBootstrap/app-bootstrap/app-bootstrap.module';
@@ -10,7 +9,7 @@ import { AppBootstrapModule } from '../AppBootstrap/app-bootstrap/app-bootstrap.
 @NgModule({
   declarations: [
     CampoControlErroComponent,
-    FormDebugComponent    
+    FormDebugComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +19,6 @@ import { AppBootstrapModule } from '../AppBootstrap/app-bootstrap/app-bootstrap.
     CampoControlErroComponent,
     FormDebugComponent,
     AppBootstrapModule
-  ],
-  
+  ]
 })
-export class AuxiliaresModule { }
+export class SharedModule { }
