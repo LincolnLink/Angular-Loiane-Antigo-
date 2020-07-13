@@ -24,14 +24,20 @@ export class TemplateFormComponent implements OnInit {
   }
 
 
-  onSubmit(form: any){
+  onSubmit(formularioVariavel: any){
     //console.log(form);
     //console.log(form.value);
     //console.log(this.userExemplo);
 
-    this.httpService.postFormData(form)
+    this.httpService.postFormData(formularioVariavel)
     .pipe(map(data => data))
-    .subscribe(data => console.log("informações enviadas: "+ data));
+    .subscribe(data =>{
+       console.log("informações enviadas: "+ data)
+
+       formularioVariavel.form.reset();
+
+      }
+    );
   }
 
 

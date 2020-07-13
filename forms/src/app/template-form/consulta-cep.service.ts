@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/Rx';
-import 'rxjs/add/operator/map';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+/*import 'rxjs/Rx';
+import 'rxjs/add/operator/map';*/
 
 import { FormGroup } from '@angular/forms';
 import { cepData } from '../Entidades/cepData';

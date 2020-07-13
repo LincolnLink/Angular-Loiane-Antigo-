@@ -576,13 +576,83 @@
 
   Para compartilhar varios componente se cria uma modulo de compartilhamento chamado "shared", declara os componente que vai ser compartilhado nele, e depois importa o modulo nos mudulos que vai receber os componentes reutilizaveis !
 
-- 
+- Formulários reativos: Fazendo submit
+
+  Cria um evento de onSubmit na tag "forms"
+
+  <blockquote>
+
+    < form class="mt-5" [ formGroup]="formulario" (ngSubmit)="onSubmit()">
+      ...
+    < /form>
+
+  </blockquote>
+
+  Não precisa passar nada para o parametro do método do evento de submite, porque já está vinculado!
+
+  com a variavel vinculada é possivel pegar os valores dos campos do formulario, ele vem em um objeto chamado "value"
+
+  <blockquote>
+    
+    onSubmit(){
+      console.log(this.formulario.value);
+
+      this.formService.postFormData(this.formulario)    
+      .subscribe(dados => console.log(dados));
+    }
+  </blockquote>
+
+- Formulários reativos: Resetando o form
+
+  com a variavel(TS) que vincula com o formulario(HTML), você chama um método chamado "reset()", para reutilizar foi isolado esse método em um método!
+
+  <blockquote>
+    resetar(){
+      this.formulario.reset();
+    }
+  </blockquote>
+
+  Pode chamar esse método no template-form tb!
 
 
+- Formulários reativos: Aplicando validação nos campos
+
+  A validação é feita dentro do campo de formulario no (TS), aonda passa um segundo parametro aonde foi declarada as propriedade no "this.formBuilder.group({})", com a classe do Angular "Validators" você define as validações da propriedade!
+
+  <blockquote>
+
+    this.formulario = this.formBuilder.group({
+
+        // 1° parametro: valor inicial
+        nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+        email: [null, [Validators.required, Validators.email]]
+
+      });
+
+  </blockquote>
 
 
+- Formulários reativos: Acesso ao FormControl no HTML e CSS de validação dos campos
 
+  Aplica um ngClass aonde tem a classe "form-group " com um método(aplicaCssErro('nome do campo')) para validar, cria outros 2 métodos(isInValidTouched() e isValidTouched()) para ajudar na validação!
 
+  O método aplicaCssErro() no HTML recebe o nome do "formControlName" usando aspas simples!
+
+  Com a variavel "formulario" aonde foi declarado o "this.formBuilder.group({})" é possivel pegar qualquer campo, usando o método "get()", com isso você pode acessar as propriedade dos campos!
+
+  <blockquote>
+
+    // Verifica se o campo foi tocado e se é valido!
+    isValidTouched(campo: any){
+
+      //this.formulario.controls[ campo];
+
+      //Melhor forma de pegar o campo do formulario!
+      return this.formulario.get(campo).valid && this.formulario.get(campo).touched
+
+    }
+
+  </blockquote>
 
 
 

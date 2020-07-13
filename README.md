@@ -15,7 +15,7 @@ Praticando Angular com Loiane Groner
   <blockquote>npm install --save-dev @angular/cli@latest</blockquote>
   <blockquote>npm install</blockquote>
 
-- passo3: executar o comando
+- passo3: executar o comando, executa em um promt comando como ADMINISTRADOR!
 
   <blockquote> ng update</blockquote>
 

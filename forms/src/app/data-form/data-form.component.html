@@ -1,6 +1,6 @@
-<form class="mt-5" [formGroup]="formulario">
+<form class="mt-5" [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
-    <div class="form-group row" >
+    <div class="form-group row" [ngClass]="aplicaCssErro('nome')" >
         
         <div class="col-sm-12">
 
@@ -9,32 +9,32 @@
             <input type="text" formControlName="nome" class="form-control"
             id="nome" placeholder="Nome">
                     
-            <alert type="danger" [dismissible]="dismissible" >
-                <strong>Nome</strong>  é obrigatorio!
-            </alert>
+            <app-campo-control-erro [condicao]="isInValidTouched('nome')" msnErro="Nome">
+
+            </app-campo-control-erro>
            
         </div>
     </div>
     
 
-    <div class="form-group row">
+    <div class="form-group row" [ngClass]="aplicaCssErro('email')" >
         
         <div class="col-sm-12">
 
             <label for="emailLb" class="label font-weight-bold">Email</label> 
 
             <input type="email"  formControlName="email" class="form-control"
-            id="email" placeholder="nome@Email.com"required email >
+            id="email" placeholder="nome@Email.com" required email >
         
-            <alert type="danger" [dismissible]="dismissible">
-                <strong>E-mail</strong> é obrigatorio!
-            </alert>
+            <app-campo-control-erro [condicao]="isInValidTouched('email')" msnErro="Email" >
+
+            </app-campo-control-erro>
         </div>
     </div>
 
     
-    <button type="submit" class="btn btn-primary">Enviar</button>  
-
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="button" (click)="resetar()"  class="btn btn-primary">Cancelar</button>  
 </form>
 
 
