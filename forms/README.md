@@ -576,7 +576,7 @@
 
   Para compartilhar varios componente se cria uma modulo de compartilhamento chamado "shared", declara os componente que vai ser compartilhado nele, e depois importa o modulo nos mudulos que vai receber os componentes reutilizaveis !
 
-- Formulários reativos: Fazendo submit
+- Formulários reativos: Fazendo submit ((ngSubmit)="métido()")
 
   Cria um evento de onSubmit na tag "forms"
 
@@ -602,7 +602,7 @@
     }
   </blockquote>
 
-- Formulários reativos: Resetando o form
+- Formulários reativos: Resetando o form (reset())
 
   com a variavel(TS) que vincula com o formulario(HTML), você chama um método chamado "reset()", para reutilizar foi isolado esse método em um método!
 
@@ -615,7 +615,7 @@
   Pode chamar esse método no template-form tb!
 
 
-- Formulários reativos: Aplicando validação nos campos
+- Formulários reativos: Aplicando validação nos campos (Validators)
 
   A validação é feita dentro do campo de formulario no (TS), aonda passa um segundo parametro aonde foi declarada as propriedade no "this.formBuilder.group({})", com a classe do Angular "Validators" você define as validações da propriedade!
 
@@ -632,7 +632,7 @@
   </blockquote>
 
 
-- Formulários reativos: Acesso ao FormControl no HTML e CSS de validação dos campos
+- Formulários reativos: Acesso ao FormControl no HTML e CSS de validação dos campos (get())
 
   Aplica um ngClass aonde tem a classe "form-group " com um método(aplicaCssErro('nome do campo')) para validar, cria outros 2 métodos(isInValidTouched() e isValidTouched()) para ajudar na validação!
 

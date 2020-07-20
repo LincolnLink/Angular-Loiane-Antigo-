@@ -1,5 +1,16 @@
-# Angular-Loiane
-Praticando Angular com Loiane Groner
+# Angular 2+ com Loiane
+- Praticando Angular 2 + com Loiane Groner
+
+
+  - [x] Angular 10
+  - [x] Type Script
+  - [x] Node
+  - [x] ES6 / ES 2015
+
+- Sintaxe do ES6 e do ES5
+
+  http://es6-features.org/#Constants
+
 
 # Atualizando o Angular CLI
 
@@ -29,6 +40,10 @@ Praticando Angular com Loiane Groner
 
 
 # Principais  comando JS/TS
+
+- Compilar o TS
+
+  <blockquete> tsc "nome do arquivo TS"</blockquote>
 
 - .filter(): Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
 
