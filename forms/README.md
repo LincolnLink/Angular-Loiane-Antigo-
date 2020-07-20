@@ -12,6 +12,8 @@
 
   - Valores do form são submetidos com ngSubmit, é usada uma variasvel local para o método que faz o submite pegar os valores.
 
+  - Usa ngModule para identificar um campo
+
 - Data Driven(Reativo)
 
   - O formulario é criado e configurado no Component, o HTML só recebe o basico, o componente cria o objeto forms, e o proprio componente gerencia os dados.
@@ -21,6 +23,8 @@
   - Angular usa o FormGroup criado no Component!
 
   - Form já está no Component e não precisa de ngSubmit
+
+  - Usa formControlName para identificar um campo
 
 # Iniciando um projeto para estudo de formularios no Angular 2+
 

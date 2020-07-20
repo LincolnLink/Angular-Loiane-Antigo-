@@ -1,15 +1,17 @@
 # Angular 2+ com Loiane
 - Praticando Angular 2 + com Loiane Groner
 
-
+  - [x] Nodejs/npm - https://nodejs.org/en/
+  - [x] Angular CLI - npm i @angular/cli
+  - [x] Type Script - npm i typescript
   - [x] Angular 10
-  - [x] Type Script
-  - [x] Node
   - [x] ES6 / ES 2015
 
 - Sintaxe do ES6 e do ES5
 
   http://es6-features.org/#Constants
+
+  TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
 
 
 # Atualizando o Angular CLI
