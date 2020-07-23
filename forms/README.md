@@ -658,6 +658,34 @@
 
   </blockquote>
 
+  Quando é um property binding, pode acessar a variavel "formulario" que foi declarado no arquivo TS do componente, ou então chamar o método(aplicaCssErro()) que retorna ovalor booleano!
+
+  <blockquote>
+    < div class="form-group row" >
+        
+      < div class="col-sm-12">
+
+        <label for="emailLb" class="label font-weight-bold">Email</label> 
+
+        <input type="email"  formControlName="email" class="form-control"
+        id="email" placeholder="nome@Email.com" required email  [ngClass]="aplicaCssErro('email')">
+        
+        <app-campo-control-erro [condicao]="!formulario.controls['email'].valid && formulario.get('email').touched" msnErro="Email" >
+        < /app-campo-control-erro>
+
+      < /div>
+    < /div>
+  </blockquote>
+
+  O método get() ou controls[], funciona tanto no arquivo TS como no arquivo do HTML, para poder obter o valor dos campos
+
+
+- Formulários reativos: Endereço (migrando de template driven para form reativo)
+
+  remove as diretivas do ngModel, e deixa apenas, id,class, ngclass
+
+  
+
 
 
 

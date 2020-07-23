@@ -9,6 +9,7 @@ import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
 import { TemplateFormModule } from './template-form/template-form.module';
 import { DataFormModule } from './data-form/data-form.module';
+import { OpeningModalComponent } from './opening-modal/opening-modal.component';
 
 
 //declarations: cadastra os component, diretivas e pipes, criando um vinculo unico com eles!
@@ -18,7 +19,8 @@ import { DataFormModule } from './data-form/data-form.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OpeningModalComponent
   ],
   imports: [
     BrowserModule,

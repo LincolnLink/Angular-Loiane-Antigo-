@@ -30,7 +30,14 @@ export class DataFormComponent implements OnInit {
 
       // 1° parametro: valor inicial
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      email: [null, [Validators.required, Validators.email]]
+      email: [null, [Validators.required, Validators.email]],
+      cep:[null,[Validators.required]],
+      numero:[null,[Validators.required]],
+      complemento:[null],
+      rua:[null,[Validators.required]],
+      bairro:[null,[Validators.required]],
+      cidade:[null,[Validators.required]],
+      estado:[null,[Validators.required]]
 
     });
 
@@ -64,7 +71,7 @@ export class DataFormComponent implements OnInit {
   }
 
   // Verifica se o campo foi tocado e se é valido!
-  isValidTouched(campo: any){
+  isValidTouched(campo: string){
 
     //this.formulario.controls["campo"];
 
@@ -74,13 +81,21 @@ export class DataFormComponent implements OnInit {
   }
 
   // Verifica se o campo foi tocado e se é valido!
-  isInValidTouched(campo: any){
+  isInValidTouched(campo: string){
 
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched
 
   }
 
-  aplicaCssErro(campo){
+  isInvalidEmail(){
+    let emailProp = this.formulario.get('email');
+
+    if(emailProp.errors){
+      return emailProp.errors['email'] && emailProp.touched;
+    }
+  }
+
+  aplicaCssErro(campo: string){
 
     return {
       'is-valid': this.isValidTouched(campo),

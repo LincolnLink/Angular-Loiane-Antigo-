@@ -1,0 +1,20 @@
+<button type="button" id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button class="btn" (click)="addValor()">
+Adiciona mais 1
+</button>
+
+<br>
+
+<span>{{valorDoNumero}}</span>
