@@ -682,7 +682,50 @@
 
 - Formulários reativos: Endereço (migrando de template driven para form reativo)
 
-  remove as diretivas do ngModel, e deixa apenas, id,class, ngclass
+  remove as diretivas do ngModel, e deixa apenas, id,class, ngclass,
+  define um "formControlName" para cada campo, declara uma propriedade no objeto "this.formBuilder.group({})" para representar um campo!
+
+
+- Formulários reativos: Form groups (agrupando dados)
+
+  - Para agrupar campo, deve chamar uma propriedade e por um "this.formBuilder.group({})" como valor!
+
+  <blockquote>
+
+    // Melhor forma de declarar os campos do formulario!
+      this.formulario = this.formBuilder.group({
+
+        // 1° parametro: valor inicial
+        nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+        email: [null, [Validators.required, Validators.email]],
+        endereco: this.formBuilder.group({
+          cep: [null, [Validators.required]],
+          numero: [null, [Validators.required]],
+          complemento: [null],
+          rua: [null, [Validators.required]],
+          bairro: [null, [Validators.required]],
+          cidade: [null, [Validators.required]],
+          estado: [null, [Validators.required]]
+        })
+
+      });
+
+  </blockquote>
+
+  - declara o "formGroupName" endereco no HTML, para poder agrupar!
+
+  - Vai da erro na validação, porque precisa informar para o caminho "endereco." em cada propriedade para ser encontrada!
+
+  - Dica de mascará de CEP: https://www.npmjs.com/package/angular2-text-mask
+
+
+- Formulários reativos: Autopopulando endereço com CEP (setValue e patchValue)
+
+
+
+
+
+
 
   
 

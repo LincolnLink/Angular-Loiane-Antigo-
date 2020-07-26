@@ -1,7 +1,7 @@
 <form class="mt-5" [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
     <div class="form-group row" >
-        
+
         <div class="col-sm-12">
 
             <label for="nome" class="label font-weight-bold">Nome</label>
@@ -13,21 +13,21 @@
             </app-campo-control-erro>
             -->
             <app-controle-erro-generico-teste [controle]= "this.formulario.controls['nome']" [nomeCampo]="'nome'"></app-controle-erro-generico-teste>
-                       
+
         </div>
     </div>
-    
+
 
     <div class="form-group row" >
-        
+
         <div class="col-sm-12">
 
-            <label for="emailLb" class="label font-weight-bold">Email</label> 
+            <label for="emailLb" class="label font-weight-bold">Email</label>
 
             <input type="email"  formControlName="email" class="form-control"
             id="email" placeholder="nome@Email.com" required email  [ngClass]="aplicaCssErro('email')">
             <!--
-            <app-campo-control-erro [condicao]="!formulario.controls['email'].valid && formulario.get('email').touched" 
+            <app-campo-control-erro [condicao]="!formulario.controls['email'].valid && formulario.get('email').touched"
             msnErro="Email é obrigatorio!" >
             </app-campo-control-erro>
 
@@ -41,16 +41,17 @@
         </div>
     </div>
 
-    <div>
+    <div formGroupName="endereco">
+
         <div class="form-group row">
 
             <div class="col-sm-3">
 
                 <label for="" class="label font-weight-bold">CEP</label>
 
-                <input type="number" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('cep')">
-                
-                <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('cep').valid && formulario.get('cep').touched">
+                <input type="number" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')">
+
+                <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('endereco.cep').valid && formulario.get('endereco.cep').touched">
                     <strong>CEP</strong> é obrigatorio!
                 </alert>
 
@@ -59,9 +60,9 @@
 
                 <label for="" class="label font-weight-bold">Número</label>
 
-                <input type="number" id="numero" class="form-control" formControlName="numero" [ngClass]="aplicaCssErro('numero')">
+                <input type="number" id="numero" class="form-control" formControlName="numero" [ngClass]="aplicaCssErro('endereco.numero')">
 
-                <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('numero').valid && formulario.get('numero').touched">
+                <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('endereco.numero').valid && formulario.get('endereco.numero').touched">
                     <strong>Número</strong> é obrigatorio!
                 </alert>
 
@@ -70,7 +71,7 @@
 
                 <label for="" class="label font-weight-bold">Complemento</label>
 
-                <input type="text" id="complemento" class="form-control" formControlName="complemento" [ngClass]="aplicaCssErro('complemento')">
+                <input type="text" id="complemento" class="form-control" formControlName="complemento" [ngClass]="aplicaCssErro('endereco.complemento')">
 
             </div>
 
@@ -82,9 +83,9 @@
 
                 <label for="rua" class="label font-weight-bold">Rua</label>
 
-                <input type="text" id="rua" class="form-control" formControlName="rua" [ngClass]="aplicaCssErro('rua')">
+                <input type="text" id="rua" class="form-control" formControlName="rua" [ngClass]="aplicaCssErro('endereco.rua')">
 
-                <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('rua').valid && formulario.get('rua').touched">
+                <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('endereco.rua').valid && formulario.get('endereco.rua').touched">
                     <strong>Rua</strong> é obrigatorio!
                 </alert>
 
@@ -94,36 +95,36 @@
         <div class="form-group row">
             <div class="col-sm-5">
                 <label for="bairro" class="label font-weight-bold">Bairro</label>
-                
-                <input type="text" id="bairro" class="form-control" formControlName="bairro" [ngClass]="aplicaCssErro('bairro')">
 
-                <app-campo-control-erro [condicao]="isInValidTouched('bairro')" msnErro="Bairro" ></app-campo-control-erro>
-            
+                <input type="text" id="bairro" class="form-control" formControlName="bairro" [ngClass]="aplicaCssErro('endereco.bairro')">
+
+                <app-campo-control-erro [condicao]="isInValidTouched('endereco.bairro')" msnErro="Bairro" ></app-campo-control-erro>
+
             </div>
             <div class="col-sm-4">
                 <label for="cidade" class="label font-weight-bold">Cidade</label>
 
-                <input type="text" id="cidade" class="form-control" formControlName="cidade" [ngClass]="aplicaCssErro('cidade')">           
+                <input type="text" id="cidade" class="form-control" formControlName="cidade" [ngClass]="aplicaCssErro('endereco.cidade')">
 
-                <app-campo-control-erro [condicao]="isInValidTouched('cidade')" msnErro="Cidade" ></app-campo-control-erro>
-            
+                <app-campo-control-erro [condicao]="isInValidTouched('endereco.cidade')" msnErro="Cidade" ></app-campo-control-erro>
+
             </div>
             <div class="col-sm-3">
                 <label for="estado" class="label font-weight-bold">Estado</label>
 
                 <input type="text" id="estado" class="form-control" maxlength="2" placeholder="SP"
-                formControlName="estado" [ngClass]="aplicaCssErro('estado')">            
+                formControlName="estado" [ngClass]="aplicaCssErro('endereco.estado')">
 
-                <app-campo-control-erro [condicao]="isInValidTouched('estado')" msnErro="Estado" ></app-campo-control-erro>
-            
+                <app-campo-control-erro [condicao]="isInValidTouched('endereco.estado')" msnErro="Estado" ></app-campo-control-erro>
+
             </div>
         </div>
     </div>
 
-    
+
     <button type="submit" class="btn btn-primary mr-5">Enviar</button>
-    
-    <button type="button" (click)="resetar()"  class="btn btn-primary">Cancelar</button>  
+
+    <button type="button" (click)="resetar()"  class="btn btn-primary">Cancelar</button>
 </form>
 
 

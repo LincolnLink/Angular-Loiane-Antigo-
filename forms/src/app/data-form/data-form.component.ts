@@ -15,7 +15,7 @@ export class DataFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formService: ConsultaCepService) 
+    private formService: ConsultaCepService)
     { }
 
   ngOnInit(): void {
@@ -25,19 +25,21 @@ export class DataFormComponent implements OnInit {
       email: new FormControl(null)
     });*/
 
-    //Melhor forma de declarar os campos do formulario!
+    // Melhor forma de declarar os campos do formulario!
     this.formulario = this.formBuilder.group({
 
       // 1° parametro: valor inicial
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       email: [null, [Validators.required, Validators.email]],
-      cep:[null,[Validators.required]],
-      numero:[null,[Validators.required]],
-      complemento:[null],
-      rua:[null,[Validators.required]],
-      bairro:[null,[Validators.required]],
-      cidade:[null,[Validators.required]],
-      estado:[null,[Validators.required]]
+      endereco: this.formBuilder.group({
+        cep: [null, Validators.required],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+      })
 
     });
 
@@ -50,22 +52,22 @@ export class DataFormComponent implements OnInit {
 
     //console.log(this.formulario.value);
 
-    this.formService.postFormData(this.formulario)    
+    this.formService.postFormData(this.formulario)
     .subscribe(dados =>{
 
        console.log(dados);
-       //reseta o form 
+       //reseta o form
        //this.formulario.reset();
        this.resetar();
 
       },
       (error: any) => alert('erro')
-      
+
     );
-      
+
   }
 
-  /// Método que limpa os campos  
+  /// Método que limpa os campos
   resetar(){
     this.formulario.reset();
   }
@@ -99,8 +101,8 @@ export class DataFormComponent implements OnInit {
 
     return {
       'is-valid': this.isValidTouched(campo),
-      'is-invalid': this.isInValidTouched (campo)        
-    } 
+      'is-invalid': this.isInValidTouched (campo)
+    }
 
   }
 

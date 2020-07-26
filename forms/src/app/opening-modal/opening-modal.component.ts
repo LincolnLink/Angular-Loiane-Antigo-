@@ -18,7 +18,7 @@ export class OpeningModalComponent implements OnInit {
   addValor(){
     this.valorDoNumero += 1;
 
-    if(this.valorDoNumero == 5){
+    if(this.valorDoNumero == 5 || this.valorDoNumero == 10){
       document.getElementById("openModalButton").click();
     }
   }
