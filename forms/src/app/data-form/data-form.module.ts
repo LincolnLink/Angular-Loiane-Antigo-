@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DataFormComponent } from './data-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { ConsultaCepService } from '../template-form/consulta-cep.service';
 
 
 
@@ -14,9 +15,10 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,    
-    HttpClientModule,    
+    ReactiveFormsModule,
+    HttpClientModule,
     SharedModule
-  ]
+  ],
+  providers: [ConsultaCepService]
 })
 export class DataFormModule { }

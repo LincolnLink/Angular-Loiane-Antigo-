@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ConsultaCepService } from '../template-form/consulta-cep.service';
+import { cepData } from '../Entidades/cepData';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data-form',
@@ -15,7 +17,7 @@ export class DataFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formService: ConsultaCepService)
+    private httpServiceCep: ConsultaCepService)
     { }
 
   ngOnInit(): void {
@@ -47,17 +49,17 @@ export class DataFormComponent implements OnInit {
 
   }
 
-  //Método que envia os dados preenchido para o servidor!
+  // Método que envia os dados preenchido para o servidor!
   onSubmit(){
 
-    //console.log(this.formulario.value);
+    // console.log(this.formulario.value);
 
-    this.formService.postFormData(this.formulario)
+    this.httpServiceCep.postFormData(this.formulario)
     .subscribe(dados =>{
 
        console.log(dados);
-       //reseta o form
-       //this.formulario.reset();
+       // reseta o form
+       // this.formulario.reset();
        this.resetar();
 
       },
@@ -75,9 +77,9 @@ export class DataFormComponent implements OnInit {
   // Verifica se o campo foi tocado e se é valido!
   isValidTouched(campo: string){
 
-    //this.formulario.controls["campo"];
+    // this.formulario.controls["campo"];
 
-    //Melhor forma de pegar o campo do formulario!
+    // Melhor forma de pegar o campo do formulario!
     return this.formulario.get(campo).valid && this.formulario.get(campo).touched
 
   }
@@ -103,6 +105,89 @@ export class DataFormComponent implements OnInit {
       'is-valid': this.isValidTouched(campo),
       'is-invalid': this.isInValidTouched (campo)
     }
+
+  }
+
+  consultaCep(){
+
+    // Obtenha o valor do campo cep
+    let cep = this.formulario.get("endereco.cep").value;
+
+    // Remove caracteres indesejaveis
+    cep = cep.replace(/\D/g, '');
+
+    // Verfirificar se não está vazio!
+    if (cep !== ''){
+
+      // Expressão regular para validar o CEP
+      const validacep = /^[0-9]{8}$/;
+
+      if (validacep.test(cep)){
+
+        this.resetDados();
+
+        // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+
+        // Mapeia os valores e transformar em um json
+        // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+        this.httpServiceCep.getCep(cep)
+          .pipe(map(data => data))
+          .subscribe((data :cepData) => this.feedsData(data))
+
+
+
+      }
+    }
+  }
+
+
+  // "setValue" e "patchValue" são Método do FormGroup!
+  // Método que popula os campos
+  // "patchValue" é a melhor maneira de popular os dados,
+  // porque  você escolher qual campo pode popular!
+  feedsData(dados: cepData){
+
+    /*formulario.setValue({
+      nome: formulario.value.nome,
+      email: formulario.value.email,
+      endereco: {
+        cep: dados.cep.replace(/\D/g, ''),
+        numero: '',
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    });*/
+
+    this.formulario.patchValue({
+
+      endereco: {
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    });
+  }
+
+
+  // Reseta campos especificos, e não todos!
+  resetDados(){
+
+    this.formulario.patchValue({
+
+      endereco: {
+        complemento: '',
+        rua: '',
+        bairro: '',
+        cidade: '',
+        estado: ''
+      }
+
+    });
 
   }
 

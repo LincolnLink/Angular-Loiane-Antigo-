@@ -47,7 +47,9 @@
 
   <blockquete> tsc "nome do arquivo TS"</blockquote>
 
-- .filter(): Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
+- .filter() 
+
+  - Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
 
   <blockquote>
 
@@ -59,7 +61,9 @@
 
   </blockquote> 
 
-- .indexOf(): O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
+- .indexOf()
+
+  - O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
 
   <blockquote> 
 
@@ -73,17 +77,57 @@
 
 - .map()
 
+  - Cria um novo array, com cada valor do antigo array modificado, baseado no que foi programado! 
+
+  - https://www.w3schools.com/jsref/jsref_map.asp
+
+  <blockquote> 
+
+  var numbers = [2, 3, 4, 5];
+
+  // resultado: 20,30,40,50
+  var newarray = numbers.map(num => num * 10 )
+
+  </blockquote> 
+
 
 - .includes()
 
-  Verifica se existe em um array a string passado como parametro!
+  - Verifica se existe em um array a string passado como parametro!
+
+  <blockquote>
+
+    includes('editar')
+
+  </blockquote>
+
+- .replace() 
+
+  - Remove caracteres indesejaveis
+    
+  <blockquote>
+
+    cep = cep.replace(/\D/g, '');
+
+  </blockquote>
+
+- .teste()
+
+  - O método test () testa uma correspondência em uma string.
+  - Este método retorna verdadeiro se encontrar uma correspondência, caso contrário, retorna falso.
+  - https://www.w3schools.com/jsref/jsref_regexp_test.asp
+
+  <blockquote>
+
+    let cep = this.formulario.get("endereco.cep").value;
+
+    const validacep = /^[0-9]{8}$/;
+
+    if (validacep.test(cep)){}
+
+  </blockquote>
 
 
-    <blockquote>
-
-      includes('editar')
-
-    </blockquote>
 
 - JSON.stringify()
 

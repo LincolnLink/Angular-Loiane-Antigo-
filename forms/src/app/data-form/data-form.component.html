@@ -49,7 +49,8 @@
 
                 <label for="" class="label font-weight-bold">CEP</label>
 
-                <input type="number" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')">
+                <input type="number" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')"
+                (blur)="consultaCep()">
 
                 <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('endereco.cep').valid && formulario.get('endereco.cep').touched">
                     <strong>CEP</strong> é obrigatorio!

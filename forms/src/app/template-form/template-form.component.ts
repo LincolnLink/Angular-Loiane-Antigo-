@@ -13,8 +13,8 @@ export class TemplateFormComponent implements OnInit {
 
   dismissible = true;
 
-  userExemplo: any = { 
-    nome: null, 
+  userExemplo: any = {
+    nome: null,
     email: null
   };
 
@@ -25,14 +25,14 @@ export class TemplateFormComponent implements OnInit {
 
 
   onSubmit(formularioVariavel: any){
-    //console.log(form);
-    //console.log(form.value);
-    //console.log(this.userExemplo);
+    // console.log(form);
+    // console.log(form.value);
+    // console.log(this.userExemplo);
 
     this.httpService.postFormData(formularioVariavel)
     .pipe(map(data => data))
     .subscribe(data =>{
-       console.log("informações enviadas: "+ data)
+       console.log( "informações enviadas: " + data)
 
        formularioVariavel.form.reset();
 
@@ -52,46 +52,46 @@ export class TemplateFormComponent implements OnInit {
   }
 
   // Retorna um conjuto de classes CSS, de acordo com a condição baseada no parametro!
-  aplicaCssErro(campo){ 
+  aplicaCssErro(campo){
       return {
         'is-valid': this.isValidTouched(campo),
-        'is-invalid': this.isInValidTouched (campo)        
-    }  
+        'is-invalid': this.isInValidTouched (campo)
+    }
   }
 
-  // Consulta uma API que busca dados de cep  
+  // Consulta uma API que busca dados de cep
   consultaCEP(valueCep, form){
 
-    //Filtro: somente digitos
-    var cep = valueCep.replace(/\D/g, ''); 
+    // Filtro: somente digitos
+    var cep = valueCep.replace(/\D/g, '');
 
-    //Verfirificar se não está vazio!
-    if(cep != ''){
+    // Verfirificar se não está vazio!
+    if (cep !== ''){
 
-      //Expressão regular para validar o CEP
-      var validacep = /^[0-9]{8}$/;
+      // Expressão regular para validar o CEP
+      const validacep = /^[0-9]{8}$/;
 
-      if(validacep.test(cep)){
+      if (validacep.test(cep)){
 
         this.resetDados(form);
 
-        //TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+        // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
 
-        //Mapeia os valores e transformar em um json
-        //Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+        // Mapeia os valores e transformar em um json
+        // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
         this.httpService.getCep(cep)
-          .pipe(map(data => data))   
+          .pipe(map(data => data))
           .subscribe((data :cepData) => this.feedsData(data, form))
 
-        
+
 
       }
-    }    
+    }
   }
 
   // "setValue" e "patchValue" são Método do FormGroup!
   // Método que popula os campos
-  feedsData(dados :cepData, formulario){
+  feedsData(dados: cepData, formulario){
 
     /*formulario.setValue({
       nome: formulario.value.nome,
@@ -107,11 +107,11 @@ export class TemplateFormComponent implements OnInit {
       }
     });*/
 
-    //console.log(formulario);
+    // console.log(formulario);
 
     formulario.form.patchValue({
 
-      endereco: {                
+      endereco: {
         complemento: dados.complemento,
         rua: dados.logradouro,
         bairro: dados.bairro,
@@ -128,7 +128,7 @@ export class TemplateFormComponent implements OnInit {
 
     formulario.form.patchValue({
 
-      endereco: {                
+      endereco: {
         complemento: '',
         rua: '',
         bairro: '',
@@ -139,7 +139,5 @@ export class TemplateFormComponent implements OnInit {
     });
 
   }
-  
-  
 
 }

@@ -721,7 +721,19 @@
 
 - Formulários reativos: Autopopulando endereço com CEP (setValue e patchValue)
 
+  - Use o evento "blur()" no input cep, para quando perder o foco, executar um método que busca o cep digitado!
 
+  - Cria o método, não precisa passar referencia do formulario, cria um let passando o valor do cep!
+
+  - Reseta os dados dos campos endereço, o objeto "formulario" já tem o método "patchValue"
+
+  - Chama o serviço que tem o método que faz a requisição que busca os dados com o CEP!
+
+  - Se faz um ".pipe()" mapa por um ".map()" que transforma o valor em jSON!
+
+  - Logo em seguida chama um ".subscribe()" para poder receber os valores da requisição quando ele chegar!
+
+  - o valor fica na variavel "data" é tipado com a interface "cepData", que é passado por parametro no dentro do método ".subscribe()", em uma função chamada "feedsData()", essa função popula os campos com os valores novos! 
 
 
 
