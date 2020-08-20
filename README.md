@@ -111,6 +111,24 @@
 
   </blockquote>
 
+- Object.keys()
+
+  - Esse método recebe uma lista de controls, aonde ele pega todas as keys, assim consegimos trator como array!
+
+  <blockquote>
+
+    Object.keys(this.formulario.controls).forEach((campo)=>{
+
+        console.log(campo);
+
+        const controle = this.formulario.get(campo);
+
+        controle.markAsDirty();
+
+    });
+
+  </blockquote>
+
 - .teste()
 
   - O método test () testa uma correspondência em uma string.

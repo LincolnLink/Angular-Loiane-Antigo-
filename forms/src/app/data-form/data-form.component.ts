@@ -17,8 +17,8 @@ export class DataFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private httpServiceCep: ConsultaCepService)
-    { }
+    private httpServiceCep: ConsultaCepService
+  ){ }
 
   ngOnInit(): void {
 
@@ -49,69 +49,50 @@ export class DataFormComponent implements OnInit {
 
   }
 
-  // Método que envia os dados preenchido para o servidor!
+  //(POST) Método que envia os dados preenchido para o servidor!
   onSubmit(){
 
     // console.log(this.formulario.value);
 
-    this.httpServiceCep.postFormData(this.formulario)
-    .subscribe(dados =>{
+    if(this.formulario.valid){
 
-       console.log(dados);
-       // reseta o form
-       // this.formulario.reset();
-       this.resetar();
+      this.httpServiceCep.postFormData(this.formulario)
+      .subscribe(dados =>{
 
-      },
-      (error: any) => alert('erro')
+        //TODO: Criar uma requisição post para uma API
+        console.log(dados);
 
-    );
+        // reseta o form
+        // this.formulario.reset();
+        this.resetar();
 
-  }
+        },
+        (error: any) => alert('erro')
 
-  /// Método que limpa os campos
-  resetar(){
-    this.formulario.reset();
-  }
+      );
+    }
+    else
+    {
+      Object.keys(this.formulario.controls).forEach((campo)=>{
 
-  // Verifica se o campo foi tocado e se é valido!
-  isValidTouched(campo: string){
+        console.log(campo);
+        const controle = this.formulario.get(campo);
 
-    // this.formulario.controls["campo"];
+        controle.markAsDirty();
 
-    // Melhor forma de pegar o campo do formulario!
-    return this.formulario.get(campo).valid && this.formulario.get(campo).touched
 
-  }
 
-  // Verifica se o campo foi tocado e se é valido!
-  isInValidTouched(campo: string){
-
-    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched
-
-  }
-
-  isInvalidEmail(){
-    let emailProp = this.formulario.get('email');
-
-    if(emailProp.errors){
-      return emailProp.errors['email'] && emailProp.touched;
+      });
     }
   }
 
-  aplicaCssErro(campo: string){
-
-    return {
-      'is-valid': this.isValidTouched(campo),
-      'is-invalid': this.isInValidTouched (campo)
-    }
-
-  }
-
+  //(GET) Consulta o cep digitado, depois que perde o foco, usando uma requisição em API de terceiros!
   consultaCep(){
 
     // Obtenha o valor do campo cep
     let cep = this.formulario.get("endereco.cep").value;
+
+    //console.log("valor: " + cep);
 
     // Remove caracteres indesejaveis
     cep = cep.replace(/\D/g, '');
@@ -134,20 +115,60 @@ export class DataFormComponent implements OnInit {
           .pipe(map(data => data))
           .subscribe((data :cepData) => this.feedsData(data))
 
-
-
       }
     }
   }
 
+  /// Método que limpa os campos
+  resetar(){
+    this.formulario.reset();
+  }
 
-  // "setValue" e "patchValue" são Método do FormGroup!
-  // Método que popula os campos
-  // "patchValue" é a melhor maneira de popular os dados,
-  // porque  você escolher qual campo pode popular!
+  // (VALIDAÇÃO) Verifica se o campo foi tocado e se é valido!
+  isValidTouched(campo: string){
+
+    // this.formulario.controls["campo"];
+
+    // Melhor forma de pegar o campo do formulario!
+    return this.formulario.get(campo).valid && (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
+
+  }
+
+  // (VALIDAÇÃO) Verifica se o campo foi tocado e se é valido!
+  isInValidTouched(campo: string){
+
+    return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
+
+  }
+
+  //(VALIDAÇÃO)
+  isInvalidEmail(){
+    let emailProp = this.formulario.get('email');
+
+    if(emailProp.errors){
+      return emailProp.errors['email'] && emailProp.touched;
+    }
+  }
+
+  aplicaCssErro(campo: string){
+
+    return {
+      'is-valid': this.isValidTouched(campo),
+      'is-invalid': this.isInValidTouched (campo)
+    }
+
+  }
+
+
+
+
+  /*
+    Método que popula os campos, "setValue" e "patchValue" são Método do FormGroup,
+    "patchValue" é a melhor maneira de popular os dados, porque você escolher qual campo pode popular!
+  */
   feedsData(dados: cepData){
 
-    /*formulario.setValue({
+    /* formulario.setValue({
       nome: formulario.value.nome,
       email: formulario.value.email,
       endereco: {
@@ -170,7 +191,12 @@ export class DataFormComponent implements OnInit {
         cidade: dados.localidade,
         estado: dados.uf
       }
+
     });
+
+    //Popular apenas um campo
+    //this.formulario.get('nome').setValue('Lincoln');
+
   }
 
 
@@ -188,7 +214,6 @@ export class DataFormComponent implements OnInit {
       }
 
     });
-
   }
 
 }

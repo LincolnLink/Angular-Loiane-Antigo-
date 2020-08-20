@@ -733,7 +733,41 @@
 
   - Logo em seguida chama um ".subscribe()" para poder receber os valores da requisição quando ele chegar!
 
-  - o valor fica na variavel "data" é tipado com a interface "cepData", que é passado por parametro no dentro do método ".subscribe()", em uma função chamada "feedsData()", essa função popula os campos com os valores novos! 
+  - O valor fica na variavel "data" é tipado com a interface "cepData", que é passado por parametro no dentro do método ".subscribe()", em uma função chamada "feedsData()", essa função popula os campos com os valores novos! 
+
+  - Popular apenas um campo
+
+    <blockquote>
+
+      this.formulario.get('nome').setValue('Lincoln');
+
+    </blockquote>
+
+- Formulários reativos: Verificar validação dos campos com botão submit
+
+  - O this.formulario que é do tipo "FormGroup", tem uma propriedade chamada "controls" que representa uma lista de cada campo, no entanto ele não é um array, por isso não é possivel trabalhar com métodos como forEach, ou tratar ele como um array!
+
+  - Com JS é possivel extrair as keys desse array, usando o método "Object.keys", com isso é possivel usar forEach!
+
+  - Com o nome de cada key é possivel buscar cada uma delas, usando get()! 
+
+  - Para ativar a validação, usa o método "markAsDirty", Dirty seria o campos quando tem o valor alterado!
+
+  <blockquote>
+
+    Object.keys(this.formulario.controls).forEach((campo)=>{
+
+        console.log(campo);
+
+        const controle = this.formulario.get(campo);
+
+        controle.markAsDirty();
+
+    });
+
+  </blockquote>
+
+
 
 
 
