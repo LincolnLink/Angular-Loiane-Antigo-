@@ -4,21 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TemplateFormComponent } from './template-form.component';
-import { ConsultaCepService } from './consulta-cep.service';
 import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    TemplateFormComponent    
+    TemplateFormComponent
   ],
-  imports: [    
+  imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule,    
-    SharedModule         
-  ],  
-  providers: [ConsultaCepService]
+    HttpClientModule,
+    SharedModule
+  ],
+  providers: []
 })
 export class TemplateFormModule { }

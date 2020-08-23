@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsultaCepService } from './consulta-cep.service';
 import { map } from 'rxjs/operators';
 
 import { cepData } from '../Entidades/cepData';
+import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 
 @Component({
   selector: 'app-template-form',
@@ -18,7 +18,7 @@ export class TemplateFormComponent implements OnInit {
     email: null
   };
 
-  constructor(private httpService: ConsultaCepService) { }
+  constructor(private cepService: ConsultaCepService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +29,7 @@ export class TemplateFormComponent implements OnInit {
     // console.log(form.value);
     // console.log(this.userExemplo);
 
-    this.httpService.postFormData(formularioVariavel)
+    this.cepService.postFormData(formularioVariavel)
     .pipe(map(data => data))
     .subscribe(data =>{
        console.log( "informações enviadas: " + data)
@@ -60,33 +60,16 @@ export class TemplateFormComponent implements OnInit {
   }
 
   // Consulta uma API que busca dados de cep
-  consultaCEP(valueCep, form){
+  consultaCEP(cep, form){
 
-    // Filtro: somente digitos
-    var cep = valueCep.replace(/\D/g, '');
+    if(cep != null && cep !== ''){
+      // Mapeia os valores e transformar em um json, .pipe(map(data => data))
+      // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+      this.cepService.getCep(cep)
+      .subscribe((data :cepData) => this.feedsData(data, form))
 
-    // Verfirificar se não está vazio!
-    if (cep !== ''){
-
-      // Expressão regular para validar o CEP
-      const validacep = /^[0-9]{8}$/;
-
-      if (validacep.test(cep)){
-
-        this.resetDados(form);
-
-        // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
-
-        // Mapeia os valores e transformar em um json
-        // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
-        this.httpService.getCep(cep)
-          .pipe(map(data => data))
-          .subscribe((data :cepData) => this.feedsData(data, form))
-
-
-
-      }
     }
+    // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
   }
 
   // "setValue" e "patchValue" são Método do FormGroup!

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ConsultaCepService } from '../template-form/consulta-cep.service';
+
 import { cepData } from '../Entidades/cepData';
 import { map } from 'rxjs/operators';
+import { DropdownService } from './../shared/services/dropdown.service';
+import { EstadoBr } from './../shared/models/estado-br.model';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
+
 
 @Component({
   selector: 'app-data-form',
@@ -15,12 +19,20 @@ export class DataFormComponent implements OnInit {
 
   formulario: FormGroup;
 
+  estados: EstadoBr[];
+
   constructor(
     private formBuilder: FormBuilder,
-    private httpServiceCep: ConsultaCepService
+    private cepService: ConsultaCepService,
+    private dropdownService: DropdownService
   ){ }
 
   ngOnInit(): void {
+
+    //Chamada da lista de estado
+    this.dropdownService.getEstadosBr()
+    .subscribe((dados: EstadoBr[]) =>{ this.estados = dados; console.log(dados);});
+
 
     /*this.formulario = new FormGroup({
       nome: new FormControl(null),
@@ -56,7 +68,7 @@ export class DataFormComponent implements OnInit {
 
     if(this.formulario.valid){
 
-      this.httpServiceCep.postFormData(this.formulario)
+      this.cepService.postFormData(this.formulario)
       .subscribe(dados =>{
 
         //TODO: Criar uma requisição post para uma API
@@ -73,16 +85,10 @@ export class DataFormComponent implements OnInit {
     }
     else
     {
-      Object.keys(this.formulario.controls).forEach((campo)=>{
+      console.log('Formulario invalido');
 
-        console.log(campo);
-        const controle = this.formulario.get(campo);
+      this.verificaValidacoesForm(this.formulario);
 
-        controle.markAsDirty();
-
-
-
-      });
     }
   }
 
@@ -92,31 +98,16 @@ export class DataFormComponent implements OnInit {
     // Obtenha o valor do campo cep
     let cep = this.formulario.get("endereco.cep").value;
 
-    //console.log("valor: " + cep);
-
-    // Remove caracteres indesejaveis
-    cep = cep.replace(/\D/g, '');
-
-    // Verfirificar se não está vazio!
-    if (cep !== ''){
-
-      // Expressão regular para validar o CEP
-      const validacep = /^[0-9]{8}$/;
-
-      if (validacep.test(cep)){
-
-        this.resetDados();
-
-        // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
-
-        // Mapeia os valores e transformar em um json
-        // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
-        this.httpServiceCep.getCep(cep)
-          .pipe(map(data => data))
-          .subscribe((data :cepData) => this.feedsData(data))
-
-      }
+    if(cep != null && cep !== ''){
+      // Mapeia os valores e transformar em um json
+      // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+      this.cepService.getCep(cep)
+      .pipe(map(data => data))
+      .subscribe((data :cepData) => this.feedsData(data));
     }
+    // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+
+    this.resetDados();
   }
 
   /// Método que limpa os campos
@@ -158,8 +149,6 @@ export class DataFormComponent implements OnInit {
     }
 
   }
-
-
 
 
   /*
@@ -213,6 +202,19 @@ export class DataFormComponent implements OnInit {
         estado: ''
       }
 
+    });
+  }
+
+  verificaValidacoesForm(dateInforme: FormGroup)
+  {
+    Object.keys(dateInforme.controls).forEach(campo => {
+      console.log(campo);
+      const controle = dateInforme.get(campo);
+      controle.markAsDirty();
+
+      if(controle instanceof FormGroup){
+        this.verificaValidacoesForm(controle);
+      }
     });
   }
 

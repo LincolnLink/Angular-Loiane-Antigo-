@@ -5,9 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DataFormComponent } from './data-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { ConsultaCepService } from '../template-form/consulta-cep.service';
-
-
 
 @NgModule({
   declarations: [
@@ -19,6 +16,6 @@ import { ConsultaCepService } from '../template-form/consulta-cep.service';
     HttpClientModule,
     SharedModule
   ],
-  providers: [ConsultaCepService]
+  providers: []
 })
 export class DataFormModule { }

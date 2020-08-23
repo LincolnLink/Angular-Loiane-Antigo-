@@ -767,9 +767,151 @@
 
   </blockquote>
 
+- Formulários: Criando um serviço de Estados Brasileiros
+
+  - Tranformar campo simples/tipo input para campo comboBox, select ou dropdown!
+
+  - Json com estados: https://github.com/felipefdl/cidades-estados-brasil-json/blob/master/Estados.json
+
+  - Criar um serviço chamado "Dropdown" dentro do "shared" com o diretorio "services"
+
+  - O Json é colocado no diretorio "assets", transforma o nome das propriedades em tudo minusculo!
+
+  - Antes de chamar o ".map()" deve por o ".pipe()"
+
+  - A chamada retorna um objeto do tipo "response", que é convertida para o tipo "json", usando o mapeamento!
+
+  <bloclquote>
+
+    constructor(private http: HttpClient) { }
+
+    getEstadosBr(){
+
+      return this.http.get('assets/dados/estadosbr.json');
+      //.pipe(map((res: Response) => res.json()));
+
+    }
+
+  </blockquote>
+
+  - A reqisição retorna uma observable ou uma promesse, por isso devese se increver!
+
+  - Não foi preciso usar o pipe() nem map!
+
+  - Apenas na chamada tipar o resultado!
+
+  <blockquote>
+
+    //Chamada da lista de estado
+    this.dropdownService.getEstadosBr()
+    .subscribe((dados: EstadoBr[]) =>{ this.estados = dados});
+
+  </blockquote>
+
+  - interface que serviu para tipar
+
+  </blockquote>
+
+    export interface EstadoBr {
+
+    id: number;
+    sigla: string;
+    nome: string;
+
+    }
+
+  </blockquote>
+
+- Formulários: Serviço de consulta CEP + provideIn
+
+  - Quando cria um servido, ele já vem com a propriedade e valor "providedIn: 'root'" no decoreito do "@Injectable"
+
+  - Facilitando a declaração para criar instancias automaticamente!
+
+  - Nessa aula ela refatorou o serviso que consulta o cep, e botou na pasta shared, sem precisar declarar no "providers"!
+
+  REFATORAÇÃO
+
+  - Método consultaCep() do componente data-form
+
+  <blockquote>
+
+    //(GET) Consulta o cep digitado, depois que perde o foco, usando uma requisição em API de terceiros!
+    consultaCep(){
+
+      // Obtenha o valor do campo cep
+      let cep = this.formulario.get("endereco.cep").value;
+
+      if(cep != null && cep !== ''){
+
+        // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+        // Mapeia os valores e transformar em um json
+        // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+        this.cepService.getCep(cep)
+        .pipe(map(data => data))
+        .subscribe((data :cepData) => this.feedsData(data));
+      }
+
+      this.resetDados();
+    }
+
+  </blockquote>
+
+  - Método ... do componente template-forms
+
+  <blockquote>
+
+    // Consulta uma API que busca dados de cep
+    consultaCEP(cep, form){
+
+      // Filtro: somente digitos
+      cep = cep.replace(/\D/g, '');
+
+      if(cep != null && cep !== ''){
+
+        // TODO:  Implementar uma mensagem de ERRO caso o cep esteja errado
+
+        // Mapeia os valores e transformar em um json
+        // Se inscreve para ter a notificação, seria a execução de uma função como se fosse um callback!
+        this.cepService.getCep(cep)
+        .subscribe((data :cepData) => this.feedsData(data, form))
+
+      }
+    }
+  </blockquote>
+
+  - Método GetCep do serviço "consulta-cep.service"
+
+  <blockquote>
+  
+    //GET - endpoint que pega dados de um cep!
+    getCep(cep: any){
+
+      // Remove caracteres indesejaveis
+      cep = cep.replace(/\D/g, '');
+
+      // Verfirificar se não está vazio!
+      if (cep !== ''){
+
+        // Expressão regular para validar o CEP
+        const validaCep = /^[0-9]{8}$/;
+
+        // Valida o formato do CEP
+        if (validaCep.test(cep)){
+
+          const configUrl = `//viacep.com.br/ws/${cep}/json`;
+
+          return this.http.get<cepData>(configUrl);
+
+        }
+        return of({});
+      }
+      return of({});
+    }
+  </blockquote>
 
 
-
+- Formulários reativos: Combobox simples (select)
 
 
 
