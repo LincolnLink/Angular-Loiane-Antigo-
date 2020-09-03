@@ -16,21 +16,11 @@
 
 # Atualizando o Angular CLI
 
-- passo1: atualizando de forma global: Global package
-
-  <blockquote>npm uninstall -g angular-cli @angular/cli</blockquote>
-  <blockquote>npm cache clean</blockquote>
-  <blockquote>npm install -g @angular/cli@latest</blockquote>
-
-- passo2: Local do projeto: local project package
-
-  <blockquote>rm -rf nome_modules dist</blockquote>
-  <blockquote>npm install --save-dev @angular/cli@latest</blockquote>
-  <blockquote>npm install</blockquote>
-
-- passo3: executar o comando, executa em um promt comando como ADMINISTRADOR!
+- passo1: executar o comando, executa em um promt comando como ADMINISTRADOR!
 
   <blockquote> ng update</blockquote>
+
+  Guia das principais modificações: https://update.angular.io/
 
 # Reparando erro de vulnerabilidade 
 
