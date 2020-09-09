@@ -28,6 +28,10 @@
 
   Guia das principais modificações: https://update.angular.io/
 
+  -Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
+
+  <blockquote>npm install -save codelyzer@latest</blockquote>
+
 
 
 # Reparando erro de vulnerabilidade 
