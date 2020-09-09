@@ -16,11 +16,19 @@
 
 # Atualizando o Angular CLI
 
-- passo1: executar o comando, executa em um promt comando como ADMINISTRADOR!
+- executar o comando, executa em um promt comando como ADMINISTRADOR!
 
+  - atualizando globalmente:
+
+  <blockquote> npm install -g @angular/cli</blockquote>
+
+  - Comando que atualiza automatico 
+  
   <blockquote> ng update</blockquote>
 
   Guia das principais modificações: https://update.angular.io/
+
+
 
 # Reparando erro de vulnerabilidade 
 
