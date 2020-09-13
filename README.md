@@ -13,8 +13,20 @@
 
   TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
 
+# Dicas
+
+- Operadores RXJS
+
+  -Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
+
+- HttpClintModel
+
+  -  Não precisa usar o .pipe(map(...)) em chamadas http
+
 
 # Atualizando o Angular CLI
+
+-Sempre atualize uma versão para outra, do 4 para o 5, do 5 para o 6 , etc, usando sempre um repositorio para cada versão!
 
 - executar o comando, executa em um promt comando como ADMINISTRADOR!
 
@@ -32,6 +44,13 @@
 
   <blockquote>npm install -save codelyzer@latest</blockquote>
 
+- NCU
+
+  -Exibe todos os pacotes dezatualizado! 
+
+   <blockquote> npm install ncu</blockquote>
+
+   <blockquote> ncu -u</blockquote>
 
 
 # Reparando erro de vulnerabilidade 
