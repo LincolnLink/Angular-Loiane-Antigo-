@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~10.1.0",
     "@angular/router": "~10.1.0",
     "bootstrap": "^4.5.0",
+    "ncu": "^0.2.1",
     "ngx-bootstrap": "^5.6.1",
     "ngx-bootstrap-navbar": "0.0.5",
     "rxjs": "~6.6.3",
