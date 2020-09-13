@@ -17,7 +17,7 @@
 
 - Operadores RXJS
 
-  -Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
+  - Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
 
 - HttpClintModel
 
@@ -40,16 +40,26 @@
 
   Guia das principais modificações: https://update.angular.io/
 
-  -Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
+  - Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
 
   <blockquote>npm install -save codelyzer@latest</blockquote>
 
-- NCU
+- NCU updates
 
-  -Exibe todos os pacotes dezatualizado! 
+  - https://www.npmjs.com/package/npm-check-updates
 
-   <blockquote> npm install ncu</blockquote>
+  - Exibe todos os pacotes dezatualizado!    
 
+   <blockquote> npm i npm-check-updates</blockquote> 
+
+   <blockquote> npm install -g npm-check-updates</blockquote> 
+
+  - Comando que verifica oque está desatualizado
+
+   <blockquote> ncu </blockquote>
+
+  - Comando que atualiza
+   
    <blockquote> ncu -u</blockquote>
 
 
