@@ -23,6 +23,10 @@
 
   -  Não precisa usar o .pipe(map(...)) em chamadas http
 
+- Memory Leak
+
+  - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async"
+
 
 # Atualizando o Angular CLI
 

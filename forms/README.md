@@ -781,7 +781,7 @@
 
   - A chamada retorna um objeto do tipo "response", que é convertida para o tipo "json", usando o mapeamento!
 
-  <bloclquote>
+  <blockquote>
 
     constructor(private http: HttpClient) { }
 
@@ -913,11 +913,38 @@
 
 - Formulários reativos: Combobox simples (select)
 
-  -
+  - Transforma o campo "Estado" em select!
+
+  - Insclui a tag option, e faz um ngFor com os valores, inclui a propriedade "value" setando o estado.sigla!
   
+  - IMPORTANTE: para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit()
+
+  - No ngFor é colocado um pipe chamado "async", para que ele construa e também destrua a inscrição!
+
+  - A inscrição foi comentada, e foi subistuida por: 
+
+    <blockquete>
+
+      estados: Observable<EstadoBr[]>;
+
+      this.estados = this.dropdownService.getEstadosBr();
+
+    </blockquete>
+
+  - Deve se por um tipo no get!
+
+    <blockquete>
+      getEstadosBr(){
+
+        return this.http.get<EstadoBr[]>('assets/dados/estadosbr.json');
+        //.pipe(map((res: Response) => res.json()));
+
+      }    
+    </blockquete>
+
+- Formulários reativos: Combobox com Objeto (ngValue e compareWith)
 
 
-  
 
 
 

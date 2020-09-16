@@ -110,23 +110,23 @@
 },
      {
 	"id": "23",
-	"sigla": "Rs",
+	"sigla": "RS",
 	"nome": "Rio Grande do sul"
 },
      {
 	"id": "24",
-	"sigla": "sC",
-	"nome": "santa Catarina"
+	"sigla": "SC",
+	"nome": "Santa Catarina"
 },
      {
 	"id": "25",
-	"sigla": "sE",
-	"nome": "sergipe"
+	"sigla": "SE",
+	"nome": "Sergipe"
 },
      {
 	"id": "26",
-	"sigla": "sP",
-	"nome": "são Paulo"
+	"sigla": "SP",
+	"nome": "São Paulo"
 },
      {
 	"id": "27",

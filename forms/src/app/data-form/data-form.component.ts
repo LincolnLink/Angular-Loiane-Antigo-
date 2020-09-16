@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { DropdownService } from './../shared/services/dropdown.service';
 import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -19,7 +20,10 @@ export class DataFormComponent implements OnInit {
 
   formulario: FormGroup;
 
-  estados: EstadoBr[];
+  /*estados: EstadoBr[];*/
+  estados: Observable<EstadoBr[]>;
+
+  cargos: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,9 +34,14 @@ export class DataFormComponent implements OnInit {
   ngOnInit(): void {
 
     //Chamada da lista de estado
+    /*
     this.dropdownService.getEstadosBr()
     .subscribe((dados: EstadoBr[]) =>{ this.estados = dados; console.log(dados);});
+    */
 
+    this.estados = this.dropdownService.getEstadosBr();
+
+    this.cargos = this.dropdownService.getCargos();
 
     /*this.formulario = new FormGroup({
       nome: new FormControl(null),
@@ -53,7 +62,9 @@ export class DataFormComponent implements OnInit {
         bairro: [null, Validators.required],
         cidade: [null, Validators.required],
         estado: [null, Validators.required]
-      })
+      }),
+      cargo:[null]
+
 
     });
 
