@@ -123,19 +123,32 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
+      <div class="col-md-3">
+        <label for="cargo" class="label font-weight-bold">Cargo</label>
 
-      <label for="cargo" class="label font-weight-bold">Cargo</label>
+        <select id="cargo" class="form-control" formControlName="cargo"
+          [ngClass]="aplicaCssErro('cargo')" [compareWith]="comparandoObjetos">
+          <option *ngFor="let cargo of cargos" [ngValue]="cargo" >{{ cargo.desc }}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="tecnologia" class="label font-weight-bold">Tecnologia</label>
 
-      <select id="cargo" class="form-control" formControlName="cargo">
-        <option *ngFor="let cargo of cargos" [value]="cargo" >{{ cargo.desc }}</option>
-      </select>
-
+        <select id="tecnologias" class="form-control" formControlName="tecnologias"
+          [ngClass]="aplicaCssErro('tecnologias')" [compareWith]="comparandoObjetos" multiple>
+          <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia.nome" >{{ tecnologia.desc }}</option>
+        </select>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary mr-5">Enviar</button>
 
-    <button type="button" (click)="resetar()"  class="btn btn-primary">Cancelar</button>
+    <button type="button" (click)="resetar()"  class="btn btn-defaut mr-5">Cancelar</button>
+
+    <button type="button" (click)="setarCargo()"  class="btn btn-info">Setar Cargo</button>
+
+    <button type="button" (click)="setarTecnologia()"  class="btn btn-info">Setar Cargo</button>
 </form>
 
 

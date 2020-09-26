@@ -944,7 +944,17 @@
 
 - Formulários reativos: Combobox com Objeto (ngValue e compareWith)
 
+  - O angular compara os objetos com "===", se baseia em endereço de memroia, e sempre vai ser falso porq são sempre endereço de memoria diferente, mesmo os objetos tendo as mesmas propriedades!
 
+  - Para fazer com que o Angular trabalhar com objeto complexo, deve se usar a diretiva "ngValue" no campo option!
+
+  - Tratando a comparação dos objetos, usando uma diretiva do select chamada "compareWith"(ele é uma função), aonde você define a comparação dos objetos!
+
+  - https://angular.io/api/forms/SelectControlValueAccessor
+
+- Formulários reativos: Combobox Múltiplo (Select Multiple)
+
+ -Cria um novo dropdown, e coloque o atributo "multiple" na tag select!
 
 
 
