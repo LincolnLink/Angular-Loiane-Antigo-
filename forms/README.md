@@ -954,7 +954,13 @@
 
 - Formulários reativos: Combobox Múltiplo (Select Multiple)
 
- -Cria um novo dropdown, e coloque o atributo "multiple" na tag select!
+ - Cria um novo dropdown, e coloque o atributo "multiple" na tag select!
+
+ - A tag option recebe a propriedade "value" e recebe a propriedade do objeto "nome", e exibe a "descr"!
+
+- Formulários reativos: Radio Button (Botão do tipo Rádio)
+
+ - Cria uma campo
 
 
 

@@ -27,6 +27,8 @@ export class DataFormComponent implements OnInit {
 
   tecnologias: any[];
 
+  newsletterOp: any[];
+
   constructor(
     private formBuilder: FormBuilder,
     private cepService: ConsultaCepService,
@@ -46,6 +48,8 @@ export class DataFormComponent implements OnInit {
     this.cargos = this.dropdownService.getCargos();
 
     this.tecnologias = this.dropdownService.getTecnologias();
+
+    this.newsletterOp = this.dropdownService.getNewsletter();
 
     /*this.formulario = new FormGroup({
       nome: new FormControl(null),
@@ -67,8 +71,9 @@ export class DataFormComponent implements OnInit {
         cidade: [null, Validators.required],
         estado: [null, Validators.required]
       }),
-      cargo:[null],
-      tecnologias:[null]
+      cargo:[null, Validators.required],
+      tecnologias:[null],
+      newsletter:[1]
 
 
     });
@@ -246,7 +251,10 @@ export class DataFormComponent implements OnInit {
   }
 
   setarTecnologia(){
+    const tec = ['java','php','c#']
 
+    this.formulario.get('tecnologias').setValue(tec);
   }
+
 
 }

@@ -35,6 +35,10 @@ export class DropdownService {
     ];
   }
 
+  getNewsletter(){
+    return[{value: 1, desc: 'Sim'},{value: 0, desc: 'Não'}];
+  }
+
 
 
 }

@@ -124,7 +124,7 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <label for="cargo" class="label font-weight-bold">Cargo</label>
 
         <select id="cargo" class="form-control" formControlName="cargo"
@@ -132,7 +132,7 @@
           <option *ngFor="let cargo of cargos" [ngValue]="cargo" >{{ cargo.desc }}</option>
         </select>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <label for="tecnologia" class="label font-weight-bold">Tecnologia</label>
 
         <select id="tecnologias" class="form-control" formControlName="tecnologias"
@@ -140,15 +140,27 @@
           <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia.nome" >{{ tecnologia.desc }}</option>
         </select>
       </div>
+
+      <div class="col-md-4" [ngClass]="aplicaCssErro('newsletter')">
+        <label for="newsletter" class="label font-weight-bold">NewsLetter</label>
+        <div id="newsletter" class="form-check-inline">
+          <div class="ml-2" *ngFor="let item of newsletterOp" >
+            <label [for]="item.value" class="form-check-label">
+                <input type="radio" class="form-check-input" [id]="item.value" [value]="item.value"
+                 formControlName="newsletter" /> {{item.desc}}
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary mr-5">Enviar</button>
 
-    <button type="button" (click)="resetar()"  class="btn btn-defaut mr-5">Cancelar</button>
+    <button type="button" (click)="resetar()"  class="btn btn-danger mr-5">Cancelar</button>
 
-    <button type="button" (click)="setarCargo()"  class="btn btn-info">Setar Cargo</button>
+    <button type="button" (click)="setarCargo()"  class="btn btn-info mr-5">Setar Cargo</button>
 
-    <button type="button" (click)="setarTecnologia()"  class="btn btn-info">Setar Cargo</button>
+    <button type="button" (click)="setarTecnologia()"  class="btn btn-info mr-5">Setar Tecnologia</button>
 </form>
 
 
