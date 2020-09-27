@@ -960,7 +960,26 @@
 
 - Formulários reativos: Radio Button (Botão do tipo Rádio)
 
- - Cria uma campo
+ - Cria uma campo radio buttom, torna ele dinamico com um ngFor, exemplo:
+
+  <blockquote>
+
+    < div class="col-md-4" [ ngClass]="aplicaCssErro('newsletter')">
+      < label for="newsletter" class="label font-weight-bold">NewsLetter</>
+        < div id="newsletter" class="form-check-inline">
+          < div class="ml-2" *ngFor="let item of newsletterOp" >
+            < label [ for]="item.value" class="form-check-label">
+                < input type="radio" class="form-check-input" [id]="item.value" [value]="item.value"
+                 formControlName="newsletter" /> {{item.desc}}
+            </>
+          </>
+        </>
+      </>
+    < /div>
+    
+  </blockquote>
+
+- Formulários reativos: Checkbox Toggle
 
 
 
