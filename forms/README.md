@@ -954,13 +954,13 @@
 
 - Formulários reativos: Combobox Múltiplo (Select Multiple)
 
- - Cria um novo dropdown, e coloque o atributo "multiple" na tag select!
+  - Cria um novo dropdown, e coloque o atributo "multiple" na tag select.
 
- - A tag option recebe a propriedade "value" e recebe a propriedade do objeto "nome", e exibe a "descr"!
+  - A tag option recebe a propriedade "value" e recebe a propriedade do objeto "nome", e exibe a "descr".
 
 - Formulários reativos: Radio Button (Botão do tipo Rádio)
 
- - Cria uma campo radio buttom, torna ele dinamico com um ngFor, exemplo:
+  - Cria uma campo radio buttom, torna ele dinamico com um ngFor, exemplo:
 
   <blockquote>
 
@@ -970,13 +970,13 @@
           < div class="ml-2" *ngFor="let item of newsletterOp" >
             < label [ for]="item.value" class="form-check-label">
                 < input type="radio" class="form-check-input" [id]="item.value" [value]="item.value"
-                 formControlName="newsletter" /> {{item.desc}}
+                formControlName="newsletter" /> {{item.desc}}
             </>
           </>
         </>
       </>
     < /div>
-    
+
   </blockquote>
 
 - Formulários reativos: Checkbox Toggle
