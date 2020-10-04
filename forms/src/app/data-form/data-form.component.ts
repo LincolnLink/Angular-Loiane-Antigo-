@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { cepData } from '../Entidades/cepData';
-import { map } from 'rxjs/operators';
 import { DropdownService } from './../shared/services/dropdown.service';
 import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -28,6 +29,9 @@ export class DataFormComponent implements OnInit {
   tecnologias: any[];
 
   newsletterOp: any[];
+
+  // Pode vim de alguma base de dados!
+  frameworksList: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,6 +55,8 @@ export class DataFormComponent implements OnInit {
 
     this.newsletterOp = this.dropdownService.getNewsletter();
 
+    this.frameworksList = ['Angular', 'React', 'Vue', 'Sencha'];
+
     /*this.formulario = new FormGroup({
       nome: new FormControl(null),
       email: new FormControl(null)
@@ -73,12 +79,29 @@ export class DataFormComponent implements OnInit {
       }),
       cargo:[null, Validators.required],
       tecnologias:[null],
-      newsletter:[1]
-
-
+      newsletter:[1],
+      termos:[null, Validators.requiredTrue],
+      frameworks: this.buildFrameworks(),
     });
 
     //console.log(this.formulario)
+
+  }
+
+  buildFrameworks(){
+
+    // Criando manualmente!
+    /*return[
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+    ]*/
+
+    // Criando dinamicamente
+    const values = this.frameworksList.map( v => new FormControl(false));
+
+    return this.formBuilder.array(values);
 
   }
 
@@ -89,7 +112,7 @@ export class DataFormComponent implements OnInit {
 
     if(this.formulario.valid){
 
-      this.cepService.postFormData(this.formulario)
+      this.cepService.postFormData(this.formulario, this.frameworksList)
       .subscribe(dados =>{
 
         //TODO: Criar uma requisição post para uma API
@@ -148,9 +171,10 @@ export class DataFormComponent implements OnInit {
 
   // (VALIDAÇÃO) Verifica se o campo foi tocado e se é valido!
   isInValidTouched(campo: string){
-
-    return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
-
+    return (
+      !this.formulario.get(campo).valid &&
+      (this.formulario.get(campo).touched || this.formulario.get(campo).dirty)
+    );
   }
 
   //(VALIDAÇÃO)
@@ -229,7 +253,7 @@ export class DataFormComponent implements OnInit {
   verificaValidacoesForm(dateInforme: FormGroup)
   {
     Object.keys(dateInforme.controls).forEach(campo => {
-      console.log(campo);
+
       const controle = dateInforme.get(campo);
       controle.markAsDirty();
 

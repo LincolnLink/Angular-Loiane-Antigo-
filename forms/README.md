@@ -965,24 +965,128 @@
   <blockquote>
 
     < div class="col-md-4" [ ngClass]="aplicaCssErro('newsletter')">
+
       < label for="newsletter" class="label font-weight-bold">NewsLetter</>
+
         < div id="newsletter" class="form-check-inline">
+
           < div class="ml-2" *ngFor="let item of newsletterOp" >
+
             < label [ for]="item.value" class="form-check-label">
+
                 < input type="radio" class="form-check-input" [id]="item.value" [value]="item.value"
                 formControlName="newsletter" /> {{item.desc}}
+
             </>
+
           </>
+
         </>
+
       </>
+
     < /div>
 
   </blockquote>
 
 - Formulários reativos: Checkbox Toggle
 
+  - cria um checkbox, declara ele no "formBuilder", vincula o html com "formControlName"
 
+  - cria uma alidação usando "Validators.pattern('true')" ou o "Validators.requiredTrue"
 
+  <blockquete>
+
+    termos:[null, Validators.pattern('true')]
+
+  </blockquete>
+
+- Formulários reativos: FormArray: Checkboxes Dinâmicos
+
+  - Cria um array com os nomes dos checkBox, ou pode vim de uma base de dados!
+
+    <blockquete>
+      frameworks: ['Angular', 'React', 'Vue', 'Sencha'];
+    </blockquete>
+
+  - Quando trabalha com multiplos controle no Angular, se usa "FORM-ARRAY" se usa para checkBox dinamicos ou formularios alinhados.
+
+  - É normal criar um método chamado "build...alguma coisa" para ser o valor da propriedade do campo "frameworks".
+
+  - O método retorna um array de "new FormControl(false)", que seria a declaração de cada checkBox.
+
+  - Não se coloca nome nos checkBox, se faz uma comparação(depara) baseada em Index do primeiro array criado.
+
+  - Porem deve se criar cada campo dinamicamente, usando uma constante, aonde recebe o valor do primeiro array modificado pelo método ".map()".
+
+  <blockquete>
+
+    const values = this.frameworks.map( v => this.formBuilder.control(''));
+
+    ou
+
+    const values = this.frameworks.map( v => new FormControl(false));
+
+  </blockquete>
+
+  - Ultilizando a programação FUNCIONAL e programação REATIVA! 
+
+  - Retorna uma "this.formBuilder.array(value);", value seria a constante.
+
+  - o HTML fica dessa forma!
+
+  <blockquete>
+
+    < div class="col-md-6" [ ngClass]="aplicaCssErro('frameworks')">
+
+        <label for="frameworks">frameworks favoritos</label>
+
+          <div id="frameworks" class="row">
+
+            <div class="checkbox col-md-4"
+            formArrayName="frameworks"
+            *ngFor="let item of formulario.get('frameworks')['controls']; let i = index">
+
+              <label [for]="frameworks[i]" class="checkbox-inline">
+
+                <input [id]="frameworks[i]" type="checkbox" [formControlName]="i"> {{ frameworks[i] }}
+
+              </label>
+
+            </div>
+
+          </div>
+          
+      < /div>
+
+  </blockquete>
+
+  - Cria um tratamento para ir apenas valores marcados e o nome do framework
+
+  <blockquete>
+
+  
+    // Criando uma copia do valor!
+
+    let valueSubmit = Object.assign({}, form.value)
+
+    // Tratamento paga pegar o nome dos framework marcado e apenas os que foram marcados!
+
+    valueSubmit = Object.assign(valueSubmit, {
+
+      frameworks: valueSubmit.frameworks
+
+      .map((v, i) => v ? listFramework[i]: null)
+
+      .filter((v) => v !== null)
+
+    });
+
+  </blockquete>
+
+- Formulários reativos: Validação Customizada (FormArray Checkboxes)
+
+  - 
 
 
 

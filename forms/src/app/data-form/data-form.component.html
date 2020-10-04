@@ -154,6 +154,34 @@
       </div>
     </div>
 
+    <div class="form-group row">
+
+      <div class="col-md-6" [ngClass]="aplicaCssErro('termos')">
+        <div class="checkbox">
+          <label for="" class="checkbox-inline">
+            <input type="checkbox" formControlName="termos"> Aceito os termos.
+          </label>
+        </div>
+        <app-campo-control-erro [condicao]="!formulario.get('termos').valid" msnErro="Por favor aceite os termos!" ></app-campo-control-erro>
+      </div>
+
+      <div class="col-md-6" [ngClass]="aplicaCssErro('frameworks')">
+        <label>frameworks favoritos</label>
+          <div class="row">
+
+            <div class="checkbox col-md-4"
+            formArrayName="frameworks"
+            *ngFor="let item of formulario.get('frameworks')['controls']; let i = index">
+
+              <label [for]="frameworksList[i]" class="checkbox-inline">
+                <input [id]="frameworksList[i]" type="checkbox" [formControlName]="i"> {{ frameworksList[i] }}
+              </label>
+            </div>
+          </div>
+      </div>
+
+    </div>
+
     <button type="submit" class="btn btn-primary mr-5">Enviar</button>
 
     <button type="button" (click)="resetar()"  class="btn btn-danger mr-5">Cancelar</button>

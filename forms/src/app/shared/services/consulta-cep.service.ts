@@ -41,12 +41,25 @@ export class ConsultaCepService {
   }
 
   //POST - envia dados para uma API de teste
-  postFormData(form: FormGroup){
+  postFormData(form: FormGroup, listFramework?: any[]){
 
     const configUrl = `https://httpbin.org/post`;
 
+    // Criando uma copia do valor!
+    let valueSubmit = Object.assign({}, form.value)
+
+    // Tratamento paga pegar o nome dos framework marcado e apenas os que foram marcados!
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+      .map((v, i) => v ? listFramework[i]: null)
+      .filter((v) => v !== null)
+
+    });
+
+    console.log(valueSubmit);
+
     //Converte um objeto JS em JSON!
-    return this.http.post(configUrl, JSON.stringify(form.value));
+    return this.http.post(configUrl, JSON.stringify(valueSubmit));
   }
 
 
