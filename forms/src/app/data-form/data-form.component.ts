@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { cepData } from '../Entidades/cepData';
 import { DropdownService } from './../shared/services/dropdown.service';
@@ -7,6 +7,7 @@ import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 
 
@@ -101,8 +102,39 @@ export class DataFormComponent implements OnInit {
     // Criando dinamicamente
     const values = this.frameworksList.map( v => new FormControl(false));
 
-    return this.formBuilder.array(values);
+    return this.formBuilder.array(values, this.requiredMinCheckbox(1));
 
+  }
+
+  // Meétodo que cria a validação personalizada!
+  requiredMinCheckbox(min = 1){
+
+    // Contante que recebe uma função que trata o "formArray"!
+    const validator = (formArray: FormArray) => {
+
+      /*
+      // Constante que recebe os controles do "formArray"!
+      const values = formArray.controls;
+      // Verifica cada check se algum deles foi marcado!
+      let totalChecked = 0;
+      for (let i = 0; i< values.length; i++){
+        if (values[i].value){
+          totalChecked += 1;
+        }
+      }
+      */
+
+     const totalChecked = formArray.controls
+     .map(v => v.value)
+     .reduce((total, current) => current ? total + current : total, 0);
+
+
+
+      // Retorna se atende ou não o minimo de check marcados!
+      return totalChecked >= min ? null : {required: true};
+    };
+
+    return validator;
   }
 
   //(POST) Método que envia os dados preenchido para o servidor!

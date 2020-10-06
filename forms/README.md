@@ -1086,7 +1086,81 @@
 
 - Formulários reativos: Validação Customizada (FormArray Checkboxes)
 
-  - 
+  - Cria uma método chamada "requiredMinCheckbox", que recebe um parametro chamado "min" com o valor 1. 
+  
+  - Dentro dessa método cria uma constante que recebe uma função, e como parametro recebe o "formArray"!
+
+  - Dentro desse método cria uma constante, que recebe os controles do "formArray"!
+
+  - Codigo versão estruturada!
+
+  <blockquete>
+
+    // Meétodo que cria a validação personalizada!
+
+    requiredMinCheckbox(min = 1){
+
+    // Contante que recebe uma função que trata o "formArray"!
+
+    const validator = (formArray: FormArray) => {
+
+      // Constante que recebe os controles do "formArray"!
+
+      const values = formArray.controls;
+
+      // Verifica cada check se algum deles foi marcado!
+
+      let totalChecked = 0;
+
+      for (let i = 0; i< values.length; i++){
+
+        if (values[i].value){
+
+          totalChecked += 1;
+
+        }
+
+      }
+
+      // Retorna se atende ou não o minimo de check marcados!
+
+      return totalChecked >= min ? null : {required: true};
+
+    };
+
+    return validator;
+  }
+
+  </blockquete>
+
+  - Codigo versão funcional
+
+  <blockquete>
+
+  // Meétodo que cria a validação personalizada!
+
+  requiredMinCheckbox(min = 1){
+
+    // Contante que recebe uma função que trata o "formArray"!
+
+    const validator = (formArray: FormArray) => {    
+     
+     const totalChecked = formArray.controls
+     .map(v => v.value)
+     .reduce((total, current) => current ? total + current : total, 0);
+
+
+
+      // Retorna se atende ou não o minimo de check marcados!
+      return totalChecked >= min ? null : {required: true};
+    };
+
+    return validator;
+  }
+  
+  </blockquete>
+
+
 
 
 
