@@ -27,6 +27,15 @@
 
   - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async"
 
+- Métodos "static"
+
+  - Não precisa instanciar.
+
+  - Não precisa de Injeção de dependencia.
+
+  - Se usa diretamente, apenas fazendo referencia da classe.
+
+  - Tem apenas uma instancia! 
 
 # Atualizando o Angular CLI
 
@@ -162,6 +171,16 @@
 
     });
 
+  </blockquote>
+
+- Object.assign()
+
+  <blockquote>
+
+    // Criando uma copia do valor!
+
+    let valueSubmit = Object.assign({}, form.value)
+    
   </blockquote>
 
 - .teste()

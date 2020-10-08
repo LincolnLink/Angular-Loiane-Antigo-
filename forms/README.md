@@ -1137,28 +1137,179 @@
 
   <blockquete>
 
-  // Meétodo que cria a validação personalizada!
+    // Meétodo que cria a validação personalizada!
+    requiredMinCheckbox(min = 1){
 
-  requiredMinCheckbox(min = 1){
-
-    // Contante que recebe uma função que trata o "formArray"!
-
-    const validator = (formArray: FormArray) => {    
+      // Contante que recebe uma função que trata o "formArray"!
+      const validator = (formArray: FormArray) => {    
      
-     const totalChecked = formArray.controls
-     .map(v => v.value)
-     .reduce((total, current) => current ? total + current : total, 0);
+      const totalChecked = formArray.controls
+      .map(v => v.value)
+      .reduce((total, current) => current ? total + current : total, 0);
 
+        // Retorna se atende ou não o minimo de check marcados!
+        return totalChecked >= min ? null : {required: true};
 
+      };
 
-      // Retorna se atende ou não o minimo de check marcados!
-      return totalChecked >= min ? null : {required: true};
-    };
+      return validator;
 
-    return validator;
-  }
+    }
   
   </blockquete>
+
+  - Dentro do "buildFrameworks" bota a validação!
+
+  <blockquete>
+
+    return this.formBuilder.array(values, this.requiredMinCheckbox(1));
+
+  </blockquete>
+
+  - configuração da validação personalizada no HTML
+
+  <blockquete>
+    < app-campo-control-erro [ condicao]="!formulario.get('frameworks').valid" msnErro="Selecione 1 opção" >
+            </>
+  </blockquete>
+
+  - O método foi isolado em uma classe de serviço, e foi declarado como "static", não precisa instanciar a classe, se usa diretamente!
+
+- Formulários reativos: Validação Customizada (CEP)
+
+  - Cria um método static chamado "cepValidator", no serviço "form-validations"!
+
+  - Caso de erro, retorna um objeto representando o tipo de erro!
+
+  <blockquete>
+
+    static cepValidator(control: FormControl){
+
+      const cep = control.value;
+
+      if (cep && cep !== '')
+      {
+
+        const validacep = /^[0-9]{8}$/;
+        // É preciso retornar um objeto quando da erro!
+
+        return validacep.test(cep) ? null : { cepInvalido : true};
+
+      }
+
+      return null;
+
+    }
+
+  <blockquete>
+
+  - Declarando a validação no campo!
+
+  <blockquete>
+
+    cep: [null, [Validators.required, FormValidationsService.cepValidator]],
+
+  <blockquete>
+
+  - Mensagem de erro, no HTML!
+
+  <blockquete>
+
+    < alert type="danger" [ dismissible]="dismissible" *ngIf="formulario.get('endereco.cep').hasError('cepInvalido') && formulario.get('endereco.cep').touched">
+    
+    < strong> CEP</> é Invalido!
+    < />
+
+  </blockquete>
+
+- Formulários reativos: Validação entre dois campos (confirmar email)
+
+  - A ideia dessa validação é comparar os dois campos de email!
+
+  - Cria um método chamado "equalsTo" no FormValidationsService, passando o valor o nome do primeiro campo como uma string.
+
+  - Cria uma constante, que vai receber uma função que informa, se os campos são iguais.
+
+  - Essa constante é criada para receber como método o 2° campo, o campo que vai receber a validação.
+
+  - Com isso cria uma condição para varificar se:
+
+   - O sistema carregou os campos.
+
+   - O campo e depois o valor existe.
+
+   - Os campos são iguais
+
+  <blockquete>
+
+    // Compara os dois campos de email, recebe como paremetro o 1° campo!
+    static equalsTo(otherField: string){
+
+
+      // Resultado é colocado em uma constant, recebe como parametro o 2° campo "automaticamente"!
+      const validator = (formControl: FormControl) => {
+
+        // Verificando se existe o 1° campo.
+        if(otherField == null)
+        {
+          throw new Error('É necessário informar :' + otherField );
+        }
+
+        // Verificando todos os campos existem, ou se já foram carregados no sistema
+        if(!formControl.root || !(<FormGroup>formControl.root).controls){
+
+          return null;
+        }
+
+        // Pesquisa o valor do 1° campo
+        const field = (<FormGroup>formControl.root).get(otherField);
+
+        console.log(formControl);
+
+        // Verifica se o valor do 1° campo existe
+        if (!field){
+
+          throw new Error('É necessario informar um campo válido.');
+
+        }
+
+        // Compara o 1° valor com o 2° valor
+        if (field.value !== formControl.value){
+
+          return {equalsTo: otherField};
+
+        }
+
+        // Caso não tenha erro retorne null
+        return null;
+      }
+
+      return validator;
+    }
+
+  </blockquete>
+
+  - Use o erro personalizado "equalsTo" para fazer a condição da mensagem de erro!
+
+  <blockquete>
+
+    < div class="col-sm-12">
+
+          < label class="label font-weight-bold">Confirmar Email</>
+
+          < input type="email"  formControlName="confirmarEmail" class="form-control"
+          id="confEmail" placeholder="nome@Email.com" required email  [ngClass]="aplicaCssErro('confirmarEmail')">
+
+          < app-campo-control-erro [condicao]="formulario.get('confirmarEmail').hasError('equalsTo')" msnErro="Confirma o Email" ></>
+    < /div>
+
+  </blockquete>
+
+  - Biblioteca que tem as validações prontas, seja no "template-driven" ou como "model-driven"
+
+  <blockquete> https://www.npmjs.com/package/ng2-validation </blockquete>
+
+
 
 
 

@@ -25,6 +25,7 @@ export class ConsultaCepService {
     if (cep !== ''){
 
       // Expressão regular para validar o CEP
+      // TODO criar validação de CNPJ
       const validaCep = /^[0-9]{8}$/;
 
       // Valida o formato do CEP

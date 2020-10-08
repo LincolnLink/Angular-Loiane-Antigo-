@@ -5,10 +5,10 @@ import { cepData } from '../Entidades/cepData';
 import { DropdownService } from './../shared/services/dropdown.service';
 import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ValueTransformer } from '@angular/compiler/src/util';
-
+import { FormValidationsService } from '../shared/services/form-validations.service';
 
 
 @Component({
@@ -37,7 +37,8 @@ export class DataFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private cepService: ConsultaCepService,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+
   ){ }
 
   ngOnInit(): void {
@@ -69,8 +70,9 @@ export class DataFormComponent implements OnInit {
       // 1° parametro: valor inicial
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       email: [null, [Validators.required, Validators.email]],
+      confirmarEmail: [null, FormValidationsService.equalsTo('email')],
       endereco: this.formBuilder.group({
-        cep: [null, Validators.required],
+        cep: [null, [Validators.required, FormValidationsService.cepValidator]],
         numero: [null, Validators.required],
         complemento: [null],
         rua: [null, Validators.required],
@@ -102,45 +104,16 @@ export class DataFormComponent implements OnInit {
     // Criando dinamicamente
     const values = this.frameworksList.map( v => new FormControl(false));
 
-    return this.formBuilder.array(values, this.requiredMinCheckbox(1));
+    return this.formBuilder.array(values, FormValidationsService.requiredMinCheckbox(1));
 
   }
 
-  // Meétodo que cria a validação personalizada!
-  requiredMinCheckbox(min = 1){
 
-    // Contante que recebe uma função que trata o "formArray"!
-    const validator = (formArray: FormArray) => {
-
-      /*
-      // Constante que recebe os controles do "formArray"!
-      const values = formArray.controls;
-      // Verifica cada check se algum deles foi marcado!
-      let totalChecked = 0;
-      for (let i = 0; i< values.length; i++){
-        if (values[i].value){
-          totalChecked += 1;
-        }
-      }
-      */
-
-     const totalChecked = formArray.controls
-     .map(v => v.value)
-     .reduce((total, current) => current ? total + current : total, 0);
-
-
-
-      // Retorna se atende ou não o minimo de check marcados!
-      return totalChecked >= min ? null : {required: true};
-    };
-
-    return validator;
-  }
 
   //(POST) Método que envia os dados preenchido para o servidor!
   onSubmit(){
 
-    // console.log(this.formulario.value);
+    console.log(this.formulario);
 
     if(this.formulario.valid){
 

@@ -22,7 +22,7 @@
 
         <div class="col-sm-12">
 
-            <label for="emailLb" class="label font-weight-bold">Email</label>
+            <label for="email" class="label font-weight-bold">Email</label>
 
             <input type="email"  formControlName="email" class="form-control"
             id="email" placeholder="nome@Email.com" required email  [ngClass]="aplicaCssErro('email')">
@@ -35,8 +35,17 @@
             </app-campo-control-erro>
             -->
             <app-controle-erro-generico-teste [controle]= "this.formulario.controls['email']" [nomeCampo]="'email'">
-
             </app-controle-erro-generico-teste>
+
+        </div>
+        <div class="col-sm-12">
+
+          <label class="label font-weight-bold">Confirmar Email</label>
+
+          <input type="email"  formControlName="confirmarEmail" class="form-control"
+          id="confEmail" placeholder="nome@Email.com" required email  [ngClass]="aplicaCssErro('confirmarEmail')">
+
+          <app-campo-control-erro [condicao]="formulario.get('confirmarEmail').hasError('equalsTo')" msnErro="Confirma o Email" ></app-campo-control-erro>
 
         </div>
     </div>
@@ -53,6 +62,9 @@
 
                 <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('endereco.cep').valid && formulario.get('endereco.cep').touched">
                     <strong>CEP</strong> é obrigatorio!
+                </alert>
+                <alert type="danger" [dismissible]="dismissible" *ngIf="formulario.get('endereco.cep').hasError('cepInvalido') && formulario.get('endereco.cep').touched">
+                  <strong>CEP</strong> é Invalido!
                 </alert>
 
             </div>
@@ -158,7 +170,7 @@
 
       <div class="col-md-6" [ngClass]="aplicaCssErro('termos')">
         <div class="checkbox">
-          <label for="" class="checkbox-inline">
+          <label for="" class="checkbox-inline label font-weight-bold" >
             <input type="checkbox" formControlName="termos"> Aceito os termos.
           </label>
         </div>
@@ -166,7 +178,7 @@
       </div>
 
       <div class="col-md-6" [ngClass]="aplicaCssErro('frameworks')">
-        <label>frameworks favoritos</label>
+        <label class="label font-weight-bold">frameworks favoritos</label>
           <div class="row">
 
             <div class="checkbox col-md-4"
@@ -177,6 +189,8 @@
                 <input [id]="frameworksList[i]" type="checkbox" [formControlName]="i"> {{ frameworksList[i] }}
               </label>
             </div>
+            <app-campo-control-erro [condicao]="!formulario.get('frameworks').valid" msnErro="Selecione 1 opção" >
+            </app-campo-control-erro>
           </div>
       </div>
 
