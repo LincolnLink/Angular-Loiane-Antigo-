@@ -9,10 +9,12 @@
             <input type="text" formControlName="nome" class="form-control"
             id="nome" placeholder="Nome" [ngClass]="aplicaCssErro('nome')">
 
-            <app-error-msg [control]="formulario.get('nome')" label="Nome"
-            cssErro="danger" >
-            </app-error-msg>
+            <app-campo-control-erro cssErro="danger" [condicao]="isInValidTouched('nome')" msnErro="Nome é obrigatorio!">
+            </app-campo-control-erro>
 
+            <!--
+            <app-controle-erro-generico-teste [controle]= "this.formulario.controls['nome']" [nomeCampo]="'nome'"></app-controle-erro-generico-teste>
+-->
         </div>
     </div>
 

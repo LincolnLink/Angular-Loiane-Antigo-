@@ -9,6 +9,7 @@ import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ValueTransformer } from '@angular/compiler/src/util';
 import { FormValidationsService } from '../shared/services/form-validations.service';
+import { VerificaEmailService } from './services/verifica-email.service';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class DataFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cepService: ConsultaCepService,
     private dropdownService: DropdownService,
+    private validarEmailService: VerificaEmailService
 
   ){ }
 
@@ -48,6 +50,8 @@ export class DataFormComponent implements OnInit {
     this.dropdownService.getEstadosBr()
     .subscribe((dados: EstadoBr[]) =>{ this.estados = dados; console.log(dados);});
     */
+
+    //this.validarEmailService.verificarEmail('email4@email.com.br').subscribe();
 
     this.estados = this.dropdownService.getEstadosBr();
 
@@ -69,7 +73,7 @@ export class DataFormComponent implements OnInit {
 
       // 1° parametro: valor inicial
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
       confirmarEmail: [null, FormValidationsService.equalsTo('email')],
       endereco: this.formBuilder.group({
         cep: [null, [Validators.required, FormValidationsService.cepValidator]],
@@ -285,5 +289,16 @@ export class DataFormComponent implements OnInit {
     this.formulario.get('tecnologias').setValue(tec);
   }
 
+  validarEmail(formControl: FormControl){
+
+    let outroCampo = this.formulario.get('confirmarEmail');
+
+    outroCampo.setValue('');
+
+    return this.validarEmailService.verificarEmail(formControl.value)
+    .pipe(
+      map(emailExiste => emailExiste ? { emailInvalido: true } : null)
+    );
+  }
 
 }

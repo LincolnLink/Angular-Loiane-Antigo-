@@ -9,6 +9,7 @@ export class CampoControlErroComponent implements OnInit {
 
   @Input() condicao: boolean;
   @Input() msnErro: string;
+  @Input() cssErro: string;
 
   dismissible = true;
 

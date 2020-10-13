@@ -22,42 +22,23 @@ export class ControleErroGenericoTesteComponent implements OnInit {
   }
 
   exibeCampo(){
-    
 
-    if(this.nomeCampo == "email"){ 
 
-        if(this.controle.errors && this.controle.touched){
+    if(this.nomeCampo == "email"){
 
-          this.msnErro = "Campo de Email é obrigatorio!  <- logica em outro componente";
+      if(this.controle.errors && this.controle.touched){
 
-          if(this.controle.errors['email'] && this.controle.touched){
+        this.msnErro = "Campo de Email é obrigatorio!  <- logica em outro componente";
 
-            this.msnErro = "O email está errado e é obrigatorio!  <- logica em outro componente";
+        if(this.controle.errors['email'] && this.controle.touched){
 
-            return true;
-          }
+          this.msnErro = "O email está errado e é obrigatorio!  <- logica em outro componente";
 
           return true;
         }
-    }
 
-
-    if(this.nomeCampo == "nome"){ 
-
-      if(this.controle.errors){
-
-        let resultado = !this.controle.valid && this.controle.touched;
-
-        if(resultado == true){
-
-          this.msnErro = "O Nome está invalido!   <- logica em outro componente";       
-          
-        }
-
-        return resultado          
+        return true;
       }
+    }
   }
-    
-  }
-
 }

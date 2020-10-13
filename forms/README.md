@@ -1309,6 +1309,131 @@
 
   <blockquete> https://www.npmjs.com/package/ng2-validation </blockquete>
 
+- Formulários reativos: Validação Assíncrona
+
+  - Cria um jsom com dados para ser consultados
+
+  <blockquete>
+    {
+      "emails": [
+        {"email": "email@email.com.br" },
+        {"email": "email1@email.com.br" }
+        ...
+      ]
+    }
+
+  </blockquete>
+
+  - Com isso cria uma serviço chamado "verifica-email"
+
+    - Cria uma pasta chamada "services" no component
+
+    - Clica com o botão direito na pasta do component
+
+    - Escolhe a opção: "Schematics" -> "Service" -> bota um nome, e aperta Enter!
+
+    - O sistema gera um arquivo de serviço!
+
+  - cria um método chamado "verificarEmail" que recebe um parametro string "email"
+
+    - Ele retorna uma requisição, para usar os operadores do RXJS, deve se usar o .pipe()
+
+    - Dentro desse .pipe(), chama o .map() para buscar apenas os valores desejaveis.
+
+    - Passando um parametro chamado "dados", podemos tipar ele como um objeto "{emails : any[]}".
+
+  - Cria a validação no componente, chamando o serviço criado!
+
+  <blockquete>
+
+    validarEmail(formControl: FormControl){
+
+       let outroCampo = this.formulario.get('confirmarEmail');
+
+       outroCampo.setValue('');
+
+      return this.validarEmailService.verificarEmail(formControl.value)
+      .pipe(
+        map(emailExiste => emailExiste ? { emailInvalido: true } : null)
+      );
+      
+    }
+
+  </blockquete>
+
+- Formulários reativos: Serviço de Mensagens de Erros
+
+  - Crie um serviço usando o "Schematics", nele bota um "Input" do tipo "formControl", outro bool, e string!
+
+  - crie um span, para receber a mensagem de erro!
+
+  - Cria um método get para o component, ele já reconhece o get como uma propriedade padrão! 
+
+  <blockquete>
+
+    get errorMessage(){
+
+      for( const propertyName in this.control.errors){
+
+      if(this.control.errors.hasOwnProperty(propertyName) &&
+      this.control.touched){
+
+        return FormValidationsService.getErrorMsg(this.label, propertyName, this.control.errors[propertyName]);
+        }
+
+      }
+      return null;
+    }
+
+  </blockquete>
+
+  - O método é calculado de acordo com o tempo de uso do component
+
+  <blockquete>
+
+    < div *ngIf="errorMessage != null" >
+
+      < alert [ type]="cssErro" [ dismissible]="dismissible" >
+        < strong>{{ errorMessage }}</>
+      </>
+
+    </>
+  </blockquete>
+
+  - O component ele verifica se a propriedade que faz parte de uma listagem de erro existe!
+
+  - Existindo ele chama um serviço que tem uma método statico, para poder montar e returnar uma mensagem dinamicamente!
+
+  - Essa mensagem vai variar de acordo com o nome do campo e do tipo de erro!
+
+  <blockquete>
+
+    static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any){
+
+      const config = {
+        'required': " $ { fieldName} é obrigatorio",
+        'minlength': " ${fieldName} precisa ter no mínimo ${validatorValue.requiredLength} caracteres.",
+        'maxlength': " $ { fieldName} precisa ter no máximo ${validatorValue.requiredLength} caracteres.",
+        'cepInvalido': 'CEP inválido.'
+      }
+
+      return config[ validatorName];
+    }
+
+  </blockquete>
+
+  - O formulario, precisa invocar o component, e passar o controle e uma label !
+
+  <blockquete>
+
+    < app-error-msg [ control]="formulario.get('nome')" label="Nome"
+      cssErro="danger" >
+    </>
+
+  </blockquete>
+
+
+
 
 
 
