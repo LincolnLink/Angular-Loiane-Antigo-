@@ -5,11 +5,12 @@ import { cepData } from '../Entidades/cepData';
 import { DropdownService } from './../shared/services/dropdown.service';
 import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { ValueTransformer } from '@angular/compiler/src/util';
 import { FormValidationsService } from '../shared/services/form-validations.service';
 import { VerificaEmailService } from './services/verifica-email.service';
+
 
 
 @Component({
@@ -92,6 +93,13 @@ export class DataFormComponent implements OnInit {
     });
 
     //console.log(this.formulario)
+
+    this.formulario.get('endereco.cep').statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap(value => console.log('status CEP: ', value))
+      )
+      .subscribe();
 
   }
 

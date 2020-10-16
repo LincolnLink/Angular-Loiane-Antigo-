@@ -1433,6 +1433,38 @@
   </blockquete>
 
 
+- Formulários reativos: Reagindo à mudanças reativamente
+
+ - Alem dos eventos do JS (Evento de input) que serve para fazer o two way data binding.
+ 
+ - Tem outra forma de escutar as mudanças de valores de formularios, usando a API do formulario do Angular.
+
+  - this.formulario.statusChanges: Ele emite varios valores a cada mudança de status do formulario, ele é um observable!
+
+  - this.formulario.status: consegue pegar o status do formulario!
+
+  - this.formulario.value: Obtem os valores de cada campo do formulario, oque geralmente envia para o servidor.
+
+  - this.formulario.statusChanges: Captura cada mudança de valor do formulario!
+
+- Pode ser feito a nivel de formulario ou do controle, formGroup, ou formArray!
+
+- Consultando o CEP de forma reativa!
+
+  - Se deve ativar o observable, usando um subscribe!
+
+  - Usando o valueChanges/statusChanges, para confirmar se o CEP é valido, antes mesmo de executar o serviço!
+
+  -
+
+ <blockquete>
+ 
+    this.formulario.get('endereco.cep').statusChanges
+      .subscribe(statuss => console.log("status do CEP: ", statuss));
+
+ </blockquete>
+
+
 
 
 

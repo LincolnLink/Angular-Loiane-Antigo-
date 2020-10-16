@@ -18,6 +18,8 @@ export class ConsultaCepService {
   //GET - endpoint que pega dados de um cep!
   getCep(cep: any){
 
+    console.log(cep);
+
     // Remove caracteres indesejaveis
     cep = cep.replace(/\D/g, '');
 

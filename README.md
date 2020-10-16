@@ -1,316 +1,368 @@
 # Angular 2+ com Loiane
-- Praticando Angular 2 + com Loiane Groner
 
-  - [x] Nodejs/npm - https://nodejs.org/en/
-  - [x] Angular CLI - npm i @angular/cli
-  - [x] Type Script - npm i typescript
-  - [x] Angular 10
-  - [x] ES6 / ES 2015
+  - Praticando Angular 2 + com Loiane Groner
 
-- Sintaxe do ES6 e do ES5
+    - [x] Nodejs/npm - https://nodejs.org/en/
+    - [x] Angular CLI - npm i @angular/cli
+    - [x] Type Script - npm i typescript
+    - [x] Angular 10
+    - [x] ES6 / ES 2015
 
-  http://es6-features.org/#Constants
+  - Sintaxe do ES6 e do ES5
 
-  TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
+    http://es6-features.org/#Constants
 
-# Dicas
+    TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
 
-- Operadores RXJS
+### Dicas
 
-  - Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
+  - Operadores RXJS
 
-- HttpClintModel
+    - Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
 
-  -  Não precisa usar o .pipe(map(...)) em chamadas http
+  - HttpClintModel
 
-- Memory Leak
+    -  Não precisa usar o .pipe(map(...)) em chamadas http
 
-  - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async"
+  - Memory Leak
 
-- Métodos "static"
+    - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async"
 
-  - Não precisa instanciar.
+  - Métodos "static"
 
-  - Não precisa de Injeção de dependencia.
+    - Não precisa instanciar.
 
-  - Se usa diretamente, apenas fazendo referencia da classe.
+    - Não precisa de Injeção de dependencia.
 
-  - Tem apenas uma instancia! 
+    - Se usa diretamente, apenas fazendo referencia da classe.
 
-# Atualizando o Angular CLI
+    - Tem apenas uma instancia! 
 
--Sempre atualize uma versão para outra, do 4 para o 5, do 5 para o 6 , etc, usando sempre um repositorio para cada versão!
+### Principais operadores do RXJS
 
-- executar o comando, executa em um promt comando como ADMINISTRADOR!
+ - distinctUntilChanged()
 
-  - atualizando globalmente:
+  - Descrição: Se uma função de comparação for fornecida, ela será chamada para cada item para testar se esse valor deve ou não ser emitido.
 
-  <blockquote> npm install -g @angular/cli</blockquote>
+  - Se uma função de comparador não for fornecida, uma verificação de igualdade será usada por padrão.
 
-  - Comando que atualiza automatico 
-  
-  <blockquote> ng update</blockquote>
-
-  Guia das principais modificações: https://update.angular.io/
-
-  - Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
-
-  <blockquote>npm install -save codelyzer@latest</blockquote>
-
-- NCU updates
-
-  - https://www.npmjs.com/package/npm-check-updates
-
-  - Exibe todos os pacotes dezatualizado!    
-
-   <blockquote> npm i npm-check-updates</blockquote> 
-
-   <blockquote> npm install -g npm-check-updates</blockquote> 
-
-  - Comando que verifica oque está desatualizado
-
-   <blockquote> ncu </blockquote>
-
-  - Comando que atualiza
-   
-   <blockquote> ncu -u</blockquote>
+  - Exemplo: https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilChanged
 
 
-# Reparando erro de vulnerabilidade 
 
-- Comando
+### Atualizando o Angular CLI
 
-  <blockquote> $ npm audit fix</blockquote>
+  -Sempre atualize uma versão para outra, do 4 para o 5, do 5 para o 6 , etc, usando sempre um repositorio para cada versão!
 
-  depois executa um ng build e executa com ng serve!
+  - executar o comando, executa em um promt comando como ADMINISTRADOR!
+
+    - atualizando globalmente:
+
+    <blockquote> npm install -g @angular/cli</blockquote>
+
+    - Comando que atualiza automatico 
+    
+    <blockquote> ng update</blockquote>
+
+    Guia das principais modificações: https://update.angular.io/
+
+    - Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
+
+    <blockquote>npm install -save codelyzer@latest</blockquote>
+
+  - NCU updates
+
+    - https://www.npmjs.com/package/npm-check-updates
+
+    - Exibe todos os pacotes dezatualizado!    
+
+     <blockquote> npm i npm-check-updates</blockquote> 
+
+     <blockquote> npm install -g npm-check-updates</blockquote> 
+
+    - Comando que verifica oque está desatualizado
+
+     <blockquote> ncu </blockquote>
+
+    - Comando que atualiza
+     
+     <blockquote> ncu -u</blockquote>
 
 
-# Principais  comando JS/TS
+### Reparando erro de vulnerabilidade 
 
-- Compilar o TS
+  - Comando
 
-  <blockquete> tsc "nome do arquivo TS"</blockquote>
+    <blockquote> $ npm audit fix</blockquote>
 
-- .filter() 
+    depois executa um ng build e executa com ng serve!
 
-  - Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
 
-  <blockquote>
+### Principais  comando JS/TS
 
-    value.filter(
-      
-      v => v.toLocaleLowerCase().indexOf(filter) != -1
+  - Compilar o TS
 
-    );
+    <blockquete> tsc "nome do arquivo TS"</blockquote>
 
-  </blockquote> 
+  - .filter() 
 
-- .indexOf()
+    - Filtra uma lista, deacordo com uma condição, pode passar uma Arrow functions!
 
-  - O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
+    <blockquote>
 
-  <blockquote> 
-
-    return value.filter(
-
+      value.filter(
+        
         v => v.toLocaleLowerCase().indexOf(filter) != -1
 
-    );
+      );
 
-  </blockquote> 
+    </blockquote> 
 
-- .map()
+  - .indexOf()
 
-  - Cria um novo array, com cada valor do antigo array modificado, baseado no que foi programado! 
+    - O método indexOf() retorna o primeiro índice em que o elemento pode ser encontrado no array, retorna -1 caso o mesmo não esteja presente.
 
-  - https://www.w3schools.com/jsref/jsref_map.asp
+    <blockquote> 
 
-  <blockquote> 
+      return value.filter(
 
-  var numbers = [2, 3, 4, 5];
+          v => v.toLocaleLowerCase().indexOf(filter) != -1
 
-  // resultado: 20,30,40,50
-  var newarray = numbers.map(num => num * 10 )
+      );
 
-  </blockquote> 
+    </blockquote> 
+
+  - .map()
+
+    - Cria um novo array, com cada valor do antigo array modificado, baseado no que foi programado! 
+
+    - https://www.w3schools.com/jsref/jsref_map.asp
+
+    <blockquote> 
+
+    var numbers = [2, 3, 4, 5];
+
+    // resultado: 20,30,40,50
+    var newarray = numbers.map(num => num * 10 )
+
+    // Quando tipa fica mais facil de tratar!
+    var x = map((dados: {emails: any[]}) => dados.emails),
+
+    </blockquote> 
+
+  - .includes()
+
+    - Verifica se existe em um array a string passado como parametro!
+
+    <blockquote>
+
+      includes('editar')
+
+    </blockquote>
+
+  - .replace() 
+
+    - Remove caracteres indesejaveis
+      
+    <blockquote>
+
+      cep = cep.replace(/\D/g, '');
+
+    </blockquote>
+
+  - Object.keys()
+
+    - Esse método recebe uma lista de controls, aonde ele pega todas as keys, assim consegimos trator como array!
+
+    <blockquote>
+
+      Object.keys(this.formulario.controls).forEach((campo)=>{
+
+          console.log(campo);
+
+          const controle = this.formulario.get(campo);
+
+          controle.markAsDirty();
+
+      });
+
+    </blockquote>
+
+  - Object.assign()
+
+    <blockquote>
+
+      // Criando uma copia do valor!
+
+      let valueSubmit = Object.assign({}, form.value)
+      
+    </blockquote>
+
+  - .teste()
+
+    - O método test () testa uma correspondência em uma string.
+    - Este método retorna verdadeiro se encontrar uma correspondência, caso contrário, retorna falso.
+    - https://www.w3schools.com/jsref/jsref_regexp_test.asp
+
+    <blockquote>
+
+      let cep = this.formulario.get("endereco.cep").value;
+
+      const validacep = /^[0-9]{8}$/;
+
+      if (validacep.test(cep)){}
+
+    </blockquote>
 
 
-- .includes()
+  - JSON.stringify()
 
-  - Verifica se existe em um array a string passado como parametro!
+    Transforma qualquer objeto JS em JSON
 
-  <blockquote>
+    <blockquote>
 
-    includes('editar')
+      JSON.stringify(objetoExemplo)
 
-  </blockquote>
+    </blockquote>
 
-- .replace() 
+  - tap()
 
-  - Remove caracteres indesejaveis
+    - Informa dados do dado tratado pelo "map()"
+
+    <blockquote>
+
+      tap(console.log)
+
+    </blockquote>
+
+  - in
+
+    - O operador in retorna true se a propriedade especificada estiver no objeto especificado ou na sua cadeia de protótipo (prototype chain) desde objeto.
+
+    <blockquote>
+      // Arrays
+
+      var trees = ['redwood', 'bay', 'cedar', 'oak', 'maple'];
+
+      0 in trees        // retorna true
+
+      3 in trees        // retorna true
+
+      6 in trees        // retorna false
+
+      'bay' in trees    // retorna false (você precisa especificar o  
+                        // número do índice, não o valor naquele índice)
+      'length' in trees // retorna true (length é uma propridade do Array)
+
+      Symbol.iterator in trees // retorna true (arrays são iteráveis, funciona apenas na ES2015+)
+
+    </blockquote>
+
+  - Object.prototype.hasOwnProperty()
+
+    - O método hasOwnProperty() retorna um booleano indicando se o objeto possui a propriedade especificada como uma propriedade definida no próprio objeto em questão (ao contrário de uma propriedade herdada).
+
+    - 
+
+
+
+### Principais comandos do Angular CLI
+
+  - Criando um componente pelo CLI
+
+    <blockquote> ng g c nomeDoComponente </blockquote> 
+
+  - Criando um module pelo CLI
+
+    <blockquote> ng g m nomeDoModulo</blockquote> 
+
+  - Criando um serviço 
+
+    <blockquote> ng g s nomeDoServico</blockquote> 
+
+  - Instalando o bootstrap no angular
+
+    <blockquote>npm i ngx-bootstrap-navbar </blockquote>
+
+    <blockquote> npm i @angular/cdk</blockquote>
+
+    É preciso que o modulo principal tenha essas importações para que o componente funcione!
+
+    <blockquote> 
     
-  <blockquote>
+      import { NgModule } from '@angular/core';
+      import { FormsModule } from '@angular/forms';
+      import { BrowserModule } from '@angular/platform-browser';
+      import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+      import { AppComponent } from './app.component';
+      import { AppRoutingModule } from './app-routing.module';
 
-    cep = cep.replace(/\D/g, '');
-
-  </blockquote>
-
-- Object.keys()
-
-  - Esse método recebe uma lista de controls, aonde ele pega todas as keys, assim consegimos trator como array!
-
-  <blockquote>
-
-    Object.keys(this.formulario.controls).forEach((campo)=>{
-
-        console.log(campo);
-
-        const controle = this.formulario.get(campo);
-
-        controle.markAsDirty();
-
-    });
-
-  </blockquote>
-
-- Object.assign()
-
-  <blockquote>
-
-    // Criando uma copia do valor!
-
-    let valueSubmit = Object.assign({}, form.value)
+      import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
     
-  </blockquote>
+    </blockquote> 
 
-- .teste()
+    <blockquote> https://www.npmjs.com/package/ngx-bootstrap-navbar </blockquote> 
 
-  - O método test () testa uma correspondência em uma string.
-  - Este método retorna verdadeiro se encontrar uma correspondência, caso contrário, retorna falso.
-  - https://www.w3schools.com/jsref/jsref_regexp_test.asp
-
-  <blockquote>
-
-    let cep = this.formulario.get("endereco.cep").value;
-
-    const validacep = /^[0-9]{8}$/;
-
-    if (validacep.test(cep)){}
-
-  </blockquote>
-
-
-
-- JSON.stringify()
-
-  Transforma qualquer objeto JS em JSON
-
-  <blockquote>
-
-    JSON.stringify(objetoExemplo)
-
-  </blockquote>
+    <blockquote> https://valor-software.com/ngx-bootstrap/#/documentation </blockquote>
 
 
 
 
-# Principais comandos do Angular CLI
+### Comandos de teste
 
-- Criando um componente pelo CLI
+  - Comando que varifica o seu codigo!
 
-  <blockquote> ng g c nomeDoComponente </blockquote> 
+    <blockquote> ng lint </blockquote>
 
-- Criando um module pelo CLI
+  - Roda os arquivos de teste, e informa o tipo de erro no teste!
 
-  <blockquote> ng g m nomeDoModulo</blockquote> 
+    <blockquote> ng test: </blockquote>
 
-- Criando um serviço 
+  - Teste de integração
 
-  <blockquote> ng g s nomeDoServico</blockquote> 
-
-- Instalando o bootstrap no angular
-
-  <blockquote>npm i ngx-bootstrap-navbar </blockquote>
-
-  <blockquote> npm i @angular/cdk</blockquote>
-
-  É preciso que o modulo principal tenha essas importações para que o componente funcione!
-
-  <blockquote> 
-  
-    import { NgModule } from '@angular/core';
-    import { FormsModule } from '@angular/forms';
-    import { BrowserModule } from '@angular/platform-browser';
-    import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-    import { AppComponent } from './app.component';
-    import { AppRoutingModule } from './app-routing.module';
-
-    import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
-  
-  </blockquote> 
-
-  <blockquote> https://www.npmjs.com/package/ngx-bootstrap-navbar </blockquote> 
-
-  <blockquote> https://valor-software.com/ngx-bootstrap/#/documentation </blockquote>
-
-
-
-
-# Comandos de teste
-
-- Comando que varifica o seu codigo!
-
-  <blockquote> ng lint </blockquote>
-
-- Roda os arquivos de teste, e informa o tipo de erro no teste!
-
-  <blockquote> ng test: </blockquote>
-
-- Teste de integração
-
-  <blockquote> ng e2e</blockquote>
+    <blockquote> ng e2e</blockquote>
 
 
 
 # Ciclo de vida do Angular ! 
 
-  Quando? - Evento (Hooks) -
+  - Quando? - Evento (Hooks) -
 
-- Antes #2 e quando valor property-binding é atualizado (importante):
+  - Antes #2 e quando valor property-binding é atualizado (importante):
 
-    <blockquote> ngOnChanges() </blockquote> 
+      <blockquote> ngOnChanges() </blockquote> 
 
-- Quando component é inicializado:
+  - Quando component é inicializado:
 
-    <blockquote> ngOnInit()</blockquote>
+      <blockquote> ngOnInit()</blockquote>
 
-- A cada ciclo de verificação de mudanças:
+  - A cada ciclo de verificação de mudanças:
 
-    <blockquote> ngDoCheck()</blockquote>
+      <blockquote> ngDoCheck()</blockquote>
 
-- Depois de inserir conteúdo externo na view:
+  - Depois de inserir conteúdo externo na view:
 
-  <blockquote> ngAfterContentInit()</blockquote>
+    <blockquote> ngAfterContentInit()</blockquote>
 
-- A cada verificação de conteúdo inserido:
+  - A cada verificação de conteúdo inserido:
 
-  <blockquote> ngAfterContentChecked()</blockquote>
+    <blockquote> ngAfterContentChecked()</blockquote>
 
-- A cada verificação de conteúdo / conteúdo filho: 
+  - A cada verificação de conteúdo / conteúdo filho: 
 
-  <blockquote> ngAfterViewChecked()</blockquote> 
+    <blockquote> ngAfterViewChecked()</blockquote> 
 
-- Antes da diretiva / component ser destruído (importante):
+  - Antes da diretiva / component ser destruído (importante):
 
-  <blockquote> ngOnDestroy()</blockquote>
+    <blockquote> ngOnDestroy()</blockquote>
 
 
-# Mudando o pré processador de css de um projeto que ja existe!
+### Mudando o pré processador de css de um projeto que ja existe!
 
-- style guid: Padrões do angular
+ - style guid: Padrões do angular
 
   https://angular.io/guide/styleguide
-  
+
   <blockquote>ng set defaults.styleExt scss</blockquote>
 
   <blockquote>ng set dedaults.styleExt less</blockquote>
@@ -320,29 +372,29 @@
 
 # Projeto de Module
 
-- Module de funcionalidade vs module root/ modulo raiz
+  - Module de funcionalidade vs module root/ modulo raiz
 
-  - Module de funcionalidade se importa o CommonModule!
+    - Module de funcionalidade se importa o CommonModule!
 
-  - Modulo raiz se importa o BrowserModule!
+    - Modulo raiz se importa o BrowserModule!
 
-- Decoreitor do ngModule 
+  - Decoreitor do ngModule 
 
-  - declarations: Cadastra os component, diretivas e pipes, vinculando ao modulo.
+    - declarations: Cadastra os component, diretivas e pipes, vinculando ao modulo.
 
-  - imports: Pega os modulos que vem de fora.
+    - imports: Pega os modulos que vem de fora.
 
-  - export: compartilha o acesso de componentes e modulos. 
+    - export: compartilha o acesso de componentes e modulos. 
 
-  - providers: cadastra os serviços que vão ser usado pelos componentes, pipes e diretivas vinculados.
+    - providers: cadastra os serviços que vão ser usado pelos componentes, pipes e diretivas vinculados.
 
-- Modulo de compartilhamento
+  - Modulo de compartilhamento
 
-  Para compartilhar um componet que é reutilizado em varias paginas, por exemplo um "componente de mensagem de erro" devese declarar ele em um modulo, com isso você precisa apenas importar esse modulo!
+    Para compartilhar um componet que é reutilizado em varias paginas, por exemplo um "componente de mensagem de erro" devese declarar ele em um modulo, com isso você precisa apenas importar esse modulo!
 
-- Exemplo:
+  - Exemplo:
 
-  https://github.com/LincolnLink/Angular-Loiane/tree/master/primeiro-projeto
+    https://github.com/LincolnLink/Angular-Loiane/tree/master/primeiro-projeto
   
 
 # Projeto de Data-binding
