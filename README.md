@@ -42,11 +42,11 @@
 
  - distinctUntilChanged()
 
-  - Descrição: Se uma função de comparação for fornecida, ela será chamada para cada item para testar se esse valor deve ou não ser emitido.
+    - Descrição: Se uma função de comparação for fornecida, ela será chamada para cada item para testar se esse valor deve ou não ser emitido.
 
-  - Se uma função de comparador não for fornecida, uma verificação de igualdade será usada por padrão.
+    - Se uma função de comparador não for fornecida, uma verificação de igualdade será usada por padrão.
 
-  - Exemplo: https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilChanged
+    - Exemplo: https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilChanged
 
 
 
