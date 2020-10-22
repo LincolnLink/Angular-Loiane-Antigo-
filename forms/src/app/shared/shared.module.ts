@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,6 +9,8 @@ import { AppBootstrapModule } from '../AppBootstrap/app-bootstrap/app-bootstrap.
 import { ControleErroGenericoTesteComponent } from './controle-erro-generico-teste/controle-erro-generico-teste.component';
 import { DropdownService } from './services/dropdown.service';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { InputFieldComponent } from './input-field/input-field.component';
+
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { ErrorMsgComponent } from './error-msg/error-msg.component';
     CampoControlErroComponent,
     FormDebugComponent,
     ControleErroGenericoTesteComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    InputFieldComponent
+
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,9 @@ import { ErrorMsgComponent } from './error-msg/error-msg.component';
     FormDebugComponent,
     AppBootstrapModule,
     ControleErroGenericoTesteComponent,
-    ErrorMsgComponent
+    ErrorMsgComponent,
+    InputFieldComponent
+
   ],
   providers:[]
 })

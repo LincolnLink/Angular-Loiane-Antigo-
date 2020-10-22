@@ -1435,9 +1435,9 @@
 
 - Formulários reativos: Reagindo à mudanças reativamente
 
- - Alem dos eventos do JS (Evento de input) que serve para fazer o two way data binding.
+  - Alem dos eventos do JS (Evento de input) que serve para fazer o two way data binding.
  
- - Tem outra forma de escutar as mudanças de valores de formularios, usando a API do formulario do Angular.
+  - Tem outra forma de escutar as mudanças de valores de formularios, usando a API do formulario do Angular.
 
   - this.formulario.statusChanges: Ele emite varios valores a cada mudança de status do formulario, ele é um observable!
 
@@ -1447,22 +1447,215 @@
 
   - this.formulario.statusChanges: Captura cada mudança de valor do formulario!
 
-- Pode ser feito a nivel de formulario ou do controle, formGroup, ou formArray!
+  - Pode ser feito a nivel de formulario ou do controle, formGroup, ou formArray!
 
-- Consultando o CEP de forma reativa!
+  - Consultando o CEP de forma reativa!
 
   - Se deve ativar o observable, usando um subscribe!
 
-  - Usando o valueChanges/statusChanges, para confirmar se o CEP é valido, antes mesmo de executar o serviço!
+  - Usando o valueChanges/statusChanges, para confirmar se o CEP é valido, antes mesmo de executar o serviço!  
 
-  -
-
- <blockquete>
+  <blockquete>
  
     this.formulario.get('endereco.cep').statusChanges
       .subscribe(statuss => console.log("status do CEP: ", statuss));
 
- </blockquete>
+  </blockquete>
+
+  - Comando "(blur)="consultaCep()"" foi removido do input do CEP!
+
+  <blockquete>
+  
+    this.formulario.get('endereco.cep').statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap(value => console.log('status CEP: ', value))
+      )
+      .subscribe(status => {
+        if(status === 'VALID'){
+
+          this.cepService.getCep(this.formulario.get('endereco.cep').value)
+          .pipe(map(data => data))
+          .subscribe((data :cepData) => this.feedsData(data));
+
+
+        }
+      });
+
+  </blockquete>
+
+  - O codigo pode ficar melhor usando um operador do RXJS que junta dois observable!
+
+  <blockquete>
+
+
+  this.formulario.get('endereco.cep').statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap(value => console.log('status CEP: ', value)),
+        switchMap(status => status === 'VALID' ?
+        this.cepService.getCep(this.formulario.get('endereco.cep').value)
+          : empty()
+        )
+      )
+      .subscribe((data :cepData) => this.feedsData(data));
+
+  </blockquete>
+
+-  Formulários reativos: Campo input customizado (ControlValueAcessor)
+
+ - Cria um component chamado "InputField".
+
+ - Replica um formulario no HTML dele, cria os "Imput" de valores que eles iram receber!  
+
+  <blockquete>
+      @Input() classeCss;
+      @Input() id: string;
+      @Input() label: string;
+      @Input() type = 'text';
+      @Input() placeholder: string;
+      @Input() control;
+  </blockquete>
+
+ - O component pai ainda não reconhece o "formControlName="xxxx"" do formulario isolado que é um component filho!
+
+ - Para o component pai reconhecer a configuração deve se usar o "ControlValueAccessor"
+
+ - ControlValueAccessor: Define uma interface que atua como uma ponte entre a API de formulários Angular e um elemento nativo no DOM.
+
+ - Devese implementar essa interface "ControlValueAccessor"
+
+ - E implementar os métodos dessa interface!
+
+  <blockquete>
+
+    // Setar um valor
+    writeValue(v: any): void {
+
+      this.value = v;
+
+      /*if(v !== this.innerValue){
+        this.innerValue = v;
+        this.onChangeCb(v);
+      }*/
+    }
+
+    // Fala para o Angular toda vez que um valor muda!
+    registerOnChange(fn: any): void {
+      this.onChangeCb = fn;
+    }
+
+    // Fala com o Angular toda vez que o campo ganha foco!
+    registerOnTouched(fn: any): void {
+      this.onTouchedCb = fn;
+    }
+
+    // Fala pro Angular quando o Campo está dezabilitado !
+    setDisabledState?(isDisabled: boolean): void {
+      this.isReadOnly = isDisabled;
+    }
+  </blockquete> 
+
+ - Com a interface implementada, é preciso por um [( ngmodel)]="value" e associar a um value!
+
+ - O segundo paço transformar o component em um campo de imput é o "ngValueAccessor", para o Angular entender a logica!
+
+   - provide: token para reconhecer que é um campo de imput!
+   - useExisting: referenciando a propria classe!
+   - multi: Informa que pode ter varias instancias!
+
+   <blockquete> 
+
+      const INPUT_FIELD_VALUE_ACCESSOR: any = {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => InputFieldComponent),
+        multi: true
+      }
+
+      @Component({
+        selector: 'app-input-field',
+        templateUrl: './input-field.component.html',
+        styleUrls: [ './input-field.component.css'],
+        providers: [ INPUT_FIELD_VALUE_ACCESSOR]
+      })
+
+   </blockquete>  
+
+  - com o ngModel configurado, pode usar o componet de imput no template datadrive também!
+
+
+- Formulários reativos: Classe base para Forms (herança no Angular)
+
+ - Todo formulario vai herdar essa classe, para ter métodos padrão!
+
+  ### Como Criar uma herança!
+
+    - Cria um componente chamada "base-form" remove o HTML e o CSS dele.
+
+    - Na configuração deixa apenas "template" e bota uma DIV vazia.
+
+    - No DataFormComponent, bota o "extends" e o BaseFormComponent.
+
+    - Assim o "DataFormComponent" herda o "BaseFormComponent".
+
+    - No construtor do "DataFormComponent" deve se chamar o super();.
+
+    - A propriedade "formulario: FormGroup;" foi comentada porque o "DataFormComponent" já herda ela do "base-form".
+
+  ### Criando método abstratos
+
+    - Cria um método abstract no "BaseFormComponent" e torna a classe dele abstract, pois método abstract deve ser criado em classes abstract!
+
+    - Vai da erro no "DataFormComponent", porq ele vai pedir para implementar o novo método que foi herdado!
+
+    <blockquete>
+
+      export abstract class BaseFormComponent implements OnInit {
+
+        formulario: FormGroup;
+
+        constructor() { }
+
+        ngOnInit(): void {
+        }
+
+        abstract submit();
+
+        onSubmit(){
+
+          if (this.formulario.valid){
+            this.submit();
+          }
+          else
+          {
+            console.log('Formulario invalido');
+
+            this.verificaValidacoesForm(this.formulario);
+          }       
+        }
+      }
+      
+    </blockquete>
+
+    - Métodos que sairam do "DataFormComponent" para ir para o "BaseFormComponent" :
+
+     - onSubmit
+     - verificaValidacoesForm
+     - resetar
+     - isValidTouched
+     - isInValidTouched
+     - isInvalidEmail
+     - aplicaCssErro
+
+
+- Formulários reativos: Combobox aninhado: Estado + Cidade
+
+ - Baixa o json de cidade!
+
+  
+
+
+
 
 
 

@@ -2,6 +2,12 @@
 
     <div class="form-group row" >
 
+        <app-input-field class="col-sm-12" formControlName="nome"
+        [classeCss]="aplicaCssErro('nome')"
+        [id]="'Nome'" [label]="'Nome'" [type]="'text'"
+        [placeholder]="'Informe um nome'" [control]="formulario.get('nome')">
+        </app-input-field>
+<!--
         <div class="col-sm-12">
 
             <label for="nome" class="label font-weight-bold">Nome</label>
@@ -13,7 +19,7 @@
             cssErro="danger" >
             </app-error-msg>
 
-        </div>
+        </div>-->
     </div>
 
 
@@ -30,11 +36,11 @@
             msnErro="Email é obrigatorio!" >
             </app-campo-control-erro>
 
-            <app-campo-control-erro [condicao]="isInvalidEmail()" msnErro="Email é invalido" >
-            </app-campo-control-erro>
-
             <app-controle-erro-generico-teste [controle]= "this.formulario.controls['email']" [nomeCampo]="'email'">
             </app-controle-erro-generico-teste>-->
+
+            <app-campo-control-erro cssErro="danger" [condicao]="isInvalidEmail()" msnErro="Email é invalido">
+            </app-campo-control-erro>
 
             <app-campo-control-erro cssErro="info" [condicao]="formulario.get('email').status === 'PENDING'"
             msnErro="Validando E-mail ...">
@@ -70,7 +76,7 @@
 
                 <label for="" class="label font-weight-bold">CEP</label>
 
-                <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')" (blur)="consultaCep()">
+                <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="aplicaCssErro('endereco.cep')" >
 
                 <alert type="danger" [dismissible]="dismissible" *ngIf="!formulario.get('endereco.cep').valid && formulario.get('endereco.cep').touched">
                     <strong>CEP</strong> é obrigatorio!
@@ -96,6 +102,8 @@
                 <label for="" class="label font-weight-bold">Complemento</label>
 
                 <input type="text" id="complemento" class="form-control" formControlName="complemento" [ngClass]="aplicaCssErro('endereco.complemento')">
+
+
 
             </div>
 
@@ -155,6 +163,8 @@
           [ngClass]="aplicaCssErro('cargo')" [compareWith]="comparandoObjetos">
           <option *ngFor="let cargo of cargos" [ngValue]="cargo" >{{ cargo.desc }}</option>
         </select>
+        <app-campo-control-erro cssErro="danger" [condicao]="!formulario.get('cargo').valid && formulario.get('cargo').touched" msnErro="Selecione 1 opção" >
+        </app-campo-control-erro>
       </div>
       <div class="col-md-4">
         <label for="tecnologia" class="label font-weight-bold">Tecnologia</label>

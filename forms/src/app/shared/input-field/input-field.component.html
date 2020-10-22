@@ -1,0 +1,14 @@
+<div class="form-group" >
+
+      <label [attr.for]="id" class="label font-weight-bold">
+        {{label}}
+      </label>
+
+      <input [id]="id" [type]="type" class="form-control" [ngClass]="classeCss"
+       [placeholder]="placeholder" [readonly]="!!isReadOnly" [(ngModel)]="value">
+
+      <app-error-msg [control]="control" [label]="label"
+      cssErro="danger" >
+      </app-error-msg>
+
+</div>

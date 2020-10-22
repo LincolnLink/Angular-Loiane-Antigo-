@@ -10,7 +10,6 @@
   </div>
 </div>
 
-
 <button class="btn" (click)="addValor()">
 Adiciona mais 1
 </button>
@@ -18,3 +17,14 @@ Adiciona mais 1
 <br>
 
 <span>{{valorDoNumero}}</span>
+
+
+<ul>
+  <li *ngFor="let item of this.pessoas2 | keyvalue " >
+
+    {{item.key | json}} ->
+    <div *ngFor="let pessoa of item.value | keyvalue" >
+      {{ pessoa.value.nome | json}} - {{ pessoa.value.idade | json}}
+    </div>
+  </li>
+</ul>

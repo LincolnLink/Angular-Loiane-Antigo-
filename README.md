@@ -48,7 +48,24 @@
 
     - Exemplo: https://rxjs-dev.firebaseapp.com/api/operators/distinctUntilChanged
 
+ - switchMap()
 
+    - Permite executar dois obsobo!
+
+    <blockquote>
+
+       this.formulario.get('endereco.cep').statusChanges
+        .pipe(
+        distinctUntilChanged(),
+        tap(statusValue => console.log('status CEP: ', statusValue)),
+        switchMap(status => status === 'VALID' ?
+        this.cepService.getCep(this.formulario.get('endereco.cep').value)
+          : empty()
+        )
+      )
+      .subscribe((data :cepData) => this.feedsData(data));      
+
+    </blockquote>
 
 ### Atualizando o Angular CLI
 
@@ -324,7 +341,7 @@
 
 
 
-# Ciclo de vida do Angular ! 
+### Ciclo de vida do Angular ! 
 
   - Quando? - Evento (Hooks) -
 
