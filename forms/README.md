@@ -1652,6 +1652,30 @@
 
  - Baixa o json de cidade!
 
+ - Remove o "| async" com campo de estado
+
+ - Volta ao estado normal, aonde não era um Observable!
+
+ - E feito isso porque não queremos se inscrever duas vezes!
+
+ - No ngInit cria um codigo para carregar as cidades dependendo da escolha do estado!
+
+ <blockquete>
+      // valueChanges: propriedade que ativa quando o valor do campo muda!
+      // Emite um evento quando o valor do campo muda!
+      //* Pega o valor que foi selecionado do estado, depois *//
+      this.formulario.get ( 'endereco.estado').valueChanges
+          .pipe (
+            tap(estado => console.log('Novo estado: ', estado)),
+            map(estado => this.estados.filter(e => e.sigla === estado)),
+            map(estados => estados && estados.length > 0 ? estados[0].id : empty()),
+            switchMap((estadoId : number) => this.dropdownService.getCidades(estadoId)),
+            tap(console.log)
+          )
+          .subscribe(cidade => this.cidades = cidade);
+
+ </blockquete>
+
   
 
 

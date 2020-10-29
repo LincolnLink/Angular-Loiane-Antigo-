@@ -11,6 +11,7 @@ import { ValueTransformer } from '@angular/compiler/src/util';
 import { FormValidationsService } from '../shared/services/form-validations.service';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { Cidade } from '../shared/models/cidade';
 
 
 
@@ -25,8 +26,9 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
 
   //formulario: FormGroup;
 
-  /*estados: EstadoBr[];*/
-  estados: Observable<EstadoBr[]>;
+  estados: EstadoBr[];
+  cidades: Cidade[];
+  /*estados: Observable<EstadoBr[]>;*/
 
   cargos: any[];
 
@@ -50,14 +52,14 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
   ngOnInit(): void {
 
     //Chamada da lista de estado
-    /*
+
     this.dropdownService.getEstadosBr()
-    .subscribe((dados: EstadoBr[]) =>{ this.estados = dados; console.log(dados);});
-    */
+    .subscribe((dados: EstadoBr[]) =>{ this.estados = dados;});
+
 
     //this.validarEmailService.verificarEmail('email4@email.com.br').subscribe();
 
-    this.estados = this.dropdownService.getEstadosBr();
+    //this.estados = this.dropdownService.getEstadosBr();
 
     this.cargos = this.dropdownService.getCargos();
 
@@ -108,6 +110,22 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
         )
       )
       .subscribe((data :cepData) => this.feedsData(data));
+
+
+      this.dropdownService.getCidades(8).subscribe(console.log);
+
+    // valueChanges: propriedade que ativa quando o valor do campo muda!
+    // Emite um evento quando o valor do campo muda!
+    //* Pega o valor que foi selecionado do estado, depois *//
+    this.formulario.get('endereco.estado').valueChanges
+        .pipe(
+          tap(estado => console.log('Novo estado: ', estado)),
+          map(estado => this.estados.filter(e => e.sigla === estado)),
+          map(estados => estados && estados.length > 0 ? estados[0].id : empty()),
+          switchMap((estadoId : number) => this.dropdownService.getCidades(estadoId)),
+          tap(console.log)
+        )
+        .subscribe(cidade => this.cidades = cidade);
 
   }
 

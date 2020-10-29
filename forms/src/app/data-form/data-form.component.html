@@ -133,10 +133,14 @@
                 <app-campo-control-erro cssErro="danger" [condicao]="isInValidTouched('endereco.bairro')" msnErro="Bairro" ></app-campo-control-erro>
 
             </div>
+            <!--<input type="text" id="cidade" class="form-control" formControlName="cidade" [ngClass]="aplicaCssErro('endereco.cidade')">-->
             <div class="col-sm-4">
                 <label for="cidade" class="label font-weight-bold">Cidade</label>
 
-                <input type="text" id="cidade" class="form-control" formControlName="cidade" [ngClass]="aplicaCssErro('endereco.cidade')">
+                <select id="cidade" class="form-control" formControlName="cidade"
+                [ngClass]="aplicaCssErro('endereco.cidade')">
+                  <option *ngFor="let cidade of cidades " [value]="cidade.nome" > {{cidade.nome}}</option>
+                </select>
 
                 <app-campo-control-erro cssErro="danger" [condicao]="isInValidTouched('endereco.cidade')" msnErro="Cidade" ></app-campo-control-erro>
 
@@ -146,7 +150,7 @@
 
                 <select id="estado" class="form-control" formControlName="estado"
                 [ngClass]="aplicaCssErro('endereco.estado')">
-                  <option *ngFor="let estado of estados | async" [value]="estado.sigla" > {{estado.nome}}</option>
+                  <option *ngFor="let estado of estados " [value]="estado.sigla" > {{estado.nome}}</option>
                 </select>
 
                 <app-campo-control-erro cssErro="danger" [condicao]="isInValidTouched('endereco.estado')" msnErro="Estado" ></app-campo-control-erro>
