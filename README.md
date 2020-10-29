@@ -443,6 +443,20 @@
 
 - https://github.com/LincolnLink/Angular-Loiane/tree/master/forms
 
+# Projetos de request HTTP
+
+  - Criando um novo projeto!
+
+  <blockquete>
+    ng new requests-http --routing --style=scss -S
+  </blockquete>
+
+  - O "-S" é para não gerar arquivos de teste!
+
+  - https://github.com/LincolnLink/Angular-Loiane/tree/master/requests-http
+
+  
+
 
 
 
