@@ -1,27 +1,150 @@
 # RequestsHttp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
+### Instalando Bootstrap 4 
 
-## Development server
+  <blockquete>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    npm install bootstrap
 
-## Code scaffolding
+  </blockquete>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  - Inclui o Bootstrap no arquivo global de css do Angular!
 
-## Build
+  <blockquete>
+    @import '~bootstrap/dist/css/bootstrap.min.css';
+  </blockquete>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### NGX-Bootstrap
 
-## Running unit tests
+ - Instala o ngx-bootstrap
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+ <blockquete>
 
-## Running end-to-end tests
+  npm install ngx-bootstrap --save
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+ </blockquete>
 
-## Further help
+ - Para usar os componentes deve se instalar cada um que foi usado usando o CLI
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ - Lista de comandos que add os componentes!
+
+    https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+
+
+
+### Cria um navBar pegando no site do bootstrap 4
+
+  <blockquete>
+
+    < nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      < a class="navbar-brand" href="#">Http</>
+      < button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        < span class="navbar-toggler-icon"></>
+      </>
+      < div class="collapse navbar-collapse" id="navbarNav">
+        < ul class="navbar-nav">
+          < li class="nav-item ">
+            < a class="nav-link" [ routerLink]="[' /']" routerLinkActive="active"> Home
+              < span class="sr-only">(current)</>
+            </>
+          </>
+          < li class="nav-item">
+            < a class="nav-link" [ routerLink]="[' /cursos']" routerLinkActive="active">Cursos</>
+          </>
+        </>
+      </>
+    </>
+
+    < div class="container">
+      < router-outlet></>
+    </ div>
+
+  </blockquete>
+
+### cria um novo modulo de "cursos"
+
+  <blockquete>
+
+    ng g m cursos --routing
+
+  </blockquete>
+
+### cria um component chamado "cursos-lista"
+
+  <blockquete>
+
+    ng g c cursos-lista --routing
+
+  </blockquete>
+
+### Configuração do modulo de rotas!
+
+  - CursosRoutingModule
+
+  <blockquete>
+        
+    const routes: Routes = [
+      { path: '', component: CursosListaComponent}
+    ];
+
+  </blockquete>
+
+  - AppRoutingModule
+
+    - pathMatch -> Totalmente vazio
+
+    - redirectTo -> redireciona para cursos
+
+    - Criando LazyLoading
+
+    <blockquete>
+
+      const routes: Routes = [
+
+        {path: '', pathMatch: 'full', redirectTo: 'cursos'},
+        {
+          path: 'cursos',
+          loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule)
+        }
+      ];
+
+    </blockquete>
+
+### Reparando  a barra do navBar responsiva!
+
+ - Troca o "" por evento do ngxBootstrap
+
+ - add o component "collapse" 
+
+ - ng add ngx-bootstrap  --component collapse
+
+ <blockquete>
+
+  < button class="navbar-toggler" type="button"
+    (click)="isCollapsed = !isCollapsed" [ attr.aria-expanded]="!isCollapsed"
+    aria-controls="navbarNav">
+      < span class="navbar-toggler-icon"></>
+    </>
+
+    < div class="collapse navbar-collapse" id="navbarNav"
+    [ collapse]="isCollapsed" [ isAnimated]="true" >
+    
+      < ul> ... </ ul>
+
+    < / div>
+
+ </blockquete>
+
+ - Documentação do NGX-bootstrap
+
+ https://valor-software.com/ngx-bootstrap/#/collapse
+
+
+
+# proximo
+
+
+
+
+
+
