@@ -1,0 +1,34 @@
+<div *ngFor="let curso of cursos" >
+  {{ curso.nome }}
+</div>
+<br>
+<span>-----</span>
+<div *ngFor="let curso of cursos" >
+  {{ curso | json}}
+</div>
+<br>
+<span>-----keyvalue: Inteirando cada propriedade do objeto</span>
+<div *ngFor="let curso of cursos" >
+  <ul>
+    <li *ngFor="let prop of curso | keyvalue" >
+      {{ prop.key }}: {{ prop.value }}
+    </li>
+  </ul>
+</div>
+<span>---Modificando a ordenação!--</span>
+<div *ngFor="let curso of cursos" >
+  <ul>
+    <li *ngFor="let prop of curso | keyvalue:cursosComparator" >
+      {{ prop.key }}: {{ prop.value }}
+    </li>
+  </ul>
+</div>
+<span>-----</span>
+<div *ngFor="let curso of cursos">
+  <ul>
+    <li *ngFor="let obj of curso | keyvalue" >
+
+      {{curso | json}}
+    </li>
+  </ul>
+</div>
