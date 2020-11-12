@@ -69,7 +69,7 @@
 
   </blockquete>
 
-### cria um component chamado "cursos-lista"
+### Cria um component chamado "cursos-lista"
 
   <blockquete>
 
@@ -141,7 +141,77 @@
 
 
 
-# proximo
+### Http: Simulando Servidor REST (json-server)
+
+ - Emulando uma API
+
+ - Instalando o "json serve"
+
+ - https://www.npmjs.com/package/json-server
+
+ <blockquete> npm install -g json-server  </blockquete>
+
+ - Exemplo, arquivo db.json
+
+  <blockquete>
+
+  {
+    "cursos": [
+      { "id": 1, "nome": "Angular" }
+    ]
+  }
+
+ </blockquete>
+
+ - Para executar 
+
+ <blockquete>json-server --watch db.json </blockquete>
+
+### Fazendo request usando extenção (tipo um postman)
+
+- Instala a extenção "Rest Client"
+
+- Cria um outro arquivo chamado "exemplo.http"!
+
+- Nele bota "http://localhost:3000/cursos"
+
+- Vai aparecer um link escrito "send request",não precisa sair do VS code para testar as requisições !
+
+
+- Cria o GET,POST,DELET, PUT, e GET por id !
+
+ <blockquete>
+
+      http://localhost:3000/cursos
+
+      ###
+
+      http://localhost:3000/cursos/2
+
+      ###
+
+      POST http://localhost:3000/cursos HTTP/1.1
+      content-type: application/json
+
+      {
+          "nome": "PHP"
+      }
+
+      ###
+
+      PUT http://localhost:3000/cursos/2 HTTP/1.1
+      content-type: application/json
+
+      {
+          "nome": "C# OO"
+      }
+
+      ###
+
+      DELETE http://localhost:3000/cursos/2
+
+  </blockquete>
+
 
 
 
