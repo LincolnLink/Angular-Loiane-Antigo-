@@ -1,5 +1,7 @@
 # RequestsHttp
 
+Executando o emulador de API: json-server --watch db.json
+
 ### Instalando Bootstrap 4 
 
   <blockquete>
@@ -169,18 +171,18 @@
 
 ### Fazendo request usando extenção (tipo um postman)
 
-- Instala a extenção "Rest Client"
+ - Instala a extenção "Rest Client"
 
-- Cria um outro arquivo chamado "exemplo.http"!
+ - Cria um outro arquivo chamado "exemplo.http"!
 
-- Nele bota "http://localhost:3000/cursos"
+ - Nele bota "http://localhost:3000/cursos"
 
-- Vai aparecer um link escrito "send request",não precisa sair do VS code para testar as requisições !
+ - Vai aparecer um link escrito "send request",não precisa sair do VS code para testar as requisições !
 
 
-- Cria o GET,POST,DELET, PUT, e GET por id !
+ - Cria o GET,POST,DELET, PUT, e GET por id !
 
- <blockquete>
+  <blockquete>
 
       http://localhost:3000/cursos
 
@@ -210,7 +212,96 @@
 
       DELETE http://localhost:3000/cursos/2
 
+   </blockquete>
+
+### Http GET: listar registros
+
+ - Cria um HTML que lista uns cursos
+
+ https://github.com/loiane/curso-angular/blob/master/requests-http/src/app/cursos/cursos-lista/cursos-lista.component.html
+
+ - Cria um service chamado "cursos"
+
+ - Usa o modulo HttpClient
+
+ - Não precisa transformar o jSom manualmente
+
+ - Cria uma requisição GET
+
+ - Tipando o GET, ajuda no intelecense do VS code em tempo de desenvolvimento!
+
+ - Foi criada uma interface, para poder tipar, informando que retorna um array da interface informada!
+
+ <blockquete>
+
+  private readonly API = 'http://localhost:3000/cursos';
+
+    constructor(private http: HttpClient) { }
+
+
+    list(){
+      return this.http.get<Curso[]>(this.API);
+    }
+
+ </blockquete>
+
+ - Depois injeta o serviço no component!
+
+ #### Quando um método retorna um "observable" deve sempre se inscrever nele, para poder executar!
+
+ - Na inspeção do navegador na aba "NETWORK" é possivel ve o resultado da inscrição usando um console.log, filtra usando o XHR!
+
+ - Para debugar no serviço, pode usar o .pipe(.tap()) do RXJS!
+
+ - Depois disso, no subscrible, deve passar a response para o arry de "curso"!
+
+ - No templat do componet, deve ser criado um ngFor no body da tabela!
+
+### Http: Dica: Variável de Ambiente
+
+ - Na pasta environments é adiministrada as variaveis de ambientes!
+
+ - Todo projeto Angular tem esse pasta "environments"
+
+  - Nele tem dois arquivos, um de desenvolvimento: "envirinments.ts"
+
+  - E o outro arquivo é de produção: "envirinment.prod.ts"
+
+ - Na configurations do arquivo "angular.json" está configurado o replace de quando é feito o build em produção!
+
+ - Configura o arquivo "envirinments"
+
+  <blockquete>
+    export const environment = {
+      production: false,
+      API: 'http://localhost:3000/'
+    };
   </blockquete>
+
+- Configura o arquivo "envirinment.prod.ts"
+
+  <blockquete>
+
+    export const environment = {
+      production: true,
+      API:'/'
+    };
+  </blockquete>
+
+
+- Para chamar a variavel deve se escrever: 
+
+
+  private readonly API = `${environment.API}cursos`;
+
+### Curso Angular #122: Http GET + Pipe Async
+
+- Pipe Async: serve para se inscrever automaticamente! 
+
+- Esse pipe é melhor porque alem dele se inscrever, ele se desinscreve automaticamente!! 
+
+
+
 
 
 
