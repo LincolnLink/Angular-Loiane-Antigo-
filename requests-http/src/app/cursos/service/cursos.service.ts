@@ -2,7 +2,7 @@ import { environment } from './../../../environments/environment';
 import { Curso } from './../curso';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,9 @@ export class CursosService {
   // GET All
   list(){
     return this.http.get<Curso[]>(this.API)
-    .pipe(tap(console.log));
+    .pipe(
+      delay(2000),
+      tap(console.log)
+    );
   }
-
-
 }

@@ -1,6 +1,7 @@
 import { CursosService } from './../service/cursos.service';
 import { Component, OnInit } from '@angular/core';
 import { Curso } from '../curso';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -9,7 +10,9 @@ import { Curso } from '../curso';
 })
 export class CursosListaComponent implements OnInit {
 
-  cursos: Curso[];
+  //cursos: Curso[];
+
+  cursos$: Observable<Curso[]>;
 
   constructor(private serviceHttp: CursosService) { }
 
@@ -17,8 +20,12 @@ export class CursosListaComponent implements OnInit {
 
     // GET All
     // Deve se inscrever quando retorna um observable, com isso sempre vai atualizar a informação!
-    this.serviceHttp.list()
-    .subscribe(dados => this.cursos = dados);
+    //this.serviceHttp.list()
+    //.subscribe(dados => this.cursos = dados);
+
+    // Quando usa o pipe Async, pode atribuir o valor direto!
+    // Sem se inscrever!
+    this.cursos$ = this.serviceHttp.list();
 
     this.onRefresh();
   }

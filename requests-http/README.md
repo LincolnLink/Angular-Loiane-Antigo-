@@ -2,6 +2,14 @@
 
 Executando o emulador de API: json-server --watch db.json
 
+# Dicas MUITO IMPORTANTE
+
+  - Deve-se inscrever em métodos que retorna "observable"
+
+  - É bom ultilizar o pipe Async, por que ele se inscreve e se desinscreve automaticamente, assim evita de ter erro de vazamento de memória!
+
+  - Toda variavel que tem um "$" no final, ela é um "observable"!
+
 ### Instalando Bootstrap 4 
 
   <blockquete>
@@ -296,9 +304,51 @@ Executando o emulador de API: json-server --watch db.json
 
 ### Curso Angular #122: Http GET + Pipe Async
 
-- Pipe Async: serve para se inscrever automaticamente! 
+ - Pipe Async: serve para se inscrever automaticamente! 
 
-- Esse pipe é melhor porque alem dele se inscrever, ele se desinscreve automaticamente!! 
+  #### Importante
+
+ - Esse pipe é melhor porque alem dele se inscrever, ele se desinscreve automaticamente!! 
+
+ - Deve se desisncrever para não ter problema de vazamento de memoria!
+
+ - Mesmo o componete destruido, deve se desinscrever para não ter vazamento!
+
+ - Toda variavel que tem um "$" no final, ela é um "observable"!
+
+ - Dessa forma não precisa se inscrever!
+
+ <blockquete>
+   this.cursos$ = this.serviceHttp.list();
+ </blockquete>
+
+ #### Criando uma mensagem de carregamento!
+
+  - Cria um ngTemple com a mensagem e uma identificação!
+
+  <blockquete>
+
+    < ng-template #loading>
+      < span>Carregando Cursos...</>
+    </>
+
+  </blockquete>
+
+  - Depois cria uma condição para a tabela que exibe os resultados!
+
+  <blockquete>
+    *ngIf="(cursos$ | async) as cursos; else loading"
+  </blockquete>
+
+  - Caso carrega duas vezes, crie uma variavel local no ngIf
+
+  <blockquete>
+      < table class="table table-hover" *ngIf="(cursos$ | async) as cursosVarLocal; else loading" >
+  </blockquete>
+
+  -
+
+
 
 
 
