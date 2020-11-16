@@ -10,6 +10,10 @@ Executando o emulador de API: json-server --watch db.json
 
   - Toda variavel que tem um "$" no final, ela é um "observable"!
 
+  - Toda vez que o ngIf esconde ele destroi o componet!
+
+  - É importante desinscrever quando o component é destruido!
+
 ### Instalando Bootstrap 4 
 
   <blockquete>
@@ -346,8 +350,24 @@ Executando o emulador de API: json-server --watch db.json
       < table class="table table-hover" *ngIf="(cursos$ | async) as cursosVarLocal; else loading" >
   </blockquete>
 
-  -
+### Http + RxJS: Unsubscribe Automático
 
+- Cria um module "unsubscribeRxjsModule"
+
+- Cria um arquivo de roteamento "unsubscribeRxjsRoutingModule"
+
+- Cria um component "unsubscribePocComponentComponent"
+
+- Cria um component "pocBaseComponent"
+
+- Cria um serviço "EnviarValorService"
+
+- Toda vez que o ngIf esconde ele destroi o componet!
+
+- Depois cria 5 component e injeta os serviços!
+
+- 
+ 
 
 
 
