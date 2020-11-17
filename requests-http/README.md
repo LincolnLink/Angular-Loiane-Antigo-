@@ -2,7 +2,7 @@
 
 Executando o emulador de API: json-server --watch db.json
 
-# Dicas MUITO IMPORTANTE
+### Dicas MUITO IMPORTANTE
 
   - Deve-se inscrever em métodos que retorna "observable"
 
@@ -352,21 +352,59 @@ Executando o emulador de API: json-server --watch db.json
 
 ### Http + RxJS: Unsubscribe Automático
 
-- Cria um module "unsubscribeRxjsModule"
+  - Cria um module "unsubscribeRxjsModule"
 
-- Cria um arquivo de roteamento "unsubscribeRxjsRoutingModule"
+  - Cria um arquivo de roteamento "unsubscribeRxjsRoutingModule"
 
-- Cria um component "unsubscribePocComponentComponent"
+  - Cria um component "unsubscribePocComponentComponent"
 
-- Cria um component "pocBaseComponent"
+  - Cria um component "pocBaseComponent"
 
-- Cria um serviço "EnviarValorService"
+  - Cria um serviço "EnviarValorService"
 
-- Toda vez que o ngIf esconde ele destroi o componet!
+  - Toda vez que o ngIf esconde ele destroi o componet!
 
-- Depois cria 5 component e injeta os serviços!
+  - Depois cria 5 component e injeta os serviços!
 
-- 
+- Formar de trabalhar com requisições !
+
+  1° Fazendo um ".subscribe" na requisição! 
+
+  2° Fazendo um ".subscribe" na requisição, e fazendo um unsbscribe manualmente, passando a requisição a uma variavel do tipo "Subscription", e depois chamando em um "ngOnDestroy()" e executando o ".unsubscribe()"
+
+  3° Não ultilizando ".subscribe", e usando o "pipe async", no entando o valor deve se colocado em uma variavel do tipo "Observable<string>".
+
+  <blockquete> valor$: Observable<string>; </blockquete>
+
+  4° Ultilizando o "takeUntil()" é um outro observable, ele se desiscreve automaticamente, passando por paremetro uma variavel "unsub$ = new Subject();
+  Para não ter outro problema, deve fazer um next e de desinscrever 
+
+  <blockquete>
+
+    // Ferificando quando ele é destruido!
+    ngOnDestroy() {
+
+      // emite um valor, para tivar a inscrição!
+      this.unsub$.next();
+
+      // completa para não ter problema de memoriLiki
+      this.unsub$.complete();
+      console.log(`${this.nome} foi destruido`);
+    }
+
+  </blockquete>
+
+  é uma forma caso queria que seu observable fique vivo durante todo o ciclo de vida do component!
+
+  exemplo: NETFLIX!
+
+  5° Ultilizando o "take", com ele não fica escutando direto, é passado para ele um numero, seria a quantidade de vezes que você vai receber a resposta, caso não tente novamente boa o numero 1! ele tenta uma vez, vindo valor de sucesso ou erro!
+
+  é bom usar quando o backend não é reativo!
+
+### Capturando Erros (+ Erro com async)
+
+ - 
  
 
 

@@ -27,7 +27,7 @@ export class PocComponent implements OnInit, OnDestroy {
     .subscribe(novoValor => this.valor = novoValor);
   }
 
-  // Ferificando quando ele é destruido!
+  // Verificando quando ele é destruido!
   ngOnDestroy() {
     console.log(`${this.nome} foi destruido`);
   }

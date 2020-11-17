@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 import { EnviarValorService } from '../enviar-valor.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { EnviarValorService } from '../enviar-valor.service';
     `
 
 })
-export class PocTakeUntilComponent implements OnInit {
+export class PocTakeUntilComponent implements OnInit,OnDestroy {
 
   nome = 'Componente com takeUntil';
   valor: string;
@@ -21,6 +22,25 @@ export class PocTakeUntilComponent implements OnInit {
   constructor(private service: EnviarValorService) { }
 
   ngOnInit(): void {
+
+    // Pegando o novo valor e atribuindo!
+    this.service.getValor()
+      .pipe(
+        tap(v => console.log(this.nome, v)),
+        takeUntil(this.unsub$)
+      )
+      .subscribe(novoValor => this.valor = novoValor);
+  }
+
+  // Verificando quando ele é destruido!
+  ngOnDestroy() {
+
+    // emite um valor, para tivar a inscrição!
+    this.unsub$.next();
+
+    // completa para não ter problema de memoriLiki
+    this.unsub$.complete();
+    console.log(`${this.nome} foi destruido`);
   }
 
 }
