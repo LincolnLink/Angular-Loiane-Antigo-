@@ -14,6 +14,16 @@ Executando o emulador de API: json-server --watch db.json
 
   - É importante desinscrever quando o component é destruido!
 
+  - "Subject" é um o objeto que consegue emitir valores no RXJS!
+
+    <blockquete> error$ = new Subject() </blockquete>    
+
+  - No TS pode ser gerar um variavel usando o "as" ! 
+  
+  - O ngIf define qual "ng-template" vai ser exibido!
+
+  - 
+
 ### Instalando Bootstrap 4 
 
   <blockquete>
@@ -404,8 +414,76 @@ Executando o emulador de API: json-server --watch db.json
 
 ### Capturando Erros (+ Erro com async)
 
+ - No component de cursos, na chamada http "list()" deve se colocar um "catchError" dentro de um pipe!
+
+ - pode se chamar o método "console.error(error);" para exisbir o resultado!
+
+ - e retornar "return empty();" ou "return of();" para finalizar !
+
+ - é IMPORTANTE retornar algo, porque o observable está sendo consumindo pelo ngIf, porq pode da erro quando não retorna uma lista de cursos(valor esperado)!
+
+ - Esses métodos faz parte do pacote do RXJS!
+
+ - "Subject" é um o objeto que consegue emitir valores no RXJS!
+
+    <blockquete> error$ = new Subject() </blockquete>
+  
+ - Bota a logia da requisição da lista em um método chamado "onRefresh"
+
+ - E cria um botão que chama esse método!
+
+ - O ngIf define qual "ng-template" vai ser exibido!
+
+ - No TS pode ser gerar um variavel usando o "as" ! 
+
+ - Para o erro ser tratado e identificado, deve se criar uma variavel que recebe "new Subject<boolean>();"
+
+  <blockquete> error$ = new Subject< boolean>(); </blockquete>
+
+ - Com isso o "catchError" consegue emitir esse erro, para ser tratado com ngIf na parte do template
+
+  <blockquete>
+    catchError(error => {
+            console.error(error);
+            this.error$.next(true);
+            return empty();
+          })
+  </blockquete>
+
+### No subscrible é passado 3 tipos de logica nos parametros!
+
+  1°: Sucesso -> Trata o valor!
+
+  2°: Errror -> Trata o erro!
+
+  3°: Complete -> Exibe uma mensagem quando termina!
+
+  - Porem o erro pode ser tratado antes de fazer um "subscribe", ultilizando ".pipe()" e dentro dele um "catchError()"!
+
+  - Dentro do ".pipe()" pode se colocar o "map()","tap()", "switchMap()" e outros métodos do RXJS!
+
+  - catchError() deve ser sempre o ultimo operador do pipe!
+
+  <blockquete>
+
+    this.serviceHttp.list()
+      .pipe(
+        catchError(error => empty())
+      )
+      .subscribe(
+        dados => {
+          console.log(dados)
+        },
+        error => console.log(error),
+        () => console.log('Observable completo!')
+      );
+
+  </blockquete>
+
+### Erro Http: Alerta de Erro com Bootstrap
+
  - 
- 
+
 
 
 
