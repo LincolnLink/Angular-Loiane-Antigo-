@@ -41,9 +41,6 @@
 
     <ng-template #loadingNoError>
       <div *ngIf="error$ | async; else loading" >
-        Erro ao carregar cursos, Tetnte novamente mais tarde!
-
-
       </div>
       <ng-template #loading>
         <span>Carregando Cursos...</span>

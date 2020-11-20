@@ -22,7 +22,9 @@ Executando o emulador de API: json-server --watch db.json
   
   - O ngIf define qual "ng-template" vai ser exibido!
 
-  - 
+  - Declaração de component no "entryComponents" resolve erros de falta de "Factory"!
+
+  
 
 ### Instalando Bootstrap 4 
 
@@ -480,10 +482,149 @@ Executando o emulador de API: json-server --watch db.json
 
   </blockquete>
 
-### Erro Http: Alerta de Erro com Bootstrap
+### Erro Http: MODAL de Alerta de Erro com NGX-Bootstrap (ModalComponent)
 
- - 
+ - Cria um module "shared"
 
+  <blockquete>   ng g m shared </blockquete>
+
+  - Declara no appModule com o "ModalModule.forRoot()"
+
+  - Deve se declarar com "forRoot()" para ser usado em toda a aplicação!
+
+  ### Conteudo da MODAL
+
+    - Como funciona uma modal em forma de component do NGX-Bootstrap!
+
+    - Cria um component para o shared module, chamado "AlertModalComponent" e declara no module!
+
+    <blockquete>
+        < class="alert alert-{{ type }} " role="alert">
+          < strong>{{ message }}</>
+          < button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onClose()">
+            < span aria-hidden="true">&times;</>
+          </>
+        </ div>
+    </blockquete>
+
+  - Esse component vai ser o corpo da modal, declara os @input()
+
+    - @Input() type: 'success';
+    - @Input() message: string;
+
+    <blockquete> constructor(public bsModalRef: BsModalRef) { }</blockquete> 
+
+    - Com essa ID cria o método que fecha a modal!
+
+    <blockquete>
+      onClose(){
+          this.bsModalRef.hide();
+      }
+    <blockquete>
+
+    - Deve se declarar "entryComponents:" no module "shared", para informar que o component vai ser avaliado em tempo de execução!
+    
+    - Declaração de component no "entryComponents" resolve erros de falta de "Factory"
+
+    - Pois ele é chamado dentro do codigo do TS!
+
+    <blockquete> entryComponents: [ AlertModalComponent] </blockquete>
+
+  ### Local que é chamada a MODAL
+
+  - Deve fazer uma injeção de dependencia do "BsModalService"
+
+    <blockquete> private modalService: BsModalService</blockquete>
+
+  - Cria uma propriedade com o tipo "BsModalRef", 
+  
+    - Nela você informa o "ModalComponent" que vai ser chamado e informações dos "@input()" do "ModalComponent"
+
+  - Cria um método chamado "handleError", ele é chamado quando da erro no "catchError"
+
+    <blockquete>
+        //Criando uma modal(componente) usando NGX-Bootstrap!
+        handleError(){
+
+          // Pode ter valores iniciais!
+          // está chamando o outro component que é o corpo da modal!
+          this.bsModalRef = this.modalService.show(AlertModalComponent);
+
+          // Passando valores de input!
+          this.bsModalRef.content.type = 'danger';
+          this.bsModalRef.content.message = ' Erro ao carregar cursos, Tetnte novamente mais tarde!';
+        }
+    <blockquete>
+
+  - O método "show()" recebe o nome do componentModal e pode receber um segundo parametro que é uma constante com valores do input!
+
+  - Com o componentModal definido na variavel, é possivel passar os valores do input!
+
+  - Fote: https://valor-software.com/ngx-bootstrap/#/modals
+
+### Serviço de alerta genérico com Bootstrap 4 (refatoração)
+
+- Cria um serviço para o component da modal, onde tem o método que trata a mensagem!
+
+- Cria um injeção de dependencia da classe "BsModalService"
+
+  <blockquete> constructor(private modalService: BsModalService) { }</blockquete>
+
+- Cria um método privado com a logica da mensagem de erro!
+
+  <blockquete>
+      private showAlert(message: string, type: AlertType){
+
+        // Pode ter valores iniciais!
+        // está chamando o outro component que é o corpo da modal!
+
+        const bsModalRef: BsModalRef = this.modalService.show(AlertModalComponent);
+
+        // Passando valores de input!
+
+        bsModalRef.content.type = type;
+        bsModalRef.content.message = message;
+
+      }
+  </blockquete>
+
+- Cria métodos com mensagem de erro e de sucesso
+
+  <blockquete>
+    /Criando uma modal(componente) usando NGX-Bootstrap!
+
+    showAlertDanger(message: string){
+      this.showAlert(message, AlertType.DANGER);
+    }
+  </blockquete>
+
+  <blockquete>
+    //Criando uma modal(componente) usando NGX-Bootstrap!
+
+    showAlertSuccess(message: string){
+      this.showAlert(message, AlertType.SUCCESS);
+    }
+  </blockquete>
+
+- O que vai diferenciar é o ENUL !
+
+  <blockquete>
+    export enum AlertType{
+      DANGER = 'danger',
+      SUCCESS = 'success'
+    }  
+  </blockquete>
+
+- Na chamada do método fica dessa forma!
+
+  <blockquete>
+    handleError(){
+      this.alertService.showAlertDanger("Erro ao carregar cursos, Tetnte novamente mais tarde!");
+    }
+  </blockquete>
+
+
+ 
 
 
 
