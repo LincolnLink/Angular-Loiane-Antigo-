@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
+import { Location } from '@angular/common';
 
 import { CursosService } from './../service/cursos.service';
 
@@ -16,12 +18,14 @@ export class CursosFormComponent implements OnInit {
   // Precisa do "FormBuilder" para deixar o formulario reativo!
   constructor(
     private fb: FormBuilder,
-    private httpService: CursosService
+    private httpService: CursosService,
+    private modal: AlertModalService,
+    private location: Location
     ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(15)]]
+      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
     });
   }
 
@@ -32,7 +36,18 @@ export class CursosFormComponent implements OnInit {
     console.log(this.form.value)
 
     if(this.form.valid){
-      console.log("Enviado")
+      //console.log("Enviado")
+      this.httpService.create(this.form.value)
+      .subscribe(
+        success => {
+
+          this.modal.showAlertSuccess(`Curso criado com sucesso!`);
+          this.location.back();
+
+        } ,
+        error => this.modal.showAlertDanger("Error ao criar curso, tente novamente!"),
+        () => console.log("Completo")
+      );
     }
 
   }

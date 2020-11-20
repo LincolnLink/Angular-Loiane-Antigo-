@@ -675,6 +675,41 @@ Executando o emulador de API: json-server --watch db.json
 
 ### HTTP POST Criando Cursos
 
+  - Inejeta a dependencia do serviço curso, no component de cadastro!
+
+  - cria um método post no serviço, ultiliza pipe e depois "take", pois será apenas uma tentativa, o backEnd não é reativo!
+
+  - No Método submit, deve se chamar o método posta passando o valor do form!
+
+  - Deve se inscrever, pois está retornandop um OBSERVABLE! 
+
+  - Trata a resposta mesmo sendo um succes ou error!
+
+  - Caso não tenha inscrição, não terar nada na aba "network" no navegador!
+
+  - Ele fez 2 requisição porque o backend ultilizado é de teste ele habilita o CORS!
+
+  - Foi colocado uma método no serviço de modal, aonde caso seja uma mensagem de sucesso, tem uma duração de exibição da modal!
+
+    <blockquete>
+
+        // Define um tempo de existencia da modal, caso seja uma de success
+        if(dismissTimeout){
+          setTimeout(() => bsModalRef.hide(), dismissTimeout);
+        }
+
+    </blockquete>
+
+  ### IMPORTANTE: como volta sozinho para outra pagina usando "Location"
+
+   - Cria uma injeção de dependencia do "location"
+
+   - Cria um corpo na parte de success!
+
+     <blockquete> this.location.back(); </blockquete>
+
+   - OU pode fazer um "router.navigate" para cursos normalmente
+
 
  
 

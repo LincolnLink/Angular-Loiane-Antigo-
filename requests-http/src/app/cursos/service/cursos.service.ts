@@ -2,7 +2,7 @@ import { environment } from './../../../environments/environment';
 import { Curso } from './../curso';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, tap } from 'rxjs/operators';
+import { delay, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,14 @@ export class CursosService {
   }
 
 
-  //Post
+  // Post
+  create(curso: string){
+
+    // Com apenas uma tentativa, a não ser se o backend fosse reativo!
+    return this.http.post(this.API, curso)
+    .pipe(take(1));
+
+  }
 
 
 

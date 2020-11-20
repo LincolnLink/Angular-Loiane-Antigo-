@@ -16,7 +16,7 @@ export class AlertModalService {
   constructor(private modalService: BsModalService) { }
 
 
-  private showAlert(message: string, type: AlertType){
+  private showAlert(message: string, type: AlertType, dismissTimeout? : number){
 
     // Pode ter valores iniciais!
     // está chamando o outro component que é o corpo da modal!
@@ -25,6 +25,11 @@ export class AlertModalService {
     // Passando valores de input!
     bsModalRef.content.type = type;
     bsModalRef.content.message = message;
+
+    // Define um tempo de existencia da modal, caso seja uma de success
+    if(dismissTimeout){
+      setTimeout(() => bsModalRef.hide(), dismissTimeout);
+    }
 
   }
 
@@ -38,7 +43,7 @@ export class AlertModalService {
   //Criando uma modal(componente) usando NGX-Bootstrap!
   showAlertSuccess(message: string){
 
-    this.showAlert(message, AlertType.SUCCESS);
+    this.showAlert(message, AlertType.SUCCESS, 3000);
 
   }
 }
