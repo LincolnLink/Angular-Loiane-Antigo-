@@ -573,6 +573,7 @@ Executando o emulador de API: json-server --watch db.json
 - Cria um método privado com a logica da mensagem de erro!
 
   <blockquete>
+
       private showAlert(message: string, type: AlertType){
 
         // Pode ter valores iniciais!
@@ -586,41 +587,50 @@ Executando o emulador de API: json-server --watch db.json
         bsModalRef.content.message = message;
 
       }
+
   </blockquete>
 
 - Cria métodos com mensagem de erro e de sucesso
 
   <blockquete>
+
     /Criando uma modal(componente) usando NGX-Bootstrap!
 
     showAlertDanger(message: string){
       this.showAlert(message, AlertType.DANGER);
     }
+
   </blockquete>
 
   <blockquete>
+
     //Criando uma modal(componente) usando NGX-Bootstrap!
 
     showAlertSuccess(message: string){
       this.showAlert(message, AlertType.SUCCESS);
     }
+
   </blockquete>
 
 - O que vai diferenciar é o ENUL !
 
   <blockquete>
+
     export enum AlertType{
       DANGER = 'danger',
       SUCCESS = 'success'
     }  
+
   </blockquete>
 
 - Na chamada do método fica dessa forma!
 
   <blockquete>
+
     handleError(){
       this.alertService.showAlertDanger("Erro ao carregar cursos, Tetnte novamente mais tarde!");
     }
+    
   </blockquete>
 
 
