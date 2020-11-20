@@ -16,7 +16,9 @@ Executando o emulador de API: json-server --watch db.json
 
   - "Subject" é um o objeto que consegue emitir valores no RXJS!
 
-    <blockquete> error$ = new Subject() </blockquete>    
+      <blockquete> 
+        error$ = new Subject() 
+      </blockquete>    
 
   - No TS pode ser gerar um variavel usando o "as" ! 
   
@@ -499,12 +501,14 @@ Executando o emulador de API: json-server --watch db.json
     - Cria um component para o shared module, chamado "AlertModalComponent" e declara no module!
 
     <blockquete>
+
         < class="alert alert-{{ type }} " role="alert">
           < strong>{{ message }}</>
           < button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onClose()">
             < span aria-hidden="true">&times;</>
           </>
         </ div>
+        
     </blockquete>
 
   - Esse component vai ser o corpo da modal, declara os @input()
@@ -534,7 +538,11 @@ Executando o emulador de API: json-server --watch db.json
 
   - Deve fazer uma injeção de dependencia do "BsModalService"
 
-    <blockquete> private modalService: BsModalService</blockquete>
+    <blockquete> 
+
+      private modalService: BsModalService
+
+    </blockquete>
 
   - Cria uma propriedade com o tipo "BsModalRef", 
   
@@ -543,6 +551,7 @@ Executando o emulador de API: json-server --watch db.json
   - Cria um método chamado "handleError", ele é chamado quando da erro no "catchError"
 
     <blockquete>
+
         //Criando uma modal(componente) usando NGX-Bootstrap!
         handleError(){
 
@@ -554,6 +563,7 @@ Executando o emulador de API: json-server --watch db.json
           this.bsModalRef.content.type = 'danger';
           this.bsModalRef.content.message = ' Erro ao carregar cursos, Tetnte novamente mais tarde!';
         }
+
     <blockquete>
 
   - O método "show()" recebe o nome do componentModal e pode receber um segundo parametro que é uma constante com valores do input!
@@ -568,7 +578,11 @@ Executando o emulador de API: json-server --watch db.json
 
 - Cria um injeção de dependencia da classe "BsModalService"
 
-  <blockquete> constructor(private modalService: BsModalService) { }</blockquete>
+  <blockquete> 
+
+      constructor(private modalService: BsModalService) { }
+
+  </blockquete>
 
 - Cria um método privado com a logica da mensagem de erro!
 
