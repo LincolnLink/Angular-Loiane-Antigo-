@@ -5,14 +5,14 @@
       <h4>Cursos</h4>
     </div>
     <div class="float-right">
-      <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Curso</button>
+      <button type="button" class="btn btn-primary mr-1" [routerLink]="['novo']">Novo Curso</button>
       <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
     </div>
   </div>
 
   <div class="card-body">
-    <!--*ngIf="(cursos$ | async) as cursos; else loading"-->
-    <table class="table table-hover" *ngIf="(cursos$ | async) as cursosVarLocal; else loadingNoError" >
+    <!--*ngIf="(cursos$ | async) as cursos; else loadingNoError"-->
+    <table class="table table-hover table-dark" *ngIf="(cursos$ | async) as cursosVarLocal; else loading" >
       <thead>
         <tr>
           <th>#</th>
@@ -39,14 +39,14 @@
       </tbody>
     </table>
 
-    <ng-template #loadingNoError>
+    <ng-template #loading>
+      <span>Carregando Cursos...</span>
+    </ng-template>
+
+ <!--<ng-template #loadingNoError>
       <div *ngIf="error$ | async; else loading" >
       </div>
-      <ng-template #loading>
-        <span>Carregando Cursos...</span>
-      </ng-template>
-
-    </ng-template>
+    </ng-template>-->
 
     <!--ng-template #loadingError>
       <div *ngIf="error$ | async; else loading" >

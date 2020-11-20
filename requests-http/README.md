@@ -508,7 +508,7 @@ Executando o emulador de API: json-server --watch db.json
             < span aria-hidden="true">&times;</>
           </>
         </ div>
-        
+
     </blockquete>
 
   - Esse component vai ser o corpo da modal, declara os @input()
@@ -646,6 +646,34 @@ Executando o emulador de API: json-server --watch db.json
       }
 
   </blockquete>
+
+### Http: Criando formulário para criar e editar cursos
+
+ - Cria um component chamado "cursos-form" dentro da pasta cursos!
+
+ - Cria uma propriedade do tipo "formGroup"
+
+ - Faça uma injeção de dependencia de "FormBuilder"
+
+ - No ngOnInit, com a propriedade do tipo "FormBuilder" cria ".group()" assim você define um formulario reativo!
+
+ <blockquete>
+
+    ngOnInit(): void {
+      this.form = this.fb.group({
+        nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(15)]]
+      });
+    }
+
+ </blockquete>
+
+ - Cria o campo nome com as validações!
+
+ - Cria um botão com evento de salvar e outro de cancelar
+
+ - Cria a validação que está no HTML do "CursosFormComponent"!
+
+### HTTP POST Criando Cursos
 
 
  

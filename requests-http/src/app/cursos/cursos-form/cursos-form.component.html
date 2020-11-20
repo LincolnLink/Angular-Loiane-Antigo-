@@ -1,0 +1,38 @@
+<div class="jumbotron">
+  <h1 class="mt-5">Cadastrando um novo curso</h1>
+</div>
+
+<div class="container">
+  <form class="needs-validation" novalidate [formGroup]="form">
+    <div class="form-row mt-5">
+      <div class="col-sm-12">
+        <label class="font-weight-bold" for="validationCustom01"
+          >Nome do curso</label
+        >
+        <input
+          type="text"
+          formControlName="nome"
+          class="form-control"
+          id="nome"
+          placeholder="Nome do curso"
+          [ngClass]="{ ' is-invalid': submitted && hasError('nome')}"
+
+        />
+        <div class="invalid-feedback" *ngIf=" hasError('nome') && hasError('nome')['required']" >
+          Por favor informe um nome!
+        </div>
+        <div class="invalid-feedback" *ngIf=" hasError('nome') && hasError('nome')['minlength']" >
+          O minimo deve ser de {{hasError('nome')['minlength'].requiredLength}} caracteres!
+        </div>
+        <div class="invalid-feedback" *ngIf=" hasError('nome') && hasError('nome')['maxlength']" >
+          O maximo deve ser de {{hasError('nome')['maxlength'].requiredLength}} caracteres!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row mt-5">
+      <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+      <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
