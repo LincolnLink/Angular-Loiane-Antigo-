@@ -594,21 +594,21 @@ Executando o emulador de API: json-server --watch db.json
 
   <blockquete>
 
-    /Criando uma modal(componente) usando NGX-Bootstrap!
+      /Criando uma modal(componente) usando NGX-Bootstrap!
 
-    showAlertDanger(message: string){
-      this.showAlert(message, AlertType.DANGER);
-    }
+      showAlertDanger(message: string){
+        this.showAlert(message, AlertType.DANGER);
+      }
 
   </blockquete>
 
   <blockquete>
 
-    //Criando uma modal(componente) usando NGX-Bootstrap!
+      //Criando uma modal(componente) usando NGX-Bootstrap!
 
-    showAlertSuccess(message: string){
-      this.showAlert(message, AlertType.SUCCESS);
-    }
+      showAlertSuccess(message: string){
+        this.showAlert(message, AlertType.SUCCESS);
+      }
 
   </blockquete>
 
@@ -616,10 +616,10 @@ Executando o emulador de API: json-server --watch db.json
 
   <blockquete>
 
-    export enum AlertType{
-      DANGER = 'danger',
-      SUCCESS = 'success'
-    }  
+      export enum AlertType{
+        DANGER = 'danger',
+        SUCCESS = 'success'
+      }  
 
   </blockquete>
 
@@ -627,10 +627,10 @@ Executando o emulador de API: json-server --watch db.json
 
   <blockquete>
 
-    handleError(){
-      this.alertService.showAlertDanger("Erro ao carregar cursos, Tetnte novamente mais tarde!");
-    }
-    
+      handleError(){
+        this.alertService.showAlertDanger("Erro ao carregar cursos, Tetnte novamente mais tarde!");
+      }
+
   </blockquete>
 
 
