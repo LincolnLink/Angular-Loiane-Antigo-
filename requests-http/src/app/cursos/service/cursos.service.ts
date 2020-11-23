@@ -26,6 +26,14 @@ export class CursosService {
     );
   }
 
+  // Get byID
+  loadById(id){
+    return this.http.get(`${this.API}/${id}`)
+    .pipe(
+      take(1)
+    );
+  }
+
 
   // Post
   create(curso: string){

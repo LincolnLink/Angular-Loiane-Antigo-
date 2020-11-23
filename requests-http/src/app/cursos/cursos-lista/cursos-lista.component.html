@@ -1,68 +1,72 @@
 
-<div class="card mt-3">
-  <div class="card-header">
-    <div class="float-left">
-      <h4>Cursos</h4>
-    </div>
-    <div class="float-right">
-      <button type="button" class="btn btn-primary mr-1" [routerLink]="['novo']">Novo Curso</button>
-      <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
-    </div>
-  </div>
+<div class="col-md-12">
 
-  <div class="card-body">
-    <!--*ngIf="(cursos$ | async) as cursos; else loadingNoError"-->
-    <table class="table table-hover table-dark" *ngIf="(cursos$ | async) as cursosVarLocal; else loading" >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Curso</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let curso of cursosVarLocal">
-          <td>{{ curso.id }}</td>
-          <td>{{ curso.nome }}</td>
-          <td>
-            <span class="float-right">
-              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(curso.id)">
-                Atualizar
-              </button>
-
-              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(curso)">
-                Remover
-              </button>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <ng-template #loading>
-      <span>Carregando Cursos...</span>
-    </ng-template>
-
- <!--<ng-template #loadingNoError>
-      <div *ngIf="error$ | async; else loading" >
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="float-left">
+        <h4>Cursos</h4>
       </div>
-    </ng-template>-->
-
-    <!--ng-template #loadingError>
-      <div *ngIf="error$ | async; else loading" >
-        Erro ao carregar cursos. Tente novamente mais tarde.
+      <div class="float-right">
+        <button type="button" class="btn btn-primary m-1" [routerLink]="['novo']">Novo Curso</button>
+        <button type="button" class="btn btn-secondary m-1" (click)="onRefresh()">Atualizar</button>
       </div>
+    </div>
+
+    <div class="card-body">
+      <!--*ngIf="(cursos$ | async) as cursos; else loadingNoError"-->
+      <table class="table table-hover table-dark" *ngIf="(cursos$ | async) as cursosVarLocal; else loading" >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Curso</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let curso of cursosVarLocal">
+            <td>{{ curso.id }}</td>
+            <td>{{ curso.nome }}</td>
+            <td>
+              <span class="float-right">
+                <button class="btn btn-outline-warning m-1 btn-sm" (click)="onEdit(curso.id)">
+                  Atualizar
+                </button>
+
+                <button class="btn btn-outline-danger m-1 btn-sm" (click)="onDelete(curso)">
+                  Remover
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       <ng-template #loading>
-          <span>Carregando Cursos...</span>
+        <span>Carregando Cursos...</span>
       </ng-template>
-    </ng-template -->
-  </div>
-</div>
 
-<ng-template #deleteModal>
-  <div class="modal-body text-center">
-    <p>Tem certeza que deseja remover esse curso?</p>
-    <!--<button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
-    <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>-->
+  <!--<ng-template #loadingNoError>
+        <div *ngIf="error$ | async; else loading" >
+        </div>
+      </ng-template>-->
+
+      <!--ng-template #loadingError>
+        <div *ngIf="error$ | async; else loading" >
+          Erro ao carregar cursos. Tente novamente mais tarde.
+        </div>
+        <ng-template #loading>
+            <span>Carregando Cursos...</span>
+        </ng-template>
+      </ng-template -->
+    </div>
   </div>
-</ng-template>
+
+  <ng-template #deleteModal>
+    <div class="modal-body text-center">
+      <p>Tem certeza que deseja remover esse curso?</p>
+      <!--<button type="button" class="btn btn-default" (click)="onConfirmDelete()">Sim</button>
+      <button type="button" class="btn btn-primary" (click)="onDeclineDelete()">Nao</button>-->
+    </div>
+  </ng-template>
+
+</div>

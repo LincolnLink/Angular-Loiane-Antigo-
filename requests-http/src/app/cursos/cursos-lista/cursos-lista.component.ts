@@ -5,8 +5,9 @@ import { Curso } from '../curso';
 import { empty, Observable, of, Subject } from 'rxjs';
 import { catchError, switchMap, map, tap } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -26,7 +27,9 @@ export class CursosListaComponent implements OnInit {
 
   constructor(
     private serviceHttp: CursosService,
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private router: Router,
+    private route: ActivatedRoute
     /*private modalService: BsModalService*/) { }
 
   ngOnInit(): void {
@@ -84,7 +87,11 @@ export class CursosListaComponent implements OnInit {
     */
   }
 
-  onEdit(){
+  /// Métodos que edita os cursos!
+  onEdit(id){
+
+    // Com o router você nevega para a pagina de edição!
+    this.router.navigate(['editar', id], {relativeTo: this.route});
 
   }
 

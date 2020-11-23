@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 import { CursosService } from './../service/cursos.service';
+import { map, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-cursos-form',
   templateUrl: './cursos-form.component.html',
-  styleUrls: ['./cursos-form.component.scss']
+  styleUrls: ['./cursos-form.component.scss'],
 })
 export class CursosFormComponent implements OnInit {
 
+  // Formúlario !
   form: FormGroup;
   submitted: boolean;
 
@@ -20,48 +24,100 @@ export class CursosFormComponent implements OnInit {
     private fb: FormBuilder,
     private httpService: CursosService,
     private modal: AlertModalService,
-    private location: Location
-    ) { }
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+
+    // Declaração dos campos do formulario!
     this.form = this.fb.group({
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+      id: [null],
+      nome: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
     });
+
+    // Pega o parametro da rota, pesquisando o curso com o ID!
+    // Botando dados do curso nos formulario, para editar!
+    /* REFATORANDO!
+    this.route.params.subscribe((params: any) => {
+      const id = params['id'];
+      const cursoEdit$ = this.httpService.loadById(id);
+      cursoEdit$.subscribe(curso =>{
+        this.updateForm(curso)
+      });
+    });
+    */
+
+    this.route.params
+    .pipe(
+      map((params: any) => params['id']),
+      switchMap(id => this.httpService.loadById(id))
+
+      // Não precisa fazer unsubscribe, o angular já faz!
+
+      // Caso precise fazer outro método!
+      //switchMap(cursos => obterAulas())
+    )
+    .subscribe((curso) => this.updateForm(curso));
+
+
+    // switchMap -> cancela as anteriores e apenas busca o valor da ultima requisição!
+
+    // Caso queira fazer um create, update ou delete!
+
+    // concatMap -> ordem da requisição importa!
+    // mergeMap -> caso não se importa com a ordem das resposta!
+
+    // exHaustMap -> vai obter os valores, antes da segunda tentativa!
+    // Muito ultilizado em casos de login!
+
+
   }
 
-  // Envia dados do formulario!
-  onSubmit(){
-
+  // Envia dados do formulario para o backend
+  onSubmit() {
     this.submitted = true;
-    console.log(this.form.value)
+    console.log(this.form.value);
 
-    if(this.form.valid){
-      //console.log("Enviado")
-      this.httpService.create(this.form.value)
-      .subscribe(
-        success => {
+    if (this.form.valid) {
 
+      this.httpService.create(this.form.value).subscribe(
+        (success) => {
           this.modal.showAlertSuccess(`Curso criado com sucesso!`);
-          this.location.back();
-
-        } ,
-        error => this.modal.showAlertDanger("Error ao criar curso, tente novamente!"),
-        () => console.log("Completo")
+          this.location.back(); // Poderia ser o "router.navigate"
+        },
+        (error) =>
+          this.modal.showAlertDanger('Error ao criar curso, tente novamente!'),
+        () => console.log('Completo')
       );
     }
-
   }
 
-  onCancel(){
+  onCancel() {
     this.submitted = false;
     this.form.reset();
     //console.log("cancelado");
   }
 
-  hasError(field: string){
-
+  // Informa se tem erros no campo informado!
+  hasError(field: string) {
     return this.form.get(field).errors;
-
   }
+
+  // Carrega o formulario com os dados do curso para editar!
+  updateForm(curso){
+    this.form.patchValue({
+      id: curso.id,
+      nome: curso.nome
+    });
+  }
+
 
 }

@@ -26,6 +26,12 @@ Executando o emulador de API: json-server --watch db.json
 
   - Declaração de component no "entryComponents" resolve erros de falta de "Factory"!
 
+  - Não se inicializa formulario dentro do SUBSCRIBE porq ele é um codigo assincrone !
+
+  - Deve se inicializar o formulario dentro do construtor ou dentro do ngOInit!
+
+  - É bom evitar por atribuição de valores dentro de subscribe, e sim por métodos que recebe os valores e faz essa atribuição!
+
   
 
 ### Instalando Bootstrap 4 
@@ -709,6 +715,84 @@ Executando o emulador de API: json-server --watch db.json
      <blockquete> this.location.back(); </blockquete>
 
    - OU pode fazer um "router.navigate" para cursos normalmente
+
+### Http: Editando Cursos e Observables aninhados
+
+ - Cria um evento de click no botão de editar!
+
+ - O evento tem um método que passao id do curso para ele!
+
+ - "ActivatedRoute" é a classe que contem os parametros da rota!
+
+ - Uma das propriedades da classe "ActivatedRoute" é o "params" que retornar um observable, com isso é possivel se inscrever nele!
+
+ - "params" é um array que tem os parametros das rotas!
+
+    <blockquete>
+      this.route.params.subscribe((params: any) => {
+        const id = params['id'];
+
+        console.log(id);
+      });
+
+    </blockquete>
+
+ - Com o ID, você pode obter todos os dados para atualizar, pode cachear os dados da lista ou fazer uma requisição ao backend!
+
+ - No serviço do curso, cria uma requisição que busca apenas um curso se baseando no id passado para editar!
+
+<blockquete>
+
+    // Get byID
+    loadById(id){
+      return this.http.get(`${this.API}/${id}`)
+      .pipe(
+        take(1)
+      );
+    }
+
+</blockquete>
+
+- Define um campo "ID" APENAS NO ARQUIVO TS, para que o curso seja identificado!
+
+- Se usa o ".patchValue()" para carregar valores do no formulario! 
+
+<blockquete>
+
+    updateForm(curso){
+        this.form.patchValue({
+          id: curso.id,
+          nome: curso.nome
+      });
+    }
+
+</blockquete>
+
+- Não se inicializa formulario dentro do SUBSCRIBE porq ele é um codigo assincrone ! 
+
+- Deve se inicializar o formulario dentro do construtor ou dentro do ngOInit!
+
+- É bom evitar por atribuição de valores dentro de subscribe, e sim por métodos que recebe os valores e faz essa atribuição!
+
+### Refatorando o codigo acima, para ficar melhor!!
+
+- Como o "params" do "route" retorna um observable, eu posso por um pipe(), e nele por um map(), assim posso já pegar o id diretamente!
+
+    - switchMap -> cancela as anteriores e apenas busca o valor da
+  ultima requisição!
+
+    - Caso queira fazer um create, update ou delete!
+
+    - concatMap -> ordem da requisição importa!
+
+    - mergeMap -> caso não se importa com a ordem das resposta!
+
+    - exHaustMap -> vai obter os valores, antes da segunda tentativa!
+    - Muito ultilizado em casos de login!
+
+
+
+
 
 
  
