@@ -28,7 +28,7 @@ export class CursosService {
 
   // Get byID
   loadById(id){
-    return this.http.get(`${this.API}/${id}`)
+    return this.http.get<Curso>(`${this.API}/${id}`)
     .pipe(
       take(1)
     );

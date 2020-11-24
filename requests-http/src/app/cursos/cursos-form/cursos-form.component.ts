@@ -30,22 +30,9 @@ export class CursosFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Declaração dos campos do formulario!
-    this.form = this.fb.group({
-      id: [null],
-      nome: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-        ],
-      ],
-    });
-
     // Pega o parametro da rota, pesquisando o curso com o ID!
     // Botando dados do curso nos formulario, para editar!
-    /* REFATORANDO!
+    /* 1° REFATORANDO!
     this.route.params.subscribe((params: any) => {
       const id = params['id'];
       const cursoEdit$ = this.httpService.loadById(id);
@@ -55,18 +42,20 @@ export class CursosFormComponent implements OnInit {
     });
     */
 
-    this.route.params
-    .pipe(
-      map((params: any) => params['id']),
-      switchMap(id => this.httpService.loadById(id))
+    /* 2° REFATORAÇÃO, codigo perfeito, porem foi passado para o resolve! */
+    /*
+      this.route.params
+      .pipe(
+        map((params: any) => params['id']),
+        switchMap(id => this.httpService.loadById(id))
 
-      // Não precisa fazer unsubscribe, o angular já faz!
+        // Não precisa fazer unsubscribe, o angular já faz!
 
-      // Caso precise fazer outro método!
-      //switchMap(cursos => obterAulas())
-    )
-    .subscribe((curso) => this.updateForm(curso));
-
+        // Caso precise fazer outro método!
+        //switchMap(cursos => obterAulas())
+      )
+      .subscribe((curso) => this.updateForm(curso));
+    */
 
     // switchMap -> cancela as anteriores e apenas busca o valor da ultima requisição!
 
@@ -78,6 +67,25 @@ export class CursosFormComponent implements OnInit {
     // exHaustMap -> vai obter os valores, antes da segunda tentativa!
     // Muito ultilizado em casos de login!
 
+    /* 3° REFATORAÇÃO! */
+
+    // Pega o resultado da GUARDA DE ROTA Resolve!
+    const curso = this.route.snapshot.data['curso'];
+
+
+    // Declaração dos campos do formulario!
+    // A inicialização é definida com a Guarda de rota "Resolve"!
+    this.form = this.fb.group({
+      id: [curso.id],
+      nome: [
+        curso.nome,
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+    });
 
   }
 
@@ -112,12 +120,14 @@ export class CursosFormComponent implements OnInit {
   }
 
   // Carrega o formulario com os dados do curso para editar!
+  // 2° REFATORAÇÃO
+  /*
   updateForm(curso){
     this.form.patchValue({
       id: curso.id,
       nome: curso.nome
     });
-  }
+  }*/
 
 
 }

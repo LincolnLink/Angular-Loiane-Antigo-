@@ -790,6 +790,52 @@ Executando o emulador de API: json-server --watch db.json
     - exHaustMap -> vai obter os valores, antes da segunda tentativa!
     - Muito ultilizado em casos de login!
 
+### Http: Editando Cursos + Resolver (Rota)
+
+  - Cria um diretorio chamado "Guard", e cria um Guard chamado "curso-resolver"!
+
+  - Implementa a interface "Resolve< Curso>" curso é uma tipagem!
+
+  <blockquete>
+
+    // route: uma fotografia da rota, pode extrair os parametros da rota!
+    // state: Nesse cenário não importa!
+    
+    resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+    ): Observable<Curso> {
+
+        if(route.params && route.params['id']){
+
+          // Se reclamar que um observable          
+          //de object não é um observable de curso, deve se tipar o getbyId
+
+          return this.httpService.loadById(route.params['id'])
+        }
+
+        // Situação aonde é criado um curso novo!
+        // O operador "of()" do RXJS, serve para retornar
+        // um observable apartir de um objeto!
+
+        return of({
+          id: null,
+          nome: null
+        });
+    }      
+  </blockquete>
+
+  - A ideia é obter o curso que vai ser editado, antes mesmo de carregar o component(antes do "ngOnInit()").
+
+  - Se reclamar que um observable de object não é um observable de curso, deve se tipar o getbyId !
+
+  - Cria um if, para ve se o "route.params && route.params['id']" existe!
+
+  - Caso não exista, retorne um observarble de curso, usando o operador "of()", para transformar o objeto em observable também!
+
+  - 
+        
+
 
 
 
