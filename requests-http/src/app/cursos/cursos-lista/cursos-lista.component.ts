@@ -56,6 +56,7 @@ export class CursosListaComponent implements OnInit {
     );*/
   }
 
+  // Carrega a lista de curso!
   onRefresh() {
     this.cursos$ = this.serviceHttp.list().pipe(
       // map(),
@@ -70,7 +71,8 @@ export class CursosListaComponent implements OnInit {
     );
   }
 
-  //Criando uma modal(componente) usando NGX-Bootstrap!
+  // Criando uma modal(componente) usando NGX-Bootstrap!
+  // Informa se tem erro!
   handleError(){
 
     // Refatorado, método foi colocado em um serviço!
@@ -95,6 +97,7 @@ export class CursosListaComponent implements OnInit {
 
   }
 
+  // Método que deleta o curso
   onDelete(){
 
   }

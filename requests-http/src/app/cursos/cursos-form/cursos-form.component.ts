@@ -82,7 +82,7 @@ export class CursosFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(20),
+          Validators.maxLength(45),
         ],
       ],
     });
@@ -96,21 +96,56 @@ export class CursosFormComponent implements OnInit {
 
     if (this.form.valid) {
 
-      this.httpService.create(this.form.value).subscribe(
-        (success) => {
-          this.modal.showAlertSuccess(`Curso criado com sucesso!`);
-          this.location.back(); // Poderia ser o "router.navigate"
-        },
-        (error) =>
-          this.modal.showAlertDanger('Error ao criar curso, tente novamente!'),
-        () => console.log('Completo')
+      let msgSuccess = 'Curso criado com sucesso';
+      let msgError = 'Erro ao criar curso, tente novamente';
+      if (this.form.value.id){
+        msgSuccess = 'Curso atualizado com sucesso!';
+        msgError = 'Error ao atualizar curso';
+      }
+
+      this.httpService.save(this.form.value)
+      .subscribe(succes =>{
+        this.modal.showAlertSuccess(msgSuccess);
+        this.location.back();
+      },
+      error => this.modal.showAlertDanger(msgError),
+      () => console.log('request de update completo')
       );
+
+      /* Refatorado */
+      /*
+      if(this.form.value.id)
+      {
+        //update
+        this.httpService.update(this.form.value)
+        .subscribe(succes =>{
+          this.modal.showAlertSuccess('Curso atualizado com sucesso');
+          this.location.back();
+        },
+        error => this.modal.showAlertDanger('Error ao atualizar curso'),
+        () => console.log('request de update completo')
+        );
+
+      }
+      else
+      {
+        this.httpService.create(this.form.value).subscribe(
+          (success) => {
+            this.modal.showAlertSuccess(`Curso criado com sucesso!`);
+            this.location.back(); // Poderia ser o "router.navigate"
+          },
+          (error) =>
+            this.modal.showAlertDanger('Error ao criar curso, tente novamente!'),
+          () => console.log('Completo')
+        );
+      }*/
     }
   }
 
   onCancel() {
     this.submitted = false;
     this.form.reset();
+    this.location.back();
     //console.log("cancelado");
   }
 

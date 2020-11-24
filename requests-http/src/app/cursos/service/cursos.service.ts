@@ -36,12 +36,26 @@ export class CursosService {
 
 
   // Post
-  create(curso: string){
+  private create(curso: string){
 
     // Com apenas uma tentativa, a não ser se o backend fosse reativo!
     return this.http.post(this.API, curso)
     .pipe(take(1));
 
+  }
+
+  // Put
+  private update(curso){
+    return this.http.put(`${this.API}/${curso.id}`,curso)
+    .pipe(take(1));
+  }
+
+  // Método que salva ou atualiza
+  save(curso){
+    if(curso.id){
+      return this.update(curso);
+    }
+    return this.create(curso);
   }
 
 

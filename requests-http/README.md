@@ -800,7 +800,7 @@ Executando o emulador de API: json-server --watch db.json
 
     // route: uma fotografia da rota, pode extrair os parametros da rota!
     // state: Nesse cenário não importa!
-    
+
     resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -831,11 +831,51 @@ Executando o emulador de API: json-server --watch db.json
 
   - Cria um if, para ve se o "route.params && route.params['id']" existe!
 
+  - retorna o valor do curso usando o parametro da rota com o método do serviço!
+
   - Caso não exista, retorne um observarble de curso, usando o operador "of()", para transformar o objeto em observable também!
 
-  - 
-        
+### Http PUT Atualizando Cursos
 
+ - Foi criado um método no serviço aonde tem um if, que escolhe se deve salvar ou atualizar!
+
+ - Isso depende quando se tem valor no ID ou não!
+
+ - O método que salva e atualiza foi refatorado, então com um só método é possivel salvar um novo registro 
+ ou atualizar um que ja existe
+
+ - A mensagem de success e error ficou dinamica, foi colocado ela em um let, e um if acaba trocando dependendo da situação!
+
+  <blockquete>
+
+    if (this.form.valid) {
+
+        let msgSuccess = 'Curso criado com sucesso';
+        let msgError = 'Erro ao criar curso, tente novamente';
+        if (this.form.value.id){
+          msgSuccess = 'Curso atualizado com sucesso!';
+          msgError = 'Error ao atualizar curso';
+        }
+
+        this.httpService.save(this.form.value)
+        .subscribe(succes =>{
+          this.modal.showAlertSuccess(msgSuccess);
+          this.location.back();
+        },
+        error => this.modal.showAlertDanger(msgError),
+        () => console.log('request de update completo')
+        );
+    }
+  <blockquete>
+
+
+
+
+### Http DELETE: Popup de Confirmação para remover Cursos
+        
+- Vamos criar o método que deleta, com uma confirmação se deveser deletado ou não!
+
+- 
 
 
 
