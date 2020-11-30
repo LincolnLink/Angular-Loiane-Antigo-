@@ -873,11 +873,30 @@ Executando o emulador de API: json-server --watch db.json
 
 ### Http DELETE: Popup de Confirmação para remover Cursos
         
-- Vamos criar o método que deleta, com uma confirmação se deveser deletado ou não!
+- Vamos criar o método que deleta, com uma confirmação se deve ser deletado ou não!
+
+- cria um evento de click no botão deletar no curso lista!
+
+- Para fazer referencia de um identificador de um "ng-template", deve se usar o "@ViewChild" 
+
+<blockquete>
+  @ViewChid('deleteModal') deleteModal
+</blockquete>
+
+- Cria dois métodos um para cancelar o delete "onDeclineDelete", e outro para confirmar "onConfirmeDelete"!
+
+- Cria uma variavel do tipo "curso" que recebe uma copia do curso passado, que vai ser deletado, porque o component(modal de confirmação) não recebe parametro! 
+
+- Na confirmação é chamado o delete do http, e depois o "onRefresh" para atualizar a pagina em caso de successo, junto com a mensagem de sucesso!
+
+- Em casos de erro, retorna a mensagem de erro na modal e chama o metodo que esconde a modal de confirmação!
+
+
+### Popup de Confirmação genérica Bootstrap 4 (com RxJS)
 
 - 
 
-
+- 
 
 
 

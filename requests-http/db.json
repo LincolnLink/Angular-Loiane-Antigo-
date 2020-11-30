@@ -5,10 +5,6 @@
       "nome": "Angular 2+"
     },
     {
-      "nome": "PHP",
-      "id": 2
-    },
-    {
       "id": 3,
       "nome": "Programação com C++"
     },
@@ -21,24 +17,16 @@
       "nome": "Java"
     },
     {
-      "id": 6,
-      "nome": "Curso de WEB API com NodeJS"
-    },
-    {
-      "nome": "teste 7777 final",
-      "id": 7
-    },
-    {
       "id": 8,
       "nome": "Python"
     },
     {
-      "id": 9,
-      "nome": "Curso de MVC"
-    },
-    {
       "id": 10,
       "nome": "Node JS"
+    },
+    {
+      "id": 11,
+      "nome": "PHP"
     }
   ]
 }

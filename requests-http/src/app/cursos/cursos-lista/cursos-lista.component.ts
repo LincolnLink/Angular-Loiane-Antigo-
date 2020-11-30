@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { CursosService } from './../service/cursos.service';
 import { Curso } from '../curso';
@@ -7,7 +7,7 @@ import { catchError, switchMap, map, tap } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-cursos-lista',
@@ -25,12 +25,21 @@ export class CursosListaComponent implements OnInit {
   // Subject é um objeto que consegue emitir valores!
   error$ = new Subject<boolean>();
 
+  // Faz parte da modal que confirma quando um curso é deletado!
+  deleteModalRef: BsModalRef;
+
+  // Propriedade que faz referencia a
+  @ViewChild('deleteModal') deleteModal;
+
+  // Copia do curso que foi selecionado!
+  cursoSelecionado: Curso;
+
   constructor(
     private serviceHttp: CursosService,
     private alertService: AlertModalService,
     private router: Router,
-    private route: ActivatedRoute
-    /*private modalService: BsModalService*/) { }
+    private route: ActivatedRoute,
+    private modalService: BsModalService) { }
 
   ngOnInit(): void {
 
@@ -76,7 +85,7 @@ export class CursosListaComponent implements OnInit {
   handleError(){
 
     // Refatorado, método foi colocado em um serviço!
-    this.alertService.showAlertDanger("Erro ao carregar cursos, Tetnte novamente mais tarde!");
+    this.alertService.showAlertDanger("Erro ao carregar cursos, Tente novamente mais tarde!");
 
     /*
     // Pode ter valores iniciais!
@@ -97,9 +106,35 @@ export class CursosListaComponent implements OnInit {
 
   }
 
-  // Método que deleta o curso
-  onDelete(){
+  // Método do botão que deleta o curso, clicando invoca a modal de confirmação!
+  onDelete(Curso){
+    this.cursoSelecionado = Curso
+    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'})
 
+  }
+
+  // Método do botão que confirma quando vai deletar!
+  onConfirmeDelete(){
+
+    this.serviceHttp.delete(this.cursoSelecionado.id)
+    .subscribe(
+      (success) => {
+        this.onRefresh();
+        this.alertService.showAlertSuccess("Deletado com sucesso");
+        this.deleteModalRef.hide();
+      },
+      (error) => {
+        this.alertService.showAlertDanger("Erro ao deletar o cursos, Tente novamente mais tarde!");
+        this.deleteModalRef.hide();
+      }
+    )
+    //this.deleteModalRef.hide();
+
+  }
+
+  // Método do botão que cancela a ação de deletar!
+  onDeclineDelete(){
+    this.deleteModalRef.hide();
   }
 
 }
