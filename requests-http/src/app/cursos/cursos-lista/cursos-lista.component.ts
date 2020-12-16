@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { catchError, switchMap, map, tap, take } from 'rxjs/operators';
+import { EMPTY, empty, Observable, of, Subject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
+import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
 import { CursosService } from './../service/cursos.service';
 import { Curso } from '../curso';
-import { empty, Observable, of, Subject } from 'rxjs';
-import { catchError, switchMap, map, tap } from 'rxjs/operators';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class CursosListaComponent implements OnInit {
   // Faz parte da modal que confirma quando um curso é deletado!
   deleteModalRef: BsModalRef;
 
-  // Propriedade que faz referencia a
+  // Propriedade que faz referencia a um ng-template !!!
   @ViewChild('deleteModal') deleteModal;
 
   // Copia do curso que foi selecionado!
@@ -75,7 +76,7 @@ export class CursosListaComponent implements OnInit {
         console.error(error);
         //this.error$.next(true);
         this.handleError();
-        return empty();
+        return EMPTY;
       })
     );
   }
@@ -109,9 +110,36 @@ export class CursosListaComponent implements OnInit {
   // Método do botão que deleta o curso, clicando invoca a modal de confirmação!
   onDelete(Curso){
     this.cursoSelecionado = Curso
-    this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'})
+
+    //Refatorando - essa era uma modal de confirmação apenas desse component!
+    /*this.deleteModalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'})*/
+
+    // Modal de confirmação generica, podendo usar em qualquer component!
+    // Coloca o retorno em uma costante!
+    const result$ = this.alertService.showConfirm("Confirmação", "Tem certeza que deseja remover esse curso?");
+
+    // Poderia ter feito no método do serviço!
+    // "empty()" não se usa mais, é o EMPTY!
+    result$.asObservable()
+    .pipe(
+      take(1),
+      switchMap(result => result ? this.serviceHttp.delete(Curso.id): EMPTY)
+    )
+    .subscribe(
+      (success) => {
+        this.onRefresh();
+        this.alertService.showAlertSuccess("Deletado com sucesso");
+        this.deleteModalRef.hide();
+      },
+      (error) => {
+        this.alertService.showAlertDanger("Erro ao deletar o cursos, Tente novamente mais tarde!");
+        this.deleteModalRef.hide();
+      }
+    )
 
   }
+
+  /* MODAL DE CONFIRMAÇÃO Propria do Componente! */
 
   // Método do botão que confirma quando vai deletar!
   onConfirmeDelete(){

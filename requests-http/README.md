@@ -32,6 +32,15 @@ Executando o emulador de API: json-server --watch db.json
 
   - É bom evitar por atribuição de valores dentro de subscribe, e sim por métodos que recebe os valores e faz essa atribuição!
 
+  - Quando se declara um component no "entryComponents" significa que ele vai ser invocado de outro component!    
+    - É possivel mandar valores(inputProp) para o component que foi invocado usando um serviço com "bsModalRef" do NgxBootstrap!
+    - Técnicamente ele não é filho, então não é possivel usar o outInput propert!
+    - A solução para receber valores desse component que é invocado, seria usando o "Subject< boolean>;" do RXJS!!
+    - Esse objeto ele emite valores, então com isso o component pode escutar esses valores!
+
+  - "asObservable" é como se fosse um Subscrible, é usando no retorno de um "Subject" para escutar oque foi emitido!
+
+  - "empty()" não se usa mais, é o EMPTY!
   
 
 ### Instalando Bootstrap 4 
@@ -892,11 +901,118 @@ Executando o emulador de API: json-server --watch db.json
 - Em casos de erro, retorna a mensagem de erro na modal e chama o metodo que esconde a modal de confirmação!
 
 
-### Popup de Confirmação genérica Bootstrap 4 (com RxJS)
+### Popup de Confirmação genérica Bootstrap 4 (com RxJS)  
 
-- 
+  - É um Component totalmente indenpendente, uma modal de confirmação generica!
 
-- 
+  - Cria um component chamado "confirmModal", bota nele uma modal que tem titulo e botão de confirmar e fechar do bootstrap!
+
+  - Exporta e declara ela no "shared.module.ts"
+
+  - Cria 4 input property, "msn", "titulo", "botão" dinamico "ok" e "cancelar" 
+
+  - Cria o método para cancelar, e outro para confirmar, no cancelar precisa da referencia da modal, para fechar ela!
+
+    <blockquete>
+
+      onClose(){
+        this.bsModalRef.hide();
+      }
+
+    </blockquete>
+
+  ### método que abre a modal dentro de um service!
+
+      - No "alert-modal.service" se cria um método para executar o component "ConfirmModalComponent"
+
+      - Passa os input property, para poder alimentar os valores
+
+      - bsModalService(modalService) tem um método chamada "show" que exibe ng-template ou component!
+
+      <blockquete>
+
+          showConfirm(title: string, msn: string, okTxt?: string, cancelText?: string){
+
+            // bsModalService(modalService) tem um método chamada "show" que exibe ng-template ou component
+            // Praticamente um DOM!
+            const bsModalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
+
+            // Alimentando os valores do input propert
+            bsModalRef.content.title = title;
+            bsModalRef.content.msn = msn;
+
+            if(okTxt){bsModalRef.content.okTxt = okTxt;}
+
+            if(cancelText){bsModalRef.content.cancelText = cancelText;}
+          }
+
+      </blockquete>
+
+      - Caso a popup não funciona, demove as 2 primeiras DIV's
+
+    - Com isso a modal já é aberta, basta terminar de refatorar o botão que confirma, para deletar!
+
+  ### Tratando o botão da modal de confirmação!
+
+    - Não é possivel usar o OutPut propert, porque o component não é filho do component pai, ele está sendo paenas invocado!
+
+    - Quando se declara um component no "entryComponents" significa que ele vai ser invocado de outro component!    
+        - É possivel mandar valores(inputProp) para o component que foi invocado usando um serviço com "bsModalRef" do NgxBootstrap!
+        - Técnicamente ele não é filho, então não é possivel usar o outInput propert!
+        - A solução para receber valores desse component que é invocado, seria usando o "Subject< boolean>;" do RXJS!!
+        - Esse objeto ele emite valores, então com isso o component pode escutar esses valores!
+
+    - Cria uma instancia toda vez que o component se inicializar!
+
+    <blockquete>
+
+        confirmResult: Subject<boolean>;
+
+        constructor(private bsModalRef: BsModalRef) { }
+
+        ngOnInit(): void {
+          this.confirmResult = new Subject();
+        }
+
+        private ConfirmAnClose(value: boolean){
+          this.confirmResult.next(value);
+          this.bsModalRef.hide();
+        }
+
+        onClose(){
+          this.ConfirmAnClose(false);
+        }
+
+        onConfirm(){
+          this.ConfirmAnClose(true);
+        }
+    
+    </blockquete>
+
+    - Com isso vai ser emitido qual botão ele apertou, se foi o de cancelar ou de confirmar!!
+
+
+  ### Voltando ao serviço para ele retornar um observable do oque foi emitido!
+
+    - Retorna o valor que foi emitodo pelo componente de modal que confirma!(botão da modal)
+
+    - fazer o "castim", Tipa o retorno que é "bsModalRef.content" !
+    
+    - Usando o operador Diamond(diamante) com o tipo "ConfirmModalComponent" que é o component modal!
+
+    - Assim ele reconhece todos os valores, a nessecidade dessa tipagem é quando for retornar objetos
+
+    <blockquete> return (< ConfirmModalComponent>bsModalRef.content).confirmResult </blockquete>
+
+### Voltando ao component para ele escutar oque foi emitido!
+
+    - O método "this.alertService.showConfirm" deve ser colocado em uma constante!
+
+    - Agora ele retorna um observable, com isso é possivel fazer um "asObservable" que pertence a classe "Subject"!
+
+    - "asObservable" com ele consegue fazer um Subscrible!
+
+    - "empty()" não se usa mais, é o EMPTY!
 
 
 

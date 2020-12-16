@@ -17,9 +17,13 @@
       <table class="table table-hover table-dark" *ngIf="(cursos$ | async) as cursosVarLocal; else loading" >
         <thead>
           <tr>
-            <th>#</th>
+            <th>Id</th>
             <th>Curso</th>
-            <th></th>
+            <th>
+              <span class="float-right m-1">
+                Action
+              </span>
+            </th>
           </tr>
         </thead>
         <tbody>

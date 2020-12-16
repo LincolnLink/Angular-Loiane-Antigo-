@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal.component';
 
 export enum AlertType{
@@ -13,6 +14,7 @@ export enum AlertType{
 export class AlertModalService {
 
 
+  // "modalService" serve para manipular o DOM, ele faz parte do NGX-Bootstrap!
   constructor(private modalService: BsModalService) { }
 
 
@@ -46,4 +48,27 @@ export class AlertModalService {
     this.showAlert(message, AlertType.SUCCESS, 3000);
 
   }
+
+  // Invoca uma modal generica de confirmação, alimentando os valores de input propert!
+  showConfirm(title: string, msg: string, okTxt?: string, cancelText?: string){
+
+    // bsModalService(modalService) tem um método chamada "show" que exibe ng-template ou component
+    // Praticamente um DOM!
+    const bsModalRef: BsModalRef = this.modalService.show(ConfirmModalComponent);
+
+    // Alimentando os valores do input propert
+    bsModalRef.content.title = title;
+    bsModalRef.content.msg = msg;
+
+    if(okTxt){bsModalRef.content.okTxt = okTxt;}
+
+    if(cancelText){bsModalRef.content.cancelText = cancelText;}
+
+    // Retorna o valor que foi emitodo pelo componente de modal que confirma!(botão da modal)
+    // Tipa o "bsModalRef.content" usando o "diamante" usando a modal como tipo!
+    // Assim ele reconhece todos os valores!
+    return (<ConfirmModalComponent>bsModalRef.content).confirmResult
+
+  }
+
 }
