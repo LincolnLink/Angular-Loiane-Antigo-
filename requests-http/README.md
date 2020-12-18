@@ -1083,7 +1083,16 @@ Executando o emulador de API: json-server --watch db.json
 
  - "-y" é para criar um pact-json
 
- //TODO por link da documentação do NODEjs
+  https://github.com/LincolnLink/Angular-Loiane/tree/master/Nodejs/server
+
+
+ ### Http Upload de Arquivo: Request com FormData
+
+ - Cria um botão chamado "upload", com um evento de ngClick
+
+ - 
+
+
 
 
  

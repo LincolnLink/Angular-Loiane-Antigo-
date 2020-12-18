@@ -1,7 +1,4 @@
-import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import { registerEscClick } from 'ngx-bootstrap/utils';
 
 @Component({
   selector: 'app-upload-file',
@@ -54,6 +51,11 @@ export class UploadFileComponent implements OnInit {
 
   //}
 
+  onUpload(){
+
+
+
+  }
 
 
 }
