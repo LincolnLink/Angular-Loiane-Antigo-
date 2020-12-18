@@ -1,0 +1,23 @@
+/*
+@include media-breakpoint-up(xs) { ... }
+@include media-breakpoint-up(sm) { ... }
+@include media-breakpoint-up(md) { ... }
+@include media-breakpoint-up(lg) { ... }
+@include media-breakpoint-up(xl) { ... }
+*/
+
+
+.btn-responsivo {
+  margin-left: 1em;
+}
+
+
+@media (max-width: 425px){
+
+  .btn-responsivo {
+    width: 80%;
+    margin-bottom: 1em;
+    margin-left: 0;
+  }
+
+}

@@ -5,10 +5,6 @@
       "nome": "Angular 2+"
     },
     {
-      "id": 3,
-      "nome": "Programação com C++"
-    },
-    {
       "id": 5,
       "nome": "Java"
     },
@@ -23,6 +19,18 @@
     {
       "id": 11,
       "nome": "PHP"
+    },
+    {
+      "id": 12,
+      "nome": "teste classe generica8787"
+    },
+    {
+      "id": 13,
+      "nome": "Programação com C#"
+    },
+    {
+      "id": 14,
+      "nome": "Materia 7 atualizado"
     }
   ]
 }

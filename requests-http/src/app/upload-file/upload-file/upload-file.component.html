@@ -1,0 +1,20 @@
+<div class="row mt-4">
+  <div class="col-md-12">
+    <h3>UpLoad Arquivos</h3>
+    <p>O formato do documento deve ser PDF</p>
+
+  </div>
+  <div class="col-md-6 mt-4">
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="customFile" (change)="onChange($event)" multiple />
+      <label #fildFile class="custom-file-label" for="customFile">Escolha um arquivo</label>
+    </div>
+    <div>
+      <ul class="list-group" *ngFor="let item of lisNameFiles" >
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <p>{{ item }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

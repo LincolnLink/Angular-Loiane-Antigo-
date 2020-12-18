@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { AlertModalService } from 'src/app/shared/alert-modal/alert-modal.service';
-import { CursosService } from './../service/cursos.service';
+import { Cursos2Service } from './../service/cursos2.service';
 import { map, switchMap } from 'rxjs/operators';
 
 
@@ -22,7 +22,7 @@ export class CursosFormComponent implements OnInit {
   // Precisa do "FormBuilder" para deixar o formulario reativo!
   constructor(
     private fb: FormBuilder,
-    private httpService: CursosService,
+    private httpService: Cursos2Service,
     private modal: AlertModalService,
     private location: Location,
     private route: ActivatedRoute

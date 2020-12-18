@@ -1014,6 +1014,76 @@ Executando o emulador de API: json-server --watch db.json
 
     - "empty()" não se usa mais, é o EMPTY!
 
+### Http: Serviço Genérico de CRUD
+
+  - Criando uma CLASSE repositorio, um serviço generico de CRUD, que serve para ser reutilizado!
+
+  - Cria uma classe chamada "crud-service" e copia todo conteudo do "cursos.service" na classe!
+
+  - Troca tudo que tem o nome de "curso" para "record"
+
+  - O que tiver id, troque para [ 'id']
+
+  - Troca tuda variavel "API" para "API_URL", com isso o codigo fica generico!
+
+ ### Criando o serviço! 
+
+  - Cria um outro serviço para cursos
+
+  - Nesse caso é bom ultilizar herança!
+
+    <blockquete>
+
+      export class Cursos2Service extends CrudService< Curso> { ... }
+
+    </blockquete>
+
+  - Quando se trabalha com herança tem que chamar o "super( );" no construtor!
+
+  - O "super();"  recebe 2 parametros, 
+  
+      - o primeiro é a variavel do HttpClient, 
+      
+      - e o segundo é o endPoint !
+
+  <blockquete>
+
+      export class Cursos2Service extends CrudService<Curso> {
+
+      constructor(protected http: HttpClient )
+      {
+        super(http, `${environment.API}cursos`);
+      }
+
+    }
+
+  </blockquete>
+
+  - Ainda tem o poder de sobre escrever os métodos, apenas repita o mesmo nome do métodos que deseja alterar!
+
+### Upload de Arquivo: Formulário Upload com Bootstrap 4
+
+ - Executa o comando!
+
+  <blockquete> ng g m upload-file --routing </blockquete>
+
+  - Cria um component "upload-file"
+
+  - bota o novo component na rota, criando um link, congigurando a rota principal e a rota do component!
+
+  - No html do component, bota um formulario que faz upload de arquivos!
+
+  - Para exibir os nomes dos arquivos deve criar um evento no input de quando o input é modificado!
+
+  - 
+
+### Http: Upload de Arquivo: Back-end com Node.js
+
+ - Cria uma pasta e faz um npm init!
+
+ - "-y" é para criar um pact-json
+
+ //TODO por link da documentação do NODEjs
 
 
  
