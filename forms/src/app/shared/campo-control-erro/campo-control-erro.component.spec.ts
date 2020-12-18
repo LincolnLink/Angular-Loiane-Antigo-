@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CampoControlErroComponent } from './campo-control-erro.component';
 
@@ -6,7 +6,7 @@ describe('CampoControlErroComponent', () => {
   let component: CampoControlErroComponent;
   let fixture: ComponentFixture<CampoControlErroComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CampoControlErroComponent ]
     })
