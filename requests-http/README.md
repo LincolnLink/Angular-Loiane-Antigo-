@@ -41,6 +41,8 @@ Executando o emulador de API: json-server --watch db.json
   - "asObservable" é como se fosse um Subscrible, é usando no retorno de um "Subject" para escutar oque foi emitido!
 
   - "empty()" não se usa mais, é o EMPTY!
+
+  - Lista do tipo "Set < file>" evita que arquivo duplicados sejam salvos!
   
 
 ### Instalando Bootstrap 4 
@@ -1086,12 +1088,103 @@ Executando o emulador de API: json-server --watch db.json
   https://github.com/LincolnLink/Angular-Loiane/tree/master/Nodejs/server
 
 
- ### Http Upload de Arquivo: Request com FormData
+### Http Upload de Arquivo: Request com FormData
 
  - Cria um botão chamado "upload", com um evento de ngClick
 
- - 
+ - Para evitar que arquivos duplicados vão para o servidor, se usa o "Set< file>" ao inves do array!
 
+ - Cria um variavel do tipo "Set < file>", ele não deixa que arquivo duplicado entre nesse tipo de lista!
+
+ - Intancia o "this.files = new Set();" para por os arquivos dentro!
+
+ - O botão só aparece caso tenha arquivos no input, pode usar ngIf ou ngHide
+
+ - No método do botão de upload, verifica se tem arquivos e se tem mais que 1 arquivo!
+
+ ### Criando um request de arquivos na mão
+
+ - Cria um serviço para o component upload!
+
+ - Caso queira fazer métodos alem do "GET", "POST", "PUT", "DELETE", deve se instancia o HttpRequest() !
+
+ - Antes deve criar o "formData" !
+
+ - Os parametros que deve ser passado, está definido no projeto NODEjs!
+  - Tipo de método
+  - url
+  - informações, BODY, body mais algumas informações!
+
+  <blockquete>
+
+    // Criando o request!
+    const resquest = new HttpRequest('POST', url, formData);
+
+    // Chama o metodo Http do Angular
+    return this.httpService.request(resquest);
+
+  </blockquete>
+
+ - É como "se fosse" um request personalisado!
+
+ - Upload de arquivos, não envia jSom, envia o arquivo!
+
+ - Instancia a variavel "FormData", para por todos os arquivos!
+
+ - Construa o "FormData" 
+
+ - Inteira cada arquivo que vc tenha no "FormData" usando append
+
+ - Deve ser passar: 
+  - nome do atributo
+  - Valor ou blob, que seria o arquivo!
+  - nome do arquivo
+
+  <blockquete>
+    // Instanciando e criando o FormData!
+    const formData = new FormData();
+    files.forEach(file => formData.append('file', file, file.name));
+  </blockquete>
+
+  - Pode ser usado o POST simples
+
+  <blockquete>
+    return this.httpService.post(url, formData);
+  <blockquete>
+
+### Usando o request personalizado de arquivos, no component!
+
+- Chama o método upload, passa os valores que são os arquivos e a url!
+
+- faça o subscribe
+
+<blockquete>
+
+  onUpload(){
+
+      if(this.files && this.files.size > 0){
+
+        this.serviceUpload.upload(this.files, 'http://localhost:8000/upload')
+        .subscribe(response => console.log ( 'upload concluido!'));
+      }
+
+    }
+</blockquete>
+
+- Não use o Take(1) porq ele envia 2 requisições, use o UNsubscribe!
+
+- Boa a inscrição em uma variavel "Subscription", quando chegar no "ngOnDestroy", 
+você deve se sesisncrever usando a variavel do tipo "Subscription"!
+
+</blockquete>
+  ngOnDestroy(){
+      this.sub.unsubscribe();
+    }
+</blockquete>
+
+- 
+
+### Http: Removendo CORS com Angular Proxy
 
 
 
