@@ -1111,9 +1111,9 @@ Executando o emulador de API: json-server --watch db.json
  - Antes deve criar o "formData" !
 
  - Os parametros que deve ser passado, está definido no projeto NODEjs!
-  - Tipo de método
-  - url
-  - informações, BODY, body mais algumas informações!
+    - Tipo de método
+    - url
+    - informações, BODY, body mais algumas informações!
 
   <blockquete>
 
@@ -1136,9 +1136,9 @@ Executando o emulador de API: json-server --watch db.json
  - Inteira cada arquivo que vc tenha no "FormData" usando append
 
  - Deve ser passar: 
-  - nome do atributo
-  - Valor ou blob, que seria o arquivo!
-  - nome do arquivo
+    - nome do atributo
+    - Valor ou blob, que seria o arquivo!
+    - nome do arquivo
 
   <blockquete>
     // Instanciando e criando o FormData!
@@ -1186,6 +1186,7 @@ você deve se sesisncrever usando a variavel do tipo "Subscription"!
 
 ### Http: Removendo CORS com Angular Proxy
 
+-  
 
 
  

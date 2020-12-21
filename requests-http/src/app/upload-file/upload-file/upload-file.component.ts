@@ -1,6 +1,7 @@
-import { UploadFileService } from './../upload-file.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+import { UploadFileService } from './../upload-file.service';
 
 @Component({
   selector: 'app-upload-file',
