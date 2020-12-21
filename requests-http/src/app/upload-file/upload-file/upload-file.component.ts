@@ -1,3 +1,4 @@
+import { collectExternalReferences } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -67,7 +68,13 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   // Método que ativa quando o component é destruido
   // Esta se desinscrevendo para não gerar erro de memoria!
   ngOnDestroy(){
-    this.sub.unsubscribe();
+
+    //console.log(this.sub);
+
+    if(this.sub !== undefined){
+      this.sub.unsubscribe();
+    }
+
   }
 
 
