@@ -13,25 +13,25 @@ import { CursosGuard } from './guards/cursos.guard';
 /* Informa o path principal, mais o caminho do Module! */
 /* Lazy Loading */
 const appRoutes: Routes = [
-  { 
-    path: 'cursos', 
+  {
+    path: 'cursos',
     loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule),
     canActivate: [AuthGuard],
     canActivateChild: [CursosGuard],
     canLoad: [AuthGuard]
   },
-  { 
+  {
     path: 'alunos',
     loadChildren: () => import('./alunos/alunos.module').then(m => m.AlunosModule),
     canActivate: [AuthGuard],
     canLoad: [AuthGuard]
     //canActivateChild: [AlunosGuard]
   },
-  { 
-    path: 'login', 
-    component: LoginComponent    
+  {
+    path: 'login',
+    component: LoginComponent
   },
-  { 
+  {
     path: '',
     component: HomeComponent,
     canActivate: [AuthGuard]
@@ -45,7 +45,7 @@ const appRoutes: Routes = [
 /*Configura a lista de rotas que foi definidas! */
 /*RouterModule é exportado e importado, para poder usar a diretiva routerLink */
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {useHash: true})],
+  imports: [RouterModule.forRoot(appRoutes, {useHash: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

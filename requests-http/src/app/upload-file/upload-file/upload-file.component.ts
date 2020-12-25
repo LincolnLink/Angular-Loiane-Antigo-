@@ -1,8 +1,9 @@
-import { collectExternalReferences } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { UploadFileService } from './../upload-file.service';
+
+import { FormGroup, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-upload-file',
@@ -25,9 +26,11 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   // Variavel usada para se desinscrever!
   sub: Subscription;
 
-  constructor(private serviceUpload: UploadFileService) { }
+  constructor(
+    private serviceUpload: UploadFileService,
+  ) { }
 
-  ngOnInit(){ }
+  ngOnInit(){}
 
   // Método de Evento que pega os arquivos e trata eles!
   onChange(event){
@@ -55,12 +58,18 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   }
 
   // Método que faz p upload, chamando o serviço personalizado de upload de arquivos!
+  // pODE SE USAR: environment.BASE_URL + '/upload'
   onUpload(){
 
     if(this.files && this.files.size > 0){
 
-      this.sub = this.serviceUpload.upload(this.files, 'http://localhost:8000/upload')
+      this.sub = this.serviceUpload.upload(this.files, '/api/upload')
       .subscribe(response => console.log('upload concluido!' + response));
+
+
+      this.lisNameFiles = [];
+
+
     }
   }
 

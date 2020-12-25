@@ -1186,7 +1186,9 @@ você deve se sesisncrever usando a variavel do tipo "Subscription"!
 
 ### Http: Removendo CORS com Angular Proxy
 
--  
+-  link do projeto em node
+
+### Upload Arquivo: Barra de Progresso + Observando Eventos Http
 
 
  

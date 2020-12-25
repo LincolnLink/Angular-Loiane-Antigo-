@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+//const cors = require('cors');
 const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
 
@@ -13,13 +13,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 // o JS por padrão impede a comunicação entre dominios diferentes, 
 // o cors tem a função de liberar essa comunicação!
 /* Configuração do cors */
+/*
 const corsOptions = {
     origin: '*',
     optionsSuccessStattus: 200
 }
-
 // Usando outro middleware!
 app.use(cors(corsOptions));
+*/
 
 // Definindo a pasta que vai ser usada para guardar os arquivo do upload
 const multipartMiddleware = multipart({uploadDir: './uploads'});
