@@ -1190,11 +1190,92 @@ você deve se sesisncrever usando a variavel do tipo "Subscription"!
 
 ### Upload Arquivo: Barra de Progresso + Observando Eventos Http
 
+  - Devese capturar eventos de upload de arquivos!
+
+  <blockquete>
+      export declare enum HttpEventType {
+          /**
+          * The request was sent out over the wire.
+          */
+          Sent = 0,
+          /**
+          * An upload progress event was received.
+          */
+          UploadProgress = 1,
+          /**
+          * The response status code and headers were received.
+          */
+          ResponseHeader = 2,
+          /**
+          * A download progress event was received.
+          */
+          DownloadProgress = 3,
+          /**
+          * The full response including the body was received.
+          */
+          Response = 4,
+          /**
+          * A custom event from an interceptor or a backend.
+          */
+          User = 5
+      }
+  </blockquete>
+
+- No método POST no serviço, pode passar um header ou observable, alem da url e do formData!
+
+- {observe: 'events'} é o 3° parametro que é passado, para obter dados do update!
+
+- Essa configuração só funciona apenas em POST de update e download 
+
+  <blockquete>
+      
+      {
+        observe: 'events',
+        reportProgress: true
+      }
+
+  </blockquete>
+
+- No subscribe deve se por o response do console.log
+
+  - type 1 : informa o quando foi carregado, e o total, informa o quant foi carregado até chegar no total!
+
+  - HttpHeadersResponse: informa o status
+
+  - type 3 : downloadprogresse, informa o loaded!
+  
+  - HttpResponse: informa o status
+
+- Copia uma barra de progresso do Bootstrap4 
+
+- Troca o response por "event: HttpEvent<Object>", para ajuda no intellisense! 
+
+- No subscribe é possivel definir a % do progresso! 
+
+  <blockquete>
+
+      if(event.type === HttpEventType.Response){
+                console.log('upload concluido!');
+              }
+              else if (event.type === HttpEventType.UploadProgress){
+                const percentDone = Math.round((event.loaded * 100) / event.total);
+
+                console.log('Progresso', percentDone);
+
+                this.progress = percentDone;
+
+              }
+
+  </blockquete>
+
+### Http: Criando operador RxJS customizado
+
+ - Pode criar dois tipos de operadores do RxJs
+
+  -
+  - 
+
 - 
-
- 
-
-
 
 
 

@@ -23,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
-    SharedModule
+    SharedModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,7 +24,11 @@ export class UploadFileService {
     //return this.httpService.request(resquest);
 
     // POST feito de uma forma mais simples!
-    return this.httpService.post(url, formData);
-
+    return this.httpService.post(url, formData,
+        {
+            observe: 'events',
+            reportProgress: true
+        }
+      );
   }
 }

@@ -1,1 +1,34 @@
-<p>primeiro-teste works!</p>
+<div class="" [formGroup]="formulario">
+
+<div class="col-md-6">
+  <div class="row">
+
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Filtro</label>
+    <input class="form-control" type="text" name="search" formControlName="filterFild" />
+    <small id="emailHelp" class="form-text text-muted">Primeiro Teste de tabela</small>
+  </div>
+
+</div>
+
+</div>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Endereço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios |filter: formulario.get('filterFild'); let i = index">
+      <td>{{i}}</td>
+      <td>{{usuario.nome}}</td>
+      <td>{{usuario.endereco}}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

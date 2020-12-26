@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UploadFileService } from './../upload-file.service';
 
 import { FormGroup, FormBuilder} from '@angular/forms';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload-file',
@@ -25,6 +26,12 @@ export class UploadFileComponent implements OnInit, OnDestroy {
 
   // Variavel usada para se desinscrever!
   sub: Subscription;
+
+  // Variavel que informa a % do carregamento!
+  progress: number = 0;
+
+  // Variavel que informa quando foi concluido!
+  concluido: string = "";
 
   constructor(
     private serviceUpload: UploadFileService,
@@ -55,6 +62,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     //document.getElementById('customFile').innerHTML = fileNames.join(', ');
     //const valueFild = [...event.srcElement.files].map((file) => `${file.name}`).join(', ');
 
+    this.progress = 0;
   }
 
   // Método que faz p upload, chamando o serviço personalizado de upload de arquivos!
@@ -64,11 +72,26 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     if(this.files && this.files.size > 0){
 
       this.sub = this.serviceUpload.upload(this.files, '/api/upload')
-      .subscribe(response => console.log('upload concluido!' + response));
+      .subscribe((event: HttpEvent<Object>) => {
 
+        // Evento que occorre em download e upload!
+        // HttpEventType
+        // console.log(event);
+
+        if(event.type === HttpEventType.Response)
+        {
+          this.concluido = 'upload concluido!';
+        }
+        else if (event.type === HttpEventType.UploadProgress)
+        {
+          const percentDone = Math.round((event.loaded * 100) / event.total);
+
+          // console.log('Progresso', percentDone , '%');
+          this.progress = percentDone;
+        }
+      });
 
       this.lisNameFiles = [];
-
 
     }
   }
