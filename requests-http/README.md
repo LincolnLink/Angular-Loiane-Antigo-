@@ -216,6 +216,10 @@ Executando o emulador de API: json-server --watch db.json
 
  - Instala a extenção "Rest Client"
 
+    <blockquete>
+      npm install node-rest-client
+    </blockquete>
+
  - Cria um outro arquivo chamado "exemplo.http"!
 
  - Nele bota "http://localhost:3000/cursos"
@@ -1110,20 +1114,40 @@ Executando o emulador de API: json-server --watch db.json
 
  - Antes deve criar o "formData" !
 
+ - Para poder enviar arquivos deve instancia o formData!
+
+    - Cada arquivo deve se fazer um append!
+
+    - Deve ter 3 informações no append!
+
+      - Nome do campo ou Nome do atributo: 'file'
+
+      - Valor do campo ou Blob: blob que é o arquivo
+
+      - Nome do arquivo: file.name
+
+    <blockquete>
+
+      const formData = new FormData();
+      
+      files.forEach(file => formData.append('file', file, file.name));
+
+    </blockquete>
+
  - Os parametros que deve ser passado, está definido no projeto NODEjs!
     - Tipo de método
     - url
     - informações, BODY, body mais algumas informações!
 
-  <blockquete>
+    <blockquete>
 
-    // Criando o request!
-    const resquest = new HttpRequest('POST', url, formData);
+      // Criando o request!
+      const resquest = new HttpRequest('POST', url, formData);
 
-    // Chama o metodo Http do Angular
-    return this.httpService.request(resquest);
+      // Chama o metodo Http do Angular
+      return this.httpService.request(resquest);
 
-  </blockquete>
+    </blockquete>
 
  - É como "se fosse" um request personalisado!
 
@@ -1184,9 +1208,81 @@ você deve se sesisncrever usando a variavel do tipo "Subscription"!
 
 - 
 
-### Http: Removendo CORS com Angular Proxy
+### Http: Removendo CORS com Angular Proxy, configuração é no Angular e não no back end
 
--  https://github.com/LincolnLink/Angular-Loiane/tree/master/Nodejs/server
+ - Removendo primeiro do back end NODE!
+
+    - No projeto foi instalado uma lib do cors, e configurado um " * " para habilitar ele!
+
+    - Com isso qualquer pessoa tem acesso a API
+
+    - Em produção não é uma boa ideia fazer isso! 
+
+    - Comenta a linha do cors
+
+ ### configurando o projeto Angular para conectar com o backend sem precisar usar o cors!
+
+  - Cria um arquivo chamado "proxy.conf.js" na pasta raiz do projeto Angular
+
+  - pode ser arquivo JS ou JSOM!
+
+  - Nesse arquivo cria uma constando chamada "PROXY_CONFIG" ela recebe um array que tem um objeto com as configurações, depois exporta essa constante!
+
+    - context: Uma definição de chamada para o backend, diferente de rota, se bota '/api' por que é uma convenção.
+
+    - target: Uma string que define a porta do backend.
+
+      - O "context" redireciona para o "target"!
+
+    - securre: false
+
+    - loglevel: 'debug'
+
+    - pathRewrite: reescrever o caminho! '^/api': '' , ele está  removendo o "api" usar caso seja necessario!
+
+  - No "package.json" adiciona uma flag no start!
+
+    <blockquete> " ng serve --proxy-config proxy.conf.js " </blockquete>
+
+    - Deve ultilizar o " npm run start "
+
+    - O codigo completo!
+
+    <blockquete>
+
+        const PROXY_CONFIG = [
+          {
+            context: ['/api'],
+            target: 'http://localhost:8000/',
+            secure: false,
+            loglevel: 'debug',
+            pathRewrite: { '^/api': '' }
+          }
+        ]
+        module.exports = PROXY_CONFIG;
+
+    </blockquete>
+
+
+
+ ### (JSOM) configurando o projeto Angular para conectar com o backend sem precisar usar o cors!
+
+  <blockquete>
+
+    {
+      "/api/*": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "loglevel": "debug",
+        "pathRewrite": {
+          "^/api": ""
+        }
+      }
+    }
+
+  </blockquete>
+
+
 
 ### Upload Arquivo: Barra de Progresso + Observando Eventos Http
 
@@ -1227,12 +1323,14 @@ você deve se sesisncrever usando a variavel do tipo "Subscription"!
 
 - Essa configuração só funciona apenas em POST de update e download 
 
+- Retorna esse objeto para poder funcionar o progresso!
+
   <blockquete>
-      
+      return this.httpService.post(url, formData,
       {
         observe: 'events',
         reportProgress: true
-      }
+      })
 
   </blockquete>
 
@@ -1268,12 +1366,72 @@ você deve se sesisncrever usando a variavel do tipo "Subscription"!
 
   </blockquete>
 
+  - O evento só é concluido quando temos o "HttpEventType.Response"
+
+  -  Se o evento for do tipo "UploadProgress" ele carrega a barra de progresso!
+
 ### Http: Criando operador RxJS customizado
 
- - Pode criar dois tipos de operadores do RxJs
+ - Reultilizando o método que faz upload de arquivo!
 
-  -
-  - 
+ - Podemos fazer 2 operadores RxJs para facilitar a reutilização!
+ 
+ <blockquete>
+
+  this.sub = this.serviceUpload.upload(this.files, '/api/upload')    
+   .subscribe((event: HttpEvent<Object>) => {}
+
+ </blockquete>
+
+ - O subscribe ele retorna a resposta que é um event do tipo "HttpEvent<Object>", apenas requisições de upload e download!
+
+ - Com base nisso podemos criar 2 operadores do RxJs
+
+ - A primeira função do rxjs personalizada, o método retorna o HttpResponse, que tem o status de upload concluido!
+
+  <blockquete>
+    export function filterResponse<T>(){
+        return pipe(
+          filter((event: HttpEvent<T>) => event.type === HttpEventType.Response),
+          map((res: HttpResponse<T>) => res.body)
+        );
+    }
+  </blockquete>
+
+  - Ele retorna um tipo qualquer!
+
+  - Dentro do pipe(), bota um filter() que recebe o evento do tipo "HttpEvent<T>", verifica se ele é igual ao "HttpEventType.Response"!
+
+  - Caso seja igual, cria um "mapeamento" map(), aonde retorna o corpo da resposta! 
+__________________________________________________________________________
+  <blockquete>
+    export function uploadProgress<T>(cb: (progress: number) => void){
+      return tap((event: HttpEvent<T>)=>{
+        if(event.type === HttpEventType.UploadProgress){
+          cb(Math.round((event.loaded * 100) / event.total))
+        }
+      });
+    }
+  </blockquete>
+  
+  - A segunda função do rxjs personalizada, recebe é um função de Callback, que o tipo dela é uma função não retorna nada, apenas recebe o "progress" que é do tipo number!
+
+  - O tap() lee executa alguma logica!
+
+  - Retorna um tap(), nesse tap() é colocado uma função que recebe como parametro um "event" que é do tipo "HttpEvent<T>"!
+
+ - A função tem uma condição, aonde verifica se o tipo do evento é igual a "HttpEventType.UploadProgress", caso seja é chamada a função de callback, para ser definida, e com isso passa o calculo que retorna o valor do progresso! no parametro da função de callback!
+
+ ### Refatorando
+
+ - Troca todo codigo de dentro do subscript, e bota em um pipe antes mesmo do subscribe, para receber os métodos do RXJS personalizados!
+
+ - Passa a função de callback , quando for chamar a função "uploadProgress()" a informação é passada para a variavel que alimenta o html!
+
+ - A função de callback ela serve apenas para receber o valor que é calculado na propria função, ela só retorna o valor se o evento for do tipo determinado!
+
+
+### Http: Download de Arquivo
 
 - 
 

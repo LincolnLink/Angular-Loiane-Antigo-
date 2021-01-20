@@ -13,17 +13,22 @@ export class UploadFileService {
   upload(files: Set<File>, url: string){
 
     // Instanciando e criando o FormData!
+    // Para poder enviar arquivos deve instancia o formData!
     const formData = new FormData();
+    // Cada arquivo deve se fazer um append!
+    // Passando as informações
     files.forEach(file => formData.append('file', file, file.name));
 
 
-    // Criando o request!
-    //const resquest = new HttpRequest('POST', url, formData);
+    // Criando o request, é um metodo http personalizado!
+    // Poderia enviar um json, no lugar do formData!
+    const resquest = new HttpRequest('POST', url, formData);
 
     // Chama o metodo Http do Angular
     //return this.httpService.request(resquest);
 
     // POST feito de uma forma mais simples!
+
     return this.httpService.post(url, formData,
         {
             observe: 'events',

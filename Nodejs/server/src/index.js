@@ -1,5 +1,5 @@
 const express = require('express');
-//const cors = require('cors');
+/*const cors = require('cors');*/
 const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
 
@@ -40,6 +40,6 @@ app.use((err, req, res, next) => res.json({error: err.message}));
 
 // Escutando a porta, e passando uma função de callback, 
 // informando que o servidor foi iniciado!
-app.listen(8000, ()=> {
-    console.log('Servidor porta 8000');
+app.listen(8005, ()=> {
+    console.log('Servidor porta 8005');
 })
