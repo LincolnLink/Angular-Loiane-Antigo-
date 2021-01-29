@@ -12,7 +12,7 @@ export class Cursos2Service extends CrudService<Curso> {
 
   constructor(protected http: HttpClient )
   {
-    super(http, `${environment.API}cursos`);
+    super(http, `http://localhost:3000/cursos`);
   }
 
 }

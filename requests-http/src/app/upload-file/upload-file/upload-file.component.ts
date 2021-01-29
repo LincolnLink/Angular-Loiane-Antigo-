@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { UploadFileService } from './../upload-file.service';
+import { FileService } from './../upload-file.service';
 
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
+import { report } from 'process';
 
 @Component({
   selector: 'app-upload-file',
@@ -34,7 +35,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   concluido: string = "";
 
   constructor(
-    private serviceUpload: UploadFileService,
+    private fileService: FileService,
   ) { }
 
   ngOnInit(){}
@@ -73,15 +74,20 @@ export class UploadFileComponent implements OnInit, OnDestroy {
 
       //this.sub = this.serviceUpload.upload(this.files, 'http://localhost:8005/upload')
       //this.sub = this.serviceUpload.upload(this.files, environment.BASE_URL + '/upload')
-      this.sub = this.serviceUpload.upload(this.files, '/api/upload')
+      this.sub = this.fileService.upload(this.files, '/api/upload')
       .pipe(
         uploadProgress(progress => {
-          console.log(progress);
+          console.log("valor: " ,progress);
           this.progress = progress
         }),
         filterResponse()
       )
-      .subscribe(response => console.log('Upload Concluido'));
+      .subscribe(response =>
+        {
+          console.log('Upload Concluido'),
+          this.concluido = 'upload concluido!';
+        }
+      );
 
       /*
       .subscribe((event: HttpEvent<Object>) => {
@@ -115,13 +121,11 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   // Método que ativa quando o component é destruido
   // Esta se desinscrevendo para não gerar erro de memoria!
   ngOnDestroy(){
-
     //console.log(this.sub);
 
     if(this.sub !== undefined){
       this.sub.unsubscribe();
     }
-
   }
 
 
@@ -141,5 +145,19 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   //}
 
 
+  // TODO : preciso terminar
+  onDownloadExcel(){
 
+  }
+
+  // Botão de download
+  onDownloadPdf(){
+
+    this.fileService.download('api/downloadPDF')
+    .subscribe((res: any) => {
+
+      this.fileService.handleFile(res, 'report.pdf');
+
+    });
+  }
 }

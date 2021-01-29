@@ -1,4 +1,4 @@
-import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpEventType, HttpResponse } from "@angular/common/http";
 import { pipe } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 

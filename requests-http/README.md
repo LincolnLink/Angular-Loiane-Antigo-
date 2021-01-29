@@ -2,6 +2,8 @@
 
 Executando o emulador de API: json-server --watch db.json
 
+executa: npm run start, ao inves de ng serve!
+
 ### Dicas MUITO IMPORTANTE
 
   - Deve-se inscrever em métodos que retorna "observable"
@@ -1433,9 +1435,125 @@ __________________________________________________________________________
 
 ### Http: Download de Arquivo
 
-- 
+ - Cria o botão de "download EXCEL" no HTML e o botão de " download PDF"
+
+ - Cria dois novos endPoint noservidor NODE!
+
+ - Cria no front end 2 botoes, um de download od PDF e outro do EXCEL!
+
+ - Cria dois arquivos um PDF e outro Excel!
+
+ - O Angular não da suporte ao download de arquivo, isso é feito com JS puro!
+
+ - O Anular só oferece o GET!
+
+ - Quando faz um get(), o ppadrão é retornar um json, só que no caso, vai ser retornado um blob!
+
+ - No get pode usar o "reportProgress" para saber do progresso do download!
+
+ - O backend deve setar o "content -length"! para saber o tamanho completo do arquivo
+
+ <blockquete>
+
+  download(url: string){
+
+      return this.httpService.get(url, {
+        responseType: 'blob' as 'json', //Progresso de download!
+        //reportProgress   <- rever para poder entender!
+        // content -length
+    });
+  }
+
+ </blockquete>
+
+ - Os tipos de retorno que podem ser configurado no backend
+
+ <blockquete> 
+
+    https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Basico_sobre_HTTP/MIME_types/Complete_list_of_MIME_types
+
+ </blockquete>
+
+ - cria uma instancia de um blob na parte do método do botão!
+
+ - bota um array para instanciar o arquivo!
+
+ - Para gerenciar melhor o arquivo , pode por o tipo dele
+
+ - Pega a janela do browser, setar a URL e cria um link
+
+ - passa o objeto, a instancia do Blob!
+
+ <blockquete>  const blob = window.URL.createObjectURL(file); </blockquete>
+  
+ - Cria um link e seta o href, que é a URL no arquivo!
+
+ <blockquete> const link = document.createElement('a'); </blockquete>
+
+ - Criando a "Gambiarra"
+
+ <blockquete>
+
+  link.href = blob;
+  link.download = 'report.pdf';
+
+  link.click();
+
+  window.URL.revokeObjectURL(blob);
+  link.remove();
+
+ <blockquete>
+
+ - O link é removido para ser reutilizado em outros arquivos!
+
+###  Para funcionar no Internet Explore, deve criar um link usando o DOM e fazer o js clickar nele, para poder fazer download do arquivo
+
+  <blockquete>
+      
+    if(window.navigator && window.navigator.msSaveOrOpenBlob){
+      window.navigator.msSaveOrOpenBlob(file)
+    }
+
+  </blockquete>
+
+### DOWNLOAD de arquivos Excel em navegadores do fireFox !
+
+  - Troca o evento de "click" por algo mais personalizado!
+
+  <blockquete>
+
+   //link.click();
+      link.dispatchEvent(new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+
+      }))
+
+  </blockquete>
 
 
+ - Para o firefox precisa por um settimeout
+
+  <blockquete>
+    setTimeout(() =>{ //firefox
+
+          window.URL.revokeObjectURL(blob);
+          link.remove();
+
+        }, 100);
+
+  </blockquete>
+
+### Criando tela de pesquisa
+
+  - Criando um modulo com o arquivo de configuração de rotas
+
+  <blockquete>
+
+    ng g m reactive-search --routing
+
+  </blockquete>
 
 
 

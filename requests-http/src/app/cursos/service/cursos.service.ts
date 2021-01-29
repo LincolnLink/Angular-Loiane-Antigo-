@@ -12,7 +12,7 @@ export class CursosService {
   // readonly: siginifica que não pode atualizar essa variavel!
   //private readonly API = 'http://localhost:3000/cursos';
 
-  private readonly API = `${environment.API}cursos`;
+  private readonly API = `http://localhost:3000/cursos`;
 
   constructor(private http: HttpClient) { }
 

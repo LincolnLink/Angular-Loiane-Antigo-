@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'teste-paginacao',
     loadChildren: () => import('./teste-paginacao/teste-paginacao.module').then(m => m.TestePaginacaoModule)
+  },
+  {
+    path: 'busca-reativa',
+    loadChildren: () => import('./reactive-search/reactive-search.module').then(m => m.ReactiveSearchModule)
   }
 
 ];

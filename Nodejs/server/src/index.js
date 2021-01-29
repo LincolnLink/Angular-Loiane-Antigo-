@@ -1,7 +1,7 @@
 const express = require('express');
-/*const cors = require('cors');*/
 const bodyParser = require('body-parser');
 const multipart = require('connect-multiparty');
+/*const cors = require('cors');*/
 
 
 // Instanciando a aplicação
@@ -33,6 +33,16 @@ app.post('/upload', multipartMiddleware, (req, res) =>{
     const files = req.files;
     console.log(files);
     res.json({message: files});
+});
+
+/*
+app.get('/downloadExcel', (req, res) => {
+    res.download('../uploads/report.xlsx');
+});*/
+
+// Download do PDF especifico!
+app.get('/downloadPDF', (req, res) => {
+    res.download('./uploads/report.pdf');
 });
 
 // Mensagem de erro, caso tenha algum!
