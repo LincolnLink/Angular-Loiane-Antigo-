@@ -1545,13 +1545,100 @@ __________________________________________________________________________
 
   </blockquete>
 
-### Criando tela de pesquisa
+### Criando tela de pesquisa (HTML/CSS + BootSnipp)
 
   - Criando um modulo com o arquivo de configuração de rotas
 
   <blockquete>
 
     ng g m reactive-search --routing
+
+  </blockquete>
+
+  - Cria um component chamado "LibSearchComponent" adiciona ele no "ReactiveSearchRoutingModule" 
+
+  - Bootsnipp são modelos prontos de estruturas em HTML e CSS que usa o bootstrap! 
+
+   https://bootsnipp.com/snippets/Q0eE1
+
+  - Cria um evento de click no botão com um método que pega oque foi digitado!
+
+  <blockquete>
+
+    onSeartch(){
+      console.log(this.queryField.value);
+    }
+
+  </blockquete>
+
+### Http: Passando Parâmetros na URL (HttpParams)
+
+ - Isola a requisição HTTP em um serviço
+
+ - Trata o que foi digitado!
+
+  <blockquete>
+    let value = this.queryField.value;
+
+    if(value && value.trim() !== '')
+    {
+      value = value.trim();
+    }
+  </blockquete>
+
+ - Trata o resultado da requisição usando map e tap
+
+  <blockquete>
+
+      this.results$ = this.libSearchService.getLibAngular(value)
+      .pipe(
+        // Obomseria tipar com uma interface
+        tap((res: any) => this.total = res.total),
+        map((res: any) => res.results)
+
+      );
+  </blockquete>
+
+  - Caso tenha todos os parametros
+
+  - Cria uma const com o valor e parametros e passa como objeto!
+
+  <blockquete>
+
+    getLibAngular(value: string, fields: string)
+    {
+
+      const params = {
+        search: value,
+        fields: fields
+      };
+
+      //+ '?fields=' + fields + '&search=' + value
+      // + '?fields=' + fields.fields + '&search=' + value
+      return this.httpService.get(this.SEARCH_URL, { params } );
+    }
+
+  </blockquete>
+
+  - Caso não tenha todos os parametros! (Uma forma mais DINAMICA!)
+
+  - Pode fazer "append" caso tenha mais valores!
+
+  - Deve construir de forma dinamica! 
+
+  - Só aceita se o nome for "params"
+
+
+  <blockquete>
+
+    getLibAngular(value: any, fields: any)
+    {
+      let params = new HttpParams()
+      params = params.set('search', value); //params_.append('search', value2)
+      params = params.set('fields', fields);
+     
+      return this.httpService.get(this.SEARCH_URL, { params } );
+    }
 
   </blockquete>
 
