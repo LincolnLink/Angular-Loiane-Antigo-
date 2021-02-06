@@ -1,10 +1,8 @@
-import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LibSearchService } from './../service/lib-search.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { tap } from 'rxjs/internal/operators/tap';
-import { map } from 'rxjs/internal/operators/map';
+import { map, tap, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -15,20 +13,27 @@ import { map } from 'rxjs/internal/operators/map';
 export class LibSearchComponent implements OnInit {
 
   queryField = new FormControl();
-
   results$: Observable<any>;
   total: number;
-
-
+  readonly fields = 'name,description,version,homepage';
 
   constructor(private libSearchService: LibSearchService) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+
+    this.results$ = this.queryField.valueChanges
+    .pipe(
+      map(value => value.trim()),
+      filter(value => value.length > 1),
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap((value) => this.libSearchService.getLibAngular(value, this.fields)),
+      tap((res: any) => this.total = res.total),
+      map((res: any) => {return res.results})
+    );
   }
 
   onSeartch(){
-
-
     let value: string = this.queryField.value;
     const fields = 'name,description,version,homepage';
 
@@ -49,11 +54,9 @@ export class LibSearchComponent implements OnInit {
       // Obomseria tipar com uma interface
       tap((res: any) => this.total = res.total),
       map((res: any) => res.results)
-
     );
-
-
-
   }
+
+
 
 }

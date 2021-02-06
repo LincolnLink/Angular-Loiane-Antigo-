@@ -1642,6 +1642,76 @@ __________________________________________________________________________
 
   </blockquete>
 
+### Http: Pesquisa/Busca com Programação Reativa
+
+
+  - Pega o campo de busca e faz com que a propriedade "ValueChanges", seja a tribuida ao "this.results$", Para não precisar usar o subscribes,
+
+  - "ValueChanges" sempre retorna um "observable", faz parte da programação reativa!
+
+  - Operadores do Rxjs que ajuda no campo de busca!
+
+  <blockquete>
+    ngOnInit(){
+
+      this.queryField.valueChanges
+      .pipe(
+        map(value => value.trim()),
+        filter(value => value.length > 4),
+        distinctUntilChanged(),
+        tap(value => console.log(value))
+
+      ).subscribe();
+    }
+
+  </blockquete>
+
+  - Para fazer uma busca com o minimo de caracteres
+
+  <blockquete> filter(value => value.length > 4), </blockquete>
+
+
+  - Evitando valores repetidos!
+
+  <blockquete> distinctUntilChanged(), </blockquete>
+
+
+  - Por um tempo para fazer a requisição 
+
+  <blockquete> debounceTime(200), </blockquete>
+
+  - Evitar chamadas alinhadas (switchMap)
+
+  <blockquete>
+
+    ngOnInit(){
+
+        this.results$ = this.queryField.valueChanges
+        .pipe(
+          map(value => value.trim()),
+          filter(value => value.length > 3),
+          debounceTime(300),
+          distinctUntilChanged(),
+          switchMap((value) => this.libSearchService.getLibAngular(value, this.fields)),
+          tap((res: any) => this.total = res.total),
+          map((res: any) => {return res.results})
+        );
+      }
+
+  </blockquete>
+
+### Debug com Augury
+
+- 
+
+  
+
+
+
+
+
+
+
 
 
 

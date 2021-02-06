@@ -13,7 +13,6 @@ export class LibSearchService {
 
   getLibAngular(value: any, fields: any)
   {
-
     // Não vai aceitar nome diferente de "params"
     // Usar esse exemplo caso tenha todos os parametros!
     const params_ = {
@@ -28,5 +27,5 @@ export class LibSearchService {
     //+ '?fields=' + fields + '&search=' + value
     // + '?fields=' + fields.fields + '&search=' + value
     return this.httpService.get(this.SEARCH_URL, { params } );
-  }
+  }  
 }
