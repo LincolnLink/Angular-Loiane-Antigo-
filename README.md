@@ -511,7 +511,35 @@
 
   - aceita todos, menos a ultima pergunta que fala sobre sobreescrever o arquivo index.html!
 
-  //TODO....
+  - Não vincula com o github
+
+  - É gerado 2 arquivos, firebase.json e firebaserc
+
+  - bota o caminho " "public": "dist/requests-http","
+
+  - para subir os arquivos gerado!
+
+  <blockquote> firebase deploy <blockquote>
+
+  - Com isso já é feito o deploy e o site já está no ar!
+
+### Deploy em Produção com ng deploy (Firebase)
+
+  - Comandos que agiliza o deploy
+
+  <blockquote> ng add @angular/fire <blockquote>  
+
+  - banco de dados em tempo real!
+
+  - Precisa da versão do Angular CLI 8.3.3
+
+  - precisa do firebase e está logado no fire base!
+
+  <blockquote> ng deploy <blockquote>
+
+  - Gera conteudo do /dist/ e sobe em produção!
+
+
 
 
 
