@@ -1,5 +1,4 @@
-import { CursosListaComponent } from './cursos/cursos-lista/cursos-lista.component';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /*

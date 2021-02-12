@@ -26,7 +26,9 @@
 
   - Memory Leak
 
-    - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async"
+    - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async" ou take(1)!
+
+    - Mas pode se desinscrever da requisição depois que o component é destruido, usando o ciclo de vida ngDestroi()!
 
   - Métodos "static"
 
@@ -455,10 +457,61 @@
 
   - https://github.com/LincolnLink/Angular-Loiane/tree/master/requests-http
 
-  
+# Debug e Build de Produção!
+
+    
+### Debug com Augury
+
+  - Não funciona com o Angular 11, apenas com 8 para baixo!
+
+### Debug com Visual Studio Code
+
+  - Na configuração de debuger , bota a porta usada no angular no localhost
+
+### Suporte ao Internet Explorer
+
+  - No arquivo do angular chamado ".browserslistrc" e "polyfills.ts" descomenta e instala caso precise, aquilo que você precisa como suporte!
 
 
+### Build de Produção
 
+  - A configuração do build de produção fica no arquivo "Angular.json"
+
+  - Apenas inclua a flag "--prod" no "package.json" dolado do "ng build"!
+
+  - com tudo configurado executa o comando que gera o build de produção!
+
+  <blockquote> npm run build </blockquote>
+
+### Deploy em Produção (Firebase Hosting)
+
+  - Hospedando usando o firebase!
+
+  - Instala o firebase! 
+
+  - https://firebase.google.com/docs/cli?hl=pt-br#windows-npm
+
+  <blockquote> npm install -g firebase-tools <blockquote>
+
+  - Depois que instala deve fazer login, pode usar qualquer conta do Gmail!
+
+  <blockquote> firebase login <blockquote>
+
+  - aceita os termos, ativa o Analitic ou não e fecha o nevegador que foi aberto!
+
+  - No site do FireBase, entra no modo console!
+
+  - Cria um projeto novo
+
+  - No seu projeto inicia o firebase!
+
+  <blockquote> firebase init <blockquote>
+
+  - Escolha a opção usando "espaço" e aperta enter para seguir!
+
+  - aceita todos, menos a ultima pergunta que fala sobre sobreescrever o arquivo index.html!
+
+  //TODO....
 
 
 

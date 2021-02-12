@@ -19,6 +19,8 @@ export class CursosFormComponent implements OnInit {
   form: FormGroup;
   submitted: boolean;
 
+
+
   // Precisa do "FormBuilder" para deixar o formulario reativo!
   constructor(
     private fb: FormBuilder,
