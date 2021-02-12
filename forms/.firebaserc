@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "curso-angular-lincoln": {
+      "hosting": {
+        "forms": [
+          "curso-angular-lincoln"
+        ]
+      }
+    }
+  }
+}
