@@ -491,11 +491,11 @@
 
   - https://firebase.google.com/docs/cli?hl=pt-br#windows-npm
 
-  <blockquote> npm install -g firebase-tools <blockquote>
+  <blockquote> npm install -g firebase-tools </blockquote>
 
   - Depois que instala deve fazer login, pode usar qualquer conta do Gmail!
 
-  <blockquote> firebase login <blockquote>
+  <blockquote> firebase login </blockquote>
 
   - aceita os termos, ativa o Analitic ou não e fecha o nevegador que foi aberto!
 
@@ -505,7 +505,7 @@
 
   - No seu projeto inicia o firebase!
 
-  <blockquote> firebase init <blockquote>
+  <blockquote> firebase init </blockquote>
 
   - Escolha a opção usando "espaço" e aperta enter para seguir!
 
@@ -519,7 +519,7 @@
 
   - para subir os arquivos gerado!
 
-  <blockquote> firebase deploy <blockquote>
+  <blockquote> firebase deploy </blockquote>
 
   - Com isso já é feito o deploy e o site já está no ar!
 
@@ -527,7 +527,7 @@
 
   - Comandos que agiliza o deploy
 
-  <blockquote> ng add @angular/fire <blockquote>  
+  <blockquote> ng add @angular/fire </blockquote>  
 
   - banco de dados em tempo real!
 
@@ -535,9 +535,170 @@
 
   - precisa do firebase e está logado no fire base!
 
-  <blockquote> ng deploy <blockquote>
+  <blockquote> ng deploy </blockquote>
 
   - Gera conteudo do /dist/ e sobe em produção!
+
+
+### Gerando Imagem Docker com Build de Produção
+
+  - Instala o Docker!
+
+  - Busca por "docker communit download" no google!
+
+  - Depois instala um puglin no VS code chamado "docker"!
+
+    - Primeira faze é fazer o build de produção do Angular!
+
+    - Segundo é gerar a imagem NGinX com o conteudo do build de produção!
+
+  - "node: latest" representa a ultima versão
+
+  - precisa do node 10
+
+# 1° Fase
+
+  - Configurando a imagem no arquivo "Dockerfile"
+
+    <blockquote>
+
+        FROM node:12.18-alpine
+        ENV NODE_ENV=production
+        WORKDIR /app
+
+    </blockquote>
+
+    - COPY: ele copia o arquivo , informa o diretorio de destino!
+
+    <blockquote> COPY package.json /app </blockquote>
+
+    - RUN: codigo para executar!
+
+    <blockquote> RUN npm install --silent </blockquote>
+
+    - Gerando o arquivo nginx, e copiando o projeto para outro diretorio!
+
+    <blockquote>
+
+      FROM nginx:alpine
+      VOLUME /var/cache/nginx
+      COPY --from=angular app/dist/rotas /usr/share/nginx/html
+
+    </blockquote>
+
+    - No arquivo "dockerignore" bota alguns diretorios e arquivos desncessarios para não subir!
+     <blockquote>
+        **/dist
+        **/e2e
+    </blockquote>
+
+  - Cria uma configuração
+
+
+# 2° Fase
+
+  - https://www.nginx.com/
+
+  - Cria um pasta chamada "config" e um arquivo dentro dela chamado "nginx.conf"!
+
+  - Copia e cola o conteudo! 
+
+  <blockquote>
+
+    server {
+        listen 0.0.0.0:80;
+        listen [::]:80;
+        default_type application/octet-stream;
+
+        gzip                    on;
+        gzip_comp_level         6;
+        gzip_vary               on;
+        gzip_min_length         1000;
+        gzip_proxied            any;
+        gzip_types              text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+        gzip_buffers            16 8k;
+        client_max_body_size    256M;
+
+        root /usr/share/nginx/html;
+
+        location / {
+            try_files $uri $uri/ /index.html =404;
+        }
+    }
+
+  </blockquote>
+
+   - Define a porta como 80 é uma porta padrão paraservidores http!
+
+   - Aplicar o gzip em varios arquivos estaticos, arquivos da pasta dist
+
+   - Usar a pasta raiz que é a pasta do HTML!
+
+   - Em caso de pagina não encontrada , redireciona no index.html!
+
+   - Pode por Cache e proxy (se estiver usando node, php ou C#)
+
+   - https://docs.nginx.com/?_ga=2.41121963.801573988.1613180107-1425533929.1613180107 
+
+   - APLICA mais uma configuração no Dockerfile!
+
+  <blockquote>
+    COPY ./config/nginx.conf /etc/ngix/conf.d/default.conf
+
+    # docker build -t curso-angular .
+    # docker run -p 8081:80 curso-angular
+  </blockquote>
+
+  - Bota dois comandos que gera e executa a imagem docker, mapeando as portas!
+
+  - Arquivo "Dockerfile" completo!
+
+  <blockquote>
+
+    FROM node:latest as angular
+    ENV NODE_ENV=production
+    WORKDIR /app
+    COPY package.json /app
+    RUN npm install --silent
+    COPY . .
+    RUN npm run build
+
+    FROM nginx:alpine
+    VOLUME /var/cache/nginx
+    COPY --from=angular app/dist/rotas /usr/share/nginx/html
+    COPY ./config/nginx.conf /etc/ngix/conf.d/default.conf
+
+    # docker build -t curso-angular .
+    # docker run -p 8081:80 curso-angular
+
+  </blockquote>
+
+
+  - Pode por as configurações do que executar no "docker-compose.yml"!
+
+  <blockquote>
+
+    version: '3.4'
+
+    services:
+      curso-angular:
+        image: curso-angular
+        build: .
+        ports:
+          - 8081:80
+
+  </blockquote>
+
+  - executa o plugin: 
+
+  <blockquote> ctrl + shift + p, escreve docker: compose up </blockquote>
+
+  - Pode ter um arquivo de dockerCompose para debug, um para outro ambiente x, y et
+
+  - 
+
+
+
 
 
 
