@@ -10,18 +10,18 @@ import { Usuario } from './usuario';
 })
 export class LoginComponent implements OnInit {
 
-  private usuario: Usuario = new Usuario();
+  usuariox: Usuario = new Usuario();
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
   }
 
-  
+
   iniciandoLogin(usuario: Usuario){
 
     // Validação dos dados!
-    this.authService.fazerLogin(this.usuario);
+    this.authService.fazerLogin(this.usuariox);
 
   }
 

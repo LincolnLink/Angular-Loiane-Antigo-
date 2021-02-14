@@ -15,14 +15,19 @@
           "webpack:/*": "${workspaceRoot}/*"
         }
       },
-
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "pwa-chrome",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
-        }
-
+      {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "url": "http://localhost:8080",
+        "webRoot": "${workspaceFolder}"
+      },
+      {
+        "name": "Docker Node.js Launch",
+        "type": "docker",
+        "request": "launch",
+        "preLaunchTask": "docker-run: debug",
+        "platform": "node"
+      }
     ]
 }

@@ -695,10 +695,34 @@
 
   - Pode ter um arquivo de dockerCompose para debug, um para outro ambiente x, y et
 
+  - Caso não de certo cria e copia 3 arquivos do Docker!
+
+  https://github.com/loiane/curso-angular/blob/master/requests-http/Dockerfile
+
+  - Dockerfile, docker-compose.yml e .dockerignore
+
+
+### Imagem Docker: Deploy Google Cloud (Cloud Run)
+
+  - Fazer o depoly de imagem Docker, usando serviço Cloud!
+
+  - https://cloud.google.com/run
+
+  - Escala automaticamente!
+
+  - https://cloud.google.com/run/docs/quickstarts/build-and-deploy
+
+  - Infelismente usa cartão de credito!
+
+  - Cria um projeto em "Acessar a pagina gerenciar recursos"
+
+  - creat projetc
+
+  - De um nome, edita o project ID, CREATe!!!!!
+
+  - Depois de criado vai no "Container Registry"!
+
   - 
-
-
-
 
 
 
