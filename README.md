@@ -14,7 +14,7 @@
 
     TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
 
-### Dicas
+# Dicas
 
   - Operadores RXJS
 
@@ -40,7 +40,7 @@
 
     - Tem apenas uma instancia! 
 
-### Principais operadores do RXJS
+# Principais operadores do RXJS
 
  - distinctUntilChanged()
 
@@ -69,7 +69,7 @@
 
     </blockquote>
 
-### Atualizando o Angular CLI
+# Atualizando o Angular CLI
 
   -Sempre atualize uma versão para outra, do 4 para o 5, do 5 para o 6 , etc, usando sempre um repositorio para cada versão!
 
@@ -108,7 +108,7 @@
      <blockquote> ncu -u</blockquote>
 
 
-### Reparando erro de vulnerabilidade 
+# Reparando erro de vulnerabilidade 
 
   - Comando
 
@@ -117,7 +117,7 @@
     depois executa um ng build e executa com ng serve!
 
 
-### Principais  comando JS/TS
+# Principais  comando JS/TS
 
   - Compilar o TS
 
@@ -285,7 +285,7 @@
 
 
 
-### Principais comandos do Angular CLI
+# Principais comandos do Angular CLI
 
   - Criando um componente pelo CLI
 
@@ -327,7 +327,7 @@
 
 
 
-### Comandos de teste
+# Comandos de teste
 
   - Comando que varifica o seu codigo!
 
@@ -343,7 +343,7 @@
 
 
 
-### Ciclo de vida do Angular ! 
+# Ciclo de vida do Angular ! 
 
   - Quando? - Evento (Hooks) -
 
@@ -376,7 +376,7 @@
     <blockquote> ngOnDestroy()</blockquote>
 
 
-### Mudando o pré processador de css de um projeto que ja existe!
+# Mudando o pré processador de css de um projeto que ja existe!
 
  - style guid: Padrões do angular
 
@@ -460,20 +460,20 @@
 # Debug e Build de Produção!
 
     
-### Debug com Augury
+# Debug com Augury
 
   - Não funciona com o Angular 11, apenas com 8 para baixo!
 
-### Debug com Visual Studio Code
+# Debug com Visual Studio Code
 
   - Na configuração de debuger , bota a porta usada no angular no localhost
 
-### Suporte ao Internet Explorer
+# Suporte ao Internet Explorer
 
   - No arquivo do angular chamado ".browserslistrc" e "polyfills.ts" descomenta e instala caso precise, aquilo que você precisa como suporte!
 
 
-### Build de Produção
+# Build de Produção
 
   - A configuração do build de produção fica no arquivo "Angular.json"
 
@@ -483,7 +483,7 @@
 
   <blockquote> npm run build </blockquote>
 
-### Deploy em Produção (Firebase Hosting)
+# Deploy em Produção (Firebase Hosting)
 
   - Hospedando usando o firebase!
 
@@ -523,7 +523,7 @@
 
   - Com isso já é feito o deploy e o site já está no ar!
 
-### Deploy em Produção com ng deploy (Firebase)
+# Deploy em Produção com ng deploy (Firebase)
 
   - Comandos que agiliza o deploy
 
@@ -540,7 +540,7 @@
   - Gera conteudo do /dist/ e sobe em produção!
 
 
-### Gerando Imagem Docker com Build de Produção
+# Gerando Imagem Docker com Build de Produção
 
   - Instala o Docker!
 
@@ -556,153 +556,153 @@
 
   - precisa do node 10
 
-# 1° Fase
+  ### 1° Fase
 
-  - Configurando a imagem no arquivo "Dockerfile"
+    - Configurando a imagem no arquivo "Dockerfile"
+
+      <blockquote>
+
+          FROM node:12.18-alpine
+          ENV NODE_ENV=production
+          WORKDIR /app
+
+      </blockquote>
+
+      - COPY: ele copia o arquivo , informa o diretorio de destino!
+
+      <blockquote> COPY package.json /app </blockquote>
+
+      - RUN: codigo para executar!
+
+      <blockquote> RUN npm install --silent </blockquote>
+
+      - Gerando o arquivo nginx, e copiando o projeto para outro diretorio!
+
+      <blockquote>
+
+        FROM nginx:alpine
+        VOLUME /var/cache/nginx
+        COPY --from=angular app/dist/rotas /usr/share/nginx/html
+
+      </blockquote>
+
+      - No arquivo "dockerignore" bota alguns diretorios e arquivos desncessarios para não subir!
+       <blockquote>
+          **/dist
+          **/e2e
+      </blockquote>
+
+    - Cria uma configuração
+
+
+  ### 2° Fase
+
+    - https://www.nginx.com/
+
+    - Cria um pasta chamada "config" e um arquivo dentro dela chamado "nginx.conf"!
+
+    - Copia e cola o conteudo! 
 
     <blockquote>
 
-        FROM node:12.18-alpine
-        ENV NODE_ENV=production
-        WORKDIR /app
+      server {
+          listen 0.0.0.0:80;
+          listen [::]:80;
+          default_type application/octet-stream;
+
+          gzip                    on;
+          gzip_comp_level         6;
+          gzip_vary               on;
+          gzip_min_length         1000;
+          gzip_proxied            any;
+          gzip_types              text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+          gzip_buffers            16 8k;
+          client_max_body_size    256M;
+
+          root /usr/share/nginx/html;
+
+          location / {
+              try_files $uri $uri/ /index.html =404;
+          }
+      }
 
     </blockquote>
 
-    - COPY: ele copia o arquivo , informa o diretorio de destino!
+     - Define a porta como 80 é uma porta padrão paraservidores http!
 
-    <blockquote> COPY package.json /app </blockquote>
+     - Aplicar o gzip em varios arquivos estaticos, arquivos da pasta dist
 
-    - RUN: codigo para executar!
+     - Usar a pasta raiz que é a pasta do HTML!
 
-    <blockquote> RUN npm install --silent </blockquote>
+     - Em caso de pagina não encontrada , redireciona no index.html!
 
-    - Gerando o arquivo nginx, e copiando o projeto para outro diretorio!
+     - Pode por Cache e proxy (se estiver usando node, php ou C#)
+
+     - https://docs.nginx.com/?_ga=2.41121963.801573988.1613180107-1425533929.1613180107 
+
+     - APLICA mais uma configuração no Dockerfile!
 
     <blockquote>
+      COPY ./config/nginx.conf /etc/ngix/conf.d/default.conf
+
+      # docker build -t curso-angular .
+      # docker run -p 8081:80 curso-angular
+    </blockquote>
+
+    - Bota dois comandos que gera e executa a imagem docker, mapeando as portas!
+
+    - Arquivo "Dockerfile" completo!
+
+    <blockquote>
+
+      FROM node:latest as angular
+      ENV NODE_ENV=production
+      WORKDIR /app
+      COPY package.json /app
+      RUN npm install --silent
+      COPY . .
+      RUN npm run build
 
       FROM nginx:alpine
       VOLUME /var/cache/nginx
       COPY --from=angular app/dist/rotas /usr/share/nginx/html
+      COPY ./config/nginx.conf /etc/ngix/conf.d/default.conf
+
+      # docker build -t curso-angular .
+      # docker run -p 8081:80 curso-angular
 
     </blockquote>
 
-    - No arquivo "dockerignore" bota alguns diretorios e arquivos desncessarios para não subir!
-     <blockquote>
-        **/dist
-        **/e2e
+
+    - Pode por as configurações do que executar no "docker-compose.yml"!
+
+    <blockquote>
+
+      version: '3.4'
+
+      services:
+        curso-angular:
+          image: curso-angular
+          build: .
+          ports:
+            - 8081:80
+
     </blockquote>
 
-  - Cria uma configuração
+    - executa o plugin: 
+
+    <blockquote> ctrl + shift + p, escreve docker: compose up </blockquote>
+
+    - Pode ter um arquivo de dockerCompose para debug, um para outro ambiente x, y et
+
+    - Caso não de certo cria e copia 3 arquivos do Docker!
+
+    https://github.com/loiane/curso-angular/blob/master/requests-http/Dockerfile
+
+    - Dockerfile, docker-compose.yml e .dockerignore
 
 
-# 2° Fase
-
-  - https://www.nginx.com/
-
-  - Cria um pasta chamada "config" e um arquivo dentro dela chamado "nginx.conf"!
-
-  - Copia e cola o conteudo! 
-
-  <blockquote>
-
-    server {
-        listen 0.0.0.0:80;
-        listen [::]:80;
-        default_type application/octet-stream;
-
-        gzip                    on;
-        gzip_comp_level         6;
-        gzip_vary               on;
-        gzip_min_length         1000;
-        gzip_proxied            any;
-        gzip_types              text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-        gzip_buffers            16 8k;
-        client_max_body_size    256M;
-
-        root /usr/share/nginx/html;
-
-        location / {
-            try_files $uri $uri/ /index.html =404;
-        }
-    }
-
-  </blockquote>
-
-   - Define a porta como 80 é uma porta padrão paraservidores http!
-
-   - Aplicar o gzip em varios arquivos estaticos, arquivos da pasta dist
-
-   - Usar a pasta raiz que é a pasta do HTML!
-
-   - Em caso de pagina não encontrada , redireciona no index.html!
-
-   - Pode por Cache e proxy (se estiver usando node, php ou C#)
-
-   - https://docs.nginx.com/?_ga=2.41121963.801573988.1613180107-1425533929.1613180107 
-
-   - APLICA mais uma configuração no Dockerfile!
-
-  <blockquote>
-    COPY ./config/nginx.conf /etc/ngix/conf.d/default.conf
-
-    # docker build -t curso-angular .
-    # docker run -p 8081:80 curso-angular
-  </blockquote>
-
-  - Bota dois comandos que gera e executa a imagem docker, mapeando as portas!
-
-  - Arquivo "Dockerfile" completo!
-
-  <blockquote>
-
-    FROM node:latest as angular
-    ENV NODE_ENV=production
-    WORKDIR /app
-    COPY package.json /app
-    RUN npm install --silent
-    COPY . .
-    RUN npm run build
-
-    FROM nginx:alpine
-    VOLUME /var/cache/nginx
-    COPY --from=angular app/dist/rotas /usr/share/nginx/html
-    COPY ./config/nginx.conf /etc/ngix/conf.d/default.conf
-
-    # docker build -t curso-angular .
-    # docker run -p 8081:80 curso-angular
-
-  </blockquote>
-
-
-  - Pode por as configurações do que executar no "docker-compose.yml"!
-
-  <blockquote>
-
-    version: '3.4'
-
-    services:
-      curso-angular:
-        image: curso-angular
-        build: .
-        ports:
-          - 8081:80
-
-  </blockquote>
-
-  - executa o plugin: 
-
-  <blockquote> ctrl + shift + p, escreve docker: compose up </blockquote>
-
-  - Pode ter um arquivo de dockerCompose para debug, um para outro ambiente x, y et
-
-  - Caso não de certo cria e copia 3 arquivos do Docker!
-
-  https://github.com/loiane/curso-angular/blob/master/requests-http/Dockerfile
-
-  - Dockerfile, docker-compose.yml e .dockerignore
-
-
-### Imagem Docker: Deploy Google Cloud (Cloud Run)
+# Imagem Docker: Deploy Google Cloud (Cloud Run)
 
   - Fazer o depoly de imagem Docker, usando serviço Cloud!
 
@@ -722,7 +722,113 @@
 
   - Depois de criado vai no "Container Registry"!
 
-  - 
+  - habilita a parte de imagem!
+
+  ### Agora falta enviar a imagem docker!
+
+  - Instala o SDK do google cloud
+
+  - Instala o Python
+
+  - Loga
+
+  <blockquote> gcloud auth configure-docker </blockquote>
+
+  - HOSTNAME = google cloud
+
+  - project-id = nome do projeto ID
+
+  - image = nome da imagem!
+
+  - Google cloud usa a porta 8080, isso pode ser configurado no nginx.conf
+
+  - refaz a imagem usando o Docker-compose-UP
+
+    - nome da imagem = gcr.io 
+
+    - project ID = nome que foi definido no projeto
+
+    - nome da imagem = nome da imagem
+
+  Tagia a imagem! minuto 8:50
+
+    - clicka na imagem e escolhe a opção "TAG"!
+
+    - cola a sequencia de nomes definidos, deixando o :latest!
+
+  - https://www.youtube.com/watch?v=9bGyS0Bo8FA&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G&index=156&ab_channel=LoianeGroner
+
+  - seleciona a imagem nova e escolha a opção de PUSH !
+
+  - Com a imagem no conteiner, deve se criar um serviço na plataforma do google cloud!
+
+  - Passo a passo "build and deploy a container"
+
+  https://cloud.google.com/run/docs/quickstarts/build-and-deploy
+
+  - Cria um serviço dentro do google cloud
+
+  - CREATE SERVICE!
+
+  - cola a imagem , escolhe a localização, autoriza resquet não autenticados!, CREATE!
+
+  - Com isso é feito o deploy
+
+  - Demora um pouco!, é gerado um link que da para ver a imagem!
+
+  ###  Imagem Docker: Deploy Microsoft Azure 
+
+  - Cria uma conta no Azure, usa o cartão de credito!
+
+  - instala uma extenção no VS code, "azure tools"
+
+  - se conecta com o azure!
+
+  - Cria um registro no proprio VS code, usando a extenção instalada do azure
+
+  - depois que criar o registro, seta ele como padrão "set as default"
+
+  - depois, "tageia" a imagem do "curso-angular" imagem da video aula
+
+  - antes de fazer o push deve autenticar o registro!
+
+  ### Portal do Azure
+
+  - Na opção "Quick start" tem o comando que faz login do azure com docker!
+
+  <blockquote>docker login cursoangular.azurect.io</blockquote>
+
+  - No portal do Azure, deve habilitar um admin user no registro criado!
+
+  - é gerado um usuario e senha no portal, na parte de "acess keys"
+
+  ### PUSH
+
+  - Depois disso é possivel fazer o PUSH! é uma opção da imagem gerada pelo azure!
+
+  ### Deploy
+
+  - no registro no docker, deve criar um serviço  de aplicação, usando a imagem do docker, "deploy image to Azure app service"!
+
+  - Caso de erro, reinicia o VS code!
+
+    - Entra com um nome unico global!
+
+    - cria um plano novo
+
+    - escolhe um tipo de maquina!
+
+    - escolhe a localização!
+
+  - Na extenção do Azure! 
+
+    - Aparece a aplicação criada!
+
+    - você gerencia o serviço!
+
+    - acesse o site diretamente!
+
+# Imagem Docker: Deploy Amazon AWS
 
 
 
