@@ -830,6 +830,74 @@
 
 # Imagem Docker: Deploy Amazon AWS
 
+  - https://aws.amazon.com/pt/?nc2=h_lg
+
+  - Cria uma conta e faz loguim 
+
+  - infelismente usa cartão de credito!
+
+  - Implante contêineres do Docker
+
+  - https://aws.amazon.com/pt/getting-started/hands-on/deploy-docker-containers/
+
+  - Etapas
+
+    - Container definition
+
+    - Task definition
+
+    - Service
+
+    - Cluster
+
+  - Escolhe uma aplicação customizada para poder usar a imagem do Docker hub
+
+  - escolha um nome pro container
+
+  - imagem: repositorio/nome da imagem /tag
+
+  - exemplo: loiane/curso-angular:latest
+
+  - define a limitação da memoria (128) !
+
+  - mapeamento pra porta 80
+
+  - update!
+
+  ### Define seu servico!
+
+  - escolha a opção: "Application Load Balancer"
+
+
+  ### Configure seu Cluster
+
+  - Escolha um nome para o Cluster
+
+  ### conclua!
+
+  - Aparece o nome do container!
+
+  - exibe um link do "Tarfet group name"
+
+  - No "LOAD BALANCING" vc ve o DNS name
+
+  - com esse link vc acessa a sua aplicação!
+
+  # Conclusão
+
+  - Pesquisar por:
+
+    - Testes
+    - Gerenciamento de estado (ngRX)
+    - Organização de aplicação grande
+    - Segurança
+
+  - Documentação: 
+
+    - http://angular.io/
+    - https://update.angular.io/
+
+  - 
 
 
 
