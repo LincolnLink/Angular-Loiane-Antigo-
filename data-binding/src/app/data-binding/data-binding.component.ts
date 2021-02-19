@@ -11,21 +11,21 @@ export class DataBindingComponent implements OnInit {
 
   /*----------------------------Interpolation / Interpolação--------*/
   cursoAngular: boolean = true;
-  teste: string = 'Valor do componente';  
+  teste: string = 'Valor do componente';
 
-  /*----------------------------Property Binding--------------------*/  
+  /*----------------------------Property Binding--------------------*/
   urlImagem = 'http://lorempixel.com/400/200/';
 
-  /*----------------------------Event Binding-----------------------*/  
-  valorAtual: string = ''; 
+  /*----------------------------Event Binding-----------------------*/
+  valorAtual: string = '';
   valorSalvo: string = '';
   isMouseOver: boolean = false;
 
-  /*----------------------------Two-way data binding---------------*/  
-  nome: string = 'abc';  
-  
+  /*----------------------------Two-way data binding---------------*/
+  nome: string = 'abc';
+
   //objeto sem tipo
-  pessoa: any = {
+  pessoa = {
     nome: 'def',
     idade: 17
   }
@@ -36,7 +36,7 @@ export class DataBindingComponent implements OnInit {
   /*------------------------------Output Properties----------------*/
   valorInicial = 15;
 
-  
+
   /*------------------------------DOM----------------*/
   valorInicialDOM = 15;
 
@@ -50,7 +50,7 @@ export class DataBindingComponent implements OnInit {
 
   }
 
-  /*----------------------------Interpolation / Interpolação--------*/  
+  /*----------------------------Interpolation / Interpolação--------*/
 
   getCalculo() {
     return 25 + 25;
@@ -60,7 +60,7 @@ export class DataBindingComponent implements OnInit {
     return true;
   }
 
-  /*----------------------------Event Binding-------------------*/    
+  /*----------------------------Event Binding-------------------*/
   botaoClicado(){
 
     //função do JS!

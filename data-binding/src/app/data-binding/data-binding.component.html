@@ -8,7 +8,7 @@
 
                 <article class="blockStyle">
                     <h3>Interpolation / Interpolação  (<small> Do Componente para o Template!</small>)</h3>
-                    
+
                     <p>{{ teste }}</p>
                     <p>Valor de uam soma: {{getCalculo()}}</p>
                     <p>Resultado de 1 + 1 é: {{ 1 + 1 }}</p>
@@ -28,14 +28,14 @@
                     <!--Formato padrão é através de bind-nomePropriedade-->
                     <!--<img bind-src="urlImagem" />-->
                     <br>
-                    <!--Pesquisar depois-->     
+                    <!--Pesquisar depois-->
                     <!--Quando não existe uma propriedade no elemento, usa-se [attr.colspan]-->
 
                 </article>
 
                 <article>
                     <h3>Property Binding com CSS/Class-Binding</h3>
-                    
+
                     <select #varSelect (change)="0">
                         <option value="alert-success">Sucesso</option>
                         <option value="alert-info">Info</option>
@@ -79,14 +79,14 @@
                         #campoInput />
 
                     <br><br>
-                    
+
                     <p>Valor atual: {{ valorAtual }}</p>
                     <p>Valor atual: {{ valorSalvo }}</p>
-                    
-                    <br><br>                       
+
+                    <br><br>
 
                     <!--mouseover: evento ocorre quando coloca o mouse em cima do controlador span-->
-                    <!--mouseover: evento ocorre quando tira o mouse de cima do controlador span-->                    
+                    <!--mouseover: evento ocorre quando tira o mouse de cima do controlador span-->
                     <span
                     (mouseover)="onMouseOverOut()"
                     (mouseout)="onMouseOverOut()"
@@ -94,7 +94,7 @@
                     Passe o mouse sobre mim</span
                         >
 
-                    <br><br>  
+                    <br><br>
                 </article>
 
                 <article>
@@ -107,19 +107,19 @@
                     />-->
 
                     <!--ngModel: é a representação de uma entidade-->
-                    <!--ngModel tem um evento chamado ngModelChange, ativa quando o campo é atualizado-->  
+                    <!--ngModel tem um evento chamado ngModelChange, ativa quando o campo é atualizado-->
 
                     <!--<input type="text"
                         [ngModel]="nome"
                         (ngModelChange)="nome = $event"
                     />-->
 
-                    <input type="text" [(ngModel)]="nome">                   
+                    <input type="text" [(ngModel)]="nome">
 
                     <p>Você digitou: {{ nome }}</p>
                     <br><br>
-                    <input type="text" [(ngModel)]="pessoa.nome" />
-                    <input type="text" [(ngModel)]="pessoa.idade" />
+                    <input type="text" name="nome" [(ngModel)]="pessoa.nome" />
+                    <input type="text" name="idade" [(ngModel)]="pessoa.idade" />
 
                     <p>Meu nome é : {{ pessoa.nome }}, e a minha idade é: {{ pessoa.idade }}</p>
 
@@ -130,7 +130,7 @@
 
                 <article>
                     <h3>Input/Output Properties</h3>
-            
+
                     <!--Jogando informação de um componente para o outro, usando as input-property-->
                     <!--Só foi possivel criar a propriedade "nome", porque foi declarado um @input-->
                     <!--O componente pai está enviando informação para o componente filho!!-->
@@ -139,29 +139,29 @@
 
                     <!--Um segundo componente filho!-->
                     <!--Com o evento personalizado, o filho consegue enviar o valor da propriedade para o componente pai-->
-                    <contador [valor]="valorInicial" 
+                    <contador [valor]="valorInicial"
                     (mudouValor)="onMudouValor($event)"></contador>
-            
-                    
+
+
                     <br><br>
-            
-                    
+
+
                 </article>
-              
+
 
                 <article>
-                    <h3>DOM Properties</h3>        
-                   
+                    <h3>DOM Properties</h3>
+
 
                     <dom [valorDOM]="valorInicialDOM"
-                    (eventoPersonalizado)="pegandoValorQueFoiPassadoPorDom($event)"></dom>                   
-            
-                    
+                    (eventoPersonalizado)="pegandoValorQueFoiPassadoPorDom($event)"></dom>
+
+
                     <br><br>
-            
-                    
+
+
                 </article>
             </section>
-        </div>        
+        </div>
     </div>
 </div>
