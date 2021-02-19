@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "data-binding"
+    }
+  },
+  "defaultProject": "data-binding",
+  "cli": {
+    "analytics": "1d468ec7-7788-440c-be3a-c826e8c88f88"
+  }
 }
