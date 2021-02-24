@@ -226,14 +226,19 @@ repetição de métodos em cada componente.
 
 # Injetando um serviço em outro serviço
 
+ - Um serviço pode ser chamado dentro de outro serviço, usando o método construtor!
 
-
- -
+ - Dentro de "CursosService", é chamado "LogService"
 
  <blockquote>
- 	
- 	
+	 constructor(private logService: LogService) {
+	    console.log('!-->instancia da classe de serviço');
+	  }  	
  </blockquote>
+
+
+# 00000
+
 
  -
 
