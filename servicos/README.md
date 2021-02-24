@@ -236,23 +236,8 @@ repetição de métodos em cada componente.
 	  }  	
  </blockquote>
 
+ - Para não precisar concatenar string, usa o "${}"
 
-# 00000
-
-
- -
-
- <blockquote>
- 	
- 	
- </blockquote>
-
- -
-
- <blockquote>
- 	
- 	
- </blockquote>
 
 
 
