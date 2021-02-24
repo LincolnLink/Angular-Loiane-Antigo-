@@ -1,0 +1,28 @@
+
+<h5>Como evitar dar o erro, de quando o objeto esperado for null</h5>
+<br><br>
+
+<!--<p>Responsavel: {{ tarefa.responsavel }}</p>-->
+
+<h5>Primeira solução:</h5>
+<p>Descrição: {{ tarefa.desc }}</p>
+<p>Responsavel: {{ tarefa.responsavel != null ? tarefa.responsavel.nome : ''}}</p>
+
+<br><br>
+
+<h5>Segunda solução:</h5>
+
+<p>Descrição: {{ tarefa.desc }}</p>
+<p>Responsavel1: {{ tarefa.responsavel1}}</p>
+<p>Responsavel2: {{ tarefa.responsavel2?.nome}}</p>
+<p>Responsavel3: {{ tarefa.responsavel3?.usuario?.nome}}</p>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+<h5>Styles com property binding (style binding)</h5>
+
+<button
+    [style.backgroundColor]="ativo ? 'blue' : 'gray'"
+    [style.color]="ativo ? 'white' : 'black'"
+    [style.fontWeight]="ativo ? 'bold' : 'normal'"
+    [style.fontSize]="tamanhoFonte + 'px'"
+    (click)="onClick()"
+>Mudar atributo 'ativo'</button>
+
+<br>
+<input type="text" [(ngModel)]="tamanhoFonte">
+<br>
+
+<h5>Usando ngSyle</h5>
+<br>
+
+
+<button
+    [ngStyle]="{
+        'backgroundColor': (ativo ? 'blue' : 'gray'),
+        'color': (ativo ? 'white' : 'black'),
+        'fontWeight': (ativo ? 'bold' : 'normal'),
+        'fontSize': (tamanhoFonte + 'px')       
+    }"
+    (click)="onClick()"
+>Mudar atributo 'ativo' com ngStyle</button>

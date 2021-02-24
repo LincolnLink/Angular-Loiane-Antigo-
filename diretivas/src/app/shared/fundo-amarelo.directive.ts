@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer } from '@angular/core';
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[FundoAmarelo]'
@@ -9,9 +9,9 @@ import { Directive, ElementRef, Renderer } from '@angular/core';
 export class FundoAmareloDirective {
 
   constructor(
-    private _elementRef: ElementRef, 
-    private _renderer: Renderer
-    ) { 
+    private _elementRef: ElementRef,
+    private _renderer: Renderer2
+    ) {
 
     /* URGENTE ---- Evitar usando ElementRef sozinho!!! */
     //console.log(_elementRef);
@@ -19,12 +19,12 @@ export class FundoAmareloDirective {
 
     //Manipula a propriedade do DOM de quem recebe a diretiva!
     //Troca a cor de fundo!
-    this._renderer.setElementStyle(
+    this._renderer.setStyle(
       this._elementRef.nativeElement,
       'background-color',
       'yellow'
       );
 
-  }  
+  }
 
 }

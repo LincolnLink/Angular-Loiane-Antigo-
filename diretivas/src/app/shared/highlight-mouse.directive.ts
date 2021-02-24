@@ -1,8 +1,6 @@
-import { 
-  Directive, 
-  HostListener, 
-  ElementRef, 
-  Renderer,
+import {
+  Directive,
+  HostListener,
   HostBinding
 } from '@angular/core';
 
@@ -24,7 +22,7 @@ export class HighlightMouseDirective {
   // style.backgroundColor: atributo do HTML!
   // this.backgroundColor: variavel!
   // get : escuta assim que a variavel for modificada(retornada)!
-  // Manipular os dados antes de criar um vinculo(associação) entre o atributo HTML e variavel! 
+  // Manipular os dados antes de criar um vinculo(associação) entre o atributo HTML e variavel!
   @HostBinding('style.backgroundColor') get setColor(){
     // codigo  extra;
     // caso queira fazer algo antes de receber o valor!
@@ -34,7 +32,7 @@ export class HighlightMouseDirective {
   }
 
 
-  constructor(/*private _elementRef: ElementRef, private _renderer: Renderer*/) 
+  constructor(/*private _elementRef: ElementRef, private _renderer: Renderer2*/)
   {
   }
 
@@ -43,7 +41,7 @@ export class HighlightMouseDirective {
   // clicaNoMouse() nome do método!
   // eSCUTA EVENTO!
   @HostListener('mouseenter') selecionaNoMouse(){
-    
+
     /*this._renderer.setElementStyle(
       this._elementRef.nativeElement,
       'background-color',
@@ -54,7 +52,7 @@ export class HighlightMouseDirective {
 
   // Escuta evento!
   @HostListener('mouseleave') tiraMouse(){
-    
+
     /*this._renderer.setElementStyle(
       this._elementRef.nativeElement,
       'background-color',

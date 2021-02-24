@@ -1,0 +1,75 @@
+<h5> *ngIf</h5>
+
+<div *ngIf="cursos.length > 0">
+    Lista de cursos aqui.
+</div>
+
+<!--Não existe ELSE, tem que negar para mostrar o oposto do IF-->
+<div *ngIf="cursos.length == 0">
+    Não existe cursos para serem listados.
+</div>
+
+<p>----------Usando boolean--------------</p>
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos aqui.
+</div>
+
+<!--Não existe ELSE, tem que negar para mostrar o oposto do IF-->
+<div *ngIf="!mostrarCursos">
+    Não existe cursos para serem listados.
+</div>
+
+<p>----------Com Botão--------------</p>
+<br><br>
+
+<button (click)="onMostrarCrusos()">Mostrar ou Esconder cursos</button>
+
+
+<br><br>
+<h5>-Hidden como alternativa</h5>
+<p>--Alternativa para trocar o ngIf, seria o hidden,
+     ele esconde ao inves de destruir o DOM!</p>
+
+     <br>
+<div [hidden]="!mostrarCursos">
+    Lista de cursos aqui.
+</div>
+
+<!--Não existe ELSE, tem que negar para mostrar o oposto do IF-->
+<div [hidden]="mostrarCursos">
+    Não existe cursos para serem listados.
+</div>
+
+
+<br>
+<br>
+<h5>
+    <p>-Removendo o * e usnado template</p>
+</h5>
+<p>--Usando template</p>
+<br>
+<br>
+
+<ng-template [ngIf]="!mostrarCursos">
+    <div> Lista de cursos aqui.</div>
+</ng-template>
+
+ <br>
+<!-- não funciona mais!!!
+ <div template="ngIf !mostrarCursos">
+    Lista de cursos aqui teste
+</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
