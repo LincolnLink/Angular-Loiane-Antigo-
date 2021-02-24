@@ -18,7 +18,7 @@
 
   - Memory Leak
 
-    - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async" ou take(1)!
+    - Para evitar vazamento de memoria(memory leak), é bom evitar inscrição dentro do OnInit(), a solução é usar o pipe "async" ou take(1).
 
     - Mas pode se desinscrever da requisição depois que o component é destruido, usando o ciclo de vida ngDestroi()!
 
