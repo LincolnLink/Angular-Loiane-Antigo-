@@ -13,7 +13,7 @@ export class CursosComponent implements OnInit {
   cursos: string[] = []; //this.serviceCurso.getCursos();
 
   //Injeção de dependencia dentro do construtor
-  constructor(private serviceCurso: CursosService ) { 
+  constructor(private serviceCurso: CursosService ) {
 
   }
 
@@ -32,9 +32,9 @@ export class CursosComponent implements OnInit {
 
       // AeroFunction - ecmaScript 2015
       // curso => console.log(curso)
-      // Informa o curso que foi cadastrado   
+      // Informa o curso que foi cadastrado
       curso => this.cursos.push(curso + " <-new")
-    ); 
+    );
 
 
 

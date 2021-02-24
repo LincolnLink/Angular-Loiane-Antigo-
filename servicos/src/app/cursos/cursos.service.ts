@@ -2,9 +2,9 @@ import { Injectable, EventEmitter } from '@angular/core';
 
 import { LogService } from '../shared/log.service';
 
-@Injectable(/*{
-  //providedIn: 'root'
-}*/)
+@Injectable({
+  providedIn: 'root'
+})
 export class CursosService {
 
   private cursos: string[] = ['Angular2', 'Java', 'JS', 'PHP'];
@@ -19,13 +19,13 @@ export class CursosService {
   // atributo ou método statico, não precisa acessar a instancia do mesmo!
   static criouNovoCurso = new EventEmitter<string>();
 
-  constructor(private logService: LogService) { 
+  constructor(private logService: LogService) {
     console.log('!-->instancia da classe de serviço');
   }
 
   // Requisição do tipo: GET
   getCursos(){
-    
+
     this.logService.consoleLog('Obtendo lista de cursos');
 
     return this.cursos;

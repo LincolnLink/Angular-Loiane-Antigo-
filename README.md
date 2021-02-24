@@ -14,15 +14,7 @@
 
     TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
 
-# Dicas
-
-  - Operadores RXJS
-
-    - Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
-
-  - HttpClintModel
-
-    -  Não precisa usar o .pipe(map(...)) em chamadas http
+# Dicas  
 
   - Memory Leak
 
@@ -41,6 +33,14 @@
     - Tem apenas uma instancia! 
 
 # Principais operadores do RXJS
+
+ - Operadores RXJS
+
+    - Operadores RXJS deve ser colocado no .pipe() quando for feita uma chamada HTTP.
+
+  - HttpClintModel
+
+    -  Não precisa usar o .pipe(map(...)) em chamadas http
 
  - distinctUntilChanged()
 
@@ -71,41 +71,51 @@
 
 # Atualizando o Angular CLI
 
-  -Sempre atualize uma versão para outra, do 4 para o 5, do 5 para o 6 , etc, usando sempre um repositorio para cada versão!
+ - Site que ajuda atualizar: https://update.angular.io/
 
-  - executar o comando, executa em um promt comando como ADMINISTRADOR!
+ - Atualizando para o Angular 9
 
-    - atualizando globalmente:
+ - Principal versão do Angular porque ele tem o Ivy
 
-    <blockquote> npm install -g @angular/cli</blockquote>
+ <blockquote>
+   ng update @angular/core@9 @angular/cli@9
+ </blockquote>
+ 
+ -Sempre atualize uma versão para outra, do 4 para o 5, do 5 para o 6 , etc, usando sempre um repositorio para cada versão!
 
-    - Comando que atualiza automatico 
+ - executar o comando, executa em um promt comando como ADMINISTRADOR!
+
+ - atualizando globalmente:
+
+ <blockquote> npm install -g @angular/cli</blockquote>
+
+ - Comando que atualiza automatico 
     
-    <blockquote> ng update</blockquote>
+ <blockquote> ng update</blockquote>
 
-    Guia das principais modificações: https://update.angular.io/
+ Guia das principais modificações: https://update.angular.io/
 
-    - Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
+ - Caso de imcompatibilidade com o codelyzer, execute o comando abaixo
 
-    <blockquote>npm install -save codelyzer@latest</blockquote>
+ <blockquote>npm install -save codelyzer@latest</blockquote>
 
-  - NCU updates
+ - NCU updates
 
-    - https://www.npmjs.com/package/npm-check-updates
+  - https://www.npmjs.com/package/npm-check-updates
 
-    - Exibe todos os pacotes dezatualizado!    
+  - Exibe todos os pacotes dezatualizado!    
 
-     <blockquote> npm i npm-check-updates</blockquote> 
+  <blockquote> npm i npm-check-updates</blockquote> 
 
-     <blockquote> npm install -g npm-check-updates</blockquote> 
+  <blockquote> npm install -g npm-check-updates</blockquote> 
 
-    - Comando que verifica oque está desatualizado
+  - Comando que verifica oque está desatualizado
 
-     <blockquote> ncu </blockquote>
+  <blockquote> ncu </blockquote>
 
-    - Comando que atualiza
+  - Comando que atualiza
      
-     <blockquote> ncu -u</blockquote>
+  <blockquote> ncu -u</blockquote>
 
 
 # Reparando erro de vulnerabilidade 
@@ -323,8 +333,6 @@
     <blockquote> https://www.npmjs.com/package/ngx-bootstrap-navbar </blockquote> 
 
     <blockquote> https://valor-software.com/ngx-bootstrap/#/documentation </blockquote>
-
-
 
 
 # Comandos de teste
