@@ -27,7 +27,7 @@ export class ExemplosPipesComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {    
+  ngOnInit() {
   }
 
   addCurso(valor: string){
@@ -39,7 +39,7 @@ export class ExemplosPipesComponent implements OnInit {
   obterCursos(){
 
     // Codigo que faz o filtro!
-    if (this.livros.length === 0 || this.filtro === undefined 
+    if (this.livros.length === 0 || this.filtro === undefined
       || this.filtro.trim() === ''){
       return this.livros;
     }

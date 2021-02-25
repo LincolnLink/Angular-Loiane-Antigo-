@@ -69,6 +69,16 @@
 
     </blockquote>
 
+ - interval
+
+   - Cria um intervalo de tempo, depois executa o comando. 
+
+   <blockquote>
+     
+       valorAsync2 = interval(2000).pipe(map(valor => 'Valor assíncrono 2'));
+
+   </blockquote>
+
 # Atualizando o Angular CLI
 
  - Site que ajuda atualizar: https://update.angular.io/
@@ -291,9 +301,43 @@
 
     - O método hasOwnProperty() retorna um booleano indicando se o objeto possui a propriedade especificada como uma propriedade definida no próprio objeto em questão (ao contrário de uma propriedade herdada).
 
-    - 
+  - .split(' ');
 
+    - separa as palavras com espaço
 
+  <blockquote>
+    value.split(' ');
+  </blockquote> 
+
+ - substr(0,1)
+
+  - pega o caracter baseado nos index
+
+  <blockquote>
+    value.substr(0,1).toUpperCase()
+  </blockquote>
+
+ - indexOf()
+
+  - Retorna o index() do parametro que foi passado!
+  
+  <blockquote>
+
+    let filter = args.toLocaleLowerCase();  
+    
+  </blockquote>
+
+ - toLocaleLowerCase()
+
+  - Tranforma toda a string em letras minusculas
+
+  <blockquote>
+
+    return value.filter(
+        v => v.toLocaleLowerCase().indexOf(filter) != -1
+      );
+    
+  </blockquote>
 
 # Principais comandos do Angular CLI
 
