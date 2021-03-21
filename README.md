@@ -14,7 +14,7 @@
 
     TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
 
-# Referência1
+# Referência
 
   - Curso: Angular
 
