@@ -5,7 +5,7 @@
     - [x] Nodejs/npm - https://nodejs.org/en/
     - [x] Angular CLI - npm i @angular/cli
     - [x] Type Script - npm i typescript
-    - [x] Angular 10
+    - [x] Angular 11
     - [x] ES6 / ES 2015
 
   - Sintaxe do ES6 e do ES5
@@ -13,6 +13,16 @@
     http://es6-features.org/#Constants
 
     TypeScript > ECMAScrip 6 (2015) > ECMAScrip 5(2009)
+
+# Referencia
+
+  - Curso: Angular
+
+  - Canal: Loiane Groner 
+
+  - Link curso: https://loiane.training/curso/angular
+
+  - Link canal: https://www.youtube.com/watch?v=tPOMG0D57S0&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G&ab_channel=LoianeGroner
 
 # Dicas  
 

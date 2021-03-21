@@ -7,7 +7,7 @@ import { OpeningModalComponent } from './opening-modal/opening-modal.component';
 /*Para fazer um Lazy loading, deve carregar o modulo e não component */
 const routes: Routes = [
   {
-    path: 'templateForm', 
+    path: 'templateForm',
     component: TemplateFormComponent},
   {
     path: 'dataForm',
