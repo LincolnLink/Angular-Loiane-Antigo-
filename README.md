@@ -569,7 +569,13 @@
 
   <blockquote> firebase init </blockquote>
 
-  - Escolha a opção usando "espaço" e aperta enter para seguir!
+  - Escolha a opção usando "espaço"(os serviços FireBase) e aperta enter para seguir!
+
+    - Escolhe o projeto
+
+    - informe o diretoria dist
+
+    - informa que quer SPA
 
   - aceita todos, menos a ultima pergunta que fala sobre sobreescrever o arquivo index.html!
 
