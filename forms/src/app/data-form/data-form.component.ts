@@ -149,6 +149,8 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
    // (POST) Método que envia os dados preenchido para o servidor!
   submit() {
 
+      console.log(this.formulario.value)
+
       this.cepService.postFormData(this.formulario, this.frameworksList)
       .subscribe(dados =>{
 

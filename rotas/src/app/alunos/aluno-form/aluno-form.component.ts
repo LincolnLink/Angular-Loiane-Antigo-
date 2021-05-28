@@ -15,13 +15,13 @@ export class AlunoFormComponent implements OnInit, OnDestroy, IformCanDeactivade
   alunoTeste: any;
   inscricao: Subscription;
   private formMudou: boolean = false;
-  
+
 
   constructor(
     private route: ActivatedRoute,
     private alunoService: AlunosService
   ) { }
-  
+
   ngOnInit() {
 
     // Se inscreve para obter o parametro da rota!
@@ -29,7 +29,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy, IformCanDeactivade
       (params: any) => {
         let idAluno = params['id'];
 
-        this.alunoTeste = this.alunoService.getAluno(idAluno)        
+        this.alunoTeste = this.alunoService.getAluno(idAluno)
 
         // Tratamento
         if( this.alunoTeste === null)
@@ -42,7 +42,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy, IformCanDeactivade
   }
 
   // Logica que verifica se o campo "nome" está preenchido!
-  onInput(){
+  usahsu(){
       this.formMudou = true;
       console.log("O campo está preenchido!");
   }
@@ -54,7 +54,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy, IformCanDeactivade
       return confirm("Tem certeza que deseja mudar de pagina, exite dados modificados que não foram salvos!");
     }
   }
-  
+
   podeDesativar() {
     return this.podeMudarDeRota();
   }
